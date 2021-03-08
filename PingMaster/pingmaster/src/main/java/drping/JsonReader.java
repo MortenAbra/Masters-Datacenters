@@ -22,20 +22,17 @@ public class JsonReader {
 
     public JsonReader(String filePath) {
         this.filePath = filePath;
-
-
-        readJSON();
     }
-    private void readJSON() {
+    public ArrayList readJSON() {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
+        ArrayList<Workload> workloadList = new ArrayList<>();
          
         try (FileReader reader = new FileReader(filePath))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONArray workloadJSONList = (JSONArray) obj;
-            ArrayList<Workload> workloadList = new ArrayList<>();
              
             //Iterate over workload array
             for(int i = 0; i < workloadJSONList.size(); i++) {
@@ -43,7 +40,7 @@ public class JsonReader {
             }
 
             for(Workload workload : workloadList) {
-                System.out.println(workload.toString());
+                System.out.println(workloadList);
             }
 
  
@@ -54,7 +51,10 @@ public class JsonReader {
         } catch (org.json.simple.parser.ParseException e) {
             e.printStackTrace();
         }
+
+        return workloadList;
     }
+
 
     private static Workload parseWorkloadObject(JSONObject json_workload) 
     {
@@ -64,7 +64,7 @@ public class JsonReader {
         //Get workload attributes
         String wl_name = (String) workloadJSONObject.get("name");    
         String wl_ip = (String) workloadJSONObject.get("ip");  
-        String wl_port = (String) workloadJSONObject.get("port");    
+        int wl_port = Integer.parseInt((String)workloadJSONObject.get("port"));    
 
         return new Workload(wl_name, wl_ip, wl_port);
     }
