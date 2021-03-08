@@ -1,0 +1,9 @@
+[
+    {
+        "workload": {
+            "port": "5000",
+            "ip": "0.0.0.0",
+            "name": "Docker - Python Flask Server"
+        }
+    }
+]
