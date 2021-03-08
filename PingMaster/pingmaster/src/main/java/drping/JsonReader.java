@@ -34,9 +34,7 @@ public class JsonReader {
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
- 
             JSONArray workloadJSONList = (JSONArray) obj;
-
             ArrayList<Workload> workloadList = new ArrayList<>();
              
             //Iterate over workload array
