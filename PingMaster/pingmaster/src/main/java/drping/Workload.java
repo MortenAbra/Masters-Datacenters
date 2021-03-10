@@ -8,7 +8,7 @@ public class Workload {
 
     String wl_name = "Undefined";
     String wl_ip = "0.0.0.0";
-    int wl_port = 0000;
+    int wl_port = -1;
     long startTime = 0;
     long elapsedTime = 0;
     long endTime = 0;

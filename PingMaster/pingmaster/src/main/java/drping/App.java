@@ -2,6 +2,7 @@ package drping;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
@@ -33,11 +34,42 @@ public class App  {
         }    
     }
 
-    public static boolean pingHost(Workload workload) {
+    public static void pingHost(Workload workload) {
+        int timeout = 10;
+        if (workload.wl_port != -1) {
+            pingWithPort(workload, timeout);
+        } else {
+
+            pingWithoutPort(workload, timeout);
+        }
+    }
+
+    private static void pingWithoutPort(Workload workload, int timeout) {
+        try {
+            if (InetAddress.getByName(workload.wl_ip).isReachable(timeout)) {
+                // Connection is established
+                if (workload.getElapsedTime() > 1000 && workload.getElapsedTime() < 1000000) {
+                    // Downtime happend recently
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+                    System.out.println(timestamp + " : " + workload.wl_name + " : Downtime = " + workload.getElapsedTime() + " ms");
+                    workload.setEndTime(System.currentTimeMillis());
+                }
+                workload.setStartTime(System.currentTimeMillis());
+            } else {
+                // Connection is not reachable
+                workload.setEndTime(System.currentTimeMillis());
+            }
+        } catch (IOException e) {
+        }
+    }
+
+    private static void pingWithPort(Workload workload, int timeout) {
         try (Socket socket = new Socket()) {
-            socket.connect(new InetSocketAddress(workload.wl_ip, workload.wl_port), 1);
+            socket.connect(new InetSocketAddress(workload.wl_ip, workload.wl_port), timeout);
+            // Connection is established
             if (workload.getElapsedTime() > 1000 && workload.getElapsedTime() < 1000000) {
-                //method 1
+                // Downtime happend recently
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
                 System.out.println(timestamp + " : " + workload.wl_name + " : Downtime = " + workload.getElapsedTime() + " ms");
@@ -45,13 +77,9 @@ public class App  {
             }
             workload.setStartTime(System.currentTimeMillis());
             socket.close();
-
-
-            return true;
         } catch (IOException e) {
+            // Connection is not reachable
             workload.setEndTime(System.currentTimeMillis());
-
-            return false; // Either timeout or unreachable or failed DNS lookup.
         }
     }
 }

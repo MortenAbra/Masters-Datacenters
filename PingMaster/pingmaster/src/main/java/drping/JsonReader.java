@@ -40,7 +40,7 @@ public class JsonReader {
             }
 
             for(Workload workload : workloadList) {
-                System.out.println(workloadList);
+                System.out.println(workload);
             }
 
  
@@ -64,7 +64,7 @@ public class JsonReader {
         //Get workload attributes
         String wl_name = (String) workloadJSONObject.get("name");    
         String wl_ip = (String) workloadJSONObject.get("ip");  
-        int wl_port = Integer.parseInt((String)workloadJSONObject.get("port"));    
+        int wl_port = (int) (long) workloadJSONObject.get("port");
 
         return new Workload(wl_name, wl_ip, wl_port);
     }
