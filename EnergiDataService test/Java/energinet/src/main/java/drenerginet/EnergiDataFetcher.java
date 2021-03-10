@@ -5,22 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.ResponseBody;
 import org.json.JSONObject;
 
 
@@ -29,7 +15,6 @@ public class EnergiDataFetcher extends FileHandler {
     private InputStream input;
     private BufferedReader reader;
     private FileHandler fileSaver;
-    private final OkHttpClient client = new OkHttpClient();
     
 
     public EnergiDataFetcher(){
