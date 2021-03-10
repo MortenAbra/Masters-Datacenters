@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import org.json.JSONObject;
 
 
@@ -15,6 +18,8 @@ public class EnergiDataFetcher extends FileHandler {
     private InputStream input;
     private BufferedReader reader;
     private FileHandler fileSaver;
+    private ExecutorService executor;
+    private JSONObject test;
     
 
     public EnergiDataFetcher(){
@@ -24,14 +29,32 @@ public class EnergiDataFetcher extends FileHandler {
     //https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT%20%22HourUTC%22,%20%22HourDK%22,%20%22PriceArea%22,%20%22SpotPriceDKK%22,%20%22SpotPriceEUR%22%20FROM%20%22elspotprices%22%20ORDER%20BY%20%22HourUTC%22%20DESC%20LIMIT%20100
 
     public JSONObject fetchAPIData(String url) throws MalformedURLException, IOException{
-        setUrl(url);
-        input = new URL(getUrl()).openStream();
+        input = new URL(url).openStream();
 
         reader = new BufferedReader(new InputStreamReader(input, Charset.forName("UTF-8")));
         String inputData = readChaString(reader);
         JSONObject data = convertToJson(inputData);
-        saveDataToFile(data, "SpotPrice.json", "src\\main\\java\\drenerginet\\Results\\");
+        saveDataToFile(data, "spotpricing.json", "energinet\\src\\main\\java\\drenerginet\\Results\\");
 
         return data;
     }   
+
+    public Future<JSONObject> fetchData(String apiUrl){
+        executor = Executors.newSingleThreadExecutor();
+        test = new JSONObject();
+        return (Future<JSONObject>) executor.submit(() -> {
+            Thread.sleep(3000);
+            System.out.println();
+            return test = fetchAPIData(apiUrl);
+        });
+    }
 }
+
+
+/*
+edf.fetchData("some url");
+
+
+
+
+*/
