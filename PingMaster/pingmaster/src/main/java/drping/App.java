@@ -24,7 +24,7 @@ public class App  {
         FileWriter csvWriter;
         if (!fileExists(outputPath)) {
             new File(outputPath).createNewFile();
-            csvWriter = new FileWriter(outputPath, true);
+            csvWriter = new FileWriter(outputPath, false);
 
             appendCSVHeader(csvWriter);
         } 

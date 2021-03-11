@@ -1,5 +1,4 @@
-package drping;
-
+package drenerginet.Models;
 
 public class Workload {
 
@@ -41,5 +40,47 @@ public class Workload {
         this.startTime = startTime;
     }
 
-}
+    /**
+     * @return the wl_name
+     */
+    public String getWl_name() {
+        return wl_name;
+    }
 
+    /**
+     * @param wl_name the wl_name to set
+     */
+    public void setWl_name(String wl_name) {
+        this.wl_name = wl_name;
+    }
+
+    /**
+     * @return the wl_ip
+     */
+    public String getWl_ip() {
+        return wl_ip;
+    }
+
+    /**
+     * @param wl_ip the wl_ip to set
+     */
+    public void setWl_ip(String wl_ip) {
+        this.wl_ip = wl_ip;
+    }
+
+    /**
+     * @return the wl_port
+     */
+    public int getWl_port() {
+        return wl_port;
+    }
+
+    /**
+     * @param wl_port the wl_port to set
+     */
+    public void setWl_port(int wl_port) {
+        this.wl_port = wl_port;
+    }
+    
+    
+}

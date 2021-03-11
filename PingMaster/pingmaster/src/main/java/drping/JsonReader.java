@@ -1,17 +1,9 @@
 package drping;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
-
-import javax.print.event.PrintEvent;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
