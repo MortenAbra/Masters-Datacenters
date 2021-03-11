@@ -16,8 +16,8 @@ import drenerginet.Pinger.DockerPinger;
 */
 
 public class App {
-    static String workloadPath = "energinet\\src\\main\\java\\drenerginet\\Results\\workloads.json";
-    static String outputPath = "energinet\\src\\main\\java\\drenerginet\\Results\\output.csv";
+    static String workloadPath = "EnergiDataService test/Java/energinet/src/main/java/drenerginet/Results/workloads.json";
+    static String outputPath = "EnergiDataService test/Java/energinet/src/main/java/drenerginet/Results/output.csv";
     public static void main(String[] args) throws Exception {
         EnergiDataFetcher edf = new EnergiDataFetcher();
         DockerPinger pinger = new DockerPinger();
