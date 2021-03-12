@@ -19,27 +19,25 @@ import drenerginet.Models.Workload;
 
 
 
-public class FileHandler {
+public class FileHandler extends FilePaths {
 
     private FileWriter file;
     private JSONObject jsonObject;
     private Timestamp time;
     private JSONParser parser;
     private ArrayList<Workload> workloadList;
+    private FilePaths fp;
 
 
     public FileHandler(){
         time = new Timestamp(System.currentTimeMillis());
         parser = new JSONParser();
+        fp = new FilePaths();
     }
 
-    public FileHandler(String path){
-        time = new Timestamp(System.currentTimeMillis());
-        parser = new JSONParser();
-    }
     
-    public void saveDataToFile(JSONObject object, String fileName, String path) throws IOException{
-        file = new FileWriter(path + fileName);
+    public void saveDataToFile(JSONObject object, String fileName) throws IOException{
+        file = new FileWriter(fp.getOUTPUTPATH() + fileName);
         file.write(object.toString());
         file.close();
         TextOutPut("DATA SAVED TO FILE");
@@ -61,9 +59,9 @@ public class FileHandler {
     }
 
     //Generating workload json objects and adding to Array
-    public ArrayList addJSONWorkloadToList(String dataPath){
+    public ArrayList addJSONWorkloadToList(){
         workloadList = new ArrayList<>();
-        try (FileReader reader = new FileReader(dataPath)){
+        try (FileReader reader = new FileReader(fp.getWORKLOADPATH())){
             //Generating JSONObject based on a file
             Object obj = this.parser.parse(reader);
             JSONArray jsonWorkloadList = (JSONArray) obj;
@@ -84,21 +82,22 @@ public class FileHandler {
         return workloadList;
     }
 
-    public void CSVWriter(String outputPath){
+    public void CSVWriter(){
         FileWriter csvWriter;
-        if(!fileExists(outputPath)){
+        if(!fileExists(fp.getOUTPUTPATH())){
             try {
-                new File(outputPath).createNewFile();
-                csvWriter = new FileWriter(outputPath, true);
+                new File(fp.getOUTPUTPATH()).createNewFile();
+                csvWriter = new FileWriter(fp.getOUTPUTPATH(), true);
                 appendCSVHeader(csvWriter);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        } if (fileExists(outputPath)) {
+        } if (fileExists(fp.getOUTPUTPATH())) {
             try {
-                File tmpFile = new File(outputPath).createTempFile("output_tmp", ".csv");
-                boolean match = isFilesMatching(new File(outputPath), tmpFile);
+                new File(fp.getOUTPUTPATH());
+                File tmpFile = File.createTempFile("output_tmp", ".csv");
+                boolean match = isFilesMatching(new File(fp.getOUTPUTPATH()), tmpFile);
                 String out = String.valueOf(match);
                 TextOutPut(out);
                 if(!match){
