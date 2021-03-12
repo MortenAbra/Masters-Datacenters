@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 
 public class App  {
-    static String workloadPath = "PingMaster/pingmaster/src/main/java/drping/workloads.json";
-    static String outputPath = "PingMaster/pingmaster/src/main/java/drping/output.csv";
+    static String workloadPath = "pingmaster\\src\\main\\java\\drping\\workloads.json";
+    static String outputPath = "pingmaster\\src\\main\\java\\drping\\output.csv";
 
     
     public static void main( String[] args ) throws IOException

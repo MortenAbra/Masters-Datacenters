@@ -37,7 +37,7 @@ public class EnergiDataFetcher extends FileHandler {
         JSONObject data = convertToJson(inputData);
         saveDataToFile(data, "spotpricing.json", "energinet\\src\\main\\java\\drenerginet\\Results\\");
 
-        System.out.println(data.get("result"));
+        //System.out.println(data.get("result"));
         return data;
     }   
 
@@ -45,8 +45,7 @@ public class EnergiDataFetcher extends FileHandler {
         executor = Executors.newFixedThreadPool(5);
         test = new JSONObject();
         return (Future<JSONObject>) executor.submit(() -> {
-            Thread.sleep(3000);
-            System.out.println();
+            TextOutPut("Cycling...");
             return test = fetchAPIData(apiUrl);
         });
     }
