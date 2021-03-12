@@ -1,5 +1,5 @@
 $ docker build -t pyserver .
-$ docker run -d -p 5000:5000 myimage
+$ docker run -d -p 5000:5000 pyserver
  
 curl http://localhost:5000
 "Hello World!"
