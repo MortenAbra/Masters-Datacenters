@@ -1,4 +1,4 @@
-package drenerginet.Pinger;
+package drenerginet;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,9 +9,13 @@ import java.sql.Timestamp;
 
 import drenerginet.Models.Workload;
 
-public class DockerPinger {
+public class DockerPinger extends ExecutionManager {
 
-    public DockerPinger(){}
+    private FileHandler fh;
+
+    public DockerPinger(){
+        fh = new FileHandler();
+    }
 
     public void pingHost(Workload workload, FileWriter writer){
         int timeout = 10;
@@ -23,15 +27,18 @@ public class DockerPinger {
     }
 
     public void pingWithPort(Workload workload, int timeout, FileWriter writer){
+        fh.TextOutPut("Test - 1");
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(workload.getWl_ip(), workload.getWl_port()), timeout);
+            fh.TextOutPut("Test - 2");
             // Connection is established
             if (workload.getElapsedTime() > 1000 && workload.getElapsedTime() < 1000000) {
+                fh.TextOutPut("Test - 3");
                 // Downtime happend recently
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
                 writeWorkloadLineToCSV(workload, writer);
-                System.out.println(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
+                fh.TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
                 workload.setEndTime(System.currentTimeMillis());
             }
             workload.setStartTime(System.currentTimeMillis());
@@ -52,7 +59,7 @@ public class DockerPinger {
 
                     
                     writeWorkloadLineToCSV(workload, writer);
-                    System.out.println(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
+                    fh.TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
                     workload.setEndTime(System.currentTimeMillis());
                 }
                 workload.setStartTime(System.currentTimeMillis());

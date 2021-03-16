@@ -7,47 +7,105 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import drenerginet.Models.Record;
+import drenerginet.Models.Result;
 
 
-public class EnergiDataFetcher extends FileHandler {
+public class EnergiDataFetcher {
     private InputStream input;
     private BufferedReader reader;
-    private FileHandler fileSaver;
-    private ExecutorService executor;
-    private JSONObject test;
+    private FileHandler fh;
+    private ExecutorService es;
+    private Result res;
     
 
     public EnergiDataFetcher(){
-        fileSaver = new FileHandler();
+        fh = new FileHandler(); 
+        es = Executors.newCachedThreadPool();    
     }
 
-    //https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT%20%22HourUTC%22,%20%22HourDK%22,%20%22PriceArea%22,%20%22SpotPriceDKK%22,%20%22SpotPriceEUR%22%20FROM%20%22elspotprices%22%20ORDER%20BY%20%22HourUTC%22%20DESC%20LIMIT%20100
-
-    public JSONObject fetchAPIData(String url) throws MalformedURLException, IOException, ParseException{
+    public JsonObject fetchAPIData(String url, String filename) throws MalformedURLException, IOException{
         input = new URL(url).openStream();
-
+        fh.TextOutPut("Input stream open...");
         reader = new BufferedReader(new InputStreamReader(input, Charset.forName("UTF-8")));
-        String inputData = readChaString(reader);
-        JSONObject data = convertToJson(inputData);
-        saveDataToFile(data, "spotpricing.json", "energinet\\src\\main\\java\\drenerginet\\Results\\");
 
-        System.out.println(data.get("result"));
+        String inputData = fh.readChaString(reader);
+        JsonObject data = fh.convertToJson(inputData);
+        fh.saveDataToFile(data, filename);
+
+        //System.out.println(data.get("result"));
         return data;
     }   
 
-    public Future<JSONObject> fetchData(String apiUrl){
-        executor = Executors.newFixedThreadPool(5);
+    public JsonObject fetchData(String apiUrl, String filename){
+
+        Callable callable;
+        JsonObject jsonResult = null;
+        Future<JsonObject> future;
+        res = new Result();
+
+        try {
+            callable = new Callable<JsonObject>(){
+                @Override
+                public JsonObject call() throws Exception {
+                    JsonObject jsonObject = fetchAPIData(apiUrl, filename);
+                    return jsonObject;
+                } 
+            }; 
+        future = es.submit(callable);
+        jsonResult = future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
+
+    public void jsonToPojo(JsonObject object){
+        Gson gson = new Gson();
+        Result res = gson.fromJson(String.valueOf(object.getAsJsonObject("result")), Result.class);
+        
+        for (int i = 0; i < res.getRecords().size(); i++) {
+            fh.TextOutPut(res.getRecords().get(i).toString());
+        }
+        fh.TextOutPut(res.toString());
+    }
+        
+        /*
+        fh.TextOutPut("Executing Energi Data Fetcher - Fetching data...");
+        return new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    JSONObject apiData = fetchAPIData(apiUrl, filename);
+                    fh.TextOutPut("Energi Data Fetcher - Finished...");
+                } catch (IOException | ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                
+            }
+            
+        };
+        */
+ 
+
+    /*
+    public Future<?> fetchData(String apiUrl, String filename){
+        executor = Executors.newSingleThreadExecutor();
         test = new JSONObject();
-        return (Future<JSONObject>) executor.submit(() -> {
-            Thread.sleep(3000);
-            System.out.println();
-            return test = fetchAPIData(apiUrl);
+        return (Future<?>) executor.submit(() -> {
+            fileSaver.TextOutPut("Cycling...");
+            return test = fetchAPIData(apiUrl, filename);
         });
     }
+    */
 }

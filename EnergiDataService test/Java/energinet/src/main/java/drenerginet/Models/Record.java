@@ -1,19 +1,49 @@
 package drenerginet.Models;
 
-import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+@Getter
+@Setter
 public class Record{
 
-    @JsonProperty("HourUTC")
-    public Date hourUTC;
-    @JsonProperty("PriceArea")
+
+    public String hourUTC;
+
     public String priceArea;
-    @JsonProperty("SpotPriceDKK")
+
     public double spotPriceDKK;
-    @JsonProperty("HourDK")
-    public Date hourDK;
-    @JsonProperty("SpotPriceEUR")
+
+    public String hourDK;
+
     public double spotPriceEUR;
+
+    
+    /**
+     * @param hourUTC
+     * @param priceArea
+     * @param spotPriceDKK
+     * @param hourDK
+     * @param spotPriceEUR
+     */
+    public Record(String hourDK, String HourUTC, String priceArea, double SpotPriceDKK, double SpotPriceEUR) {
+        this.hourDK = hourDK;
+        this.hourUTC = HourUTC;
+        this.priceArea = priceArea;
+        this.spotPriceDKK = SpotPriceDKK;
+        this.spotPriceEUR = SpotPriceEUR;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    
+    @Override
+    public String toString() {
+        return "Record [hourDK=" + hourDK + ", hourUTC=" + hourUTC + ", priceArea=" + priceArea + ", spotPriceDKK="
+                + spotPriceDKK + ", spotPriceEUR=" + spotPriceEUR + "]";
+    }
+
+    
+
 }
