@@ -4,16 +4,21 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import org.apache.commons.io.FileUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
+import org.apache.commons.io.FileUtils;
+
+import drenerginet.Models.Result;
 import drenerginet.Models.Workload;
 
 
@@ -22,38 +27,41 @@ import drenerginet.Models.Workload;
 public class FileHandler extends FilePaths {
 
     private FileWriter file;
-    private JSONObject jsonObject;
+    private JsonObject jsonObject;
     private Timestamp time;
-    private JSONParser parser;
+    private JsonParser parser;
     private ArrayList<Workload> workloadList;
     private FilePaths fp;
+    private Result res;
 
 
     public FileHandler(){
         time = new Timestamp(System.currentTimeMillis());
-        parser = new JSONParser();
+        parser = new JsonParser();
         fp = new FilePaths();
+        res = new Result();
     }
 
     
-    public void saveDataToFile(JSONObject object, String fileName) throws IOException{
+    public void saveDataToFile(JsonObject object, String fileName) throws IOException{
         file = new FileWriter(fp.getOUTPUTPATH() + fileName);
         file.write(object.toString());
         file.close();
         TextOutPut("DATA SAVED TO FILE");
     }
 
-    public JSONObject convertToJson(String inputData) throws ParseException{
-        jsonObject = (JSONObject) this.parser.parse(inputData);       
+    public JsonObject convertToJson(String inputData) {
+        jsonObject = (JsonObject) this.parser.parse(inputData);       
         TextOutPut("DATA CONVERTED TO JSON");
         return jsonObject;
     }
 
-    public Workload parseWorkloadObject(JSONObject jsonWorkload){
-        JSONObject workloadObject = (JSONObject) jsonWorkload.get("workload");
-        String wl_name = (String) workloadObject.get("name");
-        String wl_ip = (String) workloadObject.get("ip");
-        int wl_port = (int) (long) workloadObject.get("port");
+    public Workload parseWorkloadObject(JsonObject jsonWorkload){
+        JsonObject workloadObject = (JsonObject) jsonWorkload.get("workload");
+        //Workload workload = gson.fromJson(String.valueOf(jsonWorkload.getAsJsonObject("workload")), Workload.class);
+        String wl_name = (String) workloadObject.get("name").getAsString(); //(String) workloadObject.get("name");
+        String wl_ip = (String) workloadObject.get("ip").getAsString();
+        int wl_port = (int) (long) workloadObject.get("port").getAsLong();
 
         return new Workload(wl_name, wl_ip, wl_port);
     }
@@ -64,11 +72,11 @@ public class FileHandler extends FilePaths {
         try (FileReader reader = new FileReader(fp.getWORKLOADPATH())){
             //Generating JSONObject based on a file
             Object obj = this.parser.parse(reader);
-            JSONArray jsonWorkloadList = (JSONArray) obj;
+            JsonArray jsonWorkloadList = (JsonArray) obj;
             
             //Adding workloads to the list
             for (int i = 0; i < jsonWorkloadList.size(); i++) {
-                workloadList.add(parseWorkloadObject((JSONObject) jsonWorkloadList.get(i)));
+                workloadList.add(parseWorkloadObject((JsonObject) jsonWorkloadList.get(i)));
             }
 
             for(Workload workload : workloadList){
@@ -81,6 +89,7 @@ public class FileHandler extends FilePaths {
 
         return workloadList;
     }
+
 
     public void CSVWriter(){
         FileWriter csvWriter;

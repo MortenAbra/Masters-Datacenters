@@ -1,4 +1,4 @@
-package drenerginet.Pinger;
+package drenerginet;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,10 +7,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.sql.Timestamp;
 
-import drenerginet.FileHandler;
 import drenerginet.Models.Workload;
 
-public class DockerPinger {
+public class DockerPinger extends ExecutionManager {
 
     private FileHandler fh;
 

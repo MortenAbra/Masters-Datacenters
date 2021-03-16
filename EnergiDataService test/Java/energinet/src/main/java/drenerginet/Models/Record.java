@@ -1,90 +1,24 @@
 package drenerginet.Models;
 
-import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Record{
 
 
-    public Date hourUTC;
+    public String hourUTC;
 
     public String priceArea;
 
     public double spotPriceDKK;
 
-    public Date hourDK;
+    public String hourDK;
 
     public double spotPriceEUR;
 
-    /**
-     * @return the hourUTC
-     */
-    public Date getHourUTC() {
-        return hourUTC;
-    }
-
-    /**
-     * @param hourUTC the hourUTC to set
-     */
-    public void setHourUTC(Date hourUTC) {
-        this.hourUTC = hourUTC;
-    }
-
-    /**
-     * @return the priceArea
-     */
-    public String getPriceArea() {
-        return priceArea;
-    }
-
-    /**
-     * @param priceArea the priceArea to set
-     */
-    public void setPriceArea(String priceArea) {
-        this.priceArea = priceArea;
-    }
-
-    /**
-     * @return the spotPriceDKK
-     */
-    public double getSpotPriceDKK() {
-        return spotPriceDKK;
-    }
-
-    /**
-     * @param spotPriceDKK the spotPriceDKK to set
-     */
-    public void setSpotPriceDKK(double spotPriceDKK) {
-        this.spotPriceDKK = spotPriceDKK;
-    }
-
-    /**
-     * @return the hourDK
-     */
-    public Date getHourDK() {
-        return hourDK;
-    }
-
-    /**
-     * @param hourDK the hourDK to set
-     */
-    public void setHourDK(Date hourDK) {
-        this.hourDK = hourDK;
-    }
-
-    /**
-     * @return the spotPriceEUR
-     */
-    public double getSpotPriceEUR() {
-        return spotPriceEUR;
-    }
-
-    /**
-     * @param spotPriceEUR the spotPriceEUR to set
-     */
-    public void setSpotPriceEUR(double spotPriceEUR) {
-        this.spotPriceEUR = spotPriceEUR;
-    }
-
+    
     /**
      * @param hourUTC
      * @param priceArea
@@ -92,12 +26,22 @@ public class Record{
      * @param hourDK
      * @param spotPriceEUR
      */
-    public Record(Date hourDK, Date HourUTC, String priceArea, double SpotPriceDKK, double SpotPriceEUR) {
-        this.hourUTC = hourUTC;
-        this.priceArea = priceArea;
-        this.spotPriceDKK = spotPriceDKK;
+    public Record(String hourDK, String HourUTC, String priceArea, double SpotPriceDKK, double SpotPriceEUR) {
         this.hourDK = hourDK;
-        this.spotPriceEUR = spotPriceEUR;
+        this.hourUTC = HourUTC;
+        this.priceArea = priceArea;
+        this.spotPriceDKK = SpotPriceDKK;
+        this.spotPriceEUR = SpotPriceEUR;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    
+    @Override
+    public String toString() {
+        return "Record [hourDK=" + hourDK + ", hourUTC=" + hourUTC + ", priceArea=" + priceArea + ", spotPriceDKK="
+                + spotPriceDKK + ", spotPriceEUR=" + spotPriceEUR + "]";
     }
 
     

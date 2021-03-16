@@ -1,13 +1,8 @@
 package drenerginet;
 
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.concurrent.Future;
-import org.json.simple.JSONObject;
 import drenerginet.Models.Record;
 import drenerginet.Models.Result;
-import drenerginet.Models.Workload;
-import drenerginet.Pinger.DockerPinger;
+
 
 
 
@@ -21,9 +16,15 @@ public class App {
     static Result res = new Result();
     public static void main(String[] args) throws Exception {
         //DockerPinger pinger = new DockerPinger();
-        ExecutionManager em = new ExecutionManager();
+        EnergiDataFetcher edf = new EnergiDataFetcher();
 
-        em.ExecuteJSONTask(em.getRunnableList());
+        edf.jsonToPojo(edf.fetchData(fh.getAPIURL(), "muttentester.json"));
+        
+        
+
+        //res.addToRecordsList(res.jsonRecordToPojo(edf.fetchData(fh.getAPIURL(), "testing.json")));
+
+        
 
 
 
