@@ -8,11 +8,13 @@ public class Workload {
     long startTime = 0;
     long elapsedTime = 0;
     long endTime = 0;
+    boolean wl_status;
 
-    public Workload(String wl_name, String wl_ip, int wl_port) {
+    public Workload(String wl_name, String wl_ip, int wl_port, boolean wl_status) {
         this.wl_name = wl_name;
         this.wl_ip = wl_ip;
         this.wl_port = wl_port;
+        this.wl_status = wl_status;
     }
 
     @Override
@@ -80,6 +82,20 @@ public class Workload {
      */
     public void setWl_port(int wl_port) {
         this.wl_port = wl_port;
+    }
+
+    /**
+     * @return the wl_status
+     */
+    public boolean isWl_status() {
+        return wl_status;
+    }
+
+    /**
+     * @param wl_status the wl_status to set
+     */
+    public void setWl_status(boolean wl_status) {
+        this.wl_status = wl_status;
     }
     
     

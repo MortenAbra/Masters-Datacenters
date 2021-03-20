@@ -16,9 +16,11 @@ import mastercontroller.Models.Workload;
 public class VMManager {
 
     private FileHandler fh;
+    private ArrayList<JsonObject> vmList;
 
     public VMManager(){
         fh = new FileHandler();
+        vmList = new ArrayList<>();
     }
 
     public void pingHost(Workload workload, FileWriter writer){
@@ -86,11 +88,11 @@ public class VMManager {
         writer.close();
     }
 
-    private ArrayList<JsonObject> findActiveVMs(ArrayList<JsonObject> vmList){
-        ArrayList<JsonObject> activeVMs = new ArrayList<>();
-        for (JsonObject vm : vmList) {
-            fh.TextOutPut("VM: " + vm.get("name") + " is - " + vm.get("active").getAsString());
-            if(vm.get("active").getAsBoolean() == true){
+    private ArrayList<Workload> findActiveVMs(ArrayList<Workload> vmList){
+        ArrayList<Workload> activeVMs = new ArrayList<>();
+        for (Workload vm : vmList) {
+            fh.TextOutPut("VM: " + vm.getWl_name() + " is - " + vm.isWl_status());
+            if(vm.isWl_status()){
                 if(activeVMs.contains(vm)){
                     fh.TextOutPut("VM already in available list...");
                 } else {
@@ -98,26 +100,27 @@ public class VMManager {
                     activeVMs.add(vm);
                 }
             } else {
-                fh.TextOutPut(vm.get("name").getAsString() + ": Unavailable...");
+                fh.TextOutPut(vm.getWl_name() + ": Unavailable...");
             }            
         }
         return activeVMs;
     }
 
-    private JsonObject getActiveVMObject(ArrayList<JsonObject> activeVMList){
-        JsonObject readyVmObject = activeVMList.get(0);
-        readyVmObject.getAsJsonObject("workload").addProperty("active", true);
-        return readyVmObject;
+    private Workload getActiveVMObject(ArrayList<Workload> activeVMList){
+        Workload vmObject = activeVMList.get(0);
+        activeVMList.get(0).setWl_status(true);
+        activeVMList.remove(0);
+        return vmObject;
     }
 
-    private String getSingleActiveVMsIP(JsonObject object){
-        return object.get("ip").getAsString();
+    private String getSingleActiveVMsIP(Workload object){
+        return object.getWl_ip();
     }
 
-    private ArrayList<String> getActiveVMsIPAsList(ArrayList<JsonObject> vmList){
+    private ArrayList<String> getActiveVMsIPAsList(ArrayList<Workload> vmList){
         ArrayList<String> vmIpList = new ArrayList<>();
-        for (JsonObject object : vmList) {
-            vmIpList.add(object.get("ip").getAsString());
+        for (Workload object : vmList) {
+            vmIpList.add(object.getWl_ip());
         }
         return vmIpList;
     }

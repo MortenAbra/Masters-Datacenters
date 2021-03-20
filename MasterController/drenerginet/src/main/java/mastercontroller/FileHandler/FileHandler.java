@@ -16,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 
 import mastercontroller.Models.Result;
 import mastercontroller.Models.Workload;
+import mastercontroller.Services.VMManager;
 
 public class FileHandler extends FilePaths {
 
@@ -55,8 +56,9 @@ public class FileHandler extends FilePaths {
         String wl_name = (String) workloadObject.get("name").getAsString(); //(String) workloadObject.get("name");
         String wl_ip = (String) workloadObject.get("ip").getAsString();
         int wl_port = (int) (long) workloadObject.get("port").getAsLong();
-
-        return new Workload(wl_name, wl_ip, wl_port);
+        boolean wl_status = (boolean) workloadObject.get("active").getAsBoolean();
+        Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status);
+        return wl;
     }
 
     //Generating workload json objects and adding to Array
