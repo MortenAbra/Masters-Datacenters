@@ -19,7 +19,7 @@ public class Workload {
 
     @Override
     public String toString() {
-        String s = wl_name + "  |  " + wl_ip + ":" + wl_port;
+        String s = wl_name + "  |  " + wl_ip + ":" + wl_port + " Available: " + wl_status;
         return s;
     }
 

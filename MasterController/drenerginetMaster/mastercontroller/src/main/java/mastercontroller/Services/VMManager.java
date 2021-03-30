@@ -1,5 +1,6 @@
 package mastercontroller.Services;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -8,19 +9,22 @@ import java.net.Socket;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-import mastercontroller.FileHandler.FileHandler;
+import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Workload;
 
 public class VMManager {
 
-    private FileHandler fh;
-    private ArrayList<JsonObject> vmList;
+    private FilePaths fp;
+    private ArrayList<Workload> workloadList;
+    private JsonParser parser = new JsonParser();
 
     public VMManager(){
-        fh = new FileHandler();
-        vmList = new ArrayList<>();
+        fp = new FilePaths();
+        workloadList = new ArrayList<>();
     }
 
     public void pingHost(Workload workload, FileWriter writer){
@@ -33,18 +37,17 @@ public class VMManager {
     }
 
     public void pingWithPort(Workload workload, int timeout, FileWriter writer){
-        fh.TextOutPut("Test - 1");
+        
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(workload.getWl_ip(), workload.getWl_port()), timeout);
-            fh.TextOutPut("Test - 2");
+            
             // Connection is established
             if (workload.getElapsedTime() > 1000 && workload.getElapsedTime() < 1000000) {
-                fh.TextOutPut("Test - 3");
+                
                 // Downtime happend recently
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-                writeWorkloadLineToCSV(workload, writer);
-                fh.TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
+                //TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
                 workload.setEndTime(System.currentTimeMillis());
             }
             workload.setStartTime(System.currentTimeMillis());
@@ -64,8 +67,8 @@ public class VMManager {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
                     
-                    writeWorkloadLineToCSV(workload, writer);
-                    fh.TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
+
+                    //TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " + workload.getElapsedTime() + " ms");
                     workload.setEndTime(System.currentTimeMillis());
                 }
                 workload.setStartTime(System.currentTimeMillis());
@@ -77,33 +80,64 @@ public class VMManager {
         }
     }
 
-    private void writeWorkloadLineToCSV(Workload workload, FileWriter writer) throws IOException {
-        writer.append(new Timestamp(System.currentTimeMillis()) + "");
-        writer.append(",");
-        writer.append(workload.getWl_name());
-        writer.append(",");
-        writer.append(workload.getElapsedTime() + "");
-        writer.append("\n");
-        writer.flush();
-        writer.close();
+    private Workload getAllVMs(ArrayList<Workload> workloadlist){
+        for (Workload workload : workloadlist) {
+            return workload;
+        }
+        return null;
     }
 
     private ArrayList<Workload> findActiveVMs(ArrayList<Workload> vmList){
         ArrayList<Workload> activeVMs = new ArrayList<>();
         for (Workload vm : vmList) {
-            fh.TextOutPut("VM: " + vm.getWl_name() + " is - " + vm.isWl_status());
+            //TextOutPut("VM: " + vm.getWl_name() + " is - " + vm.isWl_status());
             if(vm.isWl_status()){
                 if(activeVMs.contains(vm)){
-                    fh.TextOutPut("VM already in available list...");
+                    //TextOutPut("VM already in available list...");
                 } else {
-                    fh.TextOutPut("Adding vm to available list...");
+                    //TextOutPut("Adding vm to available list...");
                     activeVMs.add(vm);
                 }
             } else {
-                fh.TextOutPut(vm.getWl_name() + ": Unavailable...");
+                //TextOutPut(vm.getWl_name() + ": Unavailable...");
             }            
         }
         return activeVMs;
+    }
+
+
+    public Workload parseWorkloadObject(JsonObject jsonWorkload){
+        //Workload workload = gson.fromJson(String.valueOf(jsonWorkload.getAsJsonObject("workload")), Workload.class);
+        String wl_name = (String) jsonWorkload.get("name").getAsString(); //(String) workloadObject.get("name");
+        String wl_ip = (String) jsonWorkload.get("ip").getAsString();
+        int wl_port = (int) (long) jsonWorkload.get("port").getAsLong();
+        boolean wl_status = (boolean) jsonWorkload.get("available").getAsBoolean();
+        Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status);
+        return wl;
+    }
+
+
+
+    //Generating workload json objects and adding to Array
+    public void addJSONWorkloadToList() throws IOException{
+        try (FileReader reader = new FileReader(fp.getWORKLOADPATH()+"workloads.json")){
+            //Generating JSONObject based on a file
+            Object obj = parser.parse(reader);
+            //Object obj = (JsonObject) JsonParser.parseReader(new BufferedReader(reader));
+            JsonObject jsonObject = (JsonObject) obj;
+
+            JsonArray jsonArray = (JsonArray) jsonObject.get("workloads");
+            
+
+            //Adding workloads to the list
+            
+            for (int i = 0; i < jsonArray.size(); i++) {
+                workloadList.add(parseWorkloadObject((JsonObject) jsonArray.get(i)));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private Workload getActiveVMObject(ArrayList<Workload> activeVMList){
@@ -113,10 +147,6 @@ public class VMManager {
         return vmObject;
     }
 
-    private String getSingleActiveVMsIP(Workload object){
-        return object.getWl_ip();
-    }
-
     private ArrayList<String> getActiveVMsIPAsList(ArrayList<Workload> vmList){
         ArrayList<String> vmIpList = new ArrayList<>();
         for (Workload object : vmList) {
@@ -124,5 +154,20 @@ public class VMManager {
         }
         return vmIpList;
     }
+
+    /**
+     * @return the workloadList
+     */
+    public ArrayList<Workload> getWorkloadList() {
+        return workloadList;
+    }
+
+    /**
+     * @param workloadList the workloadList to set
+     */
+    public void setWorkloadList(ArrayList<Workload> workloadList) {
+        this.workloadList = workloadList;
+    }
+
     
 }
