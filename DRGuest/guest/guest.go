@@ -1,10 +1,10 @@
 package guest
 
 type Guest struct {
-	ip   string
-	port string
+	IP   string `json:"ip"`
+	Port string `json:"port"`
 }
 
 func New(_ip string, _port string) Guest {
-	return Guest{ip: _ip, port: _port}
+	return Guest{IP: _ip, Port: _port}
 }
