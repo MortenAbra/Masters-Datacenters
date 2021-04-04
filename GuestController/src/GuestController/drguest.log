@@ -1,0 +1,28 @@
+[INFO] Apr  4 20:51:08.083:Initialization done for localhost:8080
+[INFO] Apr  4 20:51:08.083:Listening on: localhost:8080
+[INFO] Apr  4 22:16:07.712:Initialization done for localhost:8080
+[INFO] Apr  4 22:16:07.712:Setting up handlers
+[INFO] Apr  4 22:16:07.712:Listening on localhost:8080
+[INFO] Apr  4 22:17:59.762:Initialization done for localhost:8080
+[INFO] Apr  4 22:17:59.762:Setting up handlers
+[INFO] Apr  4 22:17:59.762:Listening on localhost:8080
+[INFO] Apr  4 22:21:10.116:Initialization done for localhost:8080
+[INFO] Apr  4 22:21:10.117:Setting up handlers
+[INFO] Apr  4 22:21:10.117:Listening on localhost:8080
+[INFO] Apr  4 22:22:07.185:Initialization done for localhost:8080
+[INFO] Apr  4 22:22:07.185:Setting up handlers
+[INFO] Apr  4 22:22:07.185:Listening on localhost:8080
+[INFO] Apr  4 22:23:05.097:Initialization done for localhost:8080
+[INFO] Apr  4 22:23:05.097:Setting up handlers
+[INFO] Apr  4 22:23:05.098:Listening on localhost:8080
+[INFO] Apr  4 22:25:15.728:Initialization done for localhost:8080
+[INFO] Apr  4 22:25:15.728:Setting up handlers
+[INFO] Apr  4 22:25:15.728:Listening on localhost:8080
+[INFO] Apr  4 22:28:04.195:Initialization done for localhost:8080
+[INFO] Apr  4 22:28:04.196:Setting up handlers
+[INFO] Apr  4 22:28:04.196:Listening on localhost:8080
+[INFO] Apr  4 22:31:34.835:Initialization done for localhost:8080
+[INFO] Apr  4 22:31:34.835:Setting up handlers
+[INFO] Apr  4 22:31:34.835:Listening on localhost:8080
+[INFO] Apr  4 22:31:35.597:GET Request for /guest/workload
+[INFO] Apr  4 22:31:35.605:Responding: [{"Identifier":"Incomplete Workload:/sweet_noether","AccessIP":"172.17.0.2","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"3afb870319970c814117161370d4fb29d43c1fa347bd8e18b59ce99f54dbf196","Image":"pyserver","Checkpoint":false}},{"Identifier":"Incomplete Workload:/cr_ID","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"4ff82afe1e14930d1865434732dab834205486bc08b7a57a1a56f350c1225c16","Image":"busybox","Checkpoint":false}},{"Identifier":"Incomplete Workload:ubuntu16.04","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"VM","VMProperties":{"DomainName":"ubuntu16.04","ConnectionURI":"qemu+ssh://localhost/system"}}]
