@@ -5,10 +5,16 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/mitchellh/mapstructure"
+
 	"GuestController/consolemanager"
 	"GuestController/drlogger"
 	"GuestController/guest"
 	"GuestController/jsonmanager"
+	"GuestController/migrate"
+	"GuestController/workload"
+	"GuestController/workload/containerworkload"
+	"GuestController/workload/vmworkload"
 )
 
 var guestInformation = guest.Guest{}
@@ -56,6 +62,7 @@ func setupServer(serverIP string, serverPort string) error {
 	http.HandleFunc("/guest", guestHandler)
 	http.HandleFunc("/guest/workloads", guestWorkloadsHandler)
 	http.HandleFunc("/workloads", workloadsHandler)
+	http.HandleFunc("/migrate", migrateHandler)
 
 	logInfo("Listening on " + serverIP + ":" + serverPort)
 	err := http.ListenAndServe(serverIP+":"+serverPort, nil)
@@ -102,7 +109,7 @@ func workloadsHandler(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		logInfo("GET Request for /guest/workload")
 		// Read Active Workloads
-		result, err := jsonmanager.GetAllWorkloadsInSystem()
+		result, err := jsonmanager.GetWorkloadFileAsJSON()
 		logErr(err)
 		fmt.Fprintf(w, string(result)+"")
 		logInfo("Responding: " + string(result) + "")
@@ -112,4 +119,60 @@ func workloadsHandler(w http.ResponseWriter, r *http.Request) {
 		err := jsonmanager.AddWorkloadToSystem(r)
 		logErr(err)
 	}
+}
+
+func migrateHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		fmt.Fprintf(w, "Request not supported!")
+	case "POST":
+		logInfo("POST Request for /migrate")
+
+		decoder := json.NewDecoder(r.Body)
+		var migration migrate.Migrate
+
+		err := decoder.Decode(&migration)
+		logErr(err)
+
+		workloadlist, err := jsonmanager.GetWorkloadFileAsWorkloads()
+		logErr(err)
+		var migrationWorkload workload.Workload
+		for i := 0; i < len(workloadlist.Workloads); i++ {
+			mapstructure.Decode(workloadlist.Workloads[i], &migrationWorkload)
+			// Find the workload to migrate
+			if migrationWorkload.Identifier == migration.Identifier {
+				if len(migrationWorkload.Type) != 0 {
+					switch migrationWorkload.Type {
+					case workload.CONTAINERTYPE:
+						// Container migration Start
+						var container containerworkload.ContainerWorkload
+						mapstructure.Decode(workloadlist.Workloads[i], &container)
+
+						fmt.Println("Migrating container: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
+						logInfo("Migrating container: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
+
+						initiateContainerMigration(migration, container) // Go Routine?
+
+					case workload.VMTYPE:
+						// VM migration start
+						var vm vmworkload.VMWorkload
+						mapstructure.Decode(workloadlist.Workloads[i], &vm)
+
+						fmt.Println("Migrating VM: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
+						logInfo("Migrating VM: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
+
+						// TODO
+						initiateVMMigration(migration, vm)
+					}
+				}
+			}
+		}
+	}
+}
+
+func initiateContainerMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) {
+	container.DockerSaveAndStoreCheckpoint(container.Properties.Checkpoint)
+
+}
+func initiateVMMigration(migration migrate.Migrate, VM vmworkload.VMWorkload) {
 }

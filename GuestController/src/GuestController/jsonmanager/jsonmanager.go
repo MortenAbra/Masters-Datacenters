@@ -27,7 +27,7 @@ func CreateWorkloadFile() error {
 	return err
 }
 
-func getWorkloadFileAsWorkloads() (workload.WorkloadList, error) {
+func GetWorkloadFileAsWorkloads() (workload.WorkloadList, error) {
 	jsonFile, err := os.Open(WorkloadFileName)
 
 	if err != nil {
@@ -50,7 +50,7 @@ func getWorkloadFileAsWorkloads() (workload.WorkloadList, error) {
 	return workloads, err
 }
 
-func getWorkloadFileAsJSON() (string, error) {
+func GetWorkloadFileAsJSON() (string, error) {
 	jsonFile, err := os.Open(WorkloadFileName)
 	if err != nil {
 		return "", err
@@ -116,9 +116,4 @@ func AddWorkloadToSystem(r *http.Request) error {
 	err = ioutil.WriteFile(WorkloadFileName, result, 0644)
 
 	return err
-}
-
-func GetAllWorkloadsInSystem() (string, error) {
-	workloads, err := getWorkloadFileAsJSON()
-	return workloads, err
 }
