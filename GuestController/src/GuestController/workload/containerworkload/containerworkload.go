@@ -7,6 +7,7 @@ import (
 
 	// Docker SDK
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
 	uuid "github.com/nu7hatch/gouuid"
@@ -90,6 +91,69 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 	_, err = io.Copy(outFile, resp)
 	if err != nil {
 		return err
+	}
+	return err
+}
+
+func (wl ContainerWorkload) DockeRemoveContainer() error {
+	// Init docker environment
+	ctx, cli, err := initDocker()
+	if err != nil {
+		return err
+	}
+
+	err = cli.ContainerStop(ctx, wl.Properties.ContainerID, nil)
+	if err != nil {
+		return err
+	}
+
+	err = cli.ContainerRemove(ctx, wl.Properties.ContainerID, types.ContainerRemoveOptions{})
+	return err
+}
+
+func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) error {
+	// Init docker environment
+	ctx, cli, err := initDocker()
+	if err != nil {
+		return err
+	}
+
+	tarFile, err := os.Open(wl.SharedDir + "/" + wl.Properties.ContainerID + ".tar.gz")
+	if err != nil {
+		return err
+	}
+	defer tarFile.Close()
+
+	resp, err := cli.ImageLoad(ctx, tarFile, true)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	out, err := cli.ContainerCreate(
+		ctx,
+		&container.Config{Image: wl.Properties.Image},
+		nil,
+		&network.NetworkingConfig{EndpointsConfig: wl.Properties.NetworkSettings},
+		nil,
+		wl.Properties.ContainerID)
+	if err != nil {
+		return err
+	}
+
+	if restore {
+		err := cli.ContainerStart(ctx, out.ID, types.ContainerStartOptions{
+			CheckpointID:  wl.Properties.CheckpointIDs[len(wl.Properties.CheckpointIDs)-1],
+			CheckpointDir: wl.SharedDir,
+		})
+		if err != nil {
+			return err
+		}
+	} else {
+		err := cli.ContainerStart(ctx, out.ID, types.ContainerStartOptions{})
+		if err != nil {
+			return err
+		}
 	}
 	return err
 }

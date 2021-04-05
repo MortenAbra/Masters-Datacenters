@@ -9,6 +9,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+
+	"github.com/mitchellh/mapstructure"
 )
 
 const (
@@ -63,8 +65,16 @@ func GetWorkloadFileAsJSON() (string, error) {
 	return string(byteValue), err
 }
 
+func AddContainerWorkloadToSystem(container containerworkload.ContainerWorkload) {
+
+}
+
+func AddVMWorkloadToSystem(vm vmworkload.VMWorkload) {
+
+}
+
 func AddWorkloadToSystem(r *http.Request) error {
-	workloads, err := getWorkloadFileAsWorkloads()
+	workloads, err := GetWorkloadFileAsWorkloads()
 	if err != nil {
 		return err
 	}
@@ -83,7 +93,8 @@ func AddWorkloadToSystem(r *http.Request) error {
 	}
 
 	// Check the type of workload
-	if wl.Type == workload.CONTAINERTYPE {
+	switch wl.Type {
+	case workload.CONTAINERTYPE:
 		var wl containerworkload.ContainerWorkload
 
 		newdecoder := json.NewDecoder(ioutil.NopCloser(bytes.NewReader(data)))
@@ -93,16 +104,13 @@ func AddWorkloadToSystem(r *http.Request) error {
 		}
 
 		workloads.Workloads = append(workloads.Workloads, wl)
-
-	} else if wl.Type == workload.VMTYPE {
+	case workload.VMTYPE:
 		var wl vmworkload.VMWorkload
-
 		newdecoder := json.NewDecoder(ioutil.NopCloser(bytes.NewReader(data)))
 		err = newdecoder.Decode(&wl)
 		if err != nil {
 			return err
 		}
-
 		workloads.Workloads = append(workloads.Workloads, wl)
 	}
 
@@ -116,4 +124,26 @@ func AddWorkloadToSystem(r *http.Request) error {
 	err = ioutil.WriteFile(WorkloadFileName, result, 0644)
 
 	return err
+}
+
+func RemoveContainerFromWorkloadFile(container containerworkload.ContainerWorkload) error {
+	workloads, err := GetWorkloadFileAsWorkloads()
+	if err != nil {
+		return err
+	}
+
+	var tempWorkload workload.Workload
+	for i := 0; i < len(workloads.Workloads); i++ {
+		mapstructure.Decode(workloads.Workloads[i], &tempWorkload)
+		// Find the workload to migrate
+		if tempWorkload.Identifier == container.Identifier {
+			workloads.Workloads = removeIndexFromSlice(workloads.Workloads, i)
+		}
+	}
+	return err
+}
+
+// Remove element from a slice (Reslicing)
+func removeIndexFromSlice(slice []interface{}, index int) []interface{} {
+	return append(slice[:index], slice[index+1:]...)
 }
