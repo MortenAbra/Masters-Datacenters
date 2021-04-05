@@ -5,7 +5,7 @@ import (
 )
 
 type VMWorkload struct {
-	*workload.Workload
+	workload.Workload
 	Properties VMProperties `json:"VMProperties"`
 }
 

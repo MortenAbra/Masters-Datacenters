@@ -1,0 +1,17 @@
+{
+    "Workloads": [
+        {
+            "Identifier": "Python Flask Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "1234",
+                "Image": "1234",
+                "Checkpoint": false
+            }
+        }
+    ]
+}

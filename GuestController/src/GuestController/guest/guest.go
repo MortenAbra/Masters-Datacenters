@@ -40,7 +40,7 @@ func (g Guest) GetAllWorkloadsRunningOnGuest() []interface{} {
 
 	for _, container := range containers {
 		workload := containerworkload.ContainerWorkload{
-			Workload: &workload.Workload{
+			Workload: workload.Workload{
 				Identifier: "Incomplete Workload:" + container.Names[0],
 				AccessIP:   container.NetworkSettings.Networks["bridge"].IPAddress,
 				AccessPort: "",
@@ -72,7 +72,7 @@ func (g Guest) GetAllWorkloadsRunningOnGuest() []interface{} {
 
 	for _, domain := range domains {
 		workload := vmworkload.VMWorkload{
-			Workload: &workload.Workload{
+			Workload: workload.Workload{
 				Identifier: "Incomplete Workload:" + domain.Name,
 				AccessIP:   "",
 				AccessPort: "",

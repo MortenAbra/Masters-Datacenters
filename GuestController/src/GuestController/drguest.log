@@ -26,3 +26,498 @@
 [INFO] Apr  4 22:31:34.835:Listening on localhost:8080
 [INFO] Apr  4 22:31:35.597:GET Request for /guest/workload
 [INFO] Apr  4 22:31:35.605:Responding: [{"Identifier":"Incomplete Workload:/sweet_noether","AccessIP":"172.17.0.2","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"3afb870319970c814117161370d4fb29d43c1fa347bd8e18b59ce99f54dbf196","Image":"pyserver","Checkpoint":false}},{"Identifier":"Incomplete Workload:/cr_ID","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"4ff82afe1e14930d1865434732dab834205486bc08b7a57a1a56f350c1225c16","Image":"busybox","Checkpoint":false}},{"Identifier":"Incomplete Workload:ubuntu16.04","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"VM","VMProperties":{"DomainName":"ubuntu16.04","ConnectionURI":"qemu+ssh://localhost/system"}}]
+[INFO] Apr  5 09:03:55.584:Initialization done for localhost:8080
+[INFO] Apr  5 09:03:55.584:Setting up handlers
+[INFO] Apr  5 09:03:55.585:Listening on localhost:8080
+[INFO] Apr  5 09:04:04.710:GET Request for /guest/workload
+[INFO] Apr  5 09:04:04.716:Responding: [{"Identifier":"Incomplete Workload:/sweet_noether","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"3afb870319970c814117161370d4fb29d43c1fa347bd8e18b59ce99f54dbf196","Image":"pyserver","Checkpoint":false}},{"Identifier":"Incomplete Workload:/cr_ID","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"4ff82afe1e14930d1865434732dab834205486bc08b7a57a1a56f350c1225c16","Image":"busybox","Checkpoint":false}},{"Identifier":"Incomplete Workload:ubuntu16.04","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"VM","VMProperties":{"DomainName":"ubuntu16.04","ConnectionURI":"qemu+ssh://localhost/system"}}]
+[INFO] Apr  5 09:54:22.136:Initialization done for localhost:8080
+[INFO] Apr  5 09:54:22.137:Setting up handlers
+[INFO] Apr  5 09:54:22.137:Listening on localhost:8080
+[INFO] Apr  5 09:55:10.451:POST Request for /workloads
+[INFO] Apr  5 09:56:00.000:POST Request for /workloads
+[INFO] Apr  5 09:56:42.368:Initialization done for localhost:8080
+[INFO] Apr  5 09:56:42.368:Setting up handlers
+[INFO] Apr  5 09:56:42.368:Listening on localhost:8080
+[INFO] Apr  5 09:56:45.869:POST Request for /workloads
+[INFO] Apr  5 09:56:58.217:Initialization done for localhost:8080
+[INFO] Apr  5 09:56:58.217:Setting up handlers
+[INFO] Apr  5 09:56:58.218:Listening on localhost:8080
+[INFO] Apr  5 09:56:59.951:POST Request for /workloads
+[INFO] Apr  5 09:57:36.606:Initialization done for localhost:8080
+[INFO] Apr  5 09:57:36.606:Setting up handlers
+[INFO] Apr  5 09:57:36.606:Listening on localhost:8080
+[INFO] Apr  5 09:57:39.291:POST Request for /workloads
+[INFO] Apr  5 09:59:15.638:Initialization done for localhost:8080
+[INFO] Apr  5 09:59:15.638:Setting up handlers
+[INFO] Apr  5 09:59:15.638:Listening on localhost:8080
+[INFO] Apr  5 09:59:18.715:POST Request for /workloads
+[ERR] Apr  5 09:59:18.715:unexpected end of JSON input
+[INFO] Apr  5 10:00:25.655:Initialization done for localhost:8080
+[INFO] Apr  5 10:00:25.655:Setting up handlers
+[INFO] Apr  5 10:00:25.655:Listening on localhost:8080
+[INFO] Apr  5 10:01:02.994:POST Request for /workloads
+[ERR] Apr  5 10:01:02.994:unexpected end of JSON input
+[INFO] Apr  5 10:01:43.986:Initialization done for localhost:8080
+[INFO] Apr  5 10:01:43.986:Setting up handlers
+[INFO] Apr  5 10:01:43.986:Listening on localhost:8080
+[INFO] Apr  5 10:01:45.393:POST Request for /workloads
+[ERR] Apr  5 10:01:45.393:unexpected end of JSON input
+[INFO] Apr  5 10:02:32.250:Initialization done for localhost:8080
+[INFO] Apr  5 10:02:32.250:Setting up handlers
+[INFO] Apr  5 10:02:32.250:Listening on localhost:8080
+[INFO] Apr  5 10:02:33.154:POST Request for /workloads
+[ERR] Apr  5 10:02:33.154:unexpected end of JSON input
+[INFO] Apr  5 10:02:54.822:Initialization done for localhost:8080
+[INFO] Apr  5 10:02:54.822:Setting up handlers
+[INFO] Apr  5 10:02:54.822:Listening on localhost:8080
+[INFO] Apr  5 10:02:55.666:POST Request for /workloads
+[ERR] Apr  5 10:02:55.666:unexpected end of JSON input
+[INFO] Apr  5 10:03:11.924:Initialization done for localhost:8080
+[INFO] Apr  5 10:03:11.924:Setting up handlers
+[INFO] Apr  5 10:03:11.924:Listening on localhost:8080
+[INFO] Apr  5 10:03:14.403:POST Request for /workloads
+[ERR] Apr  5 10:03:14.403:unexpected end of JSON input
+[INFO] Apr  5 10:03:47.167:Initialization done for localhost:8080
+[INFO] Apr  5 10:03:47.167:Setting up handlers
+[INFO] Apr  5 10:03:47.167:Listening on localhost:8080
+[INFO] Apr  5 10:03:48.471:POST Request for /workloads
+[ERR] Apr  5 10:03:48.471:json: cannot unmarshal object into Go value of type []interface {}
+[INFO] Apr  5 10:06:02.593:Initialization done for localhost:8080
+[INFO] Apr  5 10:06:02.593:Setting up handlers
+[INFO] Apr  5 10:06:02.593:Listening on localhost:8080
+[INFO] Apr  5 10:06:07.042:POST Request for /workloads
+[ERR] Apr  5 10:06:07.042:json: cannot unmarshal object into Go value of type []interface {}
+[INFO] Apr  5 12:01:07.669:Initialization done for localhost:8080
+[INFO] Apr  5 12:01:07.669:Setting up handlers
+[INFO] Apr  5 12:01:07.669:Listening on localhost:8080
+[INFO] Apr  5 12:01:18.486:POST Request for /workloads
+[ERR] Apr  5 12:01:18.486:unexpected end of JSON input
+[INFO] Apr  5 12:03:18.354:Initialization done for localhost:8080
+[INFO] Apr  5 12:03:18.354:Setting up handlers
+[INFO] Apr  5 12:03:18.354:Listening on localhost:8080
+[INFO] Apr  5 12:03:33.343:GET Request for /guest/workload
+[INFO] Apr  5 12:03:33.353:Responding: [{"Identifier":"Incomplete Workload:/sweet_noether","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"3afb870319970c814117161370d4fb29d43c1fa347bd8e18b59ce99f54dbf196","Image":"pyserver","Checkpoint":false}},{"Identifier":"Incomplete Workload:/cr_ID","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"4ff82afe1e14930d1865434732dab834205486bc08b7a57a1a56f350c1225c16","Image":"busybox","Checkpoint":false}},{"Identifier":"Incomplete Workload:ubuntu16.04","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"VM","VMProperties":{"DomainName":"ubuntu16.04","ConnectionURI":"qemu+ssh://localhost/system"}}]
+[INFO] Apr  5 12:03:38.368:POST Request for /workloads
+[ERR] Apr  5 12:03:38.368:unexpected end of JSON input
+[INFO] Apr  5 12:04:58.808:Initialization done for localhost:8080
+[INFO] Apr  5 12:04:58.808:Setting up handlers
+[INFO] Apr  5 12:04:58.808:Listening on localhost:8080
+[INFO] Apr  5 12:05:00.089:POST Request for /workloads
+[ERR] Apr  5 12:05:00.089:unexpected end of JSON input
+[INFO] Apr  5 12:05:34.460:Initialization done for localhost:8080
+[INFO] Apr  5 12:05:34.461:Setting up handlers
+[INFO] Apr  5 12:05:34.461:Listening on localhost:8080
+[INFO] Apr  5 12:05:38.236:GET Request for /guest/workload
+[INFO] Apr  5 12:05:38.236:Responding: 
+[INFO] Apr  5 12:06:22.935:Initialization done for localhost:8080
+[INFO] Apr  5 12:06:22.935:Setting up handlers
+[INFO] Apr  5 12:06:22.935:Listening on localhost:8080
+[INFO] Apr  5 12:06:25.832:POST Request for /workloads
+[ERR] Apr  5 12:06:25.832:unexpected end of JSON input
+[INFO] Apr  5 12:07:28.976:Initialization done for localhost:8080
+[INFO] Apr  5 12:07:28.976:Setting up handlers
+[INFO] Apr  5 12:07:28.976:Listening on localhost:8080
+[INFO] Apr  5 12:07:32.719:POST Request for /workloads
+[ERR] Apr  5 12:07:32.720:unexpected end of JSON input
+[INFO] Apr  5 12:09:57.888:Initialization done for localhost:8080
+[INFO] Apr  5 12:09:57.888:Setting up handlers
+[INFO] Apr  5 12:09:57.889:Listening on localhost:8080
+[INFO] Apr  5 12:09:58.797:POST Request for /workloads
+[ERR] Apr  5 12:09:58.797:unexpected end of JSON input
+[INFO] Apr  5 12:16:01.661:Initialization done for localhost:8080
+[INFO] Apr  5 12:16:01.661:Setting up handlers
+[INFO] Apr  5 12:16:01.661:Listening on localhost:8080
+[INFO] Apr  5 12:16:04.228:POST Request for /workloads
+[INFO] Apr  5 12:16:28.714:Initialization done for localhost:8080
+[INFO] Apr  5 12:16:28.714:Setting up handlers
+[INFO] Apr  5 12:16:28.714:Listening on localhost:8080
+[INFO] Apr  5 12:16:29.741:POST Request for /workloads
+[INFO] Apr  5 12:16:45.621:Initialization done for localhost:8080
+[INFO] Apr  5 12:16:45.622:Setting up handlers
+[INFO] Apr  5 12:16:45.622:Listening on localhost:8080
+[INFO] Apr  5 12:16:46.547:POST Request for /workloads
+[ERR] Apr  5 12:16:46.547:unexpected end of JSON input
+[INFO] Apr  5 12:17:24.137:Initialization done for localhost:8080
+[INFO] Apr  5 12:17:24.137:Setting up handlers
+[INFO] Apr  5 12:17:24.137:Listening on localhost:8080
+[INFO] Apr  5 12:17:25.020:POST Request for /workloads
+[ERR] Apr  5 12:17:25.020:unexpected end of JSON input
+[INFO] Apr  5 12:18:18.218:Initialization done for localhost:8080
+[INFO] Apr  5 12:18:18.218:Setting up handlers
+[INFO] Apr  5 12:18:18.218:Listening on localhost:8080
+[INFO] Apr  5 12:18:21.650:POST Request for /workloads
+[ERR] Apr  5 12:18:21.650:unexpected end of JSON input
+[INFO] Apr  5 12:20:49.746:Initialization done for localhost:8080
+[INFO] Apr  5 12:20:49.746:Setting up handlers
+[INFO] Apr  5 12:20:49.746:Listening on localhost:8080
+[INFO] Apr  5 12:20:53.011:POST Request for /workloads
+[ERR] Apr  5 12:20:53.011:unexpected end of JSON input
+[INFO] Apr  5 12:21:50.126:Initialization done for localhost:8080
+[INFO] Apr  5 12:21:50.126:Setting up handlers
+[INFO] Apr  5 12:21:50.126:Listening on localhost:8080
+[INFO] Apr  5 12:21:51.282:POST Request for /workloads
+[ERR] Apr  5 12:21:51.282:unexpected end of JSON input
+[INFO] Apr  5 12:22:30.798:Initialization done for localhost:8080
+[INFO] Apr  5 12:22:30.798:Setting up handlers
+[INFO] Apr  5 12:22:30.798:Listening on localhost:8080
+[INFO] Apr  5 12:22:31.819:POST Request for /workloads
+[ERR] Apr  5 12:22:31.819:unexpected end of JSON input
+[INFO] Apr  5 12:22:41.209:Initialization done for localhost:8080
+[INFO] Apr  5 12:22:41.209:Setting up handlers
+[INFO] Apr  5 12:22:41.209:Listening on localhost:8080
+[INFO] Apr  5 12:22:42.109:POST Request for /workloads
+[ERR] Apr  5 12:22:42.109:unexpected end of JSON input
+[INFO] Apr  5 12:22:52.336:Initialization done for localhost:8080
+[INFO] Apr  5 12:22:52.336:Setting up handlers
+[INFO] Apr  5 12:22:52.336:Listening on localhost:8080
+[INFO] Apr  5 12:22:53.531:POST Request for /workloads
+[ERR] Apr  5 12:22:53.531:unexpected end of JSON input
+[INFO] Apr  5 12:23:43.927:Initialization done for localhost:8080
+[INFO] Apr  5 12:23:43.927:Setting up handlers
+[INFO] Apr  5 12:23:43.928:Listening on localhost:8080
+[INFO] Apr  5 12:23:44.726:POST Request for /workloads
+[ERR] Apr  5 12:23:44.726:unexpected end of JSON input
+[INFO] Apr  5 12:24:05.840:Initialization done for localhost:8080
+[INFO] Apr  5 12:24:05.840:Setting up handlers
+[INFO] Apr  5 12:24:05.840:Listening on localhost:8080
+[INFO] Apr  5 12:24:06.803:POST Request for /workloads
+[ERR] Apr  5 12:24:06.803:unexpected end of JSON input
+[INFO] Apr  5 12:24:19.486:Initialization done for localhost:8080
+[INFO] Apr  5 12:24:19.486:Setting up handlers
+[INFO] Apr  5 12:24:19.487:Listening on localhost:8080
+[INFO] Apr  5 12:24:20.707:POST Request for /workloads
+[INFO] Apr  5 12:24:53.653:Initialization done for localhost:8080
+[INFO] Apr  5 12:24:53.654:Setting up handlers
+[INFO] Apr  5 12:24:53.654:Listening on localhost:8080
+[INFO] Apr  5 12:24:54.607:POST Request for /workloads
+[ERR] Apr  5 12:24:54.607:unexpected end of JSON input
+[INFO] Apr  5 12:26:16.307:Initialization done for localhost:8080
+[INFO] Apr  5 12:26:16.307:Setting up handlers
+[INFO] Apr  5 12:26:16.308:Listening on localhost:8080
+[INFO] Apr  5 12:26:19.050:POST Request for /workloads
+[ERR] Apr  5 12:26:19.050:unexpected end of JSON input
+[INFO] Apr  5 12:27:34.987:Initialization done for localhost:8080
+[INFO] Apr  5 12:27:34.987:Setting up handlers
+[INFO] Apr  5 12:27:34.987:Listening on localhost:8080
+[INFO] Apr  5 12:27:37.910:POST Request for /workloads
+[ERR] Apr  5 12:27:37.910:json: cannot unmarshal object into Go value of type []interface {}
+[INFO] Apr  5 12:30:23.112:Initialization done for localhost:8080
+[INFO] Apr  5 12:30:23.113:Setting up handlers
+[INFO] Apr  5 12:30:23.113:Listening on localhost:8080
+[INFO] Apr  5 12:30:25.314:POST Request for /workloads
+[ERR] Apr  5 12:30:25.314:json: cannot unmarshal object into Go value of type map[interface {}]interface {}
+[INFO] Apr  5 12:31:13.414:Initialization done for localhost:8080
+[INFO] Apr  5 12:31:13.415:Setting up handlers
+[INFO] Apr  5 12:31:13.415:Listening on localhost:8080
+[INFO] Apr  5 12:31:14.452:POST Request for /workloads
+[ERR] Apr  5 12:31:14.452:json: cannot unmarshal object into Go value of type []workload.Workload
+[INFO] Apr  5 12:39:06.279:Initialization done for localhost:8080
+[INFO] Apr  5 12:39:06.279:Setting up handlers
+[INFO] Apr  5 12:39:06.279:Listening on localhost:8080
+[INFO] Apr  5 12:39:08.675:POST Request for /workloads
+[INFO] Apr  5 12:39:18.282:POST Request for /workloads
+[ERR] Apr  5 12:39:18.282:unexpected end of JSON input
+[INFO] Apr  5 12:41:12.337:Initialization done for localhost:8080
+[INFO] Apr  5 12:41:12.337:Setting up handlers
+[INFO] Apr  5 12:41:12.337:Listening on localhost:8080
+[INFO] Apr  5 12:41:14.789:POST Request for /workloads
+[INFO] Apr  5 12:41:44.060:Initialization done for localhost:8080
+[INFO] Apr  5 12:41:44.060:Setting up handlers
+[INFO] Apr  5 12:41:44.060:Listening on localhost:8080
+[INFO] Apr  5 12:41:45.293:POST Request for /workloads
+[INFO] Apr  5 12:42:27.361:Initialization done for localhost:8080
+[INFO] Apr  5 12:42:27.362:Setting up handlers
+[INFO] Apr  5 12:42:27.362:Listening on localhost:8080
+[INFO] Apr  5 12:42:28.527:POST Request for /workloads
+[INFO] Apr  5 12:42:52.239:Initialization done for localhost:8080
+[INFO] Apr  5 12:42:52.239:Setting up handlers
+[INFO] Apr  5 12:42:52.239:Listening on localhost:8080
+[INFO] Apr  5 12:42:54.398:POST Request for /workloads
+[INFO] Apr  5 12:43:30.160:Initialization done for localhost:8080
+[INFO] Apr  5 12:43:30.160:Setting up handlers
+[INFO] Apr  5 12:43:30.164:Listening on localhost:8080
+[INFO] Apr  5 12:43:31.265:POST Request for /workloads
+[ERR] Apr  5 12:43:31.265:EOF
+[INFO] Apr  5 12:45:53.466:Initialization done for localhost:8080
+[INFO] Apr  5 12:45:53.466:Setting up handlers
+[INFO] Apr  5 12:45:53.466:Listening on localhost:8080
+[INFO] Apr  5 12:45:54.449:POST Request for /workloads
+[ERR] Apr  5 12:45:54.450:EOF
+[INFO] Apr  5 12:46:42.718:Initialization done for localhost:8080
+[INFO] Apr  5 12:46:42.718:Setting up handlers
+[INFO] Apr  5 12:46:42.718:Listening on localhost:8080
+[INFO] Apr  5 12:46:43.596:POST Request for /workloads
+[ERR] Apr  5 12:46:43.596:EOF
+[INFO] Apr  5 12:48:15.396:Initialization done for localhost:8080
+[INFO] Apr  5 12:48:15.396:Setting up handlers
+[INFO] Apr  5 12:48:15.396:Listening on localhost:8080
+[INFO] Apr  5 12:48:18.978:POST Request for /workloads
+[ERR] Apr  5 12:48:18.978:EOF
+[INFO] Apr  5 12:49:48.777:Initialization done for localhost:8080
+[INFO] Apr  5 12:49:48.777:Setting up handlers
+[INFO] Apr  5 12:49:48.778:Listening on localhost:8080
+[INFO] Apr  5 12:49:49.719:POST Request for /workloads
+[ERR] Apr  5 12:49:49.719:EOF
+[INFO] Apr  5 12:50:23.810:Initialization done for localhost:8080
+[INFO] Apr  5 12:50:23.811:Setting up handlers
+[INFO] Apr  5 12:50:23.811:Listening on localhost:8080
+[INFO] Apr  5 12:50:24.811:POST Request for /workloads
+[ERR] Apr  5 12:50:24.811:EOF
+[INFO] Apr  5 12:51:26.878:POST Request for /workloads
+[INFO] Apr  5 12:51:35.583:Initialization done for localhost:8080
+[INFO] Apr  5 12:51:35.583:Setting up handlers
+[INFO] Apr  5 12:51:35.583:Listening on localhost:8080
+[INFO] Apr  5 12:51:36.556:POST Request for /workloads
+[INFO] Apr  5 12:52:00.967:Initialization done for localhost:8080
+[INFO] Apr  5 12:52:00.968:Setting up handlers
+[INFO] Apr  5 12:52:00.968:Listening on localhost:8080
+[INFO] Apr  5 12:52:01.974:POST Request for /workloads
+[INFO] Apr  5 12:52:28.164:Initialization done for localhost:8080
+[INFO] Apr  5 12:52:28.164:Setting up handlers
+[INFO] Apr  5 12:52:28.164:Listening on localhost:8080
+[INFO] Apr  5 12:52:29.142:POST Request for /workloads
+[INFO] Apr  5 12:54:16.555:Initialization done for localhost:8080
+[INFO] Apr  5 12:54:16.556:Setting up handlers
+[INFO] Apr  5 12:54:16.556:Listening on localhost:8080
+[INFO] Apr  5 12:54:20.052:POST Request for /workloads
+[ERR] Apr  5 12:54:20.052:EOF
+[INFO] Apr  5 12:55:06.487:Initialization done for localhost:8080
+[INFO] Apr  5 12:55:06.487:Setting up handlers
+[INFO] Apr  5 12:55:06.487:Listening on localhost:8080
+[INFO] Apr  5 12:55:07.456:POST Request for /workloads
+[ERR] Apr  5 12:55:07.456:EOF
+[INFO] Apr  5 12:56:20.267:Initialization done for localhost:8080
+[INFO] Apr  5 12:56:20.268:Setting up handlers
+[INFO] Apr  5 12:56:20.268:Listening on localhost:8080
+[INFO] Apr  5 12:56:21.331:POST Request for /workloads
+[ERR] Apr  5 12:56:21.332:EOF
+[INFO] Apr  5 12:57:47.512:Initialization done for localhost:8080
+[INFO] Apr  5 12:57:47.512:Setting up handlers
+[INFO] Apr  5 12:57:47.512:Listening on localhost:8080
+[INFO] Apr  5 12:57:49.758:POST Request for /workloads
+[ERR] Apr  5 12:57:49.758:EOF
+[INFO] Apr  5 12:58:47.480:Initialization done for localhost:8080
+[INFO] Apr  5 12:58:47.480:Setting up handlers
+[INFO] Apr  5 12:58:47.480:Listening on localhost:8080
+[INFO] Apr  5 12:58:48.713:POST Request for /workloads
+[ERR] Apr  5 12:58:48.714:EOF
+[INFO] Apr  5 12:59:16.183:Initialization done for localhost:8080
+[INFO] Apr  5 12:59:16.183:Setting up handlers
+[INFO] Apr  5 12:59:16.183:Listening on localhost:8080
+[INFO] Apr  5 12:59:17.127:POST Request for /workloads
+[ERR] Apr  5 12:59:17.127:EOF
+[INFO] Apr  5 13:01:14.313:Initialization done for localhost:8080
+[INFO] Apr  5 13:01:14.313:Setting up handlers
+[INFO] Apr  5 13:01:14.313:Listening on localhost:8080
+[INFO] Apr  5 13:01:17.294:POST Request for /workloads
+[ERR] Apr  5 13:01:17.294:EOF
+[INFO] Apr  5 13:01:37.372:Initialization done for localhost:8080
+[INFO] Apr  5 13:01:37.372:Setting up handlers
+[INFO] Apr  5 13:01:37.372:Listening on localhost:8080
+[INFO] Apr  5 13:01:38.533:POST Request for /workloads
+[ERR] Apr  5 13:01:38.534:EOF
+[INFO] Apr  5 13:02:16.923:Initialization done for localhost:8080
+[INFO] Apr  5 13:02:16.923:Setting up handlers
+[INFO] Apr  5 13:02:16.923:Listening on localhost:8080
+[INFO] Apr  5 13:02:17.969:POST Request for /workloads
+[ERR] Apr  5 13:02:17.969:EOF
+[INFO] Apr  5 13:03:04.956:Initialization done for localhost:8080
+[INFO] Apr  5 13:03:04.956:Setting up handlers
+[INFO] Apr  5 13:03:04.957:Listening on localhost:8080
+[INFO] Apr  5 13:03:06.083:POST Request for /workloads
+[ERR] Apr  5 13:03:06.083:EOF
+[INFO] Apr  5 13:06:35.136:Initialization done for localhost:8080
+[INFO] Apr  5 13:06:35.136:Setting up handlers
+[INFO] Apr  5 13:06:35.136:Listening on localhost:8080
+[INFO] Apr  5 13:06:37.589:POST Request for /workloads
+[ERR] Apr  5 13:06:37.589:EOF
+[INFO] Apr  5 13:07:26.401:Initialization done for localhost:8080
+[INFO] Apr  5 13:07:26.401:Setting up handlers
+[INFO] Apr  5 13:07:26.401:Listening on localhost:8080
+[INFO] Apr  5 13:07:27.402:POST Request for /workloads
+[ERR] Apr  5 13:07:27.402:EOF
+[INFO] Apr  5 13:08:58.330:Initialization done for localhost:8080
+[INFO] Apr  5 13:08:58.330:Setting up handlers
+[INFO] Apr  5 13:08:58.331:Listening on localhost:8080
+[INFO] Apr  5 13:09:01.693:POST Request for /workloads
+[ERR] Apr  5 13:09:01.693:EOF
+[INFO] Apr  5 13:10:07.366:Initialization done for localhost:8080
+[INFO] Apr  5 13:10:07.366:Setting up handlers
+[INFO] Apr  5 13:10:07.367:Listening on localhost:8080
+[INFO] Apr  5 13:10:08.608:POST Request for /workloads
+[ERR] Apr  5 13:10:08.608:EOF
+[INFO] Apr  5 13:11:36.347:Initialization done for localhost:8080
+[INFO] Apr  5 13:11:36.347:Setting up handlers
+[INFO] Apr  5 13:11:36.348:Listening on localhost:8080
+[INFO] Apr  5 13:11:37.414:POST Request for /workloads
+[ERR] Apr  5 13:11:37.414:EOF
+[INFO] Apr  5 13:12:19.964:Initialization done for localhost:8080
+[INFO] Apr  5 13:12:19.964:Setting up handlers
+[INFO] Apr  5 13:12:19.964:Listening on localhost:8080
+[INFO] Apr  5 13:12:21.736:POST Request for /workloads
+[ERR] Apr  5 13:12:21.737:EOF
+[INFO] Apr  5 13:13:52.541:Initialization done for localhost:8080
+[INFO] Apr  5 13:13:52.542:Setting up handlers
+[INFO] Apr  5 13:13:52.542:Listening on localhost:8080
+[INFO] Apr  5 13:13:55.711:POST Request for /workloads
+[ERR] Apr  5 13:13:55.711:EOF
+[INFO] Apr  5 13:14:14.271:POST Request for /workloads
+[ERR] Apr  5 13:14:14.271:EOF
+[INFO] Apr  5 13:14:20.960:Initialization done for localhost:8080
+[INFO] Apr  5 13:14:20.960:Setting up handlers
+[INFO] Apr  5 13:14:20.961:Listening on localhost:8080
+[INFO] Apr  5 13:14:21.893:POST Request for /workloads
+[ERR] Apr  5 13:14:21.893:EOF
+[INFO] Apr  5 13:14:53.099:Initialization done for localhost:8080
+[INFO] Apr  5 13:14:53.099:Setting up handlers
+[INFO] Apr  5 13:14:53.099:Listening on localhost:8080
+[INFO] Apr  5 13:14:54.367:POST Request for /workloads
+[INFO] Apr  5 13:15:10.421:Initialization done for localhost:8080
+[INFO] Apr  5 13:15:10.421:Setting up handlers
+[INFO] Apr  5 13:15:10.421:Listening on localhost:8080
+[INFO] Apr  5 13:15:11.305:POST Request for /workloads
+[ERR] Apr  5 13:15:11.305:EOF
+[INFO] Apr  5 13:20:11.013:Initialization done for localhost:8080
+[INFO] Apr  5 13:20:11.013:Setting up handlers
+[INFO] Apr  5 13:20:11.013:Listening on localhost:8080
+[INFO] Apr  5 13:20:13.467:POST Request for /workloads
+[ERR] Apr  5 13:20:13.467:EOF
+[INFO] Apr  5 13:36:26.746:Initialization done for localhost:8080
+[INFO] Apr  5 13:36:26.747:Setting up handlers
+[INFO] Apr  5 13:36:26.747:Listening on localhost:8080
+[INFO] Apr  5 13:36:30.591:POST Request for /workloads
+[INFO] Apr  5 13:44:32.266:Initialization done for localhost:8080
+[INFO] Apr  5 13:44:32.266:Setting up handlers
+[INFO] Apr  5 13:44:32.266:Listening on localhost:8080
+[INFO] Apr  5 13:44:34.626:POST Request for /workloads
+[ERR] Apr  5 13:44:34.626:EOF
+[INFO] Apr  5 13:46:28.544:Initialization done for localhost:8080
+[INFO] Apr  5 13:46:28.544:Setting up handlers
+[INFO] Apr  5 13:46:28.544:Listening on localhost:8080
+[INFO] Apr  5 13:46:35.341:POST Request for /workloads
+[ERR] Apr  5 13:46:35.341:http: invalid Read on closed Body
+[INFO] Apr  5 13:46:54.823:Initialization done for localhost:8080
+[INFO] Apr  5 13:46:54.823:Setting up handlers
+[INFO] Apr  5 13:46:54.823:Listening on localhost:8080
+[INFO] Apr  5 13:46:55.981:POST Request for /workloads
+[ERR] Apr  5 13:46:55.981:EOF
+[INFO] Apr  5 13:49:29.256:Initialization done for localhost:8080
+[INFO] Apr  5 13:49:29.257:Setting up handlers
+[INFO] Apr  5 13:49:29.257:Listening on localhost:8080
+[INFO] Apr  5 13:49:31.985:POST Request for /workloads
+[INFO] Apr  5 13:50:53.619:Initialization done for localhost:8080
+[INFO] Apr  5 13:50:53.619:Setting up handlers
+[INFO] Apr  5 13:50:53.619:Listening on localhost:8080
+[INFO] Apr  5 13:50:54.815:POST Request for /workloads
+[INFO] Apr  5 13:51:20.058:POST Request for /workloads
+[INFO] Apr  5 13:51:26.535:Initialization done for localhost:8080
+[INFO] Apr  5 13:51:26.535:Setting up handlers
+[INFO] Apr  5 13:51:26.535:Listening on localhost:8080
+[INFO] Apr  5 13:51:36.518:POST Request for /workloads
+[INFO] Apr  5 13:52:11.929:Initialization done for localhost:8080
+[INFO] Apr  5 13:52:11.929:Setting up handlers
+[INFO] Apr  5 13:52:11.929:Listening on localhost:8080
+[INFO] Apr  5 13:52:12.944:POST Request for /workloads
+[INFO] Apr  5 13:52:37.794:Initialization done for localhost:8080
+[INFO] Apr  5 13:52:37.794:Setting up handlers
+[INFO] Apr  5 13:52:37.794:Listening on localhost:8080
+[INFO] Apr  5 13:52:38.698:POST Request for /workloads
+[INFO] Apr  5 13:53:06.777:Initialization done for localhost:8080
+[INFO] Apr  5 13:53:06.777:Setting up handlers
+[INFO] Apr  5 13:53:06.777:Listening on localhost:8080
+[INFO] Apr  5 13:53:08.135:POST Request for /workloads
+[INFO] Apr  5 13:53:19.552:POST Request for /workloads
+[ERR] Apr  5 13:53:19.552:json: cannot unmarshal array into Go value of type workload.WorkloadList
+[INFO] Apr  5 13:54:21.600:Initialization done for localhost:8080
+[INFO] Apr  5 13:54:21.600:Setting up handlers
+[INFO] Apr  5 13:54:21.600:Listening on localhost:8080
+[INFO] Apr  5 13:54:22.708:POST Request for /workloads
+[ERR] Apr  5 13:54:22.708:json: cannot unmarshal array into Go value of type workload.WorkloadList
+[INFO] Apr  5 13:54:44.672:Initialization done for localhost:8080
+[INFO] Apr  5 13:54:44.672:Setting up handlers
+[INFO] Apr  5 13:54:44.673:Listening on localhost:8080
+[INFO] Apr  5 13:54:45.767:POST Request for /workloads
+[ERR] Apr  5 13:54:45.767:unexpected end of JSON input
+[INFO] Apr  5 13:55:17.162:Initialization done for localhost:8080
+[INFO] Apr  5 13:55:17.163:Setting up handlers
+[INFO] Apr  5 13:55:17.163:Listening on localhost:8080
+[INFO] Apr  5 13:55:18.335:POST Request for /workloads
+[INFO] Apr  5 13:55:26.480:POST Request for /workloads
+[ERR] Apr  5 13:55:26.480:json: cannot unmarshal array into Go value of type workload.WorkloadList
+[INFO] Apr  5 13:56:46.999:Initialization done for localhost:8080
+[INFO] Apr  5 13:56:47.000:Setting up handlers
+[INFO] Apr  5 13:56:47.000:Listening on localhost:8080
+[INFO] Apr  5 13:56:47.957:POST Request for /workloads
+[ERR] Apr  5 13:56:47.958:json: cannot unmarshal array into Go value of type workload.WorkloadList
+[INFO] Apr  5 13:58:58.222:Initialization done for localhost:8080
+[INFO] Apr  5 13:58:58.223:Setting up handlers
+[INFO] Apr  5 13:58:58.223:Listening on localhost:8080
+[INFO] Apr  5 13:59:00.172:POST Request for /workloads
+[INFO] Apr  5 13:59:11.467:POST Request for /workloads
+[ERR] Apr  5 13:59:11.467:json: cannot unmarshal array into Go value of type workload.WorkloadList
+[INFO] Apr  5 14:00:10.359:Initialization done for localhost:8080
+[INFO] Apr  5 14:00:10.359:Setting up handlers
+[INFO] Apr  5 14:00:10.359:Listening on localhost:8080
+[INFO] Apr  5 14:00:11.791:POST Request for /workloads
+[INFO] Apr  5 14:00:16.838:POST Request for /workloads
+[INFO] Apr  5 14:00:28.250:Initialization done for localhost:8080
+[INFO] Apr  5 14:00:28.250:Setting up handlers
+[INFO] Apr  5 14:00:28.250:Listening on localhost:8080
+[INFO] Apr  5 14:00:29.689:POST Request for /workloads
+[ERR] Apr  5 14:00:29.689:unexpected end of JSON input
+[INFO] Apr  5 14:03:13.632:Initialization done for localhost:8080
+[INFO] Apr  5 14:03:13.632:Setting up handlers
+[INFO] Apr  5 14:03:13.632:Listening on localhost:8080
+[INFO] Apr  5 14:03:15.143:POST Request for /workloads
+[INFO] Apr  5 14:03:15.857:POST Request for /workloads
+[INFO] Apr  5 14:03:16.376:POST Request for /workloads
+[INFO] Apr  5 14:03:28.273:POST Request for /workloads
+[ERR] Apr  5 14:03:28.273:unexpected end of JSON input
+[INFO] Apr  5 14:04:10.113:Initialization done for localhost:8080
+[INFO] Apr  5 14:04:10.114:Setting up handlers
+[INFO] Apr  5 14:04:10.114:Listening on localhost:8080
+[INFO] Apr  5 14:04:14.892:POST Request for /workloads
+[INFO] Apr  5 14:04:20.937:POST Request for /workloads
+[ERR] Apr  5 14:04:20.937:unexpected end of JSON input
+[INFO] Apr  5 14:05:08.428:Initialization done for localhost:8080
+[INFO] Apr  5 14:05:08.429:Setting up handlers
+[INFO] Apr  5 14:05:08.429:Listening on localhost:8080
+[INFO] Apr  5 14:05:09.471:POST Request for /workloads
+[ERR] Apr  5 14:05:09.471:unexpected end of JSON input
+[INFO] Apr  5 14:05:46.042:Initialization done for localhost:8080
+[INFO] Apr  5 14:05:46.042:Setting up handlers
+[INFO] Apr  5 14:05:46.042:Listening on localhost:8080
+[INFO] Apr  5 14:05:47.454:POST Request for /workloads
+[ERR] Apr  5 14:05:47.454:unexpected end of JSON input
+[INFO] Apr  5 14:06:06.427:Initialization done for localhost:8080
+[INFO] Apr  5 14:06:06.427:Setting up handlers
+[INFO] Apr  5 14:06:06.427:Listening on localhost:8080
+[INFO] Apr  5 14:06:07.354:POST Request for /workloads
+[ERR] Apr  5 14:06:07.354:unexpected end of JSON input
+[INFO] Apr  5 14:07:56.654:Initialization done for localhost:8080
+[INFO] Apr  5 14:07:56.655:Setting up handlers
+[INFO] Apr  5 14:07:56.655:Listening on localhost:8080
+[INFO] Apr  5 14:07:59.008:POST Request for /workloads
+[ERR] Apr  5 14:07:59.008:unexpected end of JSON input
+[INFO] Apr  5 14:11:39.387:Initialization done for localhost:8080
+[INFO] Apr  5 14:11:39.387:Setting up handlers
+[INFO] Apr  5 14:11:39.388:Listening on localhost:8080
+[INFO] Apr  5 14:11:43.921:POST Request for /workloads
+[INFO] Apr  5 14:11:54.947:POST Request for /workloads
+[ERR] Apr  5 14:11:54.947:unexpected end of JSON input
+[INFO] Apr  5 14:13:24.359:Initialization done for localhost:8080
+[INFO] Apr  5 14:13:24.360:Setting up handlers
+[INFO] Apr  5 14:13:24.360:Listening on localhost:8080
+[INFO] Apr  5 14:13:25.529:POST Request for /workloads
+[ERR] Apr  5 14:13:25.529:unexpected end of JSON input
+[INFO] Apr  5 14:13:39.655:Initialization done for localhost:8080
+[INFO] Apr  5 14:13:39.656:Setting up handlers
+[INFO] Apr  5 14:13:39.656:Listening on localhost:8080
+[INFO] Apr  5 14:13:40.548:POST Request for /workloads
+[ERR] Apr  5 14:13:40.548:unexpected end of JSON input
+[INFO] Apr  5 14:14:28.946:Initialization done for localhost:8080
+[INFO] Apr  5 14:14:28.946:Setting up handlers
+[INFO] Apr  5 14:14:28.946:Listening on localhost:8080
+[INFO] Apr  5 14:14:29.995:POST Request for /workloads
+[INFO] Apr  5 14:14:39.330:POST Request for /workloads

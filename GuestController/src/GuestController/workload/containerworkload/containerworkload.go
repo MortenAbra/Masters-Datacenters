@@ -5,7 +5,7 @@ import (
 )
 
 type ContainerWorkload struct {
-	*workload.Workload
+	workload.Workload
 	Properties ContainerProperties `json:"Containerproperties"`
 }
 

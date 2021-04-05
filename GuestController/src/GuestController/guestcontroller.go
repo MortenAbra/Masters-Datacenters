@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"GuestController/consolemanager"
@@ -20,10 +19,10 @@ func main() {
 
 // Logging fatal errors.
 // Replaces the use of "if err != nil { panic(err) }"
-func logFatal(err error) {
+func logErr(err error) {
 	if err != nil {
 		drlogger.DRLog(drlogger.ERR, err.Error())
-		log.Fatal(err)
+		panic(err)
 	}
 }
 func logInfo(info string) {
@@ -39,9 +38,10 @@ func logWarn(warn string) {
 // - User inputs for IP and Port
 func Init() {
 	drlogger.InitDRLogger()
-	jsonmanager.CreateWorkloadFile()
+	err := jsonmanager.CreateWorkloadFile()
+	logErr(err)
 	serverIP, serverPort, serverSharedDir, err := consolemanager.ReadServerIPAndPortFromUser()
-	logFatal(err)
+	logErr(err)
 
 	guestInformation = guest.Guest{IP: serverIP, Port: serverPort, StoragePath: serverSharedDir}
 
@@ -55,6 +55,7 @@ func setupServer(serverIP string, serverPort string) error {
 	drlogger.DRLog(drlogger.INFO, "Setting up handlers")
 	http.HandleFunc("/guest", guestHandler)
 	http.HandleFunc("/guest/workloads", guestWorkloadsHandler)
+	http.HandleFunc("/workloads", workloadsHandler)
 
 	logInfo("Listening on " + serverIP + ":" + serverPort)
 	err := http.ListenAndServe(serverIP+":"+serverPort, nil)
@@ -68,7 +69,7 @@ func guestHandler(w http.ResponseWriter, r *http.Request) {
 		logInfo("GET Request for /guest")
 		// Read Active Workloads
 		result, err := json.Marshal(guestInformation)
-		logFatal(err)
+		logErr(err)
 
 		fmt.Fprintf(w, string(result)+"")
 		logInfo("Responding: " + string(result) + "")
@@ -86,12 +87,29 @@ func guestWorkloadsHandler(w http.ResponseWriter, r *http.Request) {
 		// Each workload is at this point an interface.. Not a workload
 		workloads := guestInformation.GetAllWorkloadsRunningOnGuest()
 		result, err := json.Marshal(workloads)
-		logFatal(err)
+		logErr(err)
 
 		fmt.Fprintf(w, string(result)+"")
 		logInfo("Responding: " + string(result) + "")
 
 	case "POST":
 		fmt.Fprintf(w, "Request not supported!")
+	}
+}
+
+func workloadsHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		logInfo("GET Request for /guest/workload")
+		// Read Active Workloads
+		result, err := jsonmanager.GetAllWorkloadsInSystem()
+		logErr(err)
+		fmt.Fprintf(w, string(result)+"")
+		logInfo("Responding: " + string(result) + "")
+
+	case "POST":
+		logInfo("POST Request for /workloads")
+		err := jsonmanager.AddWorkloadToSystem(r)
+		logErr(err)
 	}
 }
