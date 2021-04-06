@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/mitchellh/mapstructure"
@@ -67,6 +69,7 @@ func setupServer(serverIP string, serverPort string) error {
 	http.HandleFunc("/workloads", workloadsHandler)
 	http.HandleFunc("/migrate", migrateHandler)
 	http.HandleFunc("/transfer", transferHandler)
+	http.HandleFunc("/logs", logsHandler)
 
 	logInfo("Listening on " + serverIP + ":" + serverPort)
 	err := http.ListenAndServe(serverIP+":"+serverPort, nil)
@@ -228,6 +231,24 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 				finishVMMigration(wl)
 			}
 		}
+	}
+}
+
+func logsHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		logInfo("GET Request for /logs")
+		file, err := os.Open(drlogger.LogFileName)
+		logErr(err)
+
+		defer file.Close()
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			fmt.Fprintf(w, scanner.Text()+"\n")
+		}
+
+	case "POST":
+		fmt.Fprintf(w, "Request not supported!")
 	}
 }
 

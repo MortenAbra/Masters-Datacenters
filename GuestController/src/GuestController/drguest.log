@@ -678,3 +678,25 @@
 [INFO] Apr  5 21:58:45.081:Listening on 192.168.0.106:8080
 [INFO] Apr  5 21:58:48.014:POST Request for /migrate
 [INFO] Apr  5 21:58:48.015:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[INFO] Apr  6 13:03:48.598:Initialization done for localhost:8080
+[INFO] Apr  6 13:03:48.598:Setting up handlers
+[INFO] Apr  6 13:03:48.598:Listening on localhost:8080
+[INFO] Apr  6 13:03:54.449:GET Request for /logs
+[INFO] Apr  6 13:04:33.604:GET Request for /logs
+[INFO] Apr  6 13:04:52.395:Initialization done for localhost:8080
+[INFO] Apr  6 13:04:52.396:Setting up handlers
+[INFO] Apr  6 13:04:52.396:Listening on localhost:8080
+[INFO] Apr  6 13:04:53.504:GET Request for /logs
+[INFO] Apr  6 13:06:03.699:Initialization done for localhost:8080
+[INFO] Apr  6 13:06:03.699:Setting up handlers
+[INFO] Apr  6 13:06:03.699:Listening on localhost:8080
+[INFO] Apr  6 13:06:06.424:GET Request for /logs
+[INFO] Apr  6 13:06:28.261:Initialization done for localhost:8080
+[INFO] Apr  6 13:06:28.261:Setting up handlers
+[INFO] Apr  6 13:06:28.262:Listening on localhost:8080
+[INFO] Apr  6 13:06:29.034:GET Request for /logs
+[INFO] Apr  6 13:07:23.641:Initialization done for localhost:8080
+[INFO] Apr  6 13:07:23.642:Setting up handlers
+[INFO] Apr  6 13:07:23.642:Listening on localhost:8080
+[INFO] Apr  6 13:07:24.687:GET Request for /logs
+[INFO] Apr  6 13:07:32.171:GET Request for /logs

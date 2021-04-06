@@ -48,3 +48,15 @@ func DRLog(logType LogType, line string) {
 	fmt.Fprintln(w, lineToWrite)
 	w.Flush()
 }
+
+func GetLogsScanner() (bufio.Scanner, error) {
+	file, err := os.Open(LogFileName)
+	if err != nil {
+		panic(err)
+	}
+
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+
+	return *scanner, err
+}
