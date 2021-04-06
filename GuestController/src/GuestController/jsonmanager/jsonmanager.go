@@ -65,15 +65,43 @@ func GetWorkloadFileAsJSON() (string, error) {
 	return string(byteValue), err
 }
 
-func AddContainerWorkloadToSystem(container containerworkload.ContainerWorkload) {
+func AddContainerWorkloadToSystem(container containerworkload.ContainerWorkload) error {
+	workloads, err := GetWorkloadFileAsWorkloads()
+	if err != nil {
+		return err
+	}
 
+	// Append new Workload into existing Workloads
+	workloads.Workloads = append(workloads.Workloads, container)
+
+	result, err := json.Marshal(workloads)
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile("workloads.json", result, 0644)
+	return err
 }
 
-func AddVMWorkloadToSystem(vm vmworkload.VMWorkload) {
+func AddVMWorkloadToSystem(vm vmworkload.VMWorkload) error {
+	workloads, err := GetWorkloadFileAsWorkloads()
+	if err != nil {
+		return err
+	}
 
+	// Append new Workload into existing Workloads
+	workloads.Workloads = append(workloads.Workloads, vm)
+
+	result, err := json.Marshal(workloads)
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile("workloads.json", result, 0644)
+	return err
 }
 
-func AddWorkloadToSystem(r *http.Request) error {
+func AddWorkloadToSystemHTTP(r *http.Request) error {
 	workloads, err := GetWorkloadFileAsWorkloads()
 	if err != nil {
 		return err
@@ -102,8 +130,8 @@ func AddWorkloadToSystem(r *http.Request) error {
 		if err != nil {
 			return err
 		}
-
 		workloads.Workloads = append(workloads.Workloads, wl)
+
 	case workload.VMTYPE:
 		var wl vmworkload.VMWorkload
 		newdecoder := json.NewDecoder(ioutil.NopCloser(bytes.NewReader(data)))
@@ -137,6 +165,22 @@ func RemoveContainerFromWorkloadFile(container containerworkload.ContainerWorklo
 		mapstructure.Decode(workloads.Workloads[i], &tempWorkload)
 		// Find the workload to migrate
 		if tempWorkload.Identifier == container.Identifier {
+			workloads.Workloads = removeIndexFromSlice(workloads.Workloads, i)
+		}
+	}
+	return err
+}
+func RemoveVMFromWorkloadFile(vm vmworkload.VMWorkload) error {
+	workloads, err := GetWorkloadFileAsWorkloads()
+	if err != nil {
+		return err
+	}
+
+	var tempWorkload workload.Workload
+	for i := 0; i < len(workloads.Workloads); i++ {
+		mapstructure.Decode(workloads.Workloads[i], &tempWorkload)
+		// Find the workload to migrate
+		if tempWorkload.Identifier == vm.Identifier {
 			workloads.Workloads = removeIndexFromSlice(workloads.Workloads, i)
 		}
 	}

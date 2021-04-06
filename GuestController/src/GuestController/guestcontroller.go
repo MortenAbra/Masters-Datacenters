@@ -119,7 +119,7 @@ func workloadsHandler(w http.ResponseWriter, r *http.Request) {
 
 	case "POST":
 		logInfo("POST Request for /workloads")
-		err := jsonmanager.AddWorkloadToSystem(r)
+		err := jsonmanager.AddWorkloadToSystemHTTP(r)
 		logErr(err)
 	}
 }
@@ -131,10 +131,13 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		logInfo("POST Request for /migrate")
 
-		decoder := json.NewDecoder(r.Body)
+		data, err := ioutil.ReadAll(r.Body)
+		logErr(err)
+		decoder := json.NewDecoder(bytes.NewReader(data))
+
 		var migration migrate.Migrate
 
-		err := decoder.Decode(&migration)
+		err = decoder.Decode(&migration)
 		logErr(err)
 
 		workloadlist, err := jsonmanager.GetWorkloadFileAsWorkloads()
@@ -149,17 +152,25 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 					case workload.CONTAINERTYPE:
 						// Container migration Start
 						var container containerworkload.ContainerWorkload
-						mapstructure.Decode(workloadlist.Workloads[i], &container)
 
-						fmt.Println("Migrating container: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
-						logInfo("Migrating container: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
+						// Convert interface -> JSON then JSON -> ContainerWorkload
+						// Fix because mapstructure.Decode doesn't decode workload correctly (Returns empty struct)
+						wlJSON, _ := json.Marshal(workloadlist.Workloads[i])
+						json.Unmarshal(wlJSON, &container)
+
+						fmt.Println("Migrating container: " + migration.Identifier + " to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
+						logInfo("Migrating container: " + migration.Identifier + " to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 
 						initiateContainerMigration(migration, container) // Go Routine?
 
 					case workload.VMTYPE:
 						// VM migration start
 						var vm vmworkload.VMWorkload
-						mapstructure.Decode(workloadlist.Workloads[i], &vm)
+
+						// Convert interface -> JSON then JSON -> ContainerWorkload
+						// Fix because mapstructure.Decode doesn't decode workload correctly (Returns empty struct)
+						wlJSON, _ := json.Marshal(workloadlist.Workloads[i])
+						json.Unmarshal(wlJSON, &vm)
 
 						fmt.Println("Migrating VM: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 						logInfo("Migrating VM: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
@@ -205,18 +216,21 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 
 			case workload.VMTYPE:
 				// VM migration recieved
-				logInfo("Revieving Migration of container: " + wl.Identifier)
-				fmt.Println("Revieving Migration of container: " + wl.Identifier)
+				logInfo("Revieving Migration of VM: " + wl.Identifier)
+				fmt.Println("Revieving Migration of VM: " + wl.Identifier)
 
 				var wl vmworkload.VMWorkload
 				newdecoder := json.NewDecoder(ioutil.NopCloser(bytes.NewReader(data)))
 				err = newdecoder.Decode(&wl)
 				logErr(err)
+
+				finishVMMigration(wl)
 			}
 		}
 	}
 }
 
+// Initial Migration part of the Container Migration
 func initiateContainerMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) {
 	err := container.DockerSaveAndStoreCheckpoint(container.Properties.Checkpoint)
 	logErr(err)
@@ -226,10 +240,12 @@ func initiateContainerMigration(migration migrate.Migrate, container containerwo
 	logErr(err)
 }
 
+// Final Migration part of the Container Migration on receiver
 func finishContainerMigration(container containerworkload.ContainerWorkload) {
 	logInfo("Migration of workload: " + container.Identifier)
 	container.DockerLoadAndStartContainer(container.Properties.Checkpoint)
-	jsonmanager.AddContainerWorkloadToSystem(container)
+	err := jsonmanager.AddContainerWorkloadToSystem(container)
+	logErr(err)
 }
 
 func ContainerPostMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) error {
@@ -255,5 +271,20 @@ func cleanUpAfterContainerMigration(container containerworkload.ContainerWorkloa
 	return err
 }
 
-func initiateVMMigration(migration migrate.Migrate, VM vmworkload.VMWorkload) {
+func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) {
+	// MIGRATE FUNC
+	err := cleanUpAfterVMMigration(vm)
+	logErr(err)
+
+}
+
+func finishVMMigration(vm vmworkload.VMWorkload) {
+	logInfo("Migration of workload: " + vm.Identifier)
+	err := jsonmanager.AddVMWorkloadToSystem(vm)
+	logErr(err)
+}
+
+func cleanUpAfterVMMigration(vm vmworkload.VMWorkload) error {
+	err := jsonmanager.RemoveVMFromWorkloadFile(vm)
+	return err
 }

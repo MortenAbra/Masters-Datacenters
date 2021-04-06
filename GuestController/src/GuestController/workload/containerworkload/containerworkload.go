@@ -64,6 +64,7 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 
 	err = cli.ContainerStart(ctx, wl.Properties.ContainerID, types.ContainerStartOptions{})
 	if err != nil {
+		println("HERE1 " + wl.Properties.ContainerID + "   " + err.Error())
 		return err
 	}
 	resp, err := cli.ImageSave(ctx, []string{wl.Properties.Image})
@@ -77,7 +78,9 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 	if err != nil {
 		return err
 	}
+
 	if restore {
+
 		err = cli.CheckpointCreate(ctx, wl.Properties.ContainerID, types.CheckpointCreateOptions{
 			CheckpointID:  wl.Properties.CheckpointIDs[len(wl.Properties.CheckpointIDs)-1],
 			CheckpointDir: wl.SharedDir,
@@ -91,7 +94,9 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 	_, err = io.Copy(outFile, resp)
 	if err != nil {
 		return err
+
 	}
+
 	return err
 }
 

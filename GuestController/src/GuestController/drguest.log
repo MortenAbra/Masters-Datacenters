@@ -521,3 +521,160 @@
 [INFO] Apr  5 14:14:28.946:Listening on localhost:8080
 [INFO] Apr  5 14:14:29.995:POST Request for /workloads
 [INFO] Apr  5 14:14:39.330:POST Request for /workloads
+[INFO] Apr  5 21:13:17.346:Initialization done for localhost:8080
+[INFO] Apr  5 21:13:17.347:Setting up handlers
+[INFO] Apr  5 21:13:17.347:Listening on localhost:8080
+[INFO] Apr  5 21:14:44.949:POST Request for /workloads
+[INFO] Apr  5 21:14:56.718:GET Request for /guest/workload
+[INFO] Apr  5 21:14:56.718:Responding: {"Workloads":[{"Identifier":"Python Flask Server","AccessIP":"1234","AccessPort":"1234","Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"sweet_noether","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr  5 21:15:04.873:GET Request for /guest/workload
+[INFO] Apr  5 21:15:04.894:Responding: [{"Identifier":"Incomplete Workload:/sweet_noether","AccessIP":"172.17.0.2","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"3afb870319970c814117161370d4fb29d43c1fa347bd8e18b59ce99f54dbf196","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}},{"Identifier":"Incomplete Workload:/cr_ID","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"container","Containerproperties":{"ContainerID":"4ff82afe1e14930d1865434732dab834205486bc08b7a57a1a56f350c1225c16","Image":"busybox","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}},{"Identifier":"Incomplete Workload:ubuntu16.04","AccessIP":"","AccessPort":"","Available":false,"SharedDir":"/home/wolder/shared_storage","Type":"VM","VMProperties":{"DomainName":"ubuntu16.04","ConnectionURI":"qemu+ssh://localhost/system"}}]
+[INFO] Apr  5 21:18:32.753:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:18:32.753:Setting up handlers
+[INFO] Apr  5 21:18:32.753:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:19:49.130:POST Request for /migrate
+[INFO] Apr  5 21:19:49.130:Migrating container: Python Flask Server   to: :
+[ERR] Apr  5 21:19:49.135:Error response from daemon: page not found
+[INFO] Apr  5 21:21:39.251:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:21:39.251:Setting up handlers
+[INFO] Apr  5 21:21:39.251:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:21:42.405:POST Request for /migrate
+[INFO] Apr  5 21:21:42.405:Migrating container: Python Flask Server   to: :
+[ERR] Apr  5 21:21:42.408:Error response from daemon: page not found
+[INFO] Apr  5 21:24:01.294:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:24:01.294:Setting up handlers
+[INFO] Apr  5 21:24:01.294:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:24:04.140:POST Request for /migrate
+[INFO] Apr  5 21:24:04.140:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:24:04.143:Error response from daemon: page not found
+[INFO] Apr  5 21:26:33.441:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:26:33.442:Setting up handlers
+[INFO] Apr  5 21:26:33.442:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:26:39.054:POST Request for /migrate
+[INFO] Apr  5 21:26:39.055:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:26:39.058:Error response from daemon: page not found
+[INFO] Apr  5 21:27:55.056:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:27:55.056:Setting up handlers
+[INFO] Apr  5 21:27:55.056:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:27:57.373:POST Request for /migrate
+[INFO] Apr  5 21:27:57.373:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:27:57.376:Error response from daemon: page not found
+[INFO] Apr  5 21:28:51.762:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:28:51.762:Setting up handlers
+[INFO] Apr  5 21:28:51.763:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:28:56.198:POST Request for /migrate
+[INFO] Apr  5 21:28:56.198:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:28:56.201:Error response from daemon: page not found
+[INFO] Apr  5 21:29:33.687:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:29:33.688:Setting up handlers
+[INFO] Apr  5 21:29:33.688:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:29:36.796:POST Request for /migrate
+[INFO] Apr  5 21:29:36.796:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:29:36.799:Error response from daemon: page not found
+[INFO] Apr  5 21:30:04.410:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:30:04.410:Setting up handlers
+[INFO] Apr  5 21:30:04.410:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:30:06.633:POST Request for /migrate
+[INFO] Apr  5 21:30:06.633:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:30:06.636:Error response from daemon: page not found
+[INFO] Apr  5 21:30:43.860:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:30:43.860:Setting up handlers
+[INFO] Apr  5 21:30:43.861:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:30:45.878:POST Request for /migrate
+[INFO] Apr  5 21:30:45.878:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:30:45.881:Error response from daemon: page not found
+[INFO] Apr  5 21:31:20.375:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:31:20.376:Setting up handlers
+[INFO] Apr  5 21:31:20.376:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:31:22.876:POST Request for /migrate
+[INFO] Apr  5 21:31:22.876:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:31:22.879:Error response from daemon: page not found
+[INFO] Apr  5 21:31:50.728:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:31:50.728:Setting up handlers
+[INFO] Apr  5 21:31:50.729:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:31:53.821:POST Request for /migrate
+[INFO] Apr  5 21:31:53.822:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:31:53.825:Error response from daemon: page not found
+[INFO] Apr  5 21:32:17.442:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:32:17.443:Setting up handlers
+[INFO] Apr  5 21:32:17.443:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:32:19.716:POST Request for /migrate
+[INFO] Apr  5 21:32:19.716:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:32:19.719:Error response from daemon: page not found
+[INFO] Apr  5 21:33:18.093:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:33:18.094:Setting up handlers
+[INFO] Apr  5 21:33:18.094:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:33:20.953:POST Request for /migrate
+[INFO] Apr  5 21:33:20.954:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:33:20.958:Error response from daemon: invalid reference format
+[INFO] Apr  5 21:35:19.601:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:35:19.601:Setting up handlers
+[INFO] Apr  5 21:35:19.601:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:35:24.022:POST Request for /migrate
+[INFO] Apr  5 21:35:24.022:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:35:24.025:Error response from daemon: page not found
+[INFO] Apr  5 21:36:13.636:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:36:13.636:Setting up handlers
+[INFO] Apr  5 21:36:13.636:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:36:16.642:POST Request for /migrate
+[INFO] Apr  5 21:36:16.643:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:36:16.646:Error response from daemon: page not found
+[INFO] Apr  5 21:37:22.795:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:37:22.796:Setting up handlers
+[INFO] Apr  5 21:37:22.796:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:37:24.047:POST Request for /migrate
+[INFO] Apr  5 21:37:24.047:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:37:24.050:Error response from daemon: page not found
+[INFO] Apr  5 21:38:53.357:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:38:53.358:Setting up handlers
+[INFO] Apr  5 21:38:53.358:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:38:55.790:POST Request for /migrate
+[INFO] Apr  5 21:39:46.153:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:39:46.153:Setting up handlers
+[INFO] Apr  5 21:39:46.153:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:39:48.658:POST Request for /migrate
+[INFO] Apr  5 21:43:15.338:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:43:15.338:Setting up handlers
+[INFO] Apr  5 21:43:15.338:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:43:16.759:POST Request for /migrate
+[INFO] Apr  5 21:43:16.759:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[ERR] Apr  5 21:43:16.762:Error response from daemon: page not found
+[INFO] Apr  5 21:45:28.495:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:45:28.495:Setting up handlers
+[INFO] Apr  5 21:45:28.495:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:45:30.957:POST Request for /migrate
+[INFO] Apr  5 21:49:11.797:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:49:11.797:Setting up handlers
+[INFO] Apr  5 21:49:11.797:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:49:15.467:POST Request for /migrate
+[INFO] Apr  5 21:49:15.468:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[INFO] Apr  5 21:49:36.131:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:49:36.131:Setting up handlers
+[INFO] Apr  5 21:49:36.131:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:49:42.202:POST Request for /migrate
+[INFO] Apr  5 21:49:42.202:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[INFO] Apr  5 21:49:58.767:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:49:58.767:Setting up handlers
+[INFO] Apr  5 21:49:58.767:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:50:01.349:POST Request for /migrate
+[INFO] Apr  5 21:50:01.349:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[INFO] Apr  5 21:53:32.784:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:53:32.785:Setting up handlers
+[INFO] Apr  5 21:53:32.785:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:53:34.170:POST Request for /migrate
+[INFO] Apr  5 21:53:34.171:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[INFO] Apr  5 21:53:53.861:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:53:53.861:Setting up handlers
+[INFO] Apr  5 21:53:53.861:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:53:55.147:POST Request for /migrate
+[INFO] Apr  5 21:53:55.148:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[INFO] Apr  5 21:57:26.765:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:57:26.765:Setting up handlers
+[INFO] Apr  5 21:57:26.765:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:57:29.353:POST Request for /migrate
+[INFO] Apr  5 21:57:29.354:Migrating container: Python Flask Server to: 192.168.122.72:8080
+[INFO] Apr  5 21:58:45.081:Initialization done for 192.168.0.106:8080
+[INFO] Apr  5 21:58:45.081:Setting up handlers
+[INFO] Apr  5 21:58:45.081:Listening on 192.168.0.106:8080
+[INFO] Apr  5 21:58:48.014:POST Request for /migrate
+[INFO] Apr  5 21:58:48.015:Migrating container: Python Flask Server to: 192.168.122.72:8080
