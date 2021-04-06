@@ -36,6 +36,7 @@ func initDocker() (context.Context, *client.Client, error) {
 	return ctx, cli, err
 }
 
+// Docker save - and save the exported as tar.gz
 func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 	// Init docker environment
 	ctx, cli, err := initDocker()
@@ -64,7 +65,6 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 
 	err = cli.ContainerStart(ctx, wl.Properties.ContainerID, types.ContainerStartOptions{})
 	if err != nil {
-		println("HERE1 " + wl.Properties.ContainerID + "   " + err.Error())
 		return err
 	}
 	resp, err := cli.ImageSave(ctx, []string{wl.Properties.Image})
@@ -100,6 +100,7 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 	return err
 }
 
+// Docker container stop - docker container rm
 func (wl ContainerWorkload) DockeRemoveContainer() error {
 	// Init docker environment
 	ctx, cli, err := initDocker()
@@ -116,6 +117,7 @@ func (wl ContainerWorkload) DockeRemoveContainer() error {
 	return err
 }
 
+// Docker load - docker run container
 func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) error {
 	// Init docker environment
 	ctx, cli, err := initDocker()
