@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 
 	"github.com/mitchellh/mapstructure"
 
@@ -232,8 +233,12 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 
 // Initial Migration part of the Container Migration
 func initiateContainerMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) {
+	// Stopwatch
+	start := time.Now()
 	err := container.DockerSaveAndStoreCheckpoint(container.Properties.Checkpoint)
 	logErr(err)
+	timeTrack(start, "DockerSaveAndStoreCheckpoint("+container.Identifier+")")
+
 	err = ContainerPostMigration(migration, container)
 	logErr(err)
 	cleanUpAfterContainerMigration(container)
@@ -243,11 +248,16 @@ func initiateContainerMigration(migration migrate.Migrate, container containerwo
 // Final Migration part of the Container Migration on receiver
 func finishContainerMigration(container containerworkload.ContainerWorkload) {
 	logInfo("Migration of workload: " + container.Identifier)
+	start := time.Now()
+
 	container.DockerLoadAndStartContainer(container.Properties.Checkpoint)
+	timeTrack(start, "DockerLoadAndStartContainer("+container.Identifier+")")
+
 	err := jsonmanager.AddContainerWorkloadToSystem(container)
 	logErr(err)
 }
 
+// Intermediary step of migration. Send workload information to receiver
 func ContainerPostMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) error {
 	jsonValue, _ := json.Marshal(container)
 
@@ -262,6 +272,7 @@ func ContainerPostMigration(migration migrate.Migrate, container containerworklo
 	return err
 }
 
+// Clean up after migration by removing container workload from workload.json and stopping contianer
 func cleanUpAfterContainerMigration(container containerworkload.ContainerWorkload) error {
 	err := jsonmanager.RemoveContainerFromWorkloadFile(container)
 	if err != nil {
@@ -271,6 +282,7 @@ func cleanUpAfterContainerMigration(container containerworkload.ContainerWorkloa
 	return err
 }
 
+// Initial Migration part of the VM Migration
 func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) {
 	// MIGRATE FUNC
 	err := cleanUpAfterVMMigration(vm)
@@ -278,13 +290,21 @@ func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) {
 
 }
 
+// Final Migration part of the VM Migration on receiver
 func finishVMMigration(vm vmworkload.VMWorkload) {
 	logInfo("Migration of workload: " + vm.Identifier)
 	err := jsonmanager.AddVMWorkloadToSystem(vm)
 	logErr(err)
 }
 
+// Clean up after migration by removing VM workload from workload.json
 func cleanUpAfterVMMigration(vm vmworkload.VMWorkload) error {
 	err := jsonmanager.RemoveVMFromWorkloadFile(vm)
 	return err
+}
+
+// Track time of methods. Dont use when methods use go routines
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	logInfo(name + " took " + elapsed.String())
 }
