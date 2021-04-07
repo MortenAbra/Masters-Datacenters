@@ -1,6 +1,8 @@
 package migrate
 
-import "GuestController/guest"
+import (
+	"GuestController/guest"
+)
 
 type Migrate struct {
 	Identifier  string      `json:"Identifier"`

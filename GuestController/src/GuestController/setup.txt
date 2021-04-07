@@ -1,0 +1,12 @@
+sudo apt install make pkg-config asciidoc libnftables-dev libbsd-dev gcc-multilib protobuf-compiler protobuf-c-compiler python-protobuf libprotobuf-c-dev libnet1-dev build-essential libnl-3-dev libcap-dev
+
+git clone https://github.com/checkpoint-restore/criu.git
+cd criu
+make clean
+make
+make install
+sudo criu check
+sudo criu check --all
+
+Debian 11 (Bullseye)
+- 

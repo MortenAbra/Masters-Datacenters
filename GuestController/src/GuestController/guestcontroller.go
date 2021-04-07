@@ -306,8 +306,9 @@ func cleanUpAfterContainerMigration(container containerworkload.ContainerWorkloa
 // Initial Migration part of the VM Migration
 func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) {
 	// MIGRATE FUNC
-	err := cleanUpAfterVMMigration(vm)
-	logErr(err)
+	//vm.Migrate()
+	//err := cleanUpAfterVMMigration(vm)
+	//logErr(err)
 
 }
 

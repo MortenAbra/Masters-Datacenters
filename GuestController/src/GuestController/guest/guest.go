@@ -7,12 +7,10 @@ import (
 	"GuestController/workload/vmworkload"
 	"context"
 	"log"
-	"net"
-	"time"
 
-	"github.com/digitalocean/go-libvirt"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
+	"github.com/libvirt/libvirt-go"
 )
 
 type Guest struct {
@@ -56,24 +54,30 @@ func (g Guest) GetAllWorkloadsRunningOnGuest() []interface{} {
 		resultSlice = append(resultSlice, workload)
 	}
 
-	c, err := net.DialTimeout("unix", "/var/run/libvirt/libvirt-sock", 2*time.Second)
-	logFatal(err)
+	conn, err := libvirt.NewConnect("qemu:///system")
+	if err != nil {
+		panic(err)
+	}
 
-	l := libvirt.New(c)
-	err = l.Connect()
-	logFatal(err)
+	defer conn.Close()
 
-	activeDomains, _, err := l.ConnectListAllDomains(1, libvirt.ConnectListDomainsActive)
-	logFatal(err)
-	inactiveDomains, _, err := l.ConnectListAllDomains(1, libvirt.ConnectListDomainsInactive)
-	logFatal(err)
+	activeDoms, err := conn.ListAllDomains(libvirt.CONNECT_LIST_DOMAINS_ACTIVE)
+	if err != nil {
+		panic(err)
+	}
+	inactiveDoms, err := conn.ListAllDomains(libvirt.CONNECT_LIST_DOMAINS_ACTIVE)
+	if err != nil {
+		panic(err)
+	}
 
-	domains := append(activeDomains, inactiveDomains...)
+	domains := append(activeDoms, inactiveDoms...)
+	connURI, _ := conn.GetURI()
 
 	for _, domain := range domains {
+		domainname, _ := domain.GetName()
 		workload := vmworkload.VMWorkload{
 			Workload: workload.Workload{
-				Identifier: "Incomplete Workload:" + domain.Name,
+				Identifier: "Incomplete Workload:" + domainname,
 				AccessIP:   "",
 				AccessPort: "",
 				Available:  false,
@@ -81,14 +85,11 @@ func (g Guest) GetAllWorkloadsRunningOnGuest() []interface{} {
 				Type:       "VM",
 			},
 			Properties: vmworkload.VMProperties{
-				DomainName:    domain.Name,
-				ConnectionURI: "qemu+ssh://" + g.IP + "/system",
+				DomainName:    domainname,
+				ConnectionURI: connURI,
 			}}
 		resultSlice = append(resultSlice, workload)
 	}
-
-	err = l.Disconnect()
-	logFatal(err)
 
 	return resultSlice
 }
