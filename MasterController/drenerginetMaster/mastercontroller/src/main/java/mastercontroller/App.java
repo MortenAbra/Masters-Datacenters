@@ -8,16 +8,25 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.EventObject;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import java.awt.event.MouseAdapter;
+
+import org.w3c.dom.events.MouseEvent;
 
 public class App {
 
@@ -25,6 +34,27 @@ public class App {
 	private JFrame frmVmManager;
 	private JTextField migrationThresholdTextField;
 	private JTextField migrationThresholdPercentTextField;
+	private JPanel vmListPanel;
+	private JPanel panel;
+	private JPanel panel_2;
+	private JPanel vmPropertiesPanel;
+	private JPanel vmMigrationThresholdPanel;
+	private JPanel panel_1;
+	private JList vmList;
+	private JToggleButton vmAutoMigrationSwitch;
+	private JComboBox availableVMsComboBox;
+	private JButton vmMigrationBtn;
+	private JButton migrationThresholdSetButton;
+	private JLabel migrationThresholdLabel;
+	private JLabel migrationThresholdPercentLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel vmNameLabel;
+	private JLabel vmNameResult;
+	private JLabel vmIPLabel;
+	private JLabel vmIPResult;
+	private JLabel vmStatusLabel;
+	private JLabel vmStatusResult;
+	private JLabel vmMigrationLabel;
 
 	/**
 	 * Launch the application.
@@ -62,7 +92,7 @@ public class App {
 		frmVmManager.setBounds(100, 100, 450, 300);
 		frmVmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel vmListPanel = new JPanel();
+		vmListPanel = new JPanel();
 		frmVmManager.getContentPane().add(vmListPanel, BorderLayout.WEST);
 		GridBagLayout gbl_vmListPanel = new GridBagLayout();
 		gbl_vmListPanel.columnWidths = new int[] { 56, 0 };
@@ -71,7 +101,7 @@ public class App {
 		gbl_vmListPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		vmListPanel.setLayout(gbl_vmListPanel);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "VM List", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
@@ -85,13 +115,24 @@ public class App {
 		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		JTextArea vmListTextArea = new JTextArea();
+		vmList = new JList(generator.fillVMList());
+		vmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		vmList.addListSelectionListener(new ListSelectionListener(){
 
-		String[] vmsList = generator.fillVMList();
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				JList list = (JList) e.getSource();
+				if(!e.getValueIsAdjusting()){
+					String selectedValue = (String) list.getSelectedValue();
+					vmNameResult.setText(selectedValue);
+				}
+			}
+			
+		});
 
-		for (String string : vmsList) {
-			vmListTextArea.append(string + '\n');
-		}
+
+
 
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
@@ -99,10 +140,9 @@ public class App {
 		gbc_textArea.insets = new Insets(0, 0, 0, 5);
 		gbc_textArea.gridx = 0;
 		gbc_textArea.gridy = 0;
-		panel.add(vmListTextArea, gbc_textArea);
-		vmListTextArea.setEditable(false);
+		panel.add(vmList, gbc_textArea);
 
-		JPanel vmMigrationThresholdPanel = new JPanel();
+		vmMigrationThresholdPanel = new JPanel();
 		frmVmManager.getContentPane().add(vmMigrationThresholdPanel, BorderLayout.EAST);
 		GridBagLayout gbl_vmMigrationThresholdPanel = new GridBagLayout();
 		gbl_vmMigrationThresholdPanel.columnWidths = new int[] { 88, 46 };
@@ -111,7 +151,7 @@ public class App {
 		gbl_vmMigrationThresholdPanel.rowWeights = new double[] { 1.0 };
 		vmMigrationThresholdPanel.setLayout(gbl_vmMigrationThresholdPanel);
 
-		JPanel panel_2 = new JPanel();
+		panel_2 = new JPanel();
 		panel_2.setBorder(
 				new TitledBorder(null, "VM Migration Settings", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
@@ -129,7 +169,7 @@ public class App {
 		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
-		JLabel lblNewLabel_1 = new JLabel("VM Auto Migration:");
+		lblNewLabel_1 = new JLabel("VM Auto Migration:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
@@ -137,14 +177,14 @@ public class App {
 		gbc_lblNewLabel_1.gridy = 0;
 		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		JToggleButton vmAutoMigrationSwitch = new JToggleButton("Toggle Migration");
+		vmAutoMigrationSwitch = new JToggleButton("Toggle Migration");
 		GridBagConstraints gbc_vmAutoMigrationSwitch = new GridBagConstraints();
 		gbc_vmAutoMigrationSwitch.insets = new Insets(0, 0, 5, 0);
 		gbc_vmAutoMigrationSwitch.gridx = 0;
 		gbc_vmAutoMigrationSwitch.gridy = 1;
 		panel_2.add(vmAutoMigrationSwitch, gbc_vmAutoMigrationSwitch);
 
-		JLabel migrationThresholdLabel = new JLabel("Threshold:");
+		migrationThresholdLabel = new JLabel("Threshold:");
 		GridBagConstraints gbc_migrationThresholdLabel = new GridBagConstraints();
 		gbc_migrationThresholdLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_migrationThresholdLabel.gridx = 0;
@@ -160,7 +200,7 @@ public class App {
 		panel_2.add(migrationThresholdTextField, gbc_migrationThresholdTextField);
 		migrationThresholdTextField.setColumns(10);
 
-		JLabel migrationThresholdPercentLabel = new JLabel("Threshold %:");
+		migrationThresholdPercentLabel = new JLabel("Threshold %:");
 		GridBagConstraints gbc_migrationThresholdPercentLabel = new GridBagConstraints();
 		gbc_migrationThresholdPercentLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_migrationThresholdPercentLabel.gridx = 0;
@@ -176,13 +216,13 @@ public class App {
 		panel_2.add(migrationThresholdPercentTextField, gbc_migrationThresholdPercentTextField);
 		migrationThresholdPercentTextField.setColumns(10);
 
-		JButton migrationThresholdSetButton = new JButton("Set Threshold");
+		migrationThresholdSetButton = new JButton("Set Threshold");
 		GridBagConstraints gbc_migrationThresholdSetButton = new GridBagConstraints();
 		gbc_migrationThresholdSetButton.gridx = 0;
 		gbc_migrationThresholdSetButton.gridy = 6;
 		panel_2.add(migrationThresholdSetButton, gbc_migrationThresholdSetButton);
 
-		JPanel vmPropertiesPanel = new JPanel();
+		vmPropertiesPanel = new JPanel();
 		frmVmManager.getContentPane().add(vmPropertiesPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_vmPropertiesPanel = new GridBagLayout();
 		gbl_vmPropertiesPanel.columnWidths = new int[] { 174, 0 };
@@ -191,7 +231,7 @@ public class App {
 		gbl_vmPropertiesPanel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		vmPropertiesPanel.setLayout(gbl_vmPropertiesPanel);
 
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "VM Properties", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
@@ -205,7 +245,7 @@ public class App {
 		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
-		JLabel vmNameLabel = new JLabel("VM Name:");
+		vmNameLabel = new JLabel("VM Name:");
 		GridBagConstraints gbc_vmNameLabel = new GridBagConstraints();
 		gbc_vmNameLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmNameLabel.insets = new Insets(0, 0, 5, 5);
@@ -213,14 +253,14 @@ public class App {
 		gbc_vmNameLabel.gridy = 0;
 		panel_1.add(vmNameLabel, gbc_vmNameLabel);
 
-		JLabel vmNameResult = new JLabel("");
+		vmNameResult = new JLabel("");
 		GridBagConstraints gbc_vmNameResult = new GridBagConstraints();
 		gbc_vmNameResult.insets = new Insets(0, 0, 5, 5);
 		gbc_vmNameResult.gridx = 1;
 		gbc_vmNameResult.gridy = 0;
 		panel_1.add(vmNameResult, gbc_vmNameResult);
 
-		JLabel vmIPLabel = new JLabel("VM IP:");
+		vmIPLabel = new JLabel("VM IP:");
 		GridBagConstraints gbc_vmIPLabel = new GridBagConstraints();
 		gbc_vmIPLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmIPLabel.insets = new Insets(0, 0, 5, 5);
@@ -228,14 +268,14 @@ public class App {
 		gbc_vmIPLabel.gridy = 1;
 		panel_1.add(vmIPLabel, gbc_vmIPLabel);
 
-		JLabel vmIPResult = new JLabel("");
+		vmIPResult = new JLabel("");
 		GridBagConstraints gbc_vmIPResult = new GridBagConstraints();
 		gbc_vmIPResult.insets = new Insets(0, 0, 5, 5);
 		gbc_vmIPResult.gridx = 1;
 		gbc_vmIPResult.gridy = 1;
 		panel_1.add(vmIPResult, gbc_vmIPResult);
 
-		JLabel vmStatusLabel = new JLabel("VM Status:");
+		vmStatusLabel = new JLabel("VM Status:");
 		GridBagConstraints gbc_vmStatusLabel = new GridBagConstraints();
 		gbc_vmStatusLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmStatusLabel.insets = new Insets(0, 0, 5, 5);
@@ -243,14 +283,14 @@ public class App {
 		gbc_vmStatusLabel.gridy = 2;
 		panel_1.add(vmStatusLabel, gbc_vmStatusLabel);
 
-		JLabel vmStatusResult = new JLabel("");
+		vmStatusResult = new JLabel("");
 		GridBagConstraints gbc_vmStatusResult = new GridBagConstraints();
 		gbc_vmStatusResult.insets = new Insets(0, 0, 5, 5);
 		gbc_vmStatusResult.gridx = 1;
 		gbc_vmStatusResult.gridy = 2;
 		panel_1.add(vmStatusResult, gbc_vmStatusResult);
 
-		JLabel vmMigrationLabel = new JLabel("Migrate To:");
+		vmMigrationLabel = new JLabel("Migrate To:");
 		GridBagConstraints gbc_vmMigrationLabel = new GridBagConstraints();
 		gbc_vmMigrationLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmMigrationLabel.insets = new Insets(0, 0, 5, 5);
@@ -258,7 +298,7 @@ public class App {
 		gbc_vmMigrationLabel.gridy = 3;
 		panel_1.add(vmMigrationLabel, gbc_vmMigrationLabel);
 
-		JComboBox availableVMsComboBox = new JComboBox();
+		availableVMsComboBox = new JComboBox();
 		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
 		gbc_availableVMsComboBox.fill = GridBagConstraints.BOTH;
 		gbc_availableVMsComboBox.gridwidth = 2;
@@ -268,7 +308,7 @@ public class App {
 		panel_1.add(availableVMsComboBox, gbc_availableVMsComboBox);
 		availableVMsComboBox.setMaximumRowCount(5);
 
-		JButton vmMigrationBtn = new JButton("Migrate VM");
+		vmMigrationBtn = new JButton("Migrate VM");
 		vmMigrationBtn.addActionListener(new ActionListener() {
 
 			@Override
