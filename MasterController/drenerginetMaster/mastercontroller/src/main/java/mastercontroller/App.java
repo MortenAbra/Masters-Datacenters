@@ -1,43 +1,295 @@
 package mastercontroller;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.border.TitledBorder;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
+public class App {
 
-import mastercontroller.Services.VMManager;
+	private GuiController generator;
+	private JFrame frmVmManager;
+	private JTextField migrationThresholdTextField;
+	private JTextField migrationThresholdPercentTextField;
 
-/**
- * Hello world!
- *
- */
-public class App extends JFrame {
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					App window = new App();
+					window.frmVmManager.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-    private JPanel panel;
-    private JLabel vmNameLabel;
-    private JLabel vmProperties;
-    private JLabel vmIP;
-    private JLabel vmStatus;
-    private JLabel vmMigrationLabel;
-    private JComboBox cmbAvailableVMList;
-    private JButton btConfirmMigration;
-    private JList lsVmList;
-    private JScrollPane scpVmList;
-    private GridBagLayout gbLayout;
-    private GridBagConstraints gbConstraints;
-    private ComponentGenerator generator;
-    private VMManager manager;
+	/**
+	 * Create the application.
+	 */
+	public App() {
+		generator = new GuiController();
+		initialize();
+	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmVmManager = new JFrame();
+		frmVmManager.setPreferredSize(new Dimension(800, 600));
+		frmVmManager.setVisible(true);
+		frmVmManager.setSize(new Dimension(800, 600));
+		frmVmManager.setTitle("VM Manager");
+		frmVmManager.setBounds(100, 100, 450, 300);
+		frmVmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel vmListPanel = new JPanel();
+		frmVmManager.getContentPane().add(vmListPanel, BorderLayout.WEST);
+		GridBagLayout gbl_vmListPanel = new GridBagLayout();
+		gbl_vmListPanel.columnWidths = new int[] { 56, 0 };
+		gbl_vmListPanel.rowHeights = new int[] { 0, 0 };
+		gbl_vmListPanel.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_vmListPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		vmListPanel.setLayout(gbl_vmListPanel);
+
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "VM List", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 0;
+		vmListPanel.add(panel, gbc_panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[] { 56, 58, 0 };
+		gbl_panel.rowHeights = new int[] { 188, 0 };
+		gbl_panel.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		panel.setLayout(gbl_panel);
+
+		JTextArea vmListTextArea = new JTextArea();
+
+		String[] vmsList = generator.fillVMList();
+
+		for (String string : vmsList) {
+			vmListTextArea.append(string + '\n');
+		}
+
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridwidth = 2;
+		gbc_textArea.insets = new Insets(0, 0, 0, 5);
+		gbc_textArea.gridx = 0;
+		gbc_textArea.gridy = 0;
+		panel.add(vmListTextArea, gbc_textArea);
+		vmListTextArea.setEditable(false);
+
+		JPanel vmMigrationThresholdPanel = new JPanel();
+		frmVmManager.getContentPane().add(vmMigrationThresholdPanel, BorderLayout.EAST);
+		GridBagLayout gbl_vmMigrationThresholdPanel = new GridBagLayout();
+		gbl_vmMigrationThresholdPanel.columnWidths = new int[] { 88, 46 };
+		gbl_vmMigrationThresholdPanel.rowHeights = new int[] { 104 };
+		gbl_vmMigrationThresholdPanel.columnWeights = new double[] { 0.0, 0.0 };
+		gbl_vmMigrationThresholdPanel.rowWeights = new double[] { 1.0 };
+		vmMigrationThresholdPanel.setLayout(gbl_vmMigrationThresholdPanel);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(
+				new TitledBorder(null, "VM Migration Settings", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.anchor = GridBagConstraints.WEST;
+		gbc_panel_2.gridwidth = 2;
+		gbc_panel_2.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_2.fill = GridBagConstraints.VERTICAL;
+		gbc_panel_2.gridx = 0;
+		gbc_panel_2.gridy = 0;
+		vmMigrationThresholdPanel.add(panel_2, gbc_panel_2);
+		GridBagLayout gbl_panel_2 = new GridBagLayout();
+		gbl_panel_2.columnWidths = new int[] { 116, 0 };
+		gbl_panel_2.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel_2.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel_2.setLayout(gbl_panel_2);
+
+		JLabel lblNewLabel_1 = new JLabel("VM Auto Migration:");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 0;
+		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+
+		JToggleButton vmAutoMigrationSwitch = new JToggleButton("Toggle Migration");
+		GridBagConstraints gbc_vmAutoMigrationSwitch = new GridBagConstraints();
+		gbc_vmAutoMigrationSwitch.insets = new Insets(0, 0, 5, 0);
+		gbc_vmAutoMigrationSwitch.gridx = 0;
+		gbc_vmAutoMigrationSwitch.gridy = 1;
+		panel_2.add(vmAutoMigrationSwitch, gbc_vmAutoMigrationSwitch);
+
+		JLabel migrationThresholdLabel = new JLabel("Threshold:");
+		GridBagConstraints gbc_migrationThresholdLabel = new GridBagConstraints();
+		gbc_migrationThresholdLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_migrationThresholdLabel.gridx = 0;
+		gbc_migrationThresholdLabel.gridy = 2;
+		panel_2.add(migrationThresholdLabel, gbc_migrationThresholdLabel);
+
+		migrationThresholdTextField = new JTextField();
+		GridBagConstraints gbc_migrationThresholdTextField = new GridBagConstraints();
+		gbc_migrationThresholdTextField.insets = new Insets(0, 0, 5, 0);
+		gbc_migrationThresholdTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_migrationThresholdTextField.gridx = 0;
+		gbc_migrationThresholdTextField.gridy = 3;
+		panel_2.add(migrationThresholdTextField, gbc_migrationThresholdTextField);
+		migrationThresholdTextField.setColumns(10);
+
+		JLabel migrationThresholdPercentLabel = new JLabel("Threshold %:");
+		GridBagConstraints gbc_migrationThresholdPercentLabel = new GridBagConstraints();
+		gbc_migrationThresholdPercentLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_migrationThresholdPercentLabel.gridx = 0;
+		gbc_migrationThresholdPercentLabel.gridy = 4;
+		panel_2.add(migrationThresholdPercentLabel, gbc_migrationThresholdPercentLabel);
+
+		migrationThresholdPercentTextField = new JTextField();
+		GridBagConstraints gbc_migrationThresholdPercentTextField = new GridBagConstraints();
+		gbc_migrationThresholdPercentTextField.insets = new Insets(0, 0, 5, 0);
+		gbc_migrationThresholdPercentTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_migrationThresholdPercentTextField.gridx = 0;
+		gbc_migrationThresholdPercentTextField.gridy = 5;
+		panel_2.add(migrationThresholdPercentTextField, gbc_migrationThresholdPercentTextField);
+		migrationThresholdPercentTextField.setColumns(10);
+
+		JButton migrationThresholdSetButton = new JButton("Set Threshold");
+		GridBagConstraints gbc_migrationThresholdSetButton = new GridBagConstraints();
+		gbc_migrationThresholdSetButton.gridx = 0;
+		gbc_migrationThresholdSetButton.gridy = 6;
+		panel_2.add(migrationThresholdSetButton, gbc_migrationThresholdSetButton);
+
+		JPanel vmPropertiesPanel = new JPanel();
+		frmVmManager.getContentPane().add(vmPropertiesPanel, BorderLayout.CENTER);
+		GridBagLayout gbl_vmPropertiesPanel = new GridBagLayout();
+		gbl_vmPropertiesPanel.columnWidths = new int[] { 174, 0 };
+		gbl_vmPropertiesPanel.rowHeights = new int[] { 0, 0 };
+		gbl_vmPropertiesPanel.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_vmPropertiesPanel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		vmPropertiesPanel.setLayout(gbl_vmPropertiesPanel);
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "VM Properties", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		vmPropertiesPanel.add(panel_1, gbc_panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[] { 51, 52, 33, 0 };
+		gbl_panel_1.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+		gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel_1.setLayout(gbl_panel_1);
+
+		JLabel vmNameLabel = new JLabel("VM Name:");
+		GridBagConstraints gbc_vmNameLabel = new GridBagConstraints();
+		gbc_vmNameLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_vmNameLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_vmNameLabel.gridx = 0;
+		gbc_vmNameLabel.gridy = 0;
+		panel_1.add(vmNameLabel, gbc_vmNameLabel);
+
+		JLabel vmNameResult = new JLabel("");
+		GridBagConstraints gbc_vmNameResult = new GridBagConstraints();
+		gbc_vmNameResult.insets = new Insets(0, 0, 5, 5);
+		gbc_vmNameResult.gridx = 1;
+		gbc_vmNameResult.gridy = 0;
+		panel_1.add(vmNameResult, gbc_vmNameResult);
+
+		JLabel vmIPLabel = new JLabel("VM IP:");
+		GridBagConstraints gbc_vmIPLabel = new GridBagConstraints();
+		gbc_vmIPLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_vmIPLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_vmIPLabel.gridx = 0;
+		gbc_vmIPLabel.gridy = 1;
+		panel_1.add(vmIPLabel, gbc_vmIPLabel);
+
+		JLabel vmIPResult = new JLabel("");
+		GridBagConstraints gbc_vmIPResult = new GridBagConstraints();
+		gbc_vmIPResult.insets = new Insets(0, 0, 5, 5);
+		gbc_vmIPResult.gridx = 1;
+		gbc_vmIPResult.gridy = 1;
+		panel_1.add(vmIPResult, gbc_vmIPResult);
+
+		JLabel vmStatusLabel = new JLabel("VM Status:");
+		GridBagConstraints gbc_vmStatusLabel = new GridBagConstraints();
+		gbc_vmStatusLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_vmStatusLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_vmStatusLabel.gridx = 0;
+		gbc_vmStatusLabel.gridy = 2;
+		panel_1.add(vmStatusLabel, gbc_vmStatusLabel);
+
+		JLabel vmStatusResult = new JLabel("");
+		GridBagConstraints gbc_vmStatusResult = new GridBagConstraints();
+		gbc_vmStatusResult.insets = new Insets(0, 0, 5, 5);
+		gbc_vmStatusResult.gridx = 1;
+		gbc_vmStatusResult.gridy = 2;
+		panel_1.add(vmStatusResult, gbc_vmStatusResult);
+
+		JLabel vmMigrationLabel = new JLabel("Migrate To:");
+		GridBagConstraints gbc_vmMigrationLabel = new GridBagConstraints();
+		gbc_vmMigrationLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_vmMigrationLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_vmMigrationLabel.gridx = 0;
+		gbc_vmMigrationLabel.gridy = 3;
+		panel_1.add(vmMigrationLabel, gbc_vmMigrationLabel);
+
+		JComboBox availableVMsComboBox = new JComboBox();
+		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
+		gbc_availableVMsComboBox.fill = GridBagConstraints.BOTH;
+		gbc_availableVMsComboBox.gridwidth = 2;
+		gbc_availableVMsComboBox.insets = new Insets(0, 0, 5, 0);
+		gbc_availableVMsComboBox.gridx = 1;
+		gbc_availableVMsComboBox.gridy = 3;
+		panel_1.add(availableVMsComboBox, gbc_availableVMsComboBox);
+		availableVMsComboBox.setMaximumRowCount(5);
+
+		JButton vmMigrationBtn = new JButton("Migrate VM");
+		vmMigrationBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				migrationThresholdTextField.setText("Hello there!");
+			}
+
+		});
+		GridBagConstraints gbc_vmMigrationBtn = new GridBagConstraints();
+		gbc_vmMigrationBtn.gridwidth = 2;
+		gbc_vmMigrationBtn.insets = new Insets(0, 0, 0, 5);
+		gbc_vmMigrationBtn.gridx = 0;
+		gbc_vmMigrationBtn.gridy = 4;
+		panel_1.add(vmMigrationBtn, gbc_vmMigrationBtn);
+	}
+
+}
+
+
+/*
 
     public App() {
         manager = new VMManager();
@@ -49,157 +301,7 @@ public class App extends JFrame {
             e.printStackTrace();
         }
         addComponenets(generator);
-    }
-
-    private void addComponenets(ComponentGenerator generator){
-        String[] dataVmList = { "Chocolate", "Ice Cream", "Apple Pie" };
-        String[] dataAvailableVMList = { "Chocolate", "Ice Cream", "Apple Pie" };
-
         String[] test = generator.fillVMList(manager.getWorkloadList());
-
-
-        
-        panel = new JPanel();
-        this.add(panel);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(800,400);
-        this.setVisible(true);
-        this.setResizable(true);
-        this.setTitle("VM Manager");
-        panel.setBorder(BorderFactory.createTitledBorder("VM List"));
-        gbLayout = new GridBagLayout();
-        gbConstraints = new GridBagConstraints();
-        panel.setLayout(gbLayout);
-
-        lsVmList = generator.addList(test);
-        scpVmList = generator.addScrollPane(lsVmList);
-        vmNameLabel = generator.addLabel("VM Name: ");
-        vmProperties = generator.addLabel("VM Properties");
-        vmIP = generator.addLabel("VM IP:");
-        vmStatus = generator.addLabel("VM Status");
-        vmMigrationLabel = generator.addLabel("Migration To: ");
-        cmbAvailableVMList = generator.addComboBox(dataAvailableVMList);
-        btConfirmMigration = generator.addButton("Migrate");
-        
-        Setup(generator, gbLayout, gbConstraints);
     }
 
-    private void Setup(ComponentGenerator generator, GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
-        
-        gbConstraints.gridx = 1;
-        gbConstraints.gridy = 1;
-        gbConstraints.gridwidth = 2;
-        gbConstraints.gridheight = 1;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 1;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(vmNameLabel, gbConstraints);
-
-
-         
-        gbConstraints.gridx = 1;
-        gbConstraints.gridy = 0;
-        gbConstraints.gridwidth = 2;
-        gbConstraints.gridheight = 1;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 1;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(vmProperties, gbConstraints);
-
-
-         
-        gbConstraints.gridx = 1;
-        gbConstraints.gridy = 2;
-        gbConstraints.gridwidth = 2;
-        gbConstraints.gridheight = 1;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 1;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(vmIP, gbConstraints);
-
-
-         
-        gbConstraints.gridx = 1;
-        gbConstraints.gridy = 3;
-        gbConstraints.gridwidth = 2;
-        gbConstraints.gridheight = 1;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 1;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(vmStatus, gbConstraints);
-
-
-         
-        gbConstraints.gridx = 1;
-        gbConstraints.gridy = 4;
-        gbConstraints.gridwidth = 1;
-        gbConstraints.gridheight = 1;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 1;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(vmMigrationLabel, gbConstraints);
-
-
-        
-         
-        gbConstraints.gridx = 2;
-        gbConstraints.gridy = 4;
-        gbConstraints.gridwidth = 1;
-        gbConstraints.gridheight = 1;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 0;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(cmbAvailableVMList, gbConstraints);
-
-
-        gbConstraints.gridx = 1;
-        gbConstraints.gridy = 5;
-        gbConstraints.gridwidth = 2;
-        gbConstraints.gridheight = 1;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 0;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(btConfirmMigration, gbConstraints);
-
-
-        gbConstraints.gridx = 0;
-        gbConstraints.gridy = 0;
-        gbConstraints.gridwidth = 1;
-        gbConstraints.gridheight = 6;
-        gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1;
-        gbConstraints.weighty = 1;
-        gbConstraints.anchor = GridBagConstraints.NORTH;
-        gbLayout.setConstraints(scpVmList, gbConstraints);
-
-
-    }
-
-    public static void main(String[] args) {
-        App app = new App();
-        app.generator.generateComponents(app.generator.getComponentList(), app.getPanel());
-
-
-    }
-
-    /**
-     * @return the panel
-     */
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    /**
-     * @param panel the panel to set
-     */
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
-}
+    */

@@ -19,8 +19,9 @@ import com.google.gson.JsonParser;
 
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Result;
+import mastercontroller.Services.iEnergiDataFetcher;
 
-public class EnergiDataFetcher {
+public class EnergiDataFetcher implements iEnergiDataFetcher {
     private InputStream input;
     private BufferedReader reader;
     private FilePaths fp;
@@ -36,19 +37,31 @@ public class EnergiDataFetcher {
         es = Executors.newCachedThreadPool();    
     }
 
-    public JsonObject fetchAPIData(String url, String filename) throws MalformedURLException, IOException{
-        input = new URL(url).openStream();
+    @Override
+    public JsonObject fetchAPIData(String url, String filename) {
+        try {
+            input = new URL(url).openStream();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         //TextOutPut("Input stream open...");
         reader = new BufferedReader(new InputStreamReader(input, Charset.forName("UTF-8")));
 
         String inputData = readChaString(reader);
         JsonObject data = convertToJson(inputData);
-        saveDataToFile(data, filename);
+        try {
+            saveDataToFile(data, filename);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         //System.out.println(data.get("result"));
         return data;
     }   
 
+    @Override
     public JsonObject fetchData(String apiUrl, String filename){
 
         Callable callable;
@@ -85,11 +98,16 @@ public class EnergiDataFetcher {
         return jsonObject;
     }
 
-    public String readChaString(Reader reader) throws IOException{
+    public String readChaString(Reader reader) {
         StringBuilder sb = new StringBuilder();
         int i;
-        while((i = reader.read()) != -1){
-            sb.append((char) i);
+        try {
+            while((i = reader.read()) != -1){
+                sb.append((char) i);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return sb.toString();
     }

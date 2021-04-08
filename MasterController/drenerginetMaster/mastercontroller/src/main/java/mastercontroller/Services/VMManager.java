@@ -16,7 +16,7 @@ import com.google.gson.JsonParser;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Workload;
 
-public class VMManager {
+public class VMManager implements iVMManager {
 
     private FilePaths fp;
     private ArrayList<Workload> workloadList;
@@ -25,8 +25,15 @@ public class VMManager {
     public VMManager(){
         fp = new FilePaths();
         workloadList = new ArrayList<>();
+        try {
+            addJSONWorkloadToList();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
+    @Override
     public void pingHost(Workload workload, FileWriter writer){
         int timeout = 10;
         if(workload.getWl_port() != -1){
@@ -80,14 +87,16 @@ public class VMManager {
         }
     }
 
-    private Workload getAllVMs(ArrayList<Workload> workloadlist){
+    @Override
+    public Workload getAllVMs(ArrayList<Workload> workloadlist){
         for (Workload workload : workloadlist) {
             return workload;
         }
         return null;
     }
 
-    private ArrayList<Workload> findActiveVMs(ArrayList<Workload> vmList){
+    @Override
+    public ArrayList<Workload> findActiveVMs(ArrayList<Workload> vmList){
         ArrayList<Workload> activeVMs = new ArrayList<>();
         for (Workload vm : vmList) {
             //TextOutPut("VM: " + vm.getWl_name() + " is - " + vm.isWl_status());
@@ -140,14 +149,16 @@ public class VMManager {
         }
     }
 
-    private Workload getActiveVMObject(ArrayList<Workload> activeVMList){
+    @Override
+    public Workload getActiveVMObject(ArrayList<Workload> activeVMList){
         Workload vmObject = activeVMList.get(0);
         activeVMList.get(0).setWl_status(true);
         activeVMList.remove(0);
         return vmObject;
     }
 
-    private ArrayList<String> getActiveVMsIPAsList(ArrayList<Workload> vmList){
+    @Override
+    public ArrayList<String> getActiveVMsIPAsList(ArrayList<Workload> vmList){
         ArrayList<String> vmIpList = new ArrayList<>();
         for (Workload object : vmList) {
             vmIpList.add(object.getWl_ip());
@@ -155,18 +166,9 @@ public class VMManager {
         return vmIpList;
     }
 
-    /**
-     * @return the workloadList
-     */
-    public ArrayList<Workload> getWorkloadList() {
+    @Override
+    public ArrayList<Workload> getWorkloads() {
         return workloadList;
-    }
-
-    /**
-     * @param workloadList the workloadList to set
-     */
-    public void setWorkloadList(ArrayList<Workload> workloadList) {
-        this.workloadList = workloadList;
     }
 
     
