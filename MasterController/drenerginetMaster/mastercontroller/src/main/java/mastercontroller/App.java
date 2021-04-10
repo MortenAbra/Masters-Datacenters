@@ -1,6 +1,7 @@
 package mastercontroller;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
@@ -8,7 +9,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -17,11 +20,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
+import mastercontroller.Models.Workload;
 import mastercontroller.Services.VMManager;
 
 public class App {
@@ -73,10 +74,11 @@ public class App {
 	 * Create the application.
 	 */
 	public App() {
-		initialize();
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
-        wm.workloadAddedToList(manager.getWorkloadObjectsFromList());				
+        wm.workloadAddedToList(manager.getWorkloadObjectsFromList());		
+		initialize();
+		System.out.println(manager.getWorkloads().size());		
 	}
 
 
@@ -115,22 +117,21 @@ public class App {
 		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		vmList = new JList();
-		vmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		vmList.addListSelectionListener(new ListSelectionListener(){
 
+
+		vmList = new JList(new Vector<Workload>(manager.getWorkloads()));
+		
+		vmList.setCellRenderer(new DefaultListCellRenderer(){
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				JList list = (JList) e.getSource();
-				if(!e.getValueIsAdjusting()){
-					String selectedValue = (String) list.getSelectedValue();
-					vmNameResult.setText(selectedValue);
+			public Component getListCellRendererComponent(JList<?> list, Object object, int index, boolean isSelected, boolean cellHasFocus){
+				Component renderer = super.getListCellRendererComponent(list, object, index, isSelected, cellHasFocus);
+				if(renderer instanceof JLabel && object instanceof Workload){
+					((JLabel) renderer).setText(((Workload) object).getWl_name());
 				}
+				
+				return renderer;
 			}
-			
 		});
-
 
 
 
@@ -314,7 +315,7 @@ public class App {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				migrationThresholdTextField.setText(manager.getWorkloadObjectsFromList().getWl_name());
+				migrationThresholdTextField.setText(manager.getWorkloads().get(0).getWl_name());
 			}
 
 		});
