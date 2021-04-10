@@ -1,6 +1,7 @@
 package mastercontroller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mastercontroller.Models.Workload;
 import mastercontroller.Services.VMManager;
@@ -11,8 +12,10 @@ public class GuiController {
 
 
     private iVMManager manager;
+    private List<Workload> workloadList;
 
-    public GuiController() {
+    public GuiController(Subject vmManager) {
+        this.workloadList = new ArrayList<>();
     }
 
     public String[] fillVMList(ArrayList<Workload> workloadList){
@@ -38,5 +41,22 @@ public class GuiController {
         
         return allVMs.toArray(String[]::new);
     }
+
+    
+
+    /**
+     * @return the workloadList
+     */
+    public List<Workload> getWorkloadList() {
+        return workloadList;
+    }
+
+    /**
+     * @param workloadList the workloadList to set
+     */
+    public void setWorkloadList(List<Workload> workloadList) {
+        this.workloadList = workloadList;
+    }
+
 
 }

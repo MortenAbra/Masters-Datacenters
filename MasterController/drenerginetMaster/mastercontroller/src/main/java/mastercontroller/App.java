@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.EventObject;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
@@ -24,13 +22,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import java.awt.event.MouseAdapter;
-
-import org.w3c.dom.events.MouseEvent;
+import mastercontroller.Services.VMManager;
 
 public class App {
-
-	private GuiController generator;
+ 
+	private VMManager manager;
+	private WorkloadManager wm;
 	private JFrame frmVmManager;
 	private JTextField migrationThresholdTextField;
 	private JTextField migrationThresholdPercentTextField;
@@ -76,9 +73,12 @@ public class App {
 	 * Create the application.
 	 */
 	public App() {
-		generator = new GuiController();
 		initialize();
+		this.wm = new WorkloadManager();
+		this.manager = new VMManager(wm);
+        wm.workloadAddedToList(manager.getWorkloadObjectsFromList());				
 	}
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -115,7 +115,7 @@ public class App {
 		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		vmList = new JList(generator.fillVMList());
+		vmList = new JList();
 		vmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		vmList.addListSelectionListener(new ListSelectionListener(){
 
@@ -314,7 +314,7 @@ public class App {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				migrationThresholdTextField.setText("Hello there!");
+				migrationThresholdTextField.setText(manager.getWorkloadObjectsFromList().getWl_name());
 			}
 
 		});

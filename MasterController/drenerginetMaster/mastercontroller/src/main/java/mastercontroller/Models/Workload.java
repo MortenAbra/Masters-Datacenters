@@ -1,5 +1,11 @@
 package mastercontroller.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import mastercontroller.Observer;
+import mastercontroller.Subject;
+
 public class Workload {
 
     String wl_name = "Undefined";
@@ -16,6 +22,7 @@ public class Workload {
         this.wl_port = wl_port;
         this.wl_status = wl_status;
     }
+
 
     @Override
     public String toString() {
@@ -97,6 +104,8 @@ public class Workload {
     public void setWl_status(boolean wl_status) {
         this.wl_status = wl_status;
     }
+
+    
     
     
 }

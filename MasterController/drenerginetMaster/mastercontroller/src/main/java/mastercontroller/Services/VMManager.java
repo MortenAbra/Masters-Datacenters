@@ -13,25 +13,27 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import mastercontroller.Observer;
+import mastercontroller.Subject;
+import mastercontroller.WorkloadManager;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Workload;
 
-public class VMManager implements iVMManager {
+public class VMManager implements iVMManager, Observer {
 
     private FilePaths fp;
     private ArrayList<Workload> workloadList;
     private JsonParser parser = new JsonParser();
 
-    public VMManager(){
+    public VMManager(Subject WorkloadManager){
+        WorkloadManager.registerObserver(this);
+        this.workloadList = new ArrayList<>();
         fp = new FilePaths();
-        workloadList = new ArrayList<>();
-        try {
-            addJSONWorkloadToList();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
+
+
+
+//https://github.com/beabetterdevv/DesignPatterns/blob/master/patterns/observer/ForecastDisplay.java
 
     @Override
     public void pingHost(Workload workload, FileWriter writer){
@@ -137,7 +139,6 @@ public class VMManager implements iVMManager {
 
             JsonArray jsonArray = (JsonArray) jsonObject.get("workloads");
             
-
             //Adding workloads to the list
             
             for (int i = 0; i < jsonArray.size(); i++) {
@@ -147,6 +148,19 @@ public class VMManager implements iVMManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Workload getWorkloadObjectsFromList(){
+        try {
+            addJSONWorkloadToList();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        for (Workload workload : workloadList) {
+            return workload;
+        }
+        return null;
     }
 
     @Override
@@ -171,5 +185,11 @@ public class VMManager implements iVMManager {
         return workloadList;
     }
 
+    @Override
+    public void update(Workload workload) {
+        // TODO Auto-generated method stub
+        workloadList.add(workload);
+        System.out.println("Workload added to list - Current list size: " + workloadList.size());
+    }
     
 }
