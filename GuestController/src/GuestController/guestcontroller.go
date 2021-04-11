@@ -270,7 +270,6 @@ func initiateContainerMigration(migration migrate.Migrate, container containerwo
 func finishContainerMigration(container containerworkload.ContainerWorkload) {
 	logInfo("Migration of workload: " + container.Identifier)
 	start := time.Now()
-
 	container.DockerLoadAndStartContainer(container.Properties.Checkpoint)
 	timeTrack(start, "DockerLoadAndStartContainer("+container.Identifier+")")
 
@@ -309,7 +308,6 @@ func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) {
 	//vm.Migrate()
 	//err := cleanUpAfterVMMigration(vm)
 	//logErr(err)
-
 }
 
 // Final Migration part of the VM Migration on receiver
