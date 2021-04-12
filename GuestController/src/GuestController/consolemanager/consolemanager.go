@@ -17,24 +17,36 @@ func readResonse() (string, error) {
 }
 
 // Get user input for server ip and server port to run the service on and return them
-func ReadServerIPAndPortFromUser() (string, string, string, error) {
+func ReadServerIPAndPortFromUser() (string, string, string, string, error) {
 	fmt.Print("Please enter IP: ")
 	serverIP, err := readResonse()
 	if err != nil {
-		return "", "", "", err
+		return "", "", "", "", err
 	}
 
 	fmt.Print("Please enter port: ")
 	serverPort, err := readResonse()
 	if err != nil {
-		return "", "", "", err
+		return "", "", "", "", err
 	}
 
 	fmt.Print("Please enter shared directory with host: ")
 	serverSharedDir, err := readResonse()
+	if err != nil {
+		return "", "", "", "", err
+	}
 
 	// TODO TEMPORARY WHILE TESTING
 	serverSharedDir = "/home/wolder/shared_storage"
 
-	return serverIP, serverPort, serverSharedDir, err
+	fmt.Print("Please enter shared directory with host: ")
+	serverLibvirtURI, err := readResonse()
+	if err != nil {
+		return "", "", "", "", err
+	}
+
+	// TODO TEMPORARY WHILE TESTING
+	serverLibvirtURI = "qemu///system"
+
+	return serverIP, serverPort, serverSharedDir, serverLibvirtURI, err
 }

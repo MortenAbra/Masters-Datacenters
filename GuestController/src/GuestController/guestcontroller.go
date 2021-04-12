@@ -51,10 +51,10 @@ func Init() {
 	drlogger.InitDRLogger()
 	err := jsonmanager.CreateWorkloadFile()
 	logErr(err)
-	serverIP, serverPort, serverSharedDir, err := consolemanager.ReadServerIPAndPortFromUser()
+	serverIP, serverPort, serverSharedDir, serverLibvirtURI, err := consolemanager.ReadServerIPAndPortFromUser()
 	logErr(err)
 
-	guestInformation = guest.Guest{IP: serverIP, Port: serverPort, StoragePath: serverSharedDir}
+	guestInformation = guest.Guest{IP: serverIP, Port: serverPort, StoragePath: serverSharedDir, LibvirtURI: serverLibvirtURI}
 
 	logInfo("Initialization done for " + serverIP + ":" + serverPort)
 
@@ -237,6 +237,7 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 func logsHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
+		// Reads the drguest.log file and retrieves it line by line
 		logInfo("GET Request for /logs")
 		file, err := os.Open(drlogger.LogFileName)
 		logErr(err)
@@ -305,9 +306,29 @@ func cleanUpAfterContainerMigration(container containerworkload.ContainerWorkloa
 // Initial Migration part of the VM Migration
 func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) {
 	// MIGRATE FUNC
-	//vm.Migrate()
-	//err := cleanUpAfterVMMigration(vm)
-	//logErr(err)
+	err := vm.Migrate(migration.TargetGuest.LibvirtURI)
+	logErr(err)
+	// Send Workload to Target
+	err = VMPostMigration(migration, vm)
+	logErr(err)
+	// Remove workload from workload.json
+	err = cleanUpAfterVMMigration(vm)
+	logErr(err)
+}
+
+// Intermediary step of migration. Send workload information to receiver
+func VMPostMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) error {
+	jsonValue, _ := json.Marshal(vm)
+
+	// Send workload to target via /transfer.
+	fmt.Println("Transfering Workload Information: " + vm.Identifier + " to:" + migration.TargetGuest.IP)
+	prefix := migration.TargetGuest.IP + ":" + migration.TargetGuest.Port
+	suffix := "/transfer"
+	_, err := http.Post("http://"+prefix+suffix, "application/json", bytes.NewBuffer(jsonValue))
+	if err != nil {
+		return err
+	}
+	return err
 }
 
 // Final Migration part of the VM Migration on receiver
