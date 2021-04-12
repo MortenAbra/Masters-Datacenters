@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,7 +22,10 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import mastercontroller.Models.Workload;
 import mastercontroller.Services.VMManager;
@@ -123,18 +127,27 @@ public class App {
 
 
 
-		vmList = new JList(new Vector<Workload>(manager.getWorkloads()));
-		
-		vmList.setCellRenderer(new DefaultListCellRenderer(){
+		DefaultListModel listModel = new DefaultListModel<>();
+		for (Workload workload : manager.getWorkloads()) {
+			listModel.addElement(workload);
+			
+		}
+
+
+		vmList = new JList(listModel);
+		vmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		vmList.setSelectedIndex(0);
+		vmList.addListSelectionListener(new ListSelectionListener(){
+
 			@Override
-			public Component getListCellRendererComponent(JList<?> list, Object object, int index, boolean isSelected, boolean cellHasFocus){
-				Component renderer = super.getListCellRendererComponent(list, object, index, isSelected, cellHasFocus);
-				if(renderer instanceof JLabel && object instanceof Workload){
-					((JLabel) renderer).setText(((Workload) object).getWl_name());
-				}
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				if(!e.getValueIsAdjusting()){
 				
-				return renderer;
+					
+				}
 			}
+			
 		});
 
 
