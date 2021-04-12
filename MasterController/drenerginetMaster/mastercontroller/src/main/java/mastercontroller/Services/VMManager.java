@@ -24,7 +24,7 @@ import mastercontroller.Models.VMWorkload;
 import mastercontroller.Models.Workload;
 import mastercontroller.Models.Workload.WorkloadType;
 
-public class VMManager implements iVMManager, Observer {
+public class VMManager implements Observer {
 
     private FilePaths fp;
     private ArrayList<Workload> workloadList;
@@ -41,7 +41,7 @@ public class VMManager implements iVMManager, Observer {
 
     // https://github.com/beabetterdevv/DesignPatterns/blob/master/patterns/observer/ForecastDisplay.java
 
-    @Override
+    
     public void pingHost(Workload workload, FileWriter writer) {
         int timeout = 10;
         if (workload.getWl_port() != -1) {
@@ -95,7 +95,7 @@ public class VMManager implements iVMManager, Observer {
         }
     }
 
-    @Override
+    
     public Workload getAllVMs(ArrayList<Workload> workloadlist) {
         for (Workload workload : workloadlist) {
             return workload;
@@ -103,7 +103,7 @@ public class VMManager implements iVMManager, Observer {
         return null;
     }
 
-    @Override
+    
     public ArrayList<Workload> findAvailableVMs() {
         this.availableVMs = new ArrayList<>();
         for (Workload workload : workloadList) {
@@ -173,7 +173,7 @@ public class VMManager implements iVMManager, Observer {
         return resultList;
     }
 
-    @Override
+    
     public Workload getActiveVMObject(ArrayList<Workload> activeVMList) {
         Workload vmObject = activeVMList.get(0);
         activeVMList.get(0).setWl_status(true);
@@ -181,7 +181,7 @@ public class VMManager implements iVMManager, Observer {
         return vmObject;
     }
 
-    @Override
+    
     public ArrayList<String> getAvailableVMsIPAsList() {
         ArrayList<String> vmIpList = new ArrayList<>();
         for (Workload object : workloadList) {
@@ -190,7 +190,7 @@ public class VMManager implements iVMManager, Observer {
         return vmIpList;
     }
 
-    @Override
+    
     public ArrayList<Workload> getWorkloads() {
         return workloadList;
     }
