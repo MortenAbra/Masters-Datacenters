@@ -30,11 +30,14 @@ public class FilePaths {
         System.out.println(System.getProperty("os.name"));
         String resPath = null;
         switch (System.getProperty("os.name")){
-            case "Linux":  resPath = "drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/";
+            case "Linux":  resPath = basePath + "/MasterController/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/";
                      break;
             case "Windows 10":  resPath = "drenerginetMaster\\mastercontroller\\src\\main\\java\\mastercontroller\\Workloads\\";
                      break;
         }
+
+        // /home/wolder/Documents/Projects/Masters-Datacenters/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/workloads.json
+        // /home/wolder/Documents/Projects/Masters-Datacenters/MasterController/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/workloads.json
 
         return resPath;
     }

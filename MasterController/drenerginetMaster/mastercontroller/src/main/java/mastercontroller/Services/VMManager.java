@@ -145,7 +145,7 @@ public class VMManager implements iVMManager, Observer {
                 return c_wl;
             case "VM":
                 type = WorkloadType.VM;
-                // Fix fields for VM!
+                JsonObject vmProps = (JsonObject)jsonWorkload.get("VMproperties");
                 VMWorkload vm_wl = new VMWorkload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type);
                 return vm_wl;
             default: 
