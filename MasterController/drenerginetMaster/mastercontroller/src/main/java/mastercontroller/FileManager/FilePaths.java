@@ -27,7 +27,6 @@ public class FilePaths {
     public String getWORKLOADPATH() {
         String basePath = new File("").getAbsolutePath();
 
-        System.out.println(System.getProperty("os.name"));
         String resPath = null;
         switch (System.getProperty("os.name")){
             case "Linux":  resPath = basePath + "/MasterController/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/";

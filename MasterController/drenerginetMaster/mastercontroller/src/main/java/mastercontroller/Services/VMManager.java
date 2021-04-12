@@ -145,8 +145,10 @@ public class VMManager implements iVMManager, Observer {
                 return c_wl;
             case "VM":
                 type = WorkloadType.VM;
-                JsonObject vmProps = (JsonObject)jsonWorkload.get("VMproperties");
-                VMWorkload vm_wl = new VMWorkload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type);
+                JsonObject vmProps = (JsonObject)jsonWorkload.get("VMProperties");
+                String domainName = (String) vmProps.get("DomainName").getAsString();
+                String connectionURI = (String) vmProps.get("ConnectionURI").getAsString();
+                VMWorkload vm_wl = new VMWorkload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type, domainName, connectionURI);
                 return vm_wl;
             default: 
                 Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, null);
