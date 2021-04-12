@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -109,10 +110,8 @@ public class App {
 
 			@Override
 			public void run() {
-				int iteration = 0;
-				iteration++;
-				// TODO Auto-generated method stub
-				System.out.println("Repeated task iteration: " + iteration);
+				AtomicInteger iteration = new AtomicInteger(0);
+				iteration.incrementAndGet();
 				// Initialize GuestManager
 				guestManager.initialize(manager);
 				ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();

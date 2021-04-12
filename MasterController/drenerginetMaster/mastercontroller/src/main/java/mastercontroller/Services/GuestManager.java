@@ -34,7 +34,17 @@ public class GuestManager {
             for (int i = 0; i < jsonArray.size(); i++) {
                 JsonObject guestObject = (JsonObject) jsonArray.get(i);
                 Guest g = new Guest(guestObject.get("Ip").getAsString(), guestObject.get("Port").getAsString());
-                guestList.add(g);
+                boolean duplciate = false;
+                for (Guest oldGuest : guestList) {
+                    if (oldGuest.getIp().equals(g.getIp())) {
+                        // Duplicate
+                        duplciate = true;
+                    }
+                }
+                if (!duplciate){ 
+                    // If not duplicate then add the guest
+                    guestList.add(g);
+                }
             }
 
         } catch (Exception e) {
