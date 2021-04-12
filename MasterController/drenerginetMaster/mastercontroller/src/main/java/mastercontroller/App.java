@@ -113,6 +113,8 @@ public class App {
 					}
 					if (!duplicate) {
 						wm.workloadAddedToList(workload);
+
+						// REPLACE WITH UPDATE UI METHOD
 						if (listModel != null) {
 							listModel.addElement(workload);
 						}
