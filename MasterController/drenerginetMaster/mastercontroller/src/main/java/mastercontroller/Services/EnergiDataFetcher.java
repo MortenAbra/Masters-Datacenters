@@ -19,7 +19,7 @@ import com.google.gson.JsonParser;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Result;
 
-public class EnergiDataFetcher implements iEnergiDataFetcher {
+public class EnergiDataFetcher {
     private InputStream input;
     private BufferedReader reader;
     private FilePaths fp;
@@ -35,7 +35,7 @@ public class EnergiDataFetcher implements iEnergiDataFetcher {
         es = Executors.newCachedThreadPool();    
     }
 
-    @Override
+    
     public JsonObject fetchAPIData(String url, String filename) {
         try {
             input = new URL(url).openStream();
@@ -59,7 +59,7 @@ public class EnergiDataFetcher implements iEnergiDataFetcher {
         return data;
     }   
 
-    @Override
+    
     public JsonObject fetchData(String apiUrl, String filename){
 
         Callable callable;
