@@ -18,5 +18,21 @@ public class VMWorkload extends Workload {
         this.domainName = domainName;
         this.connectionURI = connectionURI;
     }
+
+    public String getDomainName() {
+        return domainName;
+    }
+
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
+    }
+
+    public String getConnectionURI() {
+        return connectionURI;
+    }
+
+    public void setConnectionURI(String connectionURI) {
+        this.connectionURI = connectionURI;
+    }
     
 }

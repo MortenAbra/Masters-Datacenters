@@ -78,12 +78,8 @@ public class App {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					App window = new App();
-					window.frmVmManager.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				App window = new App();
+				window.frmVmManager.setVisible(true);
 			}
 		});
 	}
@@ -93,7 +89,7 @@ public class App {
 	 * 
 	 * @throws IOException
 	 */
-	public App() throws IOException {
+	public App() {
 		int delay = 0;
 		int period = 5;
 		es = Executors.newSingleThreadScheduledExecutor();
@@ -102,16 +98,22 @@ public class App {
 		this.guestManager = new GuestManager();
 
 		// Initialize VM Manager and Workload Manager
-		for (Workload workload : manager.readJSONWorkloads()) {
-			wm.workloadAddedToList(workload);
+		try {
+			for (Workload workload : manager.readJSONWorkloads()) {
+				wm.workloadAddedToList(workload);
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
+		AtomicInteger iteration = new AtomicInteger(0);
 		TimerTask repeatedTask = new TimerTask() {
 
 			@Override
 			public void run() {
-				AtomicInteger iteration = new AtomicInteger(0);
 				iteration.incrementAndGet();
+
 				// Initialize GuestManager
 				guestManager.initialize(manager);
 				ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();
@@ -129,14 +131,12 @@ public class App {
 					}
 					if (!duplicate) {
 						wm.workloadAddedToList(workload);
-
-						// REPLACE WITH UPDATE UI METHOD
 						if (listModel != null) {
 							listModel.addElement(workload);
 						}
 					}
 				}
-				
+				manager.updateWorkloadsJSON();
 			}
 
 		};
@@ -144,7 +144,6 @@ public class App {
 		try {
 			Thread.sleep(delay + period);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

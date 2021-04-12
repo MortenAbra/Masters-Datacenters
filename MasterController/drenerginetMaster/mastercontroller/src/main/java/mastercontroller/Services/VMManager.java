@@ -1,9 +1,9 @@
 package mastercontroller.Services;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
@@ -176,15 +177,54 @@ public class VMManager implements Observer {
     }
 
     public void updateWorkloadsJSON(){
-        Gson gson = new Gson();
         try {
-            System.out.println(getWorkloads().size() + " HELLO!");
-            gson.toJson(getWorkloads(), new FileWriter((fp.getWORKLOADPATH()) + "/workloads.json"));
+            JsonObject obj = new JsonObject(); // Convert to right JSON structure
+            JsonArray arr = new JsonArray();
+            for (Workload workload : getWorkloads()) {
+                arr.add(constructJsonObjectFromWorkload(workload));
+            }
+            obj.add("Workloads", arr);
+            Writer writer = new FileWriter(fp.getWORKLOADPATH() + "workloads.json");
+
+            // convert map to JSON File
+            new Gson().toJson(obj, writer);
+            
+            // close the writer
+            writer.close();
         } catch (JsonIOException | IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+
+        }   
+    }
+
+    public JsonObject constructJsonObjectFromWorkload(Workload workload) {
+        JsonObject obj = new JsonObject();
+        obj.addProperty("Identifier", workload.getWl_name());
+        obj.addProperty("AccessIP", workload.getWl_ip());
+        obj.addProperty("AccessPort", workload.getWl_port());
+        obj.addProperty("Available", workload.isWl_status());
+        obj.addProperty("AutoMigrate", workload.isWl_autoMigration());
+        obj.addProperty("SharedDir", workload.getWl_sharedDir());
+        switch (workload.getWl_type()) {
+            case CONTAINER: 
+                obj.addProperty("Type", "Container"); 
+                JsonObject containerProps = new JsonObject();
+                containerProps.addProperty("ContainerID", ((ContainerWorkload) workload).getContainerID());
+                containerProps.addProperty("Image", ((ContainerWorkload) workload).getContainerImage());
+                containerProps.addProperty("Checkpoint", ((ContainerWorkload) workload).isCheckpoint());
+                obj.add("Containerproperties", containerProps);
+                break;
+            case VM: 
+                obj.addProperty("Type", "VM"); 
+                JsonObject vmProps = new JsonObject();
+                vmProps.addProperty("DomainName", ((VMWorkload) workload).getDomainName());
+                vmProps.addProperty("ConnectionURI", ((VMWorkload) workload).getConnectionURI());
+                obj.add("VMProperties", vmProps);
+                break;
         }
-        
+
+        return obj;
     }
 
     
