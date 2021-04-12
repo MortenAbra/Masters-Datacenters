@@ -157,7 +157,8 @@ public class VMManager implements iVMManager, Observer {
     }
 
     // Generating workload json objects and adding to Array
-    public void addJSONWorkloadToList() throws IOException {
+    public ArrayList<Workload> readJSONWorkloads() throws IOException {
+        ArrayList<Workload> resultList = new ArrayList<>();
         try (FileReader reader = new FileReader(fp.getWORKLOADPATH() + "workloads.json")) {
             // Generating JSONObject based on a file
             Object obj = parser.parse(reader);
@@ -167,28 +168,15 @@ public class VMManager implements iVMManager, Observer {
             JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
 
             // Adding workloads to the list
-
             for (int i = 0; i < jsonArray.size(); i++) {
-                workloadList.add(parseWorkloadObject((JsonObject) jsonArray.get(i)));
+                resultList.add(parseWorkloadObject((JsonObject) jsonArray.get(i)));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    }
-
-    public Workload getWorkloadObjectsFromList() {
-        try {
-            addJSONWorkloadToList();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        for (Workload workload : workloadList) {
-            return workload;
-        }
-        return null;
+        return resultList;
     }
 
     @Override
@@ -218,6 +206,7 @@ public class VMManager implements iVMManager, Observer {
         // TODO Auto-generated method stub
         workloadList.add(workload);
         System.out.println("Workload added to list - Current list size: " + workloadList.size());
+        System.out.println(workloadList);
     }
 
 }

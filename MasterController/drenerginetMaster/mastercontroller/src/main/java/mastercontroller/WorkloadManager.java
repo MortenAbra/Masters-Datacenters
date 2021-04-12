@@ -44,7 +44,7 @@ public class WorkloadManager implements Subject {
     public void notifyObservers() {
         // TODO Auto-generated method stub
         System.out.println("Beginning notification of observers!");
-        observerList.forEach(o -> o.update(new Workload(name, ip, port, status, sharedDir, type)));
+        observerList.forEach(o -> o.update(workload));
         System.out.println("Observers notified!");
     }
 

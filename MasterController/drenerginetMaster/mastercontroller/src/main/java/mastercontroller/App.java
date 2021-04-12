@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Vector;
 
 import javax.swing.DefaultListCellRenderer;
@@ -72,11 +73,14 @@ public class App {
 
 	/**
 	 * Create the application.
+	 * @throws IOException
 	 */
-	public App() {
+	public App() throws IOException {
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
-        wm.workloadAddedToList(manager.getWorkloadObjectsFromList());		
+		for (Workload workload : manager.readJSONWorkloads()) {
+			wm.workloadAddedToList(workload);
+		}
 		initialize();
 		System.out.println(manager.getWorkloads().size());		
 	}
