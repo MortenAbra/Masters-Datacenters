@@ -1,7 +1,7 @@
 {
     "Workloads": [
         {
-            "Identifier": "Python Flask Server",
+            "Identifier": "Test",
             "AccessIP": "1234",
             "AccessPort": "1234",
             "Available": true,

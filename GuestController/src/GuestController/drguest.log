@@ -1021,3 +1021,262 @@
         }
     ]
 }
+[INFO] Apr 12 15:31:15.128:GET Request for /guest
+[INFO] Apr 12 15:31:15.128:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:31:15.172:GET Request for /guest/workload
+[INFO] Apr 12 15:31:15.172:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "Python Flask Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:33:16.340:Initialization done for 192.168.0.106:8080
+[INFO] Apr 12 15:33:16.340:Setting up handlers
+[INFO] Apr 12 15:33:16.340:Listening on 192.168.0.106:8080
+[INFO] Apr 12 15:37:23.422:GET Request for /guest
+[INFO] Apr 12 15:37:23.422:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:37:23.473:GET Request for /guest/workload
+[INFO] Apr 12 15:37:23.473:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:38:25.706:GET Request for /guest
+[INFO] Apr 12 15:38:25.706:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:38:25.828:GET Request for /guest/workload
+[INFO] Apr 12 15:38:25.828:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:38:43.179:GET Request for /guest
+[INFO] Apr 12 15:38:43.179:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:38:43.234:GET Request for /guest/workload
+[INFO] Apr 12 15:38:43.234:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:40:12.082:GET Request for /guest
+[INFO] Apr 12 15:40:12.083:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:40:12.138:GET Request for /guest/workload
+[INFO] Apr 12 15:40:12.138:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:41:12.527:GET Request for /guest
+[INFO] Apr 12 15:41:12.527:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:41:12.555:GET Request for /guest/workload
+[INFO] Apr 12 15:41:12.555:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:41:28.405:GET Request for /guest
+[INFO] Apr 12 15:41:28.405:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:41:28.447:GET Request for /guest/workload
+[INFO] Apr 12 15:41:28.447:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:44:04.403:GET Request for /guest
+[INFO] Apr 12 15:44:04.403:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:44:04.433:GET Request for /guest/workload
+[INFO] Apr 12 15:44:04.433:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:45:19.746:Initialization done for 192.168.0.106:8080
+[INFO] Apr 12 15:45:19.746:Setting up handlers
+[INFO] Apr 12 15:45:19.746:Listening on 192.168.0.106:8080
+[INFO] Apr 12 15:45:50.828:GET Request for /guest/workload
+[INFO] Apr 12 15:45:50.828:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:45:57.135:GET Request for /guest
+[INFO] Apr 12 15:45:57.135:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:46:11.337:GET Request for /guest
+[INFO] Apr 12 15:46:11.337:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:46:11.378:GET Request for /guest/workload
+[INFO] Apr 12 15:46:11.378:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "New Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:47:31.621:GET Request for /guest
+[INFO] Apr 12 15:47:31.621:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:47:31.660:GET Request for /guest/workload
+[INFO] Apr 12 15:47:31.660:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "Test",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}

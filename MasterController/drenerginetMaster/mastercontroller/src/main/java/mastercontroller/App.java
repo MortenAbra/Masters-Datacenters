@@ -63,6 +63,7 @@ public class App {
 	private JLabel vmStatusLabel;
 	private JLabel vmStatusResult;
 	private JLabel vmMigrationLabel;
+	private DefaultListModel listModel;
 
 	/**
 	 * Launch the application.
@@ -95,22 +96,33 @@ public class App {
 		}
 
 		// Initialize GuestManager
-		guestManager.initialize(manager);
-		ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();
-		for (Guest guest : guestManager.getGuestList()) {
-			ArrayList<Workload> guestWorkloads = guestManager.getWorkloadsFromGuest(guest, manager);
-			workloadsRunningOnGuests.addAll(guestWorkloads);
-		}
-		for (Workload workload : workloadsRunningOnGuests) {
-			// check for duplicates
-			boolean duplicate = false;
-			for (Workload addedWorkload : manager.getWorkloads()) {
-				if (addedWorkload.getWl_name().equals(workload.getWl_name())){duplicate = true;}
+		Thread t = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				guestManager.initialize(manager);
+				ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();
+				for (Guest guest : guestManager.getGuestList()) {
+					ArrayList<Workload> guestWorkloads = guestManager.getWorkloadsFromGuest(guest, manager);
+					workloadsRunningOnGuests.addAll(guestWorkloads);
+				}
+				for (Workload workload : workloadsRunningOnGuests) {
+					// check for duplicates
+					boolean duplicate = false;
+					for (Workload addedWorkload : manager.getWorkloads()) {
+						if (addedWorkload.getWl_name().equals(workload.getWl_name())){duplicate = true;}
+					}
+					if (!duplicate) {
+						wm.workloadAddedToList(workload);
+						if (listModel != null) {
+							listModel.addElement(workload);
+						}
+					}
+				}
+				
 			}
-			if (!duplicate) {
-				wm.workloadAddedToList(workload);
-			}
-		}
+		});t.start();
+		
+		
 
 		initialize();
 	}
@@ -156,7 +168,7 @@ public class App {
 
 
 
-		DefaultListModel listModel = new DefaultListModel<>();
+		listModel = new DefaultListModel<>();
 		for (Workload workload : manager.getWorkloads()) {
 			listModel.addElement(workload);
 			
