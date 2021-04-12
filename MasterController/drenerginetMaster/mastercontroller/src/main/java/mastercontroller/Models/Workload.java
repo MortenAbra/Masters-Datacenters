@@ -1,11 +1,5 @@
 package mastercontroller.Models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mastercontroller.Observer;
-import mastercontroller.Subject;
-
 public class Workload {
 
     String wl_name = "Undefined";
@@ -15,14 +9,16 @@ public class Workload {
     long elapsedTime = 0;
     long endTime = 0;
     boolean wl_status;
+    boolean wl_autoMigration;
     String wl_sharedDir;
     WorkloadType wl_type;
 
-    public Workload(String wl_name, String wl_ip, int wl_port, boolean wl_status, String wl_sharedDir, WorkloadType wl_type) {
+    public Workload(String wl_name, String wl_ip, int wl_port, boolean wl_status, boolean wl_autoMigration, String wl_sharedDir, WorkloadType wl_type) {
         this.wl_name = wl_name;
         this.wl_ip = wl_ip;
         this.wl_port = wl_port;
         this.wl_status = wl_status;
+        this.wl_autoMigration = wl_autoMigration;
         this.wl_sharedDir = wl_sharedDir;
         this.wl_type = wl_type;
     }
@@ -112,6 +108,48 @@ public class Workload {
      */
     public void setWl_status(boolean wl_status) {
         this.wl_status = wl_status;
+    }
+
+    /**
+     * @return the wl_autoMigration
+     */
+    public boolean isWl_autoMigration() {
+        return wl_autoMigration;
+    }
+
+    /**
+     * @param wl_autoMigration the wl_autoMigration to set
+     */
+    public void setWl_autoMigration(boolean wl_autoMigration) {
+        this.wl_autoMigration = wl_autoMigration;
+    }
+
+    /**
+     * @return the wl_sharedDir
+     */
+    public String getWl_sharedDir() {
+        return wl_sharedDir;
+    }
+
+    /**
+     * @param wl_sharedDir the wl_sharedDir to set
+     */
+    public void setWl_sharedDir(String wl_sharedDir) {
+        this.wl_sharedDir = wl_sharedDir;
+    }
+
+    /**
+     * @return the wl_type
+     */
+    public WorkloadType getWl_type() {
+        return wl_type;
+    }
+
+    /**
+     * @param wl_type the wl_type to set
+     */
+    public void setWl_type(WorkloadType wl_type) {
+        this.wl_type = wl_type;
     }
 
     

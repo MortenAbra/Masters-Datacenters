@@ -8,9 +8,9 @@ import mastercontroller.Models.Workload;
 public interface iVMManager {
     
     public Workload getAllVMs(ArrayList<Workload> workloadList);
-    public ArrayList<Workload> findActiveVMs(ArrayList<Workload> vmList);
+    public ArrayList<Workload> findAvailableVMs();
     public Workload getActiveVMObject(ArrayList<Workload> activeVMList);
-    public ArrayList<String> getActiveVMsIPAsList(ArrayList<Workload> vmList);
+    public ArrayList<String> getAvailableVMsIPAsList();
     public void pingHost(Workload workload, FileWriter writer);
     public ArrayList<Workload> getWorkloads();
     

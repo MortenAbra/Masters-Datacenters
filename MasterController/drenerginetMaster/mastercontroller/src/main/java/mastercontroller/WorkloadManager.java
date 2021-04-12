@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mastercontroller.Models.Workload;
-import mastercontroller.Models.Workload.WorkloadType;
 
 public class WorkloadManager implements Subject {
 
