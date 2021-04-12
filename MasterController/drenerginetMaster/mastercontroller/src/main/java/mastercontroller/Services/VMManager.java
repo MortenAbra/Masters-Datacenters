@@ -19,6 +19,8 @@ import com.google.gson.JsonParser;
 import mastercontroller.Observer;
 import mastercontroller.Subject;
 import mastercontroller.FileManager.FilePaths;
+import mastercontroller.Models.ContainerWorkload;
+import mastercontroller.Models.VMWorkload;
 import mastercontroller.Models.Workload;
 import mastercontroller.Models.Workload.WorkloadType;
 
@@ -130,20 +132,26 @@ public class VMManager implements iVMManager, Observer {
         String wl_sharedDir = (String) jsonWorkload.get("SharedDir").getAsString();
         String wl_type = (String) jsonWorkload.get("Type").getAsString();
 
+        // Determines the type of the workload
         Workload.WorkloadType type;
         switch (wl_type) {
             case "Container":
                 type = WorkloadType.CONTAINER;
-                break;
+                JsonObject containerProps = (JsonObject)jsonWorkload.get("Containerproperties");
+                String containerID = (String) containerProps.get("ContainerID").getAsString();
+                String containerImage = (String) containerProps.get("Image").getAsString();
+                boolean checkpoint = (boolean) containerProps.get("Checkpoint").getAsBoolean();
+                ContainerWorkload c_wl = new ContainerWorkload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type, containerID, containerImage, checkpoint);
+                return c_wl;
             case "VM":
                 type = WorkloadType.VM;
-                break;
+                // Fix fields for VM!
+                VMWorkload vm_wl = new VMWorkload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type);
+                return vm_wl;
             default: 
-                type = WorkloadType.CONTAINER;
+                Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, null);
+                return wl;
         }
-
-        Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type);
-        return wl;
     }
 
     // Generating workload json objects and adding to Array
