@@ -216,4 +216,8 @@ public class VMManager implements Observer {
         System.out.println("Workload added to list - Current list size: " + workloadList.size());
     }
 
+    public void migrateWorkload(String ip, int port, String storagePath, String libvirtURI){
+        System.out.println("IP: " + ip + " | " + "Port: " + port + " | " + "Storage Path: " + storagePath + " | " + "Libvirt URI: " + libvirtURI);
+    }
+
 }

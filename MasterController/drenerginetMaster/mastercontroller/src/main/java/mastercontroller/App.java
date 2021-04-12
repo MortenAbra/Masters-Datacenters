@@ -383,7 +383,8 @@ public class App {
 		panel_1.add(vmMigrationLabel, gbc_vmMigrationLabel);
 
 		availableVMsComboBox = new JComboBox<>();
-		availableVMsComboBox.setModel(new DefaultComboBoxModel<Object>(manager.findAvailableVMs().toArray()));
+		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(manager.findAvailableVMs().toArray());
+		availableVMsComboBox.setModel(comboBoxModel);
 
 		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
 		gbc_availableVMsComboBox.fill = GridBagConstraints.BOTH;
@@ -400,7 +401,8 @@ public class App {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				migrationThresholdTextField.setText(manager.getWorkloads().get(0).getWl_name());
+				Workload workload = (Workload) comboBoxModel.getSelectedItem();
+				manager.migrateWorkload(workload.getWl_ip(), workload.getWl_port(), workload.getWl_sharedDir(), null);
 			}
 
 		});
