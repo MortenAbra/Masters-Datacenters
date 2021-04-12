@@ -124,6 +124,7 @@ public class App {
 			}
 		});t.start();
 		
+		manager.updateWorkloadsJSON();
 		
 
 		initialize();

@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -171,6 +173,18 @@ public class VMManager implements Observer {
         }
 
         return resultList;
+    }
+
+    public void updateWorkloadsJSON(){
+        Gson gson = new Gson();
+        try {
+            System.out.println(getWorkloads().size() + " HELLO!");
+            gson.toJson(getWorkloads(), new FileWriter((fp.getWORKLOADPATH()) + "/workloads.json"));
+        } catch (JsonIOException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 
     

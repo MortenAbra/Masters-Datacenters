@@ -1,0 +1,36 @@
+{
+    "Workloads": [
+        {
+            "Identifier": "Python Flask Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": true,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        },
+        {
+            "Identifier": "Test",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": false,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
