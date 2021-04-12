@@ -3,9 +3,7 @@ package mastercontroller.FileManager;
 import java.io.File;
 
 public class FilePaths {
-
-    private final String OUTPUTPATH ="/MasterController/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Results/";
-    private final String WORKLOADPATH ="/MasterController/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/";
+   
     private final String APIURL = "https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT%20%22HourUTC%22,%20%22HourDK%22,%20%22PriceArea%22,%20%22SpotPriceDKK%22,%20%22SpotPriceEUR%22%20FROM%20%22elspotprices%22%20ORDER%20BY%20%22HourUTC%22%20DESC%20LIMIT%20100";
     /**
      * @return the oUTPUTPATH
@@ -13,7 +11,15 @@ public class FilePaths {
     public String getOUTPUTPATH() {
         String basePath = new File("").getAbsolutePath();
 
-        return basePath + OUTPUTPATH;
+        String resPath = null;
+        switch (System.getProperty("os.name")){
+            case "Linux":  resPath = "drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Results/";
+                     break;
+            case "Windows":  resPath = "drenerginetMaster\\mastercontroller\\src\\main\\java\\mastercontroller\\Results\\";
+                     break;
+        }
+
+        return resPath;
     }
     /**
      * @return the wORKLOADPATH
@@ -21,7 +27,16 @@ public class FilePaths {
     public String getWORKLOADPATH() {
         String basePath = new File("").getAbsolutePath();
 
-        return basePath + WORKLOADPATH;
+        System.out.println(System.getProperty("os.name"));
+        String resPath = null;
+        switch (System.getProperty("os.name")){
+            case "Linux":  resPath = "drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/";
+                     break;
+            case "Windows 10":  resPath = "drenerginetMaster\\mastercontroller\\src\\main\\java\\mastercontroller\\Workloads\\";
+                     break;
+        }
+
+        return resPath;
     }
     /**
      * @return the aPIURL

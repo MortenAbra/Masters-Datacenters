@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.concurrent.Callable;
@@ -19,7 +18,6 @@ import com.google.gson.JsonParser;
 
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Result;
-import mastercontroller.Services.iEnergiDataFetcher;
 
 public class EnergiDataFetcher implements iEnergiDataFetcher {
     private InputStream input;
