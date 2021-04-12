@@ -158,7 +158,7 @@ public class App {
 
 		DefaultListModel listModel = new DefaultListModel<>();
 		for (Workload workload : manager.getWorkloads()) {
-			listModel.addElement(workload.getWl_name());
+			listModel.addElement(workload);
 			
 		}
 

@@ -104,8 +104,7 @@ public class Workload {
     }
     @Override
     public String toString() {
-        return "Workload [wl_ip=" + wl_ip + ", wl_name=" + wl_name + ", wl_port=" + wl_port + ", wl_sharedDir="
-                + wl_sharedDir + ", wl_status=" + wl_status + ", wl_type=" + wl_type + "]";
+        return wl_name;
     }
 
     /**

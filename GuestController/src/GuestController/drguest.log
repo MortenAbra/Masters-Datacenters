@@ -952,3 +952,72 @@
         }
     ]
 }
+[INFO] Apr 12 15:15:15.658:GET Request for /guest
+[INFO] Apr 12 15:15:15.658:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:15:15.717:GET Request for /guest/workload
+[INFO] Apr 12 15:15:15.717:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "Python Flask Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:16:10.836:GET Request for /guest
+[INFO] Apr 12 15:16:10.836:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:16:10.893:GET Request for /guest/workload
+[INFO] Apr 12 15:16:10.893:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "Python Flask Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
+[INFO] Apr 12 15:21:32.052:GET Request for /guest
+[INFO] Apr 12 15:21:32.053:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 12 15:21:32.102:GET Request for /guest/workload
+[INFO] Apr 12 15:21:32.102:Responding: {
+    "Workloads": [
+        {
+            "Identifier": "Python Flask Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "AutoMigrate": false,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}
