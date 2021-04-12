@@ -40,6 +40,23 @@ public class FilePaths {
 
         return resPath;
     }
+
+    public String getGUESTPATH() {
+        String basePath = new File("").getAbsolutePath();
+
+        String resPath = null;
+        switch (System.getProperty("os.name")){
+            case "Linux":  resPath = basePath + "/MasterController/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Guests/";
+                     break;
+            case "Windows 10":  resPath = "drenerginetMaster\\mastercontroller\\src\\main\\java\\mastercontroller\\Guests\\";
+                     break;
+        }
+
+        // /home/wolder/Documents/Projects/Masters-Datacenters/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/workloads.json
+        // /home/wolder/Documents/Projects/Masters-Datacenters/MasterController/drenerginetMaster/mastercontroller/src/main/java/mastercontroller/Workloads/workloads.json
+
+        return resPath;
+    }
     /**
      * @return the aPIURL
      */

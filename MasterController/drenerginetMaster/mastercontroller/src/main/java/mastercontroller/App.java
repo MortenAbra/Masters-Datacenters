@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.DefaultListCellRenderer;
@@ -27,12 +28,15 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import mastercontroller.Models.Guest;
 import mastercontroller.Models.Workload;
+import mastercontroller.Services.GuestManager;
 import mastercontroller.Services.VMManager;
 
 public class App {
  
 	private VMManager manager;
+	private GuestManager guestManager;
 	private WorkloadManager wm;
 	private JFrame frmVmManager;
 	private JTextField migrationThresholdTextField;
@@ -82,11 +86,32 @@ public class App {
 	public App() throws IOException {
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
+		this.guestManager = new GuestManager();
+
+		// Initialize VM Manager and Workload Manager
 		for (Workload workload : manager.readJSONWorkloads()) {
 			wm.workloadAddedToList(workload);
 		}
+
+		// Initialize GuestManager
+		guestManager.initialize(manager);
+		ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();
+		for (Guest guest : guestManager.getGuestList()) {
+			ArrayList<Workload> guestWorkloads = guestManager.getWorkloadsFromGuest(guest, manager);
+			workloadsRunningOnGuests.addAll(guestWorkloads);
+		}
+		for (Workload workload : workloadsRunningOnGuests) {
+			// check for duplicates
+			boolean duplicate = false;
+			for (Workload addedWorkload : manager.getWorkloads()) {
+				if (addedWorkload.getWl_name().equals(workload.getWl_name())){duplicate = true;}
+			}
+			if (!duplicate) {
+				wm.workloadAddedToList(workload);
+			}
+		}
+
 		initialize();
-		System.out.println(manager.getWorkloads().size());		
 	}
 
 
@@ -129,7 +154,7 @@ public class App {
 
 		DefaultListModel listModel = new DefaultListModel<>();
 		for (Workload workload : manager.getWorkloads()) {
-			listModel.addElement(workload);
+			listModel.addElement(workload.getWl_name());
 			
 		}
 

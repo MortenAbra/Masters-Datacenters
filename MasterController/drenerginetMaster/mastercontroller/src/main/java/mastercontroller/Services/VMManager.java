@@ -206,7 +206,6 @@ public class VMManager implements iVMManager, Observer {
         // TODO Auto-generated method stub
         workloadList.add(workload);
         System.out.println("Workload added to list - Current list size: " + workloadList.size());
-        System.out.println(workloadList);
     }
 
 }

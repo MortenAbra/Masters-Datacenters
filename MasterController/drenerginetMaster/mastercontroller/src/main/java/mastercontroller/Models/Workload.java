@@ -32,13 +32,6 @@ public class Workload {
         VM
     }
 
-
-    @Override
-    public String toString() {
-        String s = wl_name + "  |  " + wl_ip + ":" + wl_port + " Available: " + wl_status;
-        return s;
-    }
-
     public long getElapsedTime() {
         return getEndTime() - getStartTime();
     }
@@ -112,6 +105,11 @@ public class Workload {
      */
     public void setWl_status(boolean wl_status) {
         this.wl_status = wl_status;
+    }
+    @Override
+    public String toString() {
+        return "Workload [wl_ip=" + wl_ip + ", wl_name=" + wl_name + ", wl_port=" + wl_port + ", wl_sharedDir="
+                + wl_sharedDir + ", wl_status=" + wl_status + ", wl_type=" + wl_type + "]";
     }
 
     
