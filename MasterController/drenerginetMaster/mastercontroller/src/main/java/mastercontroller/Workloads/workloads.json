@@ -5,6 +5,7 @@
             "AccessIP": "1234",
             "AccessPort": "1234",
             "Available": true,
+            "AutoMigrate": true,
             "SharedDir": "/home/wolder/shared_storage",
             "Type": "Container",
             "Containerproperties": {
@@ -19,7 +20,8 @@
             "Identifier": "Test",
             "AccessIP": "1234",
             "AccessPort": "1234",
-            "Available": true,
+            "Available": false,
+            "AutoMigrate": false,
             "SharedDir": "/home/wolder/shared_storage",
             "Type": "Container",
             "Containerproperties": {

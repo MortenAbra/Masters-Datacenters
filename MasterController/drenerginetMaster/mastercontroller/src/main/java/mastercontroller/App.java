@@ -1,7 +1,6 @@
 package mastercontroller;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
@@ -9,20 +8,22 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -48,7 +49,7 @@ public class App {
 	private JPanel vmMigrationThresholdPanel;
 	private JPanel panel_1;
 	private JList vmList;
-	private JToggleButton vmAutoMigrationSwitch;
+	private JCheckBox vmAutoMigrationSwitch;
 	private JComboBox availableVMsComboBox;
 	private JButton vmMigrationBtn;
 	private JButton migrationThresholdSetButton;
@@ -126,6 +127,7 @@ public class App {
 		frmVmManager.setTitle("VM Manager");
 		frmVmManager.setBounds(100, 100, 450, 300);
 		frmVmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		vmAutoMigrationSwitch = new JCheckBox();
 
 		vmListPanel = new JPanel();
 		frmVmManager.getContentPane().add(vmListPanel, BorderLayout.WEST);
@@ -150,6 +152,8 @@ public class App {
 		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
+		
+
 
 
 		DefaultListModel listModel = new DefaultListModel<>();
@@ -168,7 +172,17 @@ public class App {
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
 				if(!e.getValueIsAdjusting()){
-				
+					if(vmList.getSelectedIndex() != -1){
+						Workload object = (Workload) vmList.getSelectedValue();
+						if(object instanceof Workload){
+							System.out.println("Workload");
+							vmNameResult.setText(object.getWl_name());
+							vmIPResult.setText(object.getWl_ip());
+							vmStatusResult.setText(String.valueOf(object.isWl_status()));
+							vmAutoMigrationSwitch.setSelected(object.isWl_autoMigration());
+						}
+					}
+					
 					
 				}
 			}
@@ -220,7 +234,7 @@ public class App {
 		gbc_lblNewLabel_1.gridy = 0;
 		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		vmAutoMigrationSwitch = new JToggleButton("Toggle Migration");
+		
 		GridBagConstraints gbc_vmAutoMigrationSwitch = new GridBagConstraints();
 		gbc_vmAutoMigrationSwitch.insets = new Insets(0, 0, 5, 0);
 		gbc_vmAutoMigrationSwitch.gridx = 0;
@@ -341,7 +355,19 @@ public class App {
 		gbc_vmMigrationLabel.gridy = 3;
 		panel_1.add(vmMigrationLabel, gbc_vmMigrationLabel);
 
-		availableVMsComboBox = new JComboBox();
+		availableVMsComboBox = new JComboBox<>();
+		availableVMsComboBox.setModel(new DefaultComboBoxModel<Object>(manager.findAvailableVMs().toArray()));
+
+
+
+
+
+
+
+
+
+
+
 		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
 		gbc_availableVMsComboBox.fill = GridBagConstraints.BOTH;
 		gbc_availableVMsComboBox.gridwidth = 2;
@@ -350,6 +376,8 @@ public class App {
 		gbc_availableVMsComboBox.gridy = 3;
 		panel_1.add(availableVMsComboBox, gbc_availableVMsComboBox);
 		availableVMsComboBox.setMaximumRowCount(5);
+
+
 
 		vmMigrationBtn = new JButton("Migrate VM");
 		vmMigrationBtn.addActionListener(new ActionListener() {
@@ -367,6 +395,24 @@ public class App {
 		gbc_vmMigrationBtn.gridx = 0;
 		gbc_vmMigrationBtn.gridy = 4;
 		panel_1.add(vmMigrationBtn, gbc_vmMigrationBtn);
+	}
+
+	public void setToggleState(int state){
+		vmAutoMigrationSwitch.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				int currentState = e.getStateChange();
+				if(currentState == e.SELECTED){
+					currentState = state;
+				} else {
+					System.out.println("eeeehh");
+					currentState = state;
+				}
+			}
+
+		});
 	}
 
 }

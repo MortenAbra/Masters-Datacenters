@@ -28,6 +28,7 @@ public class VMManager implements iVMManager, Observer {
 
     private FilePaths fp;
     private ArrayList<Workload> workloadList;
+    private ArrayList<Workload> availableVMs;
     private JsonParser parser = new JsonParser();
     private ExecutorService es;
 
@@ -103,22 +104,14 @@ public class VMManager implements iVMManager, Observer {
     }
 
     @Override
-    public ArrayList<Workload> findActiveVMs(ArrayList<Workload> vmList) {
-        ArrayList<Workload> activeVMs = new ArrayList<>();
-        for (Workload vm : vmList) {
-            // TextOutPut("VM: " + vm.getWl_name() + " is - " + vm.isWl_status());
-            if (vm.isWl_status()) {
-                if (activeVMs.contains(vm)) {
-                    // TextOutPut("VM already in available list...");
-                } else {
-                    // TextOutPut("Adding vm to available list...");
-                    activeVMs.add(vm);
-                }
-            } else {
-                // TextOutPut(vm.getWl_name() + ": Unavailable...");
+    public ArrayList<Workload> findAvailableVMs() {
+        this.availableVMs = new ArrayList<>();
+        for (Workload workload : workloadList) {
+            if(workload.isWl_status()){
+                availableVMs.add(workload);
             }
         }
-        return activeVMs;
+        return availableVMs;
     }
 
     public Workload parseWorkloadObject(JsonObject jsonWorkload) {
@@ -129,6 +122,7 @@ public class VMManager implements iVMManager, Observer {
         String wl_ip = (String) jsonWorkload.get("AccessIP").getAsString();
         int wl_port = (int) (long) jsonWorkload.get("AccessPort").getAsLong();
         boolean wl_status = (boolean) jsonWorkload.get("Available").getAsBoolean();
+        boolean wl_autoMigration = (boolean) jsonWorkload.get("AutoMigrate").getAsBoolean();
         String wl_sharedDir = (String) jsonWorkload.get("SharedDir").getAsString();
         String wl_type = (String) jsonWorkload.get("Type").getAsString();
 
@@ -141,17 +135,17 @@ public class VMManager implements iVMManager, Observer {
                 String containerID = (String) containerProps.get("ContainerID").getAsString();
                 String containerImage = (String) containerProps.get("Image").getAsString();
                 boolean checkpoint = (boolean) containerProps.get("Checkpoint").getAsBoolean();
-                ContainerWorkload c_wl = new ContainerWorkload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type, containerID, containerImage, checkpoint);
+                ContainerWorkload c_wl = new ContainerWorkload(wl_name, wl_ip, wl_port, wl_status, wl_autoMigration, wl_sharedDir, type, containerID, containerImage, checkpoint);
                 return c_wl;
             case "VM":
                 type = WorkloadType.VM;
                 JsonObject vmProps = (JsonObject)jsonWorkload.get("VMProperties");
                 String domainName = (String) vmProps.get("DomainName").getAsString();
                 String connectionURI = (String) vmProps.get("ConnectionURI").getAsString();
-                VMWorkload vm_wl = new VMWorkload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type, domainName, connectionURI);
+                VMWorkload vm_wl = new VMWorkload(wl_name, wl_ip, wl_port, wl_status, wl_autoMigration, wl_sharedDir, type, domainName, connectionURI);
                 return vm_wl;
             default: 
-                Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, null);
+                Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status, wl_autoMigration, wl_sharedDir, null);
                 return wl;
         }
     }
@@ -188,9 +182,9 @@ public class VMManager implements iVMManager, Observer {
     }
 
     @Override
-    public ArrayList<String> getActiveVMsIPAsList(ArrayList<Workload> vmList) {
+    public ArrayList<String> getAvailableVMsIPAsList() {
         ArrayList<String> vmIpList = new ArrayList<>();
-        for (Workload object : vmList) {
+        for (Workload object : workloadList) {
             vmIpList.add(object.getWl_ip());
         }
         return vmIpList;
