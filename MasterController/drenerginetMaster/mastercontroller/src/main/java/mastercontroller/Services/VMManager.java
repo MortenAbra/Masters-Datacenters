@@ -1,5 +1,6 @@
 package mastercontroller.Services;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import mastercontroller.Observer;
 import mastercontroller.Subject;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Workload;
+import mastercontroller.Models.Workload.WorkloadType;
 
 public class VMManager implements iVMManager, Observer {
 
@@ -121,24 +123,38 @@ public class VMManager implements iVMManager, Observer {
         // Workload workload =
         // gson.fromJson(String.valueOf(jsonWorkload.getAsJsonObject("workload")),
         // Workload.class);
-        String wl_name = (String) jsonWorkload.get("name").getAsString(); // (String) workloadObject.get("name");
-        String wl_ip = (String) jsonWorkload.get("ip").getAsString();
-        int wl_port = (int) (long) jsonWorkload.get("port").getAsLong();
-        boolean wl_status = (boolean) jsonWorkload.get("available").getAsBoolean();
-        Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status);
+        String wl_name = (String) jsonWorkload.get("Identifier").getAsString(); // (String) workloadObject.get("name");
+        String wl_ip = (String) jsonWorkload.get("AccessIP").getAsString();
+        int wl_port = (int) (long) jsonWorkload.get("AccessPort").getAsLong();
+        boolean wl_status = (boolean) jsonWorkload.get("Available").getAsBoolean();
+        String wl_sharedDir = (String) jsonWorkload.get("SharedDir").getAsString();
+        String wl_type = (String) jsonWorkload.get("Type").getAsString();
+
+        Workload.WorkloadType type;
+        switch (wl_type) {
+            case "Container":
+                type = WorkloadType.CONTAINER;
+                break;
+            case "VM":
+                type = WorkloadType.VM;
+                break;
+            default: 
+                type = WorkloadType.CONTAINER;
+        }
+
+        Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status, wl_sharedDir, type);
         return wl;
     }
 
     // Generating workload json objects and adding to Array
     public void addJSONWorkloadToList() throws IOException {
-        // TODO Auto-generated method stub
         try (FileReader reader = new FileReader(fp.getWORKLOADPATH() + "workloads.json")) {
             // Generating JSONObject based on a file
             Object obj = parser.parse(reader);
             // Object obj = (JsonObject) JsonParser.parseReader(new BufferedReader(reader));
             JsonObject jsonObject = (JsonObject) obj;
 
-            JsonArray jsonArray = (JsonArray) jsonObject.get("workloads");
+            JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
 
             // Adding workloads to the list
 

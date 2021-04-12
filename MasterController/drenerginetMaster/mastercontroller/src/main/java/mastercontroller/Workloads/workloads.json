@@ -1,37 +1,18 @@
 {
-    "workloads": [
+    "Workloads": [
         {
-            "name": "Docker - Flask",
-            "ip": "0.0.0.0",
-            "port": "8000",
-            "available": true,
-            "type": "nil",
-            "sharedDir": "/home/wolder/test",
-            "dockerWorkload": {
-                "container_Dir": "",
-                "container_ID": "",
-                "container_image": "",
-                "container_CPDir": ""
-            },
-            "VMWorkload": {
-                "shared_storage": ""
-            }
-        },
-        {
-            "name": "NGINX - Flask",
-            "ip": "0.0.0.0",
-            "port": "8000",
-            "available": true,
-            "type": "nil",
-            "sharedDir": "/home/wolder/test",
-            "dockerWorkload": {
-                "container_Dir": "",
-                "container_ID": "",
-                "container_image": "",
-                "container_CPDir": ""
-            },
-            "VMWorkload": {
-                "shared_storage": ""
+            "Identifier": "Python Flask Server",
+            "AccessIP": "1234",
+            "AccessPort": "1234",
+            "Available": true,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "sweet_noether",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
             }
         }
     ]

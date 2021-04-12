@@ -15,12 +15,21 @@ public class Workload {
     long elapsedTime = 0;
     long endTime = 0;
     boolean wl_status;
+    String wl_sharedDir;
+    WorkloadType wl_type;
 
-    public Workload(String wl_name, String wl_ip, int wl_port, boolean wl_status) {
+    public Workload(String wl_name, String wl_ip, int wl_port, boolean wl_status, String wl_sharedDir, WorkloadType wl_type) {
         this.wl_name = wl_name;
         this.wl_ip = wl_ip;
         this.wl_port = wl_port;
         this.wl_status = wl_status;
+        this.wl_sharedDir = wl_sharedDir;
+        this.wl_type = wl_type;
+    }
+
+    public enum WorkloadType {
+        CONTAINER,
+        VM
     }
 
 

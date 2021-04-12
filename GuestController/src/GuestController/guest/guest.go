@@ -16,8 +16,8 @@ import (
 type Guest struct {
 	IP          string `json:"Ip"`
 	Port        string `json:"Port"`
-	LibvirtURI  string `json:"LibvirtURI"`
 	StoragePath string `json:"StoragePath"`
+	LibvirtURI  string `json:"LibvirtURI"`
 }
 
 // Logging fatal errors.

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mastercontroller.Models.Workload;
+import mastercontroller.Models.Workload.WorkloadType;
 
 public class WorkloadManager implements Subject {
 
@@ -12,6 +13,8 @@ public class WorkloadManager implements Subject {
     private String name, ip;
     private int port;
     private boolean status;
+    private String sharedDir;
+    private WorkloadType type;
     private Workload workload;
 
     public WorkloadManager(){
@@ -41,7 +44,7 @@ public class WorkloadManager implements Subject {
     public void notifyObservers() {
         // TODO Auto-generated method stub
         System.out.println("Beginning notification of observers!");
-        observerList.forEach(o -> o.update(new Workload(name, ip, port, status)));
+        observerList.forEach(o -> o.update(new Workload(name, ip, port, status, sharedDir, type)));
         System.out.println("Observers notified!");
     }
 
