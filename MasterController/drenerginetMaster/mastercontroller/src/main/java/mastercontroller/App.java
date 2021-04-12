@@ -12,7 +12,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TimerTask;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -35,10 +40,11 @@ import mastercontroller.Services.GuestManager;
 import mastercontroller.Services.VMManager;
 
 public class App {
- 
+
 	private VMManager manager;
 	private GuestManager guestManager;
 	private WorkloadManager wm;
+	private ScheduledExecutorService es;
 	private JFrame frmVmManager;
 	private JTextField migrationThresholdTextField;
 	private JTextField migrationThresholdPercentTextField;
@@ -83,9 +89,13 @@ public class App {
 
 	/**
 	 * Create the application.
+	 * 
 	 * @throws IOException
 	 */
 	public App() throws IOException {
+		int delay = 0;
+		int period = 5;
+		es = Executors.newSingleThreadScheduledExecutor();
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
 		this.guestManager = new GuestManager();
@@ -95,10 +105,15 @@ public class App {
 			wm.workloadAddedToList(workload);
 		}
 
-		// Initialize GuestManager
-		Thread t = new Thread(new Runnable(){
+		TimerTask repeatedTask = new TimerTask() {
+
 			@Override
 			public void run() {
+				int iteration = 0;
+				iteration++;
+				// TODO Auto-generated method stub
+				System.out.println("Repeated task iteration: " + iteration);
+				// Initialize GuestManager
 				guestManager.initialize(manager);
 				ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();
 				for (Guest guest : guestManager.getGuestList()) {
@@ -109,7 +124,9 @@ public class App {
 					// check for duplicates
 					boolean duplicate = false;
 					for (Workload addedWorkload : manager.getWorkloads()) {
-						if (addedWorkload.getWl_name().equals(workload.getWl_name())){duplicate = true;}
+						if (addedWorkload.getWl_name().equals(workload.getWl_name())) {
+							duplicate = true;
+						}
 					}
 					if (!duplicate) {
 						wm.workloadAddedToList(workload);
@@ -122,14 +139,19 @@ public class App {
 				}
 				
 			}
-		});t.start();
-		
-		manager.updateWorkloadsJSON();
-		
+
+		};
+		es.scheduleAtFixedRate(repeatedTask, 0, period, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(delay + period);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 		initialize();
 	}
-
 
 	/**
 	 * Initialize the contents of the frame.
@@ -167,29 +189,24 @@ public class App {
 		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		
-
-
-
 		listModel = new DefaultListModel<>();
 		for (Workload workload : manager.getWorkloads()) {
 			listModel.addElement(workload);
-			
-		}
 
+		}
 
 		vmList = new JList(listModel);
 		vmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		vmList.setSelectedIndex(0);
-		vmList.addListSelectionListener(new ListSelectionListener(){
+		vmList.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!e.getValueIsAdjusting()){
-					if(vmList.getSelectedIndex() != -1){
+				if (!e.getValueIsAdjusting()) {
+					if (vmList.getSelectedIndex() != -1) {
 						Workload object = (Workload) vmList.getSelectedValue();
-						if(object instanceof Workload){
+						if (object instanceof Workload) {
 							System.out.println("Workload");
 							vmNameResult.setText(object.getWl_name());
 							vmIPResult.setText(object.getWl_ip());
@@ -197,14 +214,11 @@ public class App {
 							vmAutoMigrationSwitch.setSelected(object.isWl_autoMigration());
 						}
 					}
-					
-					
+
 				}
 			}
-			
+
 		});
-
-
 
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
@@ -249,7 +263,6 @@ public class App {
 		gbc_lblNewLabel_1.gridy = 0;
 		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		
 		GridBagConstraints gbc_vmAutoMigrationSwitch = new GridBagConstraints();
 		gbc_vmAutoMigrationSwitch.insets = new Insets(0, 0, 5, 0);
 		gbc_vmAutoMigrationSwitch.gridx = 0;
@@ -373,16 +386,6 @@ public class App {
 		availableVMsComboBox = new JComboBox<>();
 		availableVMsComboBox.setModel(new DefaultComboBoxModel<Object>(manager.findAvailableVMs().toArray()));
 
-
-
-
-
-
-
-
-
-
-
 		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
 		gbc_availableVMsComboBox.fill = GridBagConstraints.BOTH;
 		gbc_availableVMsComboBox.gridwidth = 2;
@@ -391,8 +394,6 @@ public class App {
 		gbc_availableVMsComboBox.gridy = 3;
 		panel_1.add(availableVMsComboBox, gbc_availableVMsComboBox);
 		availableVMsComboBox.setMaximumRowCount(5);
-
-
 
 		vmMigrationBtn = new JButton("Migrate VM");
 		vmMigrationBtn.addActionListener(new ActionListener() {
@@ -412,14 +413,14 @@ public class App {
 		panel_1.add(vmMigrationBtn, gbc_vmMigrationBtn);
 	}
 
-	public void setToggleState(int state){
-		vmAutoMigrationSwitch.addItemListener(new ItemListener(){
+	public void setToggleState(int state) {
+		vmAutoMigrationSwitch.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				int currentState = e.getStateChange();
-				if(currentState == e.SELECTED){
+				if (currentState == e.SELECTED) {
 					currentState = state;
 				} else {
 					System.out.println("eeeehh");
@@ -432,20 +433,12 @@ public class App {
 
 }
 
-
 /*
-
-    public App() {
-        manager = new VMManager();
-        generator = new ComponentGenerator();
-        try {
-            manager.addJSONWorkloadToList();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        addComponenets(generator);
-        String[] test = generator.fillVMList(manager.getWorkloadList());
-    }
-
-    */
+ * 
+ * public App() { manager = new VMManager(); generator = new
+ * ComponentGenerator(); try { manager.addJSONWorkloadToList(); } catch
+ * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
+ * addComponenets(generator); String[] test =
+ * generator.fillVMList(manager.getWorkloadList()); }
+ * 
+ */
