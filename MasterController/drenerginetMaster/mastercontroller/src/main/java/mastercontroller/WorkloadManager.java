@@ -10,11 +10,6 @@ public class WorkloadManager implements Subject {
 
     private List<Observer> observerList;
     private ArrayList<Workload> workloadList;
-    private String name, ip;
-    private int port;
-    private boolean status;
-    private String sharedDir;
-    private WorkloadType type;
     private Workload workload;
 
     public WorkloadManager(){
