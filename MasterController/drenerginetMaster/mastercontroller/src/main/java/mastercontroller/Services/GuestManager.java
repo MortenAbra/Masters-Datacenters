@@ -50,9 +50,6 @@ public class GuestManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // Ping all on ip:port/guest
-        // retrieve workloads from ip:port/workloads
     }
 
     public ArrayList<Guest> getGuestList() {

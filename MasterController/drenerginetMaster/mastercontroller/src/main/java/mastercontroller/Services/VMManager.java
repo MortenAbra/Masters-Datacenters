@@ -1,8 +1,10 @@
 package mastercontroller.Services;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.HttpURLConnection;
@@ -21,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonIOException;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -164,17 +167,17 @@ public class VMManager implements Observer {
         ArrayList<Workload> resultList = new ArrayList<>();
         try (FileReader reader = new FileReader(fp.getWORKLOADPATH() + "workloads.json")) {
             // Generating JSONObject based on a file
-            Object obj = parser.parse(reader);
-            // Object obj = (JsonObject) JsonParser.parseReader(new BufferedReader(reader));
+            Object obj = JsonParser.parseReader(reader);
             JsonObject jsonObject = (JsonObject) obj;
-
             JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
 
             // Adding workloads to the list
-            for (int i = 0; i < jsonArray.size(); i++) {
-                resultList.add(parseWorkloadObject((JsonObject) jsonArray.get(i)));
+            if (jsonArray.size() != 0) {
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    resultList.add(parseWorkloadObject((JsonObject) jsonArray.get(i)));
+                }
             }
-
+        
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -308,6 +311,15 @@ public class VMManager implements Observer {
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = json.getBytes("utf-8");
                 os.write(input, 0, input.length);			
+            }
+            try(BufferedReader br = new BufferedReader(
+            new InputStreamReader(con.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println(response.toString());
             }
             
         } catch (IOException e) {
