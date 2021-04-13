@@ -125,17 +125,26 @@ public class App {
 					}
 				}
 				if (listModel != null) {
-					// Add workloads that are not in the list
+					// Add workloads that are not in the listModel
 					for (Workload workload : manager.getWorkloads()) {
-						if (!listModel.contains(workload)) {
+						System.out.println("Workloads:" + manager.getWorkloads());
+						boolean duplicate = false;
+						for (int i = 0; i < listModel.size(); i++) {
+							if (((Workload)listModel.get(i)).getWl_name() == workload.getWl_name()) {
+								duplicate = true;
+								System.out.println("DUPLICATE!");
+							}
+						}
+						if (!duplicate) {
 							listModel.addElement(workload);
 						}
 					}
 					// Remove list entires that are not in the workloads
 					for (int i = 0; i < listModel.size(); i++) {
-						final int _i = i;
+						int _i = i;
 						boolean match = manager.getWorkloads().stream().anyMatch(o -> o.getWl_name().equals(((Workload)listModel.get(_i)).getWl_name()));
 						if (!match) {
+							System.out.println("Removing element" + listModel.get(i).toString());
 							listModel.removeElement(i);
 						}
 					}
@@ -433,7 +442,6 @@ public class App {
 
 		});
 	}
-
 }
 
 /*

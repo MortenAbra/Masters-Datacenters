@@ -28,5 +28,4 @@ public class VMWorkload extends Workload {
     public void setConnectionURI(String connectionURI) {
         this.connectionURI = connectionURI;
     }
-    
 }
