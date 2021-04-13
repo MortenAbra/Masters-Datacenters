@@ -168,6 +168,11 @@ public class VMManager implements Observer {
         try (FileReader reader = new FileReader(fp.getWORKLOADPATH() + "workloads.json")) {
             // Generating JSONObject based on a file
             Object obj = JsonParser.parseReader(reader);
+            if (obj instanceof JsonNull) {
+                obj = new JsonObject();
+                ((JsonObject) obj).add("Workloads", new JsonArray());
+            } 
+
             JsonObject jsonObject = (JsonObject) obj;
             JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
 
@@ -193,15 +198,15 @@ public class VMManager implements Observer {
                 arr.add(constructJsonObjectFromWorkload(workload));
             }
             obj.add("Workloads", arr);
-            Writer writer = new FileWriter(fp.getWORKLOADPATH() + "workloads.json");
+            Writer writer = new FileWriter(fp.getWORKLOADPATH() + "workloads.json", false);
 
             // convert map to JSON File
             new Gson().toJson(obj, writer);
             
+            
             // close the writer
             writer.close();
         } catch (JsonIOException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
 
         }   
@@ -294,6 +299,12 @@ public class VMManager implements Observer {
         }
         else if (guestRunningWorkload.getIp().length() != 0) {
             HTTPMigrate(guestRunningWorkload, obj.toString());
+
+            for (Workload wl: getWorkloads()) {
+                if (wl.getWl_name() == workload.getWl_name()){
+                    getWorkloads().remove(wl);
+                }
+            }
         } 
         else {
             System.out.println("Cannot find the guest who runs the workload, Cannot migrate");

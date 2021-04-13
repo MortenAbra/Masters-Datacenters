@@ -263,7 +263,8 @@ func initiateContainerMigration(migration migrate.Migrate, container containerwo
 
 	err = ContainerPostMigration(migration, container)
 	logErr(err)
-	cleanUpAfterContainerMigration(container)
+
+	err = cleanUpAfterContainerMigration(container)
 	logErr(err)
 }
 
@@ -301,6 +302,7 @@ func cleanUpAfterContainerMigration(container containerworkload.ContainerWorkloa
 	}
 	err = container.DockeRemoveContainer()
 	return err
+
 }
 
 // Initial Migration part of the VM Migration

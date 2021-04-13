@@ -1,1 +1,20 @@
-{"Workloads":[{"AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointIDs":null,"ContainerID":"ecstatic_banzai","Image":"pyserver","NetworkSettings":null},"Identifier":"New Py Server","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"New Py Server","AccessIP":"localhost","AccessPort":"5000","Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"ecstatic_banzai","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+{
+    "Workloads": [
+        {
+            "Identifier": "Test Server",
+            "AccessIP": "localhost",
+            "AccessPort": "5000",
+            "AutoMigrate": false,
+            "Available": true,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "lucid_margulis",
+                "Image": "pyserver",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointIDs": null
+            }
+        }
+    ]
+}

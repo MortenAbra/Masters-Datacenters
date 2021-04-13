@@ -3,7 +3,7 @@
         {
             "Identifier": "Python Flask Server",
             "AccessIP": "1234",
-            "AccessPort": "1234",
+            "AccessPort": 1234,
             "Available": true,
             "AutoMigrate": true,
             "SharedDir": "/home/wolder/shared_storage",
@@ -11,15 +11,13 @@
             "Containerproperties": {
                 "ContainerID": "sweet_noether",
                 "Image": "pyserver",
-                "Checkpoint": false,
-                "NetworkSettings": null,
-                "CheckpointIDs": null
+                "Checkpoint": false
             }
         },
         {
             "Identifier": "Test",
             "AccessIP": "1234",
-            "AccessPort": "1234",
+            "AccessPort": 1234,
             "Available": false,
             "AutoMigrate": false,
             "SharedDir": "/home/wolder/shared_storage",
@@ -27,15 +25,13 @@
             "Containerproperties": {
                 "ContainerID": "sweet_noether",
                 "Image": "pyserver",
-                "Checkpoint": false,
-                "NetworkSettings": null,
-                "CheckpointIDs": null
+                "Checkpoint": false
             }
         },
         {
             "Identifier": "Ny test",
             "AccessIP": "1234",
-            "AccessPort": "1234",
+            "AccessPort": 1234,
             "Available": false,
             "AutoMigrate": false,
             "SharedDir": "/home/wolder/shared_storage",
@@ -43,15 +39,13 @@
             "Containerproperties": {
                 "ContainerID": "sweet_noether",
                 "Image": "pyserver",
-                "Checkpoint": false,
-                "NetworkSettings": null,
-                "CheckpointIDs": null
+                "Checkpoint": false
             }
         },
         {
             "Identifier": "Mere testing!",
             "AccessIP": "1234",
-            "AccessPort": "1234",
+            "AccessPort": 1234,
             "Available": false,
             "AutoMigrate": false,
             "SharedDir": "/home/wolder/shared_storage",

@@ -1,12 +1,13 @@
 package workload
 
 type Workload struct {
-	Identifier string       `json:"Identifier"`
-	AccessIP   string       `json:"AccessIP"`
-	AccessPort string       `json:"AccessPort"`
-	Available  bool         `json:"Available"`
-	SharedDir  string       `json:"SharedDir"`
-	Type       WorkloadType `json:"Type"`
+	Identifier  string       `json:"Identifier"`
+	AccessIP    string       `json:"AccessIP"`
+	AccessPort  string       `json:"AccessPort"`
+	AutoMigrate bool         `json:"AutoMigrate"`
+	Available   bool         `json:"Available"`
+	SharedDir   string       `json:"SharedDir"`
+	Type        WorkloadType `json:"Type"`
 }
 
 type WorkloadList struct {

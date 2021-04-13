@@ -168,6 +168,14 @@ func RemoveContainerFromWorkloadFile(container containerworkload.ContainerWorklo
 			workloads.Workloads = removeIndexFromSlice(workloads.Workloads, i)
 		}
 	}
+
+	result, err := json.Marshal(workloads)
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile("workloads.json", result, 0644)
+
 	return err
 }
 func RemoveVMFromWorkloadFile(vm vmworkload.VMWorkload) error {
@@ -184,6 +192,14 @@ func RemoveVMFromWorkloadFile(vm vmworkload.VMWorkload) error {
 			workloads.Workloads = removeIndexFromSlice(workloads.Workloads, i)
 		}
 	}
+
+	result, err := json.Marshal(workloads)
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile("workloads.json", result, 0644)
+
 	return err
 }
 

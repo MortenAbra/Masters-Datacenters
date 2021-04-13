@@ -98,16 +98,6 @@ public class App {
 		this.manager = new VMManager(wm);
 		this.guestManager = new GuestManager();
 
-		// Initialize VM Manager and Workload Manager
-		try {
-			for (Workload workload : manager.readJSONWorkloads()) {
-				wm.workloadAddedToList(workload);
-			}
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
 		AtomicInteger iteration = new AtomicInteger(0);
 		TimerTask repeatedTask = new TimerTask() {
 
@@ -132,14 +122,26 @@ public class App {
 					}
 					if (!duplicate) {
 						wm.workloadAddedToList(workload);
-						if (listModel != null) {
+					}
+				}
+				if (listModel != null) {
+					// Add workloads that are not in the list
+					for (Workload workload : manager.getWorkloads()) {
+						if (!listModel.contains(workload)) {
 							listModel.addElement(workload);
+						}
+					}
+					// Remove list entires that are not in the workloads
+					for (int i = 0; i < listModel.size(); i++) {
+						final int _i = i;
+						boolean match = manager.getWorkloads().stream().anyMatch(o -> o.getWl_name().equals(((Workload)listModel.get(_i)).getWl_name()));
+						if (!match) {
+							listModel.removeElement(i);
 						}
 					}
 				}
 				manager.updateWorkloadsJSON();
 			}
-
 		};
 		es.scheduleAtFixedRate(repeatedTask, 0, period, TimeUnit.SECONDS);
 		try {
@@ -147,8 +149,6 @@ public class App {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
-
 		initialize();
 	}
 
@@ -201,7 +201,6 @@ public class App {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
 				if (!e.getValueIsAdjusting()) {
 					if (vmList.getSelectedIndex() != -1) {
 						Workload object = (Workload) vmList.getSelectedValue();
