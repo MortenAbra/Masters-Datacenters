@@ -148,7 +148,6 @@ public class App {
 			e.printStackTrace();
 		}
 
-
 		initialize();
 	}
 

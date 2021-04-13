@@ -327,4 +327,10 @@ public class VMManager implements Observer {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void update(double threshold) {
+        // DO NOTHING HERE
+        
+    }
 }

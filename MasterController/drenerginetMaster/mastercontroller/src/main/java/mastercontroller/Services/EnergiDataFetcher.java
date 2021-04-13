@@ -1,41 +1,123 @@
 package mastercontroller.Services;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
-import mastercontroller.FileManager.FilePaths;
+import mastercontroller.Observer;
+import mastercontroller.Models.Record;
 import mastercontroller.Models.Result;
+import mastercontroller.Models.Workload;
 
-public class EnergiDataFetcher {
-    private InputStream input;
-    private BufferedReader reader;
-    private FilePaths fp;
-    private ExecutorService es;
-    private Result res;
-    private FileWriter file;
-    private JsonObject jsonObject;
-    private JsonParser parser;
+public class EnergiDataFetcher implements Observer {
+    
+    private Result result;
+    private Record record;
+    private double threshold;
+    private double weeklyAvg;
+    private URL url;
+    private InputStream in;
+    private JsonReader reader;
     
 
     public EnergiDataFetcher(){
-        fp = new FilePaths();
-        es = Executors.newCachedThreadPool();    
+           
+    }
+
+
+    public double weeklyRunningAvg(){
+
+        return weeklyAvg;
+    }
+
+    public double calculateThreshold(double currentPrice){
+        
+        System.out.println("t3");
+        return threshold;
+    }
+
+    public void convertJsonToObjects(String fileLocation){
+        
+        Gson gson = new Gson();
+
+        try (Reader reader = new FileReader(fileLocation)){
+            this.result = gson.fromJson(reader, Result.class);
+
+            System.out.println(result);
+
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        
+    }
+
+    public void getEnergiData(String url){
+
+        //Placeholder
+    }
+
+
+
+    /**
+     * @return the threshold
+     */
+    public double getThreshold() {
+        return threshold;
+    }
+
+
+    /**
+     * @param threshold the threshold to set
+     */
+    public void setThreshold(double threshold) {
+        this.threshold = threshold;
+    }
+
+
+    /**
+     * @return the weeklyAvg
+     */
+    public double getWeeklyAvg() {
+        return weeklyAvg;
+    }
+
+
+    /**
+     * @param weeklyAvg the weeklyAvg to set
+     */
+    public void setWeeklyAvg(double weeklyAvg) {
+        this.weeklyAvg = weeklyAvg;
+    }
+
+
+    @Override
+    public void update(Workload workload) {
+        // DO NOTHING HERE
+        
+    }
+
+
+    @Override
+    public void update(double threshold) {
+        // TODO Auto-generated method stub
+        
     }
 
     
+
+
+     
+
+
+
+    /*
     public JsonObject fetchAPIData(String url, String filename) {
         try {
             input = new URL(url).openStream();
@@ -109,4 +191,6 @@ public class EnergiDataFetcher {
         }
         return sb.toString();
     }
+
+    */
 }
