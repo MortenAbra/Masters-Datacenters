@@ -17897,3 +17897,224 @@
 [INFO] Apr 13 20:23:52.176:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
 [INFO] Apr 13 20:23:52.188:GET Request for /guest/workload
 [INFO] Apr 13 20:23:52.188:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:38:24.029:GET Request for /guest
+[INFO] Apr 13 20:38:24.029:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:38:24.065:GET Request for /guest/workload
+[INFO] Apr 13 20:38:24.065:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:39:31.381:GET Request for /guest
+[INFO] Apr 13 20:39:31.381:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:39:31.429:GET Request for /guest/workload
+[INFO] Apr 13 20:39:31.429:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:39:31.567:GET Request for /guest
+[INFO] Apr 13 20:39:31.567:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:39:31.576:GET Request for /guest/workload
+[INFO] Apr 13 20:39:31.576:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:39:31.613:GET Request for /guest
+[INFO] Apr 13 20:39:31.613:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:39:31.622:GET Request for /guest/workload
+[INFO] Apr 13 20:39:31.622:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:39:36.593:GET Request for /guest
+[INFO] Apr 13 20:39:36.593:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:39:36.604:GET Request for /guest/workload
+[INFO] Apr 13 20:39:36.604:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:39:41.590:GET Request for /guest
+[INFO] Apr 13 20:39:41.590:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:39:41.600:GET Request for /guest/workload
+[INFO] Apr 13 20:39:41.600:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:39:46.589:GET Request for /guest
+[INFO] Apr 13 20:39:46.589:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:39:46.601:GET Request for /guest/workload
+[INFO] Apr 13 20:39:46.601:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:39:51.588:GET Request for /guest
+[INFO] Apr 13 20:39:51.588:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:39:51.594:GET Request for /guest/workload
+[INFO] Apr 13 20:39:51.594:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:40:00.026:GET Request for /guest
+[INFO] Apr 13 20:40:00.026:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:40:00.069:GET Request for /guest/workload
+[INFO] Apr 13 20:40:00.069:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:41:46.703:GET Request for /guest
+[INFO] Apr 13 20:41:46.703:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:41:46.735:GET Request for /guest/workload
+[INFO] Apr 13 20:41:46.736:Responding: 
+[INFO] Apr 13 20:42:05.347:GET Request for /guest
+[INFO] Apr 13 20:42:05.347:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:42:05.379:GET Request for /guest/workload
+[INFO] Apr 13 20:42:05.379:Responding: 
+[INFO] Apr 13 20:42:09.754:GET Request for /guest
+[INFO] Apr 13 20:42:09.754:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:42:09.767:GET Request for /guest/workload
+[INFO] Apr 13 20:42:09.768:Responding: 
+[INFO] Apr 13 20:42:14.750:GET Request for /guest
+[INFO] Apr 13 20:42:14.750:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:42:14.762:GET Request for /guest/workload
+[INFO] Apr 13 20:42:14.762:Responding: 
+[INFO] Apr 13 20:42:19.747:GET Request for /guest
+[INFO] Apr 13 20:42:19.747:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:42:19.756:GET Request for /guest/workload
+[INFO] Apr 13 20:42:19.756:Responding: 
+[INFO] Apr 13 20:52:36.231:GET Request for /guest
+[INFO] Apr 13 20:52:36.231:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:52:36.273:GET Request for /guest/workload
+[INFO] Apr 13 20:52:36.273:Responding: 
+[INFO] Apr 13 20:52:40.578:GET Request for /guest
+[INFO] Apr 13 20:52:40.578:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:52:40.593:GET Request for /guest/workload
+[INFO] Apr 13 20:52:40.593:Responding: 
+[INFO] Apr 13 20:52:45.576:GET Request for /guest
+[INFO] Apr 13 20:52:45.576:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:52:45.583:GET Request for /guest/workload
+[INFO] Apr 13 20:52:45.583:Responding: 
+[INFO] Apr 13 20:52:45.813:GET Request for /guest
+[INFO] Apr 13 20:52:45.813:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:52:50.577:GET Request for /guest
+[INFO] Apr 13 20:52:50.577:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:52:50.585:GET Request for /guest/workload
+[INFO] Apr 13 20:52:50.585:Responding: 
+[INFO] Apr 13 20:52:55.578:GET Request for /guest
+[INFO] Apr 13 20:52:55.578:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:52:55.590:GET Request for /guest/workload
+[INFO] Apr 13 20:52:55.591:Responding: 
+[INFO] Apr 13 20:53:00.577:GET Request for /guest
+[INFO] Apr 13 20:53:00.577:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:00.584:GET Request for /guest/workload
+[INFO] Apr 13 20:53:00.584:Responding: 
+[INFO] Apr 13 20:53:05.576:GET Request for /guest
+[INFO] Apr 13 20:53:05.578:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:05.587:GET Request for /guest/workload
+[INFO] Apr 13 20:53:05.587:Responding: 
+[INFO] Apr 13 20:53:10.577:GET Request for /guest
+[INFO] Apr 13 20:53:10.577:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:10.583:GET Request for /guest/workload
+[INFO] Apr 13 20:53:10.583:Responding: 
+[INFO] Apr 13 20:53:15.578:GET Request for /guest
+[INFO] Apr 13 20:53:15.578:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:15.585:GET Request for /guest/workload
+[INFO] Apr 13 20:53:15.585:Responding: 
+[INFO] Apr 13 20:53:20.582:GET Request for /guest
+[INFO] Apr 13 20:53:20.583:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:20.597:GET Request for /guest/workload
+[INFO] Apr 13 20:53:20.599:Responding: 
+[INFO] Apr 13 20:53:25.311:POST Request for /transfer
+[INFO] Apr 13 20:53:25.314:Revieving Migration of container: Test Server
+[INFO] Apr 13 20:53:25.314:Migration of workload: Test Server
+[INFO] Apr 13 20:53:25.589:GET Request for /guest
+[INFO] Apr 13 20:53:25.589:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:25.612:GET Request for /guest/workload
+[INFO] Apr 13 20:53:25.613:Responding: 
+[INFO] Apr 13 20:53:30.581:GET Request for /guest
+[INFO] Apr 13 20:53:30.584:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:30.591:GET Request for /guest/workload
+[INFO] Apr 13 20:53:30.594:Responding: 
+[INFO] Apr 13 20:53:35.243:DockerLoadAndStartContainer(Test Server) took 9.929475487s
+[INFO] Apr 13 20:53:35.577:GET Request for /guest
+[INFO] Apr 13 20:53:35.577:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:35.584:GET Request for /guest/workload
+[INFO] Apr 13 20:53:35.585:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:53:40.578:GET Request for /guest
+[INFO] Apr 13 20:53:40.578:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:40.586:GET Request for /guest/workload
+[INFO] Apr 13 20:53:40.586:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:53:45.576:GET Request for /guest
+[INFO] Apr 13 20:53:45.576:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:45.588:GET Request for /guest/workload
+[INFO] Apr 13 20:53:45.588:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:53:50.577:GET Request for /guest
+[INFO] Apr 13 20:53:50.577:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:50.585:GET Request for /guest/workload
+[INFO] Apr 13 20:53:50.585:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:53:58.989:GET Request for /guest
+[INFO] Apr 13 20:53:58.989:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:53:59.025:GET Request for /guest/workload
+[INFO] Apr 13 20:53:59.025:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:54:03.259:GET Request for /guest
+[INFO] Apr 13 20:54:03.259:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:54:03.266:GET Request for /guest/workload
+[INFO] Apr 13 20:54:03.266:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:54:08.258:GET Request for /guest
+[INFO] Apr 13 20:54:08.258:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:54:08.264:GET Request for /guest/workload
+[INFO] Apr 13 20:54:08.264:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:59:04.885:GET Request for /guest
+[INFO] Apr 13 20:59:04.885:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:59:04.921:GET Request for /guest/workload
+[INFO] Apr 13 20:59:04.921:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 20:59:15.349:GET Request for /guest
+[INFO] Apr 13 20:59:15.350:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 20:59:18.208:POST Request for /migrate
+[INFO] Apr 13 20:59:18.210:Migrating container: Test Server to: 192.168.122.162:8080
+[INFO] Apr 13 20:59:45.367:DockerSaveAndStoreCheckpoint(Test Server) took 27.156460704s
+[INFO] Apr 13 21:00:20.573:GET Request for /guest
+[INFO] Apr 13 21:00:20.573:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:20.619:GET Request for /guest/workload
+[INFO] Apr 13 21:00:20.619:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:24.918:GET Request for /guest
+[INFO] Apr 13 21:00:24.918:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:24.931:GET Request for /guest/workload
+[INFO] Apr 13 21:00:24.931:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:29.629:GET Request for /guest
+[INFO] Apr 13 21:00:29.629:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:29.911:GET Request for /guest
+[INFO] Apr 13 21:00:29.911:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:29.922:GET Request for /guest/workload
+[INFO] Apr 13 21:00:29.922:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:34.910:GET Request for /guest
+[INFO] Apr 13 21:00:34.910:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:34.917:GET Request for /guest/workload
+[INFO] Apr 13 21:00:34.918:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:39.913:GET Request for /guest
+[INFO] Apr 13 21:00:39.913:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:39.926:GET Request for /guest/workload
+[INFO] Apr 13 21:00:39.926:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:44.911:GET Request for /guest
+[INFO] Apr 13 21:00:44.912:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:44.919:GET Request for /guest/workload
+[INFO] Apr 13 21:00:44.919:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:49.914:GET Request for /guest
+[INFO] Apr 13 21:00:49.914:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:49.923:GET Request for /guest/workload
+[INFO] Apr 13 21:00:49.923:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:54.910:GET Request for /guest
+[INFO] Apr 13 21:00:54.910:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:54.917:GET Request for /guest/workload
+[INFO] Apr 13 21:00:54.917:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:00:59.913:GET Request for /guest
+[INFO] Apr 13 21:00:59.913:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:00:59.925:GET Request for /guest/workload
+[INFO] Apr 13 21:00:59.925:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:01:04.910:GET Request for /guest
+[INFO] Apr 13 21:01:04.910:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:04.919:GET Request for /guest/workload
+[INFO] Apr 13 21:01:04.919:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:01:07.627:POST Request for /transfer
+[INFO] Apr 13 21:01:07.637:Revieving Migration of container: Test Server
+[INFO] Apr 13 21:01:07.638:Migration of workload: Test Server
+[INFO] Apr 13 21:01:09.922:GET Request for /guest
+[INFO] Apr 13 21:01:09.923:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:09.947:GET Request for /guest/workload
+[INFO] Apr 13 21:01:09.948:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:01:15.595:GET Request for /guest
+[INFO] Apr 13 21:01:15.596:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:15.634:GET Request for /guest/workload
+[INFO] Apr 13 21:01:15.637:Responding: {"Workloads":[]}
+[INFO] Apr 13 21:01:17.094:DockerLoadAndStartContainer(Test Server) took 9.456205685s
+[INFO] Apr 13 21:01:19.913:GET Request for /guest
+[INFO] Apr 13 21:01:19.913:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:19.927:GET Request for /guest/workload
+[INFO] Apr 13 21:01:19.927:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 21:01:24.931:GET Request for /guest
+[INFO] Apr 13 21:01:24.931:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:24.944:GET Request for /guest/workload
+[INFO] Apr 13 21:01:24.944:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 21:01:29.913:GET Request for /guest
+[INFO] Apr 13 21:01:29.913:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:29.934:GET Request for /guest/workload
+[INFO] Apr 13 21:01:29.934:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 21:01:34.913:GET Request for /guest
+[INFO] Apr 13 21:01:34.913:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:34.930:GET Request for /guest/workload
+[INFO] Apr 13 21:01:34.930:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 13 21:01:39.909:GET Request for /guest
+[INFO] Apr 13 21:01:39.910:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 13 21:01:39.915:GET Request for /guest/workload
+[INFO] Apr 13 21:01:39.915:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}

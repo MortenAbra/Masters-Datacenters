@@ -141,8 +141,23 @@ public class App {
 						}
 					}
 					// Remove list entires that are not in the workloads
-					manager.getWorkloads().retainAll((Collection<?>) listModel);
-					System.out.println(manager.getWorkloads());
+					for (int i = 0; i < listModel.getSize(); i++) {
+						boolean elementNotInWorkloads = true;
+						for (Workload workload : manager.getWorkloads()) {
+							if (listModel.get(i).toString() == workload.getWl_name()) {
+								elementNotInWorkloads = false;
+							}
+						}
+						if (elementNotInWorkloads) {
+							listModel.removeElementAt(i);
+						}
+					}
+
+					
+					
+					// Remove list entires that are not in the workloads
+					//manager.getWorkloads().retainAll((Collection<?>) listModel);
+					//System.out.println(manager.getWorkloads());
 				}
 				manager.updateWorkloadsJSON();
 			}

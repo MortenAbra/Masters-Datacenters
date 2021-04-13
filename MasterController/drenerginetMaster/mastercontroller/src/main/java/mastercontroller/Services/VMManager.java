@@ -263,6 +263,15 @@ public class VMManager implements Observer {
         return workloadList;
     }
 
+    public ArrayList<String> getWorkloadsAsStringArray() {
+        ArrayList<String> array = new ArrayList<String>();
+        for (Workload workload : getWorkloads()) {
+            array.add(workload.toString());
+        }
+
+        return array;
+    }
+
     @Override
     public void update(Workload workload) {
         // TODO Auto-generated method stub
