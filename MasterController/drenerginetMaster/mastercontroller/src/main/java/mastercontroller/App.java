@@ -12,6 +12,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.TimerTask;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
@@ -140,14 +141,8 @@ public class App {
 						}
 					}
 					// Remove list entires that are not in the workloads
-					for (int i = 0; i < listModel.size(); i++) {
-						int _i = i;
-						boolean match = manager.getWorkloads().stream().anyMatch(o -> o.getWl_name().equals(((Workload)listModel.get(_i)).getWl_name()));
-						if (!match) {
-							System.out.println("Removing element" + listModel.get(i).toString());
-							listModel.removeElement(i);
-						}
-					}
+					manager.getWorkloads().retainAll((Collection<?>) listModel);
+					System.out.println(manager.getWorkloads());
 				}
 				manager.updateWorkloadsJSON();
 			}
