@@ -3,10 +3,15 @@ package mastercontroller.Services;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Writer;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.Socket;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -23,6 +28,7 @@ import mastercontroller.Observer;
 import mastercontroller.Subject;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.ContainerWorkload;
+import mastercontroller.Models.Guest;
 import mastercontroller.Models.VMWorkload;
 import mastercontroller.Models.Workload;
 import mastercontroller.Models.Workload.WorkloadType;
@@ -256,8 +262,57 @@ public class VMManager implements Observer {
         System.out.println("Workload added to list - Current list size: " + workloadList.size());
     }
 
-    public void migrateWorkload(String ip, int port, String storagePath, String libvirtURI){
-        System.out.println("IP: " + ip + " | " + "Port: " + port + " | " + "Storage Path: " + storagePath + " | " + "Libvirt URI: " + libvirtURI);
+    // Migrate workload to guest
+    public void migrateWorkload(Workload workload, Guest guest, GuestManager guestManager){
+        // Construct Migrate JSON 
+        JsonObject obj = new JsonObject();
+        obj.addProperty("Identifier", workload.getWl_name());
+        JsonObject targetGuest = new JsonObject();
+        targetGuest.addProperty("Ip", guest.getIp());
+        targetGuest.addProperty("Port", guest.getPort());
+        targetGuest.addProperty("StoragePath", guest.getStoragePath());
+        targetGuest.addProperty("LibvirtURI", guest.getLibvirtURI());
+        obj.add("TargetGuest", targetGuest);
+
+        // Find the guest which runs the workload
+        Guest guestRunningWorkload = new Guest("", "");
+        for (Guest g : guestManager.getGuestList()) {
+            for (Workload w : g.getWorkloads()) {
+                if (w.getWl_name().equals(workload.getWl_name())) {
+                    guestRunningWorkload = g;
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Migrating from " + guest.getURL() + " to " + guestRunningWorkload.getURL());
+        if (guestRunningWorkload.equals(guest)) {
+            System.out.println("Cannot migrate workload to the same guest");
+        }
+        else if (guestRunningWorkload.getIp().length() != 0) {
+            HTTPMigrate(guestRunningWorkload, obj.toString());
+        } 
+        else {
+            System.out.println("Cannot find the guest who runs the workload, Cannot migrate");
+        }
     }
 
+    public void HTTPMigrate(Guest guest, String json) {
+        try {
+            URL url = new URL (guest.getURL() + "/migrate");
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json; utf-8");
+            con.setRequestProperty("Accept", "application/json");
+            con.setDoOutput(true);
+            try(OutputStream os = con.getOutputStream()) {
+                byte[] input = json.getBytes("utf-8");
+                os.write(input, 0, input.length);			
+            }
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

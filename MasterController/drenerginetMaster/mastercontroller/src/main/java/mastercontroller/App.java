@@ -71,6 +71,7 @@ public class App {
 	private JLabel vmStatusResult;
 	private JLabel vmMigrationLabel;
 	private DefaultListModel listModel;
+	private Workload selectedWorkload;
 
 	/**
 	 * Launch the application.
@@ -205,7 +206,7 @@ public class App {
 					if (vmList.getSelectedIndex() != -1) {
 						Workload object = (Workload) vmList.getSelectedValue();
 						if (object instanceof Workload) {
-							System.out.println("Workload");
+							selectedWorkload = object;
 							vmNameResult.setText(object.getWl_name());
 							vmIPResult.setText(object.getWl_ip());
 							vmStatusResult.setText(String.valueOf(object.isWl_status()));
@@ -382,7 +383,7 @@ public class App {
 		panel_1.add(vmMigrationLabel, gbc_vmMigrationLabel);
 
 		availableVMsComboBox = new JComboBox<>();
-		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(manager.findAvailableVMs().toArray());
+		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(guestManager.getGuestList().toArray());
 		availableVMsComboBox.setModel(comboBoxModel);
 
 		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
@@ -394,14 +395,17 @@ public class App {
 		panel_1.add(availableVMsComboBox, gbc_availableVMsComboBox);
 		availableVMsComboBox.setMaximumRowCount(5);
 
-		vmMigrationBtn = new JButton("Migrate VM");
+		vmMigrationBtn = new JButton("Migrate Workload");
 		vmMigrationBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				Workload workload = (Workload) comboBoxModel.getSelectedItem();
-				manager.migrateWorkload(workload.getWl_ip(), workload.getWl_port(), workload.getWl_sharedDir(), null);
+				Guest guest = (Guest) comboBoxModel.getSelectedItem();
+				if (selectedWorkload != null && guest.isOnline()) {
+					manager.migrateWorkload(selectedWorkload, guest, guestManager);
+				} else {
+					System.out.println("Workload is not selected or guest is not online!");
+				}
 			}
 
 		});

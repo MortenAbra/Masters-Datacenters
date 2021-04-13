@@ -75,7 +75,9 @@ public class GuestManager {
 
                     JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
                     for (int i = 0; i < jsonArray.size(); i++) {
-                        workloadList.add(vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i)));
+                        Workload workload = vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i));
+                        workloadList.add(workload);
+                        g.getWorkloads().add(workload); // Add workload to guest.
                     }
                 }
             } catch (IOException | InterruptedException e) {

@@ -1,7 +1,7 @@
 {
     "Workloads": [
         {
-            "Identifier": "Test New new",
+            "Identifier": "sweet noether Python Server",
             "AccessIP": "1234",
             "AccessPort": "1234",
             "Available": true,
