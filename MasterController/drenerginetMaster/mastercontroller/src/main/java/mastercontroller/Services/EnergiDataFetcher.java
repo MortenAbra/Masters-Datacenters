@@ -11,6 +11,7 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.print.event.PrintEvent;
 
@@ -29,7 +30,6 @@ import mastercontroller.Models.Workload;
 public class EnergiDataFetcher implements Observer {
 
     private Result result;
-    private Record record;
     private double threshold;
     private double weeklyAvg;
     private URL url;
@@ -37,6 +37,7 @@ public class EnergiDataFetcher implements Observer {
     private BufferedReader bufferedReader;
     private InputStream in;
     private JsonReader reader;
+    private List<Record> recordList;
 
     public EnergiDataFetcher() {
 
@@ -46,27 +47,44 @@ public class EnergiDataFetcher implements Observer {
         FilePaths fp = new FilePaths();
         EnergiDataFetcher en = new EnergiDataFetcher();
         en.getEnergiData(fp.getAPIURL(), 2000);
+
+        en.calculateThreshold();
     }
 
-    public double weeklyRunningAvg() {
+    public void weeklyRunningAvg() {
+        this.recordList = result.getRecords();
+        double prices = recordList.get(0).getSpotPriceDKK();
 
-        return weeklyAvg;
+        for (int i = 1; i < recordList.size(); i++) {
+            prices += recordList.get(i).getSpotPriceDKK();
+        }
+
+        this.setWeeklyAvg(prices/recordList.size());
+
+        System.out.println("Threshold based on weekly avg: " + this.getWeeklyAvg());
+
+
+
+        this.setWeeklyAvg(weeklyAvg);    
     }
 
-    public double calculateThreshold(double currentPrice) {
-
-        System.out.println("t3");
-        return threshold;
+    public void calculateThreshold() {
+        //DO SOMETHING THAT CREATES A THRESHOLD!
     }
 
-    public void convertJsonToObjects(String fileLocation) {
+    public void customThreshold(double input){
+        this.setThreshold(input);
+        System.out.println("Custom threshold set to: " + input);
+    }
+
+    public void convertJsonToObjects(String jsonString) {
         System.out.println("Init json conversion");
 
         Gson gson = new Gson();
 
-        JsonObject jsonObject = JsonParser.parseString(fileLocation).getAsJsonObject().get("result").getAsJsonObject();
-        Result r = gson.fromJson(jsonObject.toString(), Result.class);
-        System.out.println(r.getRecords().size());
+        JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject().get("result").getAsJsonObject();
+        result = gson.fromJson(jsonObject.toString(), Result.class);
+        System.out.println(result.getRecords());
     }
 
     public void getEnergiData(String apiUrl, int connectionTimeout) {

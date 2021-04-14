@@ -8,10 +8,9 @@ import java.util.List;
 
 public class Result {
     
-    private List<Record> records;
+    private List<Record> records = new ArrayList<>();
 
     public Result(){
-        this.records = new ArrayList<>();
     }
 
     /**

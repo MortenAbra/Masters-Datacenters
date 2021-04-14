@@ -4,7 +4,7 @@ import java.io.File;
 
 public class FilePaths {
    
-    private final String APIURL = "https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT%20%22HourDK%22,%20%22SpotPriceDKK%22,%20%22PriceArea%22%20from%20%22elspotprices%22%20WHERE%20%22PriceArea%22=%27DK1%27%20or%20%22PriceArea%22=%27DK2%27%20%20ORDER%20BY%20%22HourDK%22%20DESC%20LIMIT%2048";
+    private final String APIURL = "https://www.energidataservice.dk/proxy/api/datastore_search_sql?sql=SELECT%20%22HourDK%22,%20%22SpotPriceDKK%22,%20%22PriceArea%22%20from%20%22elspotprices%22%20WHERE%20%22PriceArea%22=%27DK1%27%20or%20%22PriceArea%22=%27DK2%27%20%20ORDER%20BY%20%22HourDK%22%20DESC%20LIMIT%20744";
     /**
      * @return the oUTPUTPATH
      */
