@@ -46,7 +46,6 @@ public class Guest {
                 return false;
             }
         } catch (IOException | InterruptedException e) {
-            System.out.println("Guest not available: " + toString());
             return false;
         }
     }

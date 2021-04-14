@@ -182,6 +182,7 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 						// TODO
 						initiateVMMigration(migration, vm)
 					}
+					fmt.Fprintf(w, "Migration Successful!")
 				}
 			}
 		}

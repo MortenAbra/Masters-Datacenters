@@ -309,11 +309,13 @@ public class VMManager implements Observer {
         else if (guestRunningWorkload.getIp().length() != 0) {
             HTTPMigrate(guestRunningWorkload, obj.toString());
 
+            ArrayList<Workload> workloadsToRemove = new ArrayList<Workload>();
             for (Workload wl: getWorkloads()) {
                 if (wl.getWl_name() == workload.getWl_name()){
-                    getWorkloads().remove(wl);
+                    workloadsToRemove.add(wl);
                 }
             }
+            getWorkloads().removeAll(workloadsToRemove);
         } 
         else {
             System.out.println("Cannot find the guest who runs the workload, Cannot migrate");
