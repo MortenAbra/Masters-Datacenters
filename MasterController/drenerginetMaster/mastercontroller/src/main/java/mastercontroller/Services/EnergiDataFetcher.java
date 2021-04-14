@@ -12,7 +12,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.print.event.PrintEvent;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 
@@ -60,16 +64,9 @@ public class EnergiDataFetcher implements Observer {
 
         Gson gson = new Gson();
 
-        try (Reader reader = new StringReader(fileLocation)) {
-            System.out.println("Reader initialized!");
-            this.result = gson.fromJson(reader, Result.class);
-
-            System.out.println(result.toString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        JsonObject jsonObject = JsonParser.parseString(fileLocation).getAsJsonObject().get("result").getAsJsonObject();
+        Result r = gson.fromJson(jsonObject.toString(), Result.class);
+        System.out.println(r.getRecords().size());
     }
 
     public void getEnergiData(String apiUrl, int connectionTimeout) {
@@ -93,8 +90,8 @@ public class EnergiDataFetcher implements Observer {
             switch (responseCode) {
                 case 200:
                     System.out.println("Case 200");
-                    this.bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    this.convertJsonToObjects(readChaString(bufferedReader));
+                    bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    convertJsonToObjects(readChaString(bufferedReader));
                     break;
                 case 400:
                     System.out.println("400 - Bad reqeust! Check syntax");

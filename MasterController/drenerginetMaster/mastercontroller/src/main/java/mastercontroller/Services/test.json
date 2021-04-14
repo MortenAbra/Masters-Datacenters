@@ -1,0 +1,263 @@
+{
+    "help": "https://www.energidataservice.dk/api/3/action/help_show?name=datastore_search_sql",
+    "success": true,
+    "result": {
+        "records": [
+            {
+                "HourDK": "2021-04-15T23:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 374.09
+            },
+            {
+                "HourDK": "2021-04-15T23:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 374.09
+            },
+            {
+                "HourDK": "2021-04-15T22:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 378.7
+            },
+            {
+                "HourDK": "2021-04-15T22:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 378.7
+            },
+            {
+                "HourDK": "2021-04-15T21:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 429.13
+            },
+            {
+                "HourDK": "2021-04-15T21:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 429.13
+            },
+            {
+                "HourDK": "2021-04-15T20:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 568.28
+            },
+            {
+                "HourDK": "2021-04-15T20:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 568.28
+            },
+            {
+                "HourDK": "2021-04-15T19:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 578.76
+            },
+            {
+                "HourDK": "2021-04-15T19:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 578.76
+            },
+            {
+                "HourDK": "2021-04-15T18:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 464.38
+            },
+            {
+                "HourDK": "2021-04-15T18:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 464.38
+            },
+            {
+                "HourDK": "2021-04-15T17:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 379.3
+            },
+            {
+                "HourDK": "2021-04-15T17:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 379.3
+            },
+            {
+                "HourDK": "2021-04-15T16:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 359.59
+            },
+            {
+                "HourDK": "2021-04-15T16:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 359.59
+            },
+            {
+                "HourDK": "2021-04-15T15:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 346.42
+            },
+            {
+                "HourDK": "2021-04-15T15:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 346.42
+            },
+            {
+                "HourDK": "2021-04-15T14:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 348.43
+            },
+            {
+                "HourDK": "2021-04-15T14:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 348.43
+            },
+            {
+                "HourDK": "2021-04-15T13:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 372.31
+            },
+            {
+                "HourDK": "2021-04-15T13:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 372.31
+            },
+            {
+                "HourDK": "2021-04-15T12:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 402.28
+            },
+            {
+                "HourDK": "2021-04-15T12:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 402.28
+            },
+            {
+                "HourDK": "2021-04-15T11:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 476.72
+            },
+            {
+                "HourDK": "2021-04-15T11:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 476.72
+            },
+            {
+                "HourDK": "2021-04-15T10:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 490.33
+            },
+            {
+                "HourDK": "2021-04-15T10:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 490.33
+            },
+            {
+                "HourDK": "2021-04-15T09:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 573.71
+            },
+            {
+                "HourDK": "2021-04-15T09:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 573.71
+            },
+            {
+                "HourDK": "2021-04-15T08:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 877.59
+            },
+            {
+                "HourDK": "2021-04-15T08:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 877.59
+            },
+            {
+                "HourDK": "2021-04-15T07:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 781.28
+            },
+            {
+                "HourDK": "2021-04-15T07:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 781.28
+            },
+            {
+                "HourDK": "2021-04-15T06:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 616.54
+            },
+            {
+                "HourDK": "2021-04-15T06:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 616.54
+            },
+            {
+                "HourDK": "2021-04-15T05:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 489.44
+            },
+            {
+                "HourDK": "2021-04-15T05:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 489.44
+            },
+            {
+                "HourDK": "2021-04-15T04:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 454.86
+            },
+            {
+                "HourDK": "2021-04-15T04:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 454.86
+            },
+            {
+                "HourDK": "2021-04-15T03:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 427.64
+            },
+            {
+                "HourDK": "2021-04-15T03:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 427.64
+            },
+            {
+                "HourDK": "2021-04-15T02:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 423.99
+            },
+            {
+                "HourDK": "2021-04-15T02:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 423.99
+            },
+            {
+                "HourDK": "2021-04-15T01:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 429.94
+            },
+            {
+                "HourDK": "2021-04-15T01:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 429.94
+            },
+            {
+                "HourDK": "2021-04-15T00:00:00",
+                "PriceArea": "DK2",
+                "SpotPriceDKK": 460.81
+            },
+            {
+                "HourDK": "2021-04-15T00:00:00",
+                "PriceArea": "DK1",
+                "SpotPriceDKK": 460.81
+            }
+        ],
+        "fields": [
+            {
+                "type": "timestamp",
+                "id": "HourDK"
+            },
+            {
+                "type": "float8",
+                "id": "SpotPriceDKK"
+            },
+            {
+                "type": "text",
+                "id": "PriceArea"
+            }
+        ],
+        "sql": "SELECT \"HourDK\", \"SpotPriceDKK\", \"PriceArea\" from \"elspotprices\" WHERE \"PriceArea\"='DK1' or \"PriceArea\"='DK2'  ORDER BY \"HourDK\" DESC LIMIT 48"
+    }
+}

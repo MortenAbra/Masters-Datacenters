@@ -52,8 +52,6 @@ public class VMManager implements Observer {
     }
 
     // https://github.com/beabetterdevv/DesignPatterns/blob/master/patterns/observer/ForecastDisplay.java
-
-    
     public void pingHost(Workload workload, FileWriter writer) {
         int timeout = 10;
         if (workload.getWl_port() != -1) {
