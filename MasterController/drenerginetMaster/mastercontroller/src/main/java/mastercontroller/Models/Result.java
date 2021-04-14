@@ -7,20 +7,12 @@ import java.util.List;
 
 
 public class Result {
-    public List<Record> records;
+    
+    private List<Record> records;
 
-
-    public void addToRecordsList(Record record){
-        records.add(record);
+    public Result(){
+        this.records = new ArrayList<>();
     }
-
-
-    /**
-     * @param records
-     */
-    public Result() {
-    }
-
 
     /**
      * @return the records
@@ -29,11 +21,23 @@ public class Result {
         return records;
     }
 
-
     /**
      * @param records the records to set
      */
     public void setRecords(List<Record> records) {
         this.records = records;
-    }   
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    
+    @Override
+    public String toString() {
+        return "Result: " + records;
+    }
+
+    
+
+
 }
