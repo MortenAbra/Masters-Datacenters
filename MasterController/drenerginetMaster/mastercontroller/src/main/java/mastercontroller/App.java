@@ -150,12 +150,6 @@ public class App {
 							listModel.removeElementAt(i);
 						}
 					}
-
-					
-					
-					// Remove list entires that are not in the workloads
-					//manager.getWorkloads().retainAll((Collection<?>) listModel);
-					//System.out.println(manager.getWorkloads());
 				}
 				manager.updateWorkloadsJSON();
 			}
