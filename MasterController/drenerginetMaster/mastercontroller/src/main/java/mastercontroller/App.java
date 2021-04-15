@@ -71,6 +71,8 @@ public class App {
 	private JLabel vmStatusLabel;
 	private JLabel vmStatusResult;
 	private JLabel vmMigrationLabel;
+	private JLabel migrationStatusLabel;
+	private JLabel lblNewLabel;
 	private DefaultListModel listModel;
 	private Workload selectedWorkload;
 
@@ -425,6 +427,19 @@ public class App {
 		gbc_vmMigrationBtn.gridx = 0;
 		gbc_vmMigrationBtn.gridy = 4;
 		panel_1.add(vmMigrationBtn, gbc_vmMigrationBtn);
+
+		lblNewLabel = new JLabel("Migration status:");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 3;
+		vmPropertiesPanel.add(lblNewLabel, gbc_lblNewLabel);
+		
+		migrationStatusLabel = new JLabel("Ready");
+		GridBagConstraints gbc_migrationStatusLabel = new GridBagConstraints();
+		gbc_migrationStatusLabel.gridx = 0;
+		gbc_migrationStatusLabel.gridy = 4;
+		vmPropertiesPanel.add(migrationStatusLabel, gbc_migrationStatusLabel);
 	}
 
 	public void setToggleState(int state) {
