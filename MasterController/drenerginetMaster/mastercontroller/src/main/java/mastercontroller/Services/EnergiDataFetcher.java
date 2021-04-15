@@ -46,6 +46,13 @@ public class EnergiDataFetcher implements Observer {
     private JsonReader reader;
     private List<Record> recordList;
     private FilePaths fp;
+    private Record currentRecord;
+
+    public enum OperationStage {
+        MIGRATE,
+        NORMAL,
+        RECEIVE
+    }
 
 
     public EnergiDataFetcher(int daysToRetrieve, double percentage) {
@@ -77,7 +84,7 @@ public class EnergiDataFetcher implements Observer {
     // Calculates threshold values for upper and lowerbound.
     private void generateOffset(double percentage) {
         // Genereate offSet
-        this.offSet = getThresholdByDays() * percentage;
+        this.offSet = getThresholdByDays() * (percentage / 100);
         this.upperBound = getThresholdByDays() + offSet;
         this.lowerBound = getThresholdByDays() - offSet;
     }
@@ -235,6 +242,7 @@ public class EnergiDataFetcher implements Observer {
                 // Parse record date
                 Date recordData = formatter.parse(record.HourDK);
                 if (isSameHour(now, recordData)) {
+                    currentRecord = record;
                     return record;
                 }
                 
@@ -252,6 +260,16 @@ public class EnergiDataFetcher implements Observer {
         // No need to care about formatting. 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHH");
         return fmt.format(date1).equals(fmt.format(date2));
+    }
+
+    public OperationStage getOperationStage() {
+        if (currentRecord.SpotPriceDKK < getLowerBound()) {
+            return OperationStage.RECEIVE;
+        } else if (getUpperBound() < currentRecord.SpotPriceDKK) {
+            return OperationStage.MIGRATE;
+        } else {
+            return OperationStage.NORMAL;
+        }
     }
 
     

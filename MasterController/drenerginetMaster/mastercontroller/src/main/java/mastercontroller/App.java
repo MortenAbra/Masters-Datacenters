@@ -1,6 +1,7 @@
 package mastercontroller;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -42,6 +44,7 @@ import mastercontroller.Models.Workload;
 import mastercontroller.Services.EnergiDataFetcher;
 import mastercontroller.Services.GuestManager;
 import mastercontroller.Services.VMManager;
+import mastercontroller.Services.EnergiDataFetcher.OperationStage;
 
 public class App {
 
@@ -202,16 +205,17 @@ public class App {
 		int days = 10;
 		double thresholdPercentage = 100;
 		// Checks if the expected number is a number
-		try {
-			thresholdPercentage = Double.parseDouble(migrationThresholdPercentTextField.getText());
-		} catch (NumberFormatException nfe) {
-			System.out.println("Expected value is not a number!");
-		}
+		thresholdPercentage = Double.parseDouble(migrationThresholdPercentTextField.getText());
+
 
 		edf = new EnergiDataFetcher(days, thresholdPercentage);
 		Record currentRecord = edf.getCurrentRecord();
 		System.out.println("Current Price = " + currentRecord.getSpotPriceDKK());
 		System.out.println("Current Time = " + currentRecord.getHourDK());
+
+		OperationStage operation = edf.getOperationStage();
+		migrationStatusLabel.setText(operation.name());
+
 	}
 
 	/**
@@ -260,7 +264,6 @@ public class App {
 		vmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		vmList.setSelectedIndex(0);
 		vmList.addListSelectionListener(new ListSelectionListener() {
-
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
@@ -274,7 +277,6 @@ public class App {
 							vmAutoMigrationSwitch.setSelected(object.isWl_autoMigration());
 						}
 					}
-
 				}
 			}
 
@@ -449,6 +451,7 @@ public class App {
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(guestManager.getGuestList().toArray());
 		availableVMsComboBox.setModel(comboBoxModel);
 
+
 		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
 		gbc_availableVMsComboBox.fill = GridBagConstraints.BOTH;
 		gbc_availableVMsComboBox.gridwidth = 2;
@@ -470,7 +473,6 @@ public class App {
 					System.out.println("Workload is not selected or guest is not online!");
 				}
 			}
-
 		});
 		GridBagConstraints gbc_vmMigrationBtn = new GridBagConstraints();
 		gbc_vmMigrationBtn.gridwidth = 2;

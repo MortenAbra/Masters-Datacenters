@@ -41,6 +41,7 @@ public class Guest {
                 storagePath = jsonObject.get("StoragePath").getAsString();
                 libvirtURI = jsonObject.get("LibvirtURI").getAsString();
 
+                online = true;
                 return true;
             } else {
                 return false;
