@@ -31,7 +31,9 @@ public class EnergiDataFetcher implements Observer {
 
     private Result result;
     private double threshold;
-    private double weeklyAvg;
+    private double thresholdByDays;
+    private double percentOffset;
+    private double returnThreshold;
     private URL url;
     private HttpURLConnection urlConnection;
     private BufferedReader bufferedReader;
@@ -46,35 +48,53 @@ public class EnergiDataFetcher implements Observer {
     public static void main(String[] args) {
         FilePaths fp = new FilePaths();
         EnergiDataFetcher en = new EnergiDataFetcher();
-        en.getEnergiData(fp.getAPIURL(), 2000);
+        en.getEnergiData(fp.getAPIURL());
 
-        en.calculateThreshold();
+        en.calculateThresholdMigration();
     }
 
-    public void weeklyRunningAvg() {
+    public void generateThresholdByDays(int days){
+        int i = days * 24;
         this.recordList = result.getRecords();
         double prices = recordList.get(0).getSpotPriceDKK();
 
-        for (int i = 1; i < recordList.size(); i++) {
+        for (int j = 0; j < recordList.size(); j++) {
             prices += recordList.get(i).getSpotPriceDKK();
         }
 
-        this.setWeeklyAvg(prices/recordList.size());
-
-        System.out.println("Threshold based on weekly avg: " + this.getWeeklyAvg());
-
-
-
-        this.setWeeklyAvg(weeklyAvg);    
+        this.setThresholdByDays(prices/recordList.size());
+        System.out.println("Threshold by: " + days + " = " + this.getThresholdByDays());
     }
 
-    public void calculateThreshold() {
+    public void calculateThresholdMigration() {
+        //PLACEHOLDER
+        
         //DO SOMETHING THAT CREATES A THRESHOLD!
+    }
+
+    public double getReturnThreshold(){
+        return this.returnThreshold;
     }
 
     public void customThreshold(double input){
         this.setThreshold(input);
         System.out.println("Custom threshold set to: " + input);
+    }
+
+    public double getPercentOffset(){
+        return this.percentOffset;
+    }
+
+    public void setPercentOffset(double input){
+        this.percentOffset = input;
+    }
+
+    public void setThresholdByDays(double input){
+        this.thresholdByDays = input;
+    }
+
+    public double getThresholdByDays(){
+        return this.thresholdByDays;
     }
 
     public void convertJsonToObjects(String jsonString) {
@@ -87,7 +107,7 @@ public class EnergiDataFetcher implements Observer {
         System.out.println(result.getRecords());
     }
 
-    public void getEnergiData(String apiUrl, int connectionTimeout) {
+    public void getEnergiData(String apiUrl) {
 
         int responseCode;
         try {
@@ -98,8 +118,6 @@ public class EnergiDataFetcher implements Observer {
             urlConnection.setRequestProperty("Content-length", "0");
             urlConnection.setUseCaches(true);
             urlConnection.setAllowUserInteraction(false);
-            urlConnection.setConnectTimeout(connectionTimeout);
-            urlConnection.setReadTimeout(connectionTimeout);
             urlConnection.connect();
             System.err.println("Connected!");
             responseCode = urlConnection.getResponseCode();
@@ -110,6 +128,7 @@ public class EnergiDataFetcher implements Observer {
                     System.out.println("Case 200");
                     bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     convertJsonToObjects(readChaString(bufferedReader));
+                    setThreshold(32);
                     break;
                 case 400:
                     System.out.println("400 - Bad reqeust! Check syntax");
