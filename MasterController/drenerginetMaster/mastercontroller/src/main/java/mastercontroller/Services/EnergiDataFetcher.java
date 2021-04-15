@@ -11,6 +11,9 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.print.event.PrintEvent;
@@ -50,19 +53,17 @@ public class EnergiDataFetcher implements Observer {
 
         getEnergiData(daysToRetrieve);
         calculateThresholdMigration(percentage);
-
-        System.out.println("Threshold by: " + daysToRetrieve + " days = " + this.getThresholdByDays());
     }
 
     // Calculates the threshold based on persenage
-    public void calculateThresholdMigration(double percentage) {
+    private void calculateThresholdMigration(double percentage) {
         //PLACEHOLDER
         generateThresholdByDays();
         generateOffset(percentage);
     }
 
     // Generates thresholdByDays
-    public void generateThresholdByDays(){
+    private void generateThresholdByDays(){
         this.recordList = result.getRecords();
         double prices = 0;
 
@@ -103,19 +104,16 @@ public class EnergiDataFetcher implements Observer {
     }
 
     public void convertJsonToObjects(String jsonString) {
-        System.out.println("Init json conversion");
-
         Gson gson = new Gson();
 
         JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject().get("result").getAsJsonObject();
         result = gson.fromJson(jsonObject.toString(), Result.class);
     }
 
-    public void getEnergiData(int days) {
+    private void getEnergiData(int days) {
 
         int responseCode;
         try {
-            System.out.println("Trying to open connection!");
             this.url = new URL(fp.getAPIURL(days));
             this.urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -123,13 +121,10 @@ public class EnergiDataFetcher implements Observer {
             urlConnection.setUseCaches(true);
             urlConnection.setAllowUserInteraction(false);
             urlConnection.connect();
-            System.err.println("Connected!");
             responseCode = urlConnection.getResponseCode();
-            System.out.println(responseCode);
 
             switch (responseCode) {
                 case 200:
-                    System.out.println("Case 200");
                     bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     convertJsonToObjects(readChaString(bufferedReader));
                     setThreshold(32);
@@ -214,6 +209,52 @@ public class EnergiDataFetcher implements Observer {
         this.offSet = offSet;
     }
 
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    public List<Record> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<Record> recordList) {
+        this.recordList = recordList;
+    }
+
+    public Record getCurrentRecord() {
+        // Current date (This is now)
+        Date now = new Date();
+        // Fomratter for Record Date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        for (Record record : recordList) {
+            try {
+                // Parse record date
+                Date recordData = formatter.parse(record.HourDK);
+                if (isSameHour(now, recordData)) {
+                    return record;
+                }
+                
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }  
+           
+        }
+
+        return null;
+    }
+
+    public boolean isSameHour(Date date1, Date date2) {
+        // No need to care about formatting. 
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHH");
+        return fmt.format(date1).equals(fmt.format(date2));
+    }
+
+    
     /*
      * public JsonObject fetchAPIData(String url, String filename) { try { input =
      * new URL(url).openStream(); } catch (IOException e) { // TODO Auto-generated

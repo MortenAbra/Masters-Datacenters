@@ -37,7 +37,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import mastercontroller.Models.Guest;
+import mastercontroller.Models.Record;
 import mastercontroller.Models.Workload;
+import mastercontroller.Services.EnergiDataFetcher;
 import mastercontroller.Services.GuestManager;
 import mastercontroller.Services.VMManager;
 
@@ -76,6 +78,11 @@ public class App {
 	private DefaultListModel listModel;
 	private Workload selectedWorkload;
 
+	private String initialThresholdPercent = "5";
+	private boolean initDone = false;
+
+	private EnergiDataFetcher edf;
+
 	/**
 	 * Launch the application.
 	 */
@@ -96,17 +103,16 @@ public class App {
 	public App() {
 		int delay = 0;
 		int period = 5;
-		es = Executors.newSingleThreadScheduledExecutor();
+		es = Executors.newScheduledThreadPool(10);
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
 		this.guestManager = new GuestManager();
 
-		AtomicInteger iteration = new AtomicInteger(0);
-		TimerTask repeatedTask = new TimerTask() {
-
+		AtomicInteger workloadIteration = new AtomicInteger(0);
+		TimerTask updateWorkloadsTask = new TimerTask() {
 			@Override
 			public void run() {
-				iteration.incrementAndGet();
+				workloadIteration.incrementAndGet();
 
 				// Initialize GuestManager
 				guestManager.initialize(manager);
@@ -156,13 +162,56 @@ public class App {
 				manager.updateWorkloadsJSON();
 			}
 		};
-		es.scheduleAtFixedRate(repeatedTask, 0, period, TimeUnit.SECONDS);
+		es.scheduleAtFixedRate(updateWorkloadsTask, 0, period, TimeUnit.SECONDS);
 		try {
 			Thread.sleep(delay + period);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
+
+		setupEnergiDataLoop();
 		initialize();
+	}
+
+	private void setupEnergiDataLoop() {
+		int energiPeriod = 10;
+		AtomicInteger energiIteration = new AtomicInteger(0);
+		TimerTask energiDataTask = new TimerTask() {
+			@Override
+			public void run() {
+				if (initDone) {
+					energiIteration.incrementAndGet();
+					initializeEnergiDataService();
+				}
+			}
+		};
+		es.scheduleAtFixedRate(energiDataTask, 0, energiPeriod, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(energiPeriod);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Initialize EnergiDataService
+	 */
+	private void initializeEnergiDataService() {
+		int days = 10;
+		double thresholdPercentage = 100;
+		// Checks if the expected number is a number
+		try {
+			thresholdPercentage = Double.parseDouble(migrationThresholdPercentTextField.getText());
+		} catch (NumberFormatException nfe) {
+			System.out.println("Expected value is not a number!");
+		}
+
+		edf = new EnergiDataFetcher(days, thresholdPercentage);
+		Record currentRecord = edf.getCurrentRecord();
+		System.out.println("Current Price = " + currentRecord.getSpotPriceDKK());
+		System.out.println("Current Time = " + currentRecord.getHourDK());
 	}
 
 	/**
@@ -311,6 +360,8 @@ public class App {
 		gbc_migrationThresholdPercentTextField.gridy = 5;
 		panel_2.add(migrationThresholdPercentTextField, gbc_migrationThresholdPercentTextField);
 		migrationThresholdPercentTextField.setColumns(10);
+		migrationThresholdPercentTextField.setText(initialThresholdPercent);
+		migrationThresholdPercentTextField.setHorizontalAlignment(JTextField.CENTER);
 
 		migrationThresholdSetButton = new JButton("Set Threshold");
 		GridBagConstraints gbc_migrationThresholdSetButton = new GridBagConstraints();
@@ -441,6 +492,8 @@ public class App {
 		gbc_migrationStatusLabel.gridx = 0;
 		gbc_migrationStatusLabel.gridy = 2;
 		vmPropertiesPanel.add(migrationStatusLabel, gbc_migrationStatusLabel);
+
+		initDone = true;
 	}
 
 	public void setToggleState(int state) {

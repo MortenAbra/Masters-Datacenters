@@ -22919,3 +22919,207 @@
 [INFO] Apr 15 15:23:50.185:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
 [INFO] Apr 15 15:23:50.189:GET Request for /guest/workload
 [INFO] Apr 15 15:23:50.189:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:28:11.696:GET Request for /guest
+[INFO] Apr 15 15:28:11.696:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:28:11.746:GET Request for /guest/workload
+[INFO] Apr 15 15:28:11.746:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:28:24.097:GET Request for /guest
+[INFO] Apr 15 15:28:24.097:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:28:24.108:GET Request for /guest/workload
+[INFO] Apr 15 15:28:24.108:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:30:53.272:GET Request for /guest
+[INFO] Apr 15 15:30:53.272:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:30:53.319:GET Request for /guest/workload
+[INFO] Apr 15 15:30:53.319:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:31:54.948:GET Request for /guest
+[INFO] Apr 15 15:31:54.948:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:31:54.990:GET Request for /guest/workload
+[INFO] Apr 15 15:31:54.990:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:32:12.446:GET Request for /guest
+[INFO] Apr 15 15:32:12.446:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:32:12.497:GET Request for /guest/workload
+[INFO] Apr 15 15:32:12.498:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:32:36.783:GET Request for /guest
+[INFO] Apr 15 15:32:36.783:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:32:36.839:GET Request for /guest/workload
+[INFO] Apr 15 15:32:36.840:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:33:46.247:GET Request for /guest
+[INFO] Apr 15 15:33:46.247:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:33:46.292:GET Request for /guest/workload
+[INFO] Apr 15 15:33:46.292:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:36:45.219:GET Request for /guest
+[INFO] Apr 15 15:36:45.219:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:36:45.265:GET Request for /guest/workload
+[INFO] Apr 15 15:36:45.266:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:36:57.592:GET Request for /guest
+[INFO] Apr 15 15:36:57.592:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:36:57.604:GET Request for /guest/workload
+[INFO] Apr 15 15:36:57.604:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:37:09.895:GET Request for /guest
+[INFO] Apr 15 15:37:09.895:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:37:09.901:GET Request for /guest/workload
+[INFO] Apr 15 15:37:09.901:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:37:22.187:GET Request for /guest
+[INFO] Apr 15 15:37:22.187:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:37:22.194:GET Request for /guest/workload
+[INFO] Apr 15 15:37:22.194:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:37:34.503:GET Request for /guest
+[INFO] Apr 15 15:37:34.503:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:37:34.511:GET Request for /guest/workload
+[INFO] Apr 15 15:37:34.511:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:37:46.790:GET Request for /guest
+[INFO] Apr 15 15:37:46.790:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:37:46.797:GET Request for /guest/workload
+[INFO] Apr 15 15:37:46.797:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:37:59.079:GET Request for /guest
+[INFO] Apr 15 15:37:59.079:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:37:59.087:GET Request for /guest/workload
+[INFO] Apr 15 15:37:59.087:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:38:11.371:GET Request for /guest
+[INFO] Apr 15 15:38:11.371:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:38:11.383:GET Request for /guest/workload
+[INFO] Apr 15 15:38:11.384:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:38:23.685:GET Request for /guest
+[INFO] Apr 15 15:38:23.686:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:38:23.697:GET Request for /guest/workload
+[INFO] Apr 15 15:38:23.697:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:38:36.006:GET Request for /guest
+[INFO] Apr 15 15:38:36.006:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:38:36.013:GET Request for /guest/workload
+[INFO] Apr 15 15:38:36.014:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:38:48.297:GET Request for /guest
+[INFO] Apr 15 15:38:48.297:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:38:48.303:GET Request for /guest/workload
+[INFO] Apr 15 15:38:48.304:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:39:00.613:GET Request for /guest
+[INFO] Apr 15 15:39:00.613:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:39:00.644:GET Request for /guest/workload
+[INFO] Apr 15 15:39:00.644:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:39:12.934:GET Request for /guest
+[INFO] Apr 15 15:39:12.934:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:39:12.941:GET Request for /guest/workload
+[INFO] Apr 15 15:39:12.942:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:39:25.253:GET Request for /guest
+[INFO] Apr 15 15:39:25.253:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:39:25.259:GET Request for /guest/workload
+[INFO] Apr 15 15:39:25.259:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:39:37.542:GET Request for /guest
+[INFO] Apr 15 15:39:37.542:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:39:37.548:GET Request for /guest/workload
+[INFO] Apr 15 15:39:37.548:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:39:42.124:GET Request for /guest
+[INFO] Apr 15 15:39:42.124:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:39:42.185:GET Request for /guest/workload
+[INFO] Apr 15 15:39:42.185:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:39:52.907:GET Request for /guest
+[INFO] Apr 15 15:39:52.907:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:39:52.917:GET Request for /guest/workload
+[INFO] Apr 15 15:39:52.917:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:40:02.515:GET Request for /guest
+[INFO] Apr 15 15:40:02.515:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:40:02.554:GET Request for /guest/workload
+[INFO] Apr 15 15:40:02.555:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:53:16.068:GET Request for /guest
+[INFO] Apr 15 15:53:16.068:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:53:16.101:GET Request for /guest/workload
+[INFO] Apr 15 15:53:16.101:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:53:28.404:GET Request for /guest
+[INFO] Apr 15 15:53:28.404:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:53:28.413:GET Request for /guest/workload
+[INFO] Apr 15 15:53:28.413:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:53:40.714:GET Request for /guest
+[INFO] Apr 15 15:53:40.714:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:53:40.723:GET Request for /guest/workload
+[INFO] Apr 15 15:53:40.723:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:53:53.010:GET Request for /guest
+[INFO] Apr 15 15:53:53.010:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:53:53.019:GET Request for /guest/workload
+[INFO] Apr 15 15:53:53.019:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 15:54:05.318:GET Request for /guest
+[INFO] Apr 15 15:54:05.318:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 15:54:05.326:GET Request for /guest/workload
+[INFO] Apr 15 15:54:05.326:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:00:45.815:GET Request for /guest
+[INFO] Apr 15 16:00:45.815:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:00:45.866:GET Request for /guest/workload
+[INFO] Apr 15 16:00:45.866:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:00:58.201:GET Request for /guest
+[INFO] Apr 15 16:00:58.201:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:00:58.210:GET Request for /guest/workload
+[INFO] Apr 15 16:00:58.210:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:01:10.504:GET Request for /guest
+[INFO] Apr 15 16:01:10.504:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:01:10.513:GET Request for /guest/workload
+[INFO] Apr 15 16:01:10.513:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:01:22.798:GET Request for /guest
+[INFO] Apr 15 16:01:22.798:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:01:22.814:GET Request for /guest/workload
+[INFO] Apr 15 16:01:22.814:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:01:35.118:GET Request for /guest
+[INFO] Apr 15 16:01:35.118:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:01:35.132:GET Request for /guest/workload
+[INFO] Apr 15 16:01:35.132:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:01:47.430:GET Request for /guest
+[INFO] Apr 15 16:01:47.430:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:01:47.440:GET Request for /guest/workload
+[INFO] Apr 15 16:01:47.440:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:01:59.724:GET Request for /guest
+[INFO] Apr 15 16:01:59.724:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:01:59.730:GET Request for /guest/workload
+[INFO] Apr 15 16:01:59.731:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:02:04.731:GET Request for /guest
+[INFO] Apr 15 16:02:04.731:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:02:04.779:GET Request for /guest/workload
+[INFO] Apr 15 16:02:04.779:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:02:15.122:GET Request for /guest
+[INFO] Apr 15 16:02:15.122:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:02:15.133:GET Request for /guest/workload
+[INFO] Apr 15 16:02:15.133:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:08:15.604:GET Request for /guest
+[INFO] Apr 15 16:08:15.604:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:08:15.639:GET Request for /guest/workload
+[INFO] Apr 15 16:08:15.639:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:08:27.950:GET Request for /guest
+[INFO] Apr 15 16:08:27.950:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:08:27.964:GET Request for /guest/workload
+[INFO] Apr 15 16:08:27.964:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:09:40.119:GET Request for /guest
+[INFO] Apr 15 16:09:40.119:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:09:40.152:GET Request for /guest/workload
+[INFO] Apr 15 16:09:40.152:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:11:01.791:GET Request for /guest
+[INFO] Apr 15 16:11:01.791:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:11:01.835:GET Request for /guest/workload
+[INFO] Apr 15 16:11:01.835:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:14:02.631:GET Request for /guest
+[INFO] Apr 15 16:14:02.631:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:14:02.663:GET Request for /guest/workload
+[INFO] Apr 15 16:14:02.663:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:14:14.960:GET Request for /guest
+[INFO] Apr 15 16:14:14.960:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:14:14.969:GET Request for /guest/workload
+[INFO] Apr 15 16:14:14.969:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:15:33.303:GET Request for /guest
+[INFO] Apr 15 16:15:33.303:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:15:33.346:GET Request for /guest/workload
+[INFO] Apr 15 16:15:33.346:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:15:45.642:GET Request for /guest
+[INFO] Apr 15 16:15:45.642:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:15:45.651:GET Request for /guest/workload
+[INFO] Apr 15 16:15:45.652:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:15:57.958:GET Request for /guest
+[INFO] Apr 15 16:15:57.959:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:15:57.967:GET Request for /guest/workload
+[INFO] Apr 15 16:15:57.967:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:16:10.246:GET Request for /guest
+[INFO] Apr 15 16:16:10.246:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:16:10.252:GET Request for /guest/workload
+[INFO] Apr 15 16:16:10.252:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:17:29.461:GET Request for /guest
+[INFO] Apr 15 16:17:29.461:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:17:29.499:GET Request for /guest/workload
+[INFO] Apr 15 16:17:29.499:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
+[INFO] Apr 15 16:17:41.809:GET Request for /guest
+[INFO] Apr 15 16:17:41.809:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 15 16:17:41.829:GET Request for /guest/workload
+[INFO] Apr 15 16:17:41.829:Responding: {"Workloads":[{"Identifier":"Test Server","AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"lucid_margulis","Image":"pyserver","Checkpoint":false,"NetworkSettings":null,"CheckpointIDs":null}}]}
