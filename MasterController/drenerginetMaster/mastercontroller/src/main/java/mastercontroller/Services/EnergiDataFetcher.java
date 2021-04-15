@@ -33,47 +33,52 @@ public class EnergiDataFetcher implements Observer {
     private double threshold;
     private double thresholdByDays;
     private double percentOffset;
-    private double returnThreshold;
+    private double upperBound;
+    private double lowerBound;
+    private double offSet;
     private URL url;
     private HttpURLConnection urlConnection;
     private BufferedReader bufferedReader;
     private InputStream in;
     private JsonReader reader;
     private List<Record> recordList;
+    private FilePaths fp;
 
-    public EnergiDataFetcher() {
 
+    public EnergiDataFetcher(int daysToRetrieve, double percentage) {
+        this.fp = new FilePaths();
+
+        getEnergiData(daysToRetrieve);
+        calculateThresholdMigration(percentage);
+
+        System.out.println("Threshold by: " + daysToRetrieve + " days = " + this.getThresholdByDays());
     }
 
-    public static void main(String[] args) {
-        FilePaths fp = new FilePaths();
-        EnergiDataFetcher en = new EnergiDataFetcher();
-        en.getEnergiData(fp.getAPIURL());
-
-        en.calculateThresholdMigration();
+    // Calculates the threshold based on persenage
+    public void calculateThresholdMigration(double percentage) {
+        //PLACEHOLDER
+        generateThresholdByDays();
+        generateOffset(percentage);
     }
 
-    public void generateThresholdByDays(int days){
-        int i = days * 24;
+    // Generates thresholdByDays
+    public void generateThresholdByDays(){
         this.recordList = result.getRecords();
-        double prices = recordList.get(0).getSpotPriceDKK();
+        double prices = 0;
 
-        for (int j = 0; j < recordList.size(); j++) {
-            prices += recordList.get(i).getSpotPriceDKK();
+        for (Record record : recordList) {
+            prices += record.getSpotPriceDKK();
         }
 
         this.setThresholdByDays(prices/recordList.size());
-        System.out.println("Threshold by: " + days + " = " + this.getThresholdByDays());
     }
 
-    public void calculateThresholdMigration() {
-        //PLACEHOLDER
-        
-        //DO SOMETHING THAT CREATES A THRESHOLD!
-    }
-
-    public double getReturnThreshold(){
-        return this.returnThreshold;
+    // Calculates threshold values for upper and lowerbound.
+    private void generateOffset(double percentage) {
+        // Genereate offSet
+        this.offSet = getThresholdByDays() * percentage;
+        this.upperBound = getThresholdByDays() + offSet;
+        this.lowerBound = getThresholdByDays() - offSet;
     }
 
     public void customThreshold(double input){
@@ -104,15 +109,14 @@ public class EnergiDataFetcher implements Observer {
 
         JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject().get("result").getAsJsonObject();
         result = gson.fromJson(jsonObject.toString(), Result.class);
-        System.out.println(result.getRecords());
     }
 
-    public void getEnergiData(String apiUrl) {
+    public void getEnergiData(int days) {
 
         int responseCode;
         try {
             System.out.println("Trying to open connection!");
-            this.url = new URL(apiUrl);
+            this.url = new URL(fp.getAPIURL(days));
             this.urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-length", "0");
@@ -174,20 +178,6 @@ public class EnergiDataFetcher implements Observer {
         this.threshold = threshold;
     }
 
-    /**
-     * @return the weeklyAvg
-     */
-    public double getWeeklyAvg() {
-        return weeklyAvg;
-    }
-
-    /**
-     * @param weeklyAvg the weeklyAvg to set
-     */
-    public void setWeeklyAvg(double weeklyAvg) {
-        this.weeklyAvg = weeklyAvg;
-    }
-
     @Override
     public void update(Workload workload) {
         // DO NOTHING HERE
@@ -198,6 +188,30 @@ public class EnergiDataFetcher implements Observer {
     public void update(double threshold) {
         // TODO Auto-generated method stub
 
+    }
+
+    public double getUpperBound() {
+        return upperBound;
+    }
+
+    public void setUpperBound(double upperBound) {
+        this.upperBound = upperBound;
+    }
+
+    public double getLowerBound() {
+        return lowerBound;
+    }
+
+    public void setLowerBound(double lowerBound) {
+        this.lowerBound = lowerBound;
+    }
+
+    public double getOffSet() {
+        return offSet;
+    }
+
+    public void setOffSet(double offSet) {
+        this.offSet = offSet;
     }
 
     /*
