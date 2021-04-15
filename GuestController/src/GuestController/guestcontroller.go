@@ -16,6 +16,7 @@ import (
 	"GuestController/drlogger"
 	"GuestController/guest"
 	"GuestController/jsonmanager"
+	"GuestController/jsonmanager/timerresponse"
 	"GuestController/migrate"
 	"GuestController/workload"
 	"GuestController/workload/containerworkload"
@@ -41,6 +42,10 @@ func logInfo(info string) {
 }
 func logWarn(warn string) {
 	drlogger.DRLog(drlogger.WARN, warn)
+}
+
+func logTime(time string, name string) {
+	logInfo(name + " took " + time)
 }
 
 // Initialize:
@@ -135,6 +140,7 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		logInfo("POST Request for /migrate")
 
+		// Timer Object
 		data, err := ioutil.ReadAll(r.Body)
 		logErr(err)
 		decoder := json.NewDecoder(bytes.NewReader(data))
@@ -165,7 +171,11 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 						fmt.Println("Migrating container: " + migration.Identifier + " to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 						logInfo("Migrating container: " + migration.Identifier + " to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 
-						initiateContainerMigration(migration, container) // Go Routine?
+						jsonResponse := initiateContainerMigration(migration, container) // Go Routine?
+
+						timerOutput, err := jsonmanager.GetJSONResponseAsJSON(jsonResponse)
+						logErr(err)
+						fmt.Fprintf(w, timerOutput)
 
 					case workload.VMTYPE:
 						// VM migration start
@@ -182,7 +192,6 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 						// TODO
 						initiateVMMigration(migration, vm)
 					}
-					fmt.Fprintf(w, "Migration Successful!")
 				}
 			}
 		}
@@ -217,7 +226,9 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 				err = newdecoder.Decode(&wl)
 				logErr(err)
 
-				finishContainerMigration(wl)
+				// Send time back to Migrator
+				timer := finishContainerMigration(wl)
+				fmt.Fprintf(w, timer)
 
 			case workload.VMTYPE:
 				// VM migration recieved
@@ -231,6 +242,7 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 
 				finishVMMigration(wl)
 			}
+
 		}
 	}
 }
@@ -255,44 +267,62 @@ func logsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Initial Migration part of the Container Migration
-func initiateContainerMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) {
+func initiateContainerMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) timerresponse.TimerResponse {
+	var jsonResponse timerresponse.TimerResponse
 	// Stopwatch
 	start := time.Now()
 	err := container.DockerSaveAndStoreCheckpoint(container.Properties.Checkpoint)
 	logErr(err)
-	timeTrack(start, "DockerSaveAndStoreCheckpoint("+container.Identifier+")")
 
-	err = ContainerPostMigration(migration, container)
+	// Track Time
+	elapsed := time.Since(start)
+	logTime(elapsed.String(), "DockerSaveAndStoreCheckpoint("+container.Identifier+")")
+	jsonResponse.SaveAndStore = elapsed.String()
+
+	timeResponse, err := ContainerPostMigration(migration, container)
 	logErr(err)
+	jsonResponse.LoadAndStart = timeResponse
 
+	start = time.Now()
 	err = cleanUpAfterContainerMigration(container)
 	logErr(err)
+	elapsed = time.Since(start)
+	logTime(elapsed.String(), "cleanUpAfterContainerMigration("+container.Identifier+")")
+	jsonResponse.CleanUp = elapsed.String()
+
+	return jsonResponse
 }
 
 // Final Migration part of the Container Migration on receiver
-func finishContainerMigration(container containerworkload.ContainerWorkload) {
+func finishContainerMigration(container containerworkload.ContainerWorkload) string {
 	logInfo("Migration of workload: " + container.Identifier)
 	start := time.Now()
 	container.DockerLoadAndStartContainer(container.Properties.Checkpoint)
-	timeTrack(start, "DockerLoadAndStartContainer("+container.Identifier+")")
+
+	// Track time
+	elapsed := time.Since(start)
+	logTime(elapsed.String(), "DockerLoadAndStartContainer("+container.Identifier+")")
 
 	err := jsonmanager.AddContainerWorkloadToSystem(container)
 	logErr(err)
+
+	return elapsed.String()
 }
 
 // Intermediary step of migration. Send workload information to receiver
-func ContainerPostMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) error {
+func ContainerPostMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) (string, error) {
 	jsonValue, _ := json.Marshal(container)
 
 	// Send workload to target via /transfer.
 	fmt.Println("Transfering Workload Information: " + container.Identifier + " to:" + migration.TargetGuest.IP)
 	prefix := migration.TargetGuest.IP + ":" + migration.TargetGuest.Port
 	suffix := "/transfer"
-	_, err := http.Post("http://"+prefix+suffix, "application/json", bytes.NewBuffer(jsonValue))
+	timeResponse, err := http.Post("http://"+prefix+suffix, "application/json", bytes.NewBuffer(jsonValue))
 	if err != nil {
-		return err
+		return "", err
 	}
-	return err
+	data, err := ioutil.ReadAll(timeResponse.Body)
+	return string(data), err
 }
 
 // Clean up after migration by removing container workload from workload.json and stopping contianer

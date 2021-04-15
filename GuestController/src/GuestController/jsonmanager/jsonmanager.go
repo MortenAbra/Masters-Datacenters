@@ -1,6 +1,7 @@
 package jsonmanager
 
 import (
+	"GuestController/jsonmanager/timerresponse"
 	"GuestController/workload"
 	"GuestController/workload/containerworkload"
 	"GuestController/workload/vmworkload"
@@ -206,4 +207,9 @@ func RemoveVMFromWorkloadFile(vm vmworkload.VMWorkload) error {
 // Remove element from a slice (Reslicing)
 func removeIndexFromSlice(slice []interface{}, index int) []interface{} {
 	return append(slice[:index], slice[index+1:]...)
+}
+
+func GetJSONResponseAsJSON(timer timerresponse.TimerResponse) (string, error) {
+	result, err := json.Marshal(timer)
+	return string(result), err
 }

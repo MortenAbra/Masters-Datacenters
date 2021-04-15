@@ -339,7 +339,7 @@ public class VMManager implements Observer {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                System.out.println(response.toString());
+                System.out.println("Migration Response: " + response.toString());
             }
             
         } catch (IOException e) {

@@ -17,5 +17,4 @@ require (
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	google.golang.org/grpc v1.36.1 // indirect
 	gotest.tools/v3 v3.0.3 // indirect
-	libvirt.org/libvirt-go v7.0.0+incompatible
 )
