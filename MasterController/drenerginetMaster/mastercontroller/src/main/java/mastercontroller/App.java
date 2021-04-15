@@ -432,13 +432,14 @@ public class App {
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 3;
+		gbc_lblNewLabel.gridy = 1;
 		vmPropertiesPanel.add(lblNewLabel, gbc_lblNewLabel);
 		
 		migrationStatusLabel = new JLabel("Ready");
 		GridBagConstraints gbc_migrationStatusLabel = new GridBagConstraints();
+		gbc_migrationStatusLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_migrationStatusLabel.gridx = 0;
-		gbc_migrationStatusLabel.gridy = 4;
+		gbc_migrationStatusLabel.gridy = 2;
 		vmPropertiesPanel.add(migrationStatusLabel, gbc_migrationStatusLabel);
 	}
 
