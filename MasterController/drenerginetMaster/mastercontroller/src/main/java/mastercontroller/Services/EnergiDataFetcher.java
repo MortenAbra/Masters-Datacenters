@@ -63,8 +63,6 @@ public class EnergiDataFetcher implements Observer {
 
         System.out.println("Threshold based on weekly avg: " + this.getWeeklyAvg());
 
-
-
         this.setWeeklyAvg(weeklyAvg);    
     }
 
