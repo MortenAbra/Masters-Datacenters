@@ -8,3 +8,7 @@ type TimerResponse struct {
 	Memory  time.Duration `json:"Memory"`
 	Network time.Duration `json:"Network"`
 }
+
+func (timer TimerResponse) GetTotalTime() time.Duration {
+	return timer.Disc + timer.CPU + timer.Memory + timer.Network
+}

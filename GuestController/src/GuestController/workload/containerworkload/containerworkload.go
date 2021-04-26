@@ -41,7 +41,7 @@ func initDocker() (context.Context, *client.Client, error) {
 // Returns Error, CPUTime, DiscTime, RamTime
 func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Duration, time.Duration, time.Duration, error) {
 	// Track first Timer for CPU
-	start := time.Now()
+	cpu_start := time.Now()
 	// Init docker environment
 	ctx, cli, err := initDocker()
 	if err != nil {
@@ -72,10 +72,10 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Dur
 		return 0, 0, 0, err
 	}
 
-	cpu_elapsed := time.Since(start)
+	cpu_elapsed := time.Since(cpu_start)
 
 	// Track second Timer for Disc
-	start = time.Now()
+	disc_start := time.Now()
 
 	resp, err := cli.ImageSave(ctx, []string{wl.Properties.Image})
 	if err != nil {
@@ -89,10 +89,10 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Dur
 		return 0, 0, 0, err
 	}
 
-	disc_elapsed := time.Since(start)
+	disc_elapsed := time.Since(disc_start)
 
 	// Track third Timer for RAM
-	start = time.Now()
+	ram_start := time.Now()
 	if restore {
 
 		err = cli.CheckpointCreate(ctx, wl.Properties.ContainerID, types.CheckpointCreateOptions{
@@ -104,13 +104,15 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Dur
 		}
 	}
 
-	ram_elapsed := time.Since(start)
+	ram_elapsed := time.Since(ram_start)
 
+	disc_start = time.Now()
 	defer outFile.Close()
 	_, err = io.Copy(outFile, resp)
 	if err != nil {
 		return 0, 0, 0, err
 	}
+	disc_elapsed = time.Since(disc_start) + disc_elapsed
 
 	return cpu_elapsed, disc_elapsed, ram_elapsed, err
 }
@@ -134,7 +136,7 @@ func (wl ContainerWorkload) DockeRemoveContainer() error {
 
 // Docker load - docker run container
 func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Duration, time.Duration, time.Duration, error) {
-	start := time.Now()
+	disc_start := time.Now()
 
 	// Init docker environment
 	ctx, cli, err := initDocker()
@@ -155,8 +157,8 @@ func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Dura
 	}
 	defer resp.Body.Close()
 
-	disc_elapsed := time.Since(start)
-	start = time.Now()
+	disc_elapsed := time.Since(disc_start)
+	cpu_start := time.Now()
 
 	out, err := cli.ContainerCreate(
 		ctx,
@@ -168,9 +170,9 @@ func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Dura
 	if err != nil {
 		return 0, 0, 0, err
 	}
-	cpu_elapsed := time.Since(start)
+	cpu_elapsed := time.Since(cpu_start)
 
-	start = time.Now()
+	ram_start := time.Now()
 
 	if restore {
 		err := cli.ContainerStart(ctx, out.ID, types.ContainerStartOptions{
@@ -186,7 +188,7 @@ func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Dura
 			return 0, 0, 0, err
 		}
 	}
-	ram_elapsed := time.Since(start)
+	ram_elapsed := time.Since(ram_start)
 
 	return cpu_elapsed, disc_elapsed, ram_elapsed, err
 }

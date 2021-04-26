@@ -171,9 +171,13 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 						fmt.Println("Migrating container: " + migration.Identifier + " to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 						logInfo("Migrating container: " + migration.Identifier + " to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 
+						start := time.Now()
 						jsonResponse := initiateContainerMigration(migration, container) // Go Routine?
+						elapsed := time.Since(start)
+						jsonResponse.Network = elapsed - jsonResponse.CPU - jsonResponse.Disc - jsonResponse.Memory
 
 						timerOutput := jsonmanager.GetJSONResponseAsJSON(jsonResponse)
+
 						logErr(err)
 						fmt.Fprintf(w, timerOutput)
 
@@ -272,32 +276,30 @@ func logsHandler(w http.ResponseWriter, r *http.Request) {
 func initiateContainerMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) timerresponse.TimerResponse {
 	var jsonResponse timerresponse.TimerResponse
 	// Stopwatch
-	start := time.Now()
+	save_start := time.Now()
 	cputime, disctime, ramtime, err := container.DockerSaveAndStoreCheckpoint(container.Properties.Checkpoint)
 	logErr(err)
-	logTime(time.Since(start).String(), "DockerSaveAndStoreCheckpoint("+container.Identifier+")")
+	logTime(time.Since(save_start).String(), "DockerSaveAndStoreCheckpoint("+container.Identifier+")")
 
 	jsonResponse.CPU = cputime
 	jsonResponse.Disc = disctime
 	jsonResponse.Memory = ramtime
 
-	// Track Time
 	timeResponse, err := ContainerPostMigration(migration, container)
 	logErr(err)
 
 	var postResponse timerresponse.TimerResponse
 	json.Unmarshal(timeResponse, &postResponse)
+
 	jsonResponse.CPU = postResponse.CPU + jsonResponse.CPU
 	jsonResponse.Disc = postResponse.Disc + jsonResponse.Disc
 	jsonResponse.Memory = postResponse.Memory + jsonResponse.Memory
 
-	start = time.Now()
+	clean_start := time.Now()
 	err = cleanUpAfterContainerMigration(container)
 	logErr(err)
-	logTime(time.Since(start).String(), "cleanUpAfterContainerMigration("+container.Identifier+")")
-
-	jsonResponse.CPU = cputime + jsonResponse.CPU
-	jsonResponse.Disc = disctime + jsonResponse.Disc
+	logTime(time.Since(clean_start).String(), "cleanUpAfterContainerMigration("+container.Identifier+")")
+	jsonResponse.CPU = time.Since(clean_start) + jsonResponse.CPU
 
 	return jsonResponse
 }
@@ -309,13 +311,16 @@ func finishContainerMigration(container containerworkload.ContainerWorkload) tim
 	logInfo("Migration of workload: " + container.Identifier)
 	start := time.Now()
 	cputime, disctime, ramtime, err := container.DockerLoadAndStartContainer(container.Properties.Checkpoint)
+	logErr(err)
 	logTime(time.Since(start).String(), "DockerLoadAndStartContainer("+container.Identifier+")")
 
 	jsonResponse.CPU = cputime
 	jsonResponse.Disc = disctime
 	jsonResponse.Memory = ramtime
 
+	clean_start := time.Now()
 	err = jsonmanager.AddContainerWorkloadToSystem(container)
+	jsonResponse.CPU = time.Since(clean_start) + jsonResponse.CPU
 	logErr(err)
 
 	return jsonResponse
