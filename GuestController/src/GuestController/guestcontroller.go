@@ -227,8 +227,10 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 				logErr(err)
 
 				// Send time back to Migrator
-				timer := finishContainerMigration(wl)
-				fmt.Fprintf(w, timer)
+				jsonResponse := finishContainerMigration(wl)
+				response, err := json.Marshal(jsonResponse)
+				logErr(err)
+				fmt.Fprintf(w, string(response))
 
 			case workload.VMTYPE:
 				// VM migration recieved
@@ -271,46 +273,56 @@ func initiateContainerMigration(migration migrate.Migrate, container containerwo
 	var jsonResponse timerresponse.TimerResponse
 	// Stopwatch
 	start := time.Now()
-	err := container.DockerSaveAndStoreCheckpoint(container.Properties.Checkpoint)
+	cputime, disctime, ramtime, err := container.DockerSaveAndStoreCheckpoint(container.Properties.Checkpoint)
 	logErr(err)
+	logTime(time.Since(start).String(), "DockerSaveAndStoreCheckpoint("+container.Identifier+")")
+
+	jsonResponse.CPU = int64(cputime)
+	jsonResponse.Disc = int64(disctime)
+	jsonResponse.Memory = int64(ramtime)
 
 	// Track Time
-	elapsed := time.Since(start)
-	logTime(elapsed.String(), "DockerSaveAndStoreCheckpoint("+container.Identifier+")")
-	jsonResponse.SaveAndStore = elapsed.String()
-
 	timeResponse, err := ContainerPostMigration(migration, container)
 	logErr(err)
-	jsonResponse.LoadAndStart = timeResponse
+
+	var postResponse timerresponse.TimerResponse
+	json.Unmarshal(timeResponse, &postResponse)
+	jsonResponse.CPU = postResponse.CPU + jsonResponse.CPU
+	jsonResponse.Disc = postResponse.Disc + jsonResponse.Disc
+	jsonResponse.Memory = postResponse.Memory + jsonResponse.Memory
 
 	start = time.Now()
 	err = cleanUpAfterContainerMigration(container)
 	logErr(err)
-	elapsed = time.Since(start)
-	logTime(elapsed.String(), "cleanUpAfterContainerMigration("+container.Identifier+")")
-	jsonResponse.CleanUp = elapsed.String()
+	logTime(time.Since(start).String(), "cleanUpAfterContainerMigration("+container.Identifier+")")
+
+	jsonResponse.CPU = int64(cputime) + jsonResponse.CPU
+	jsonResponse.Disc = int64(disctime) + jsonResponse.Disc
 
 	return jsonResponse
 }
 
 // Final Migration part of the Container Migration on receiver
-func finishContainerMigration(container containerworkload.ContainerWorkload) string {
+func finishContainerMigration(container containerworkload.ContainerWorkload) timerresponse.TimerResponse {
+	var jsonResponse timerresponse.TimerResponse
+
 	logInfo("Migration of workload: " + container.Identifier)
 	start := time.Now()
-	container.DockerLoadAndStartContainer(container.Properties.Checkpoint)
+	cputime, disctime, ramtime, err := container.DockerLoadAndStartContainer(container.Properties.Checkpoint)
+	logTime(time.Since(start).String(), "DockerLoadAndStartContainer("+container.Identifier+")")
 
-	// Track time
-	elapsed := time.Since(start)
-	logTime(elapsed.String(), "DockerLoadAndStartContainer("+container.Identifier+")")
+	jsonResponse.CPU = int64(cputime)
+	jsonResponse.Disc = int64(disctime)
+	jsonResponse.Memory = int64(ramtime)
 
-	err := jsonmanager.AddContainerWorkloadToSystem(container)
+	err = jsonmanager.AddContainerWorkloadToSystem(container)
 	logErr(err)
 
-	return elapsed.String()
+	return jsonResponse
 }
 
 // Intermediary step of migration. Send workload information to receiver
-func ContainerPostMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) (string, error) {
+func ContainerPostMigration(migration migrate.Migrate, container containerworkload.ContainerWorkload) ([]byte, error) {
 	jsonValue, _ := json.Marshal(container)
 
 	// Send workload to target via /transfer.
@@ -319,10 +331,10 @@ func ContainerPostMigration(migration migrate.Migrate, container containerworklo
 	suffix := "/transfer"
 	timeResponse, err := http.Post("http://"+prefix+suffix, "application/json", bytes.NewBuffer(jsonValue))
 	if err != nil {
-		return "", err
+		return []byte{}, err
 	}
 	data, err := ioutil.ReadAll(timeResponse.Body)
-	return string(data), err
+	return data, err
 }
 
 // Clean up after migration by removing container workload from workload.json and stopping contianer

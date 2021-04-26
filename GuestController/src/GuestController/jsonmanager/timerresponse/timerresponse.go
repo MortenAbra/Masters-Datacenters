@@ -1,7 +1,8 @@
 package timerresponse
 
 type TimerResponse struct {
-	SaveAndStore string `json:"SaveAndStore"`
-	LoadAndStart string `json:"LoadAndStart"`
-	CleanUp      string `json:"CleanUp"`
+	Disc    int64 `json:"Disc"`
+	CPU     int64 `json:"CPU"`
+	Memory  int64 `json:"Memory"`
+	Network int64 `json:"Network"`
 }

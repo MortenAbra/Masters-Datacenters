@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"os"
+	"time"
 
 	// Docker SDK
 	"github.com/docker/docker/api/types"
@@ -37,17 +38,20 @@ func initDocker() (context.Context, *client.Client, error) {
 }
 
 // Docker save - and save the exported as tar.gz
-func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
+// Returns Error, CPUTime, DiscTime, RamTime
+func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Duration, time.Duration, time.Duration, error) {
+	// Track first Timer for CPU
+	start := time.Now()
 	// Init docker environment
 	ctx, cli, err := initDocker()
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 
 	// Save NetworkSetitngs of the container
 	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{All: true})
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 
 	for _, container := range containers {
@@ -59,26 +63,35 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 	// Create UUID for checkpoint and store it
 	cpUUID, err := uuid.NewV4()
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 	wl.Properties.CheckpointIDs = append(wl.Properties.CheckpointIDs, cpUUID.String())
 
 	err = cli.ContainerStart(ctx, wl.Properties.ContainerID, types.ContainerStartOptions{})
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 	resp, err := cli.ImageSave(ctx, []string{wl.Properties.Image})
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 	defer resp.Close()
+
+	cpu_elapsed := time.Since(start)
+
+	// Track second Timer for Disc
+	start = time.Now()
 
 	// Write resp to file
 	outFile, err := os.Create(wl.SharedDir + "/" + wl.Properties.ContainerID + ".tar.gz")
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 
+	disc_elapsed := time.Since(start)
+
+	// Track third Timer for RAM
+	start = time.Now()
 	if restore {
 
 		err = cli.CheckpointCreate(ctx, wl.Properties.ContainerID, types.CheckpointCreateOptions{
@@ -86,18 +99,19 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) error {
 			CheckpointDir: wl.SharedDir,
 		})
 		if err != nil {
-			return err
+			return 0, 0, 0, err
 		}
 	}
+
+	ram_elapsed := time.Since(start)
 
 	defer outFile.Close()
 	_, err = io.Copy(outFile, resp)
 	if err != nil {
-		return err
-
+		return 0, 0, 0, err
 	}
 
-	return err
+	return cpu_elapsed, disc_elapsed, ram_elapsed, err
 }
 
 // Docker container stop - docker container rm
@@ -118,22 +132,28 @@ func (wl ContainerWorkload) DockeRemoveContainer() error {
 }
 
 // Docker load - docker run container
-func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) error {
+func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Duration, time.Duration, time.Duration, error) {
+	start := time.Now()
+
 	// Init docker environment
 	ctx, cli, err := initDocker()
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 
 	tarFile, err := os.Open(wl.SharedDir + "/" + wl.Properties.ContainerID + ".tar.gz")
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
+	disc_elapsed := time.Since(start)
+
 	defer tarFile.Close()
+
+	start = time.Now()
 
 	resp, err := cli.ImageLoad(ctx, tarFile, true)
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
 	defer resp.Body.Close()
 
@@ -145,8 +165,11 @@ func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) error {
 		nil,
 		wl.Properties.ContainerID)
 	if err != nil {
-		return err
+		return 0, 0, 0, err
 	}
+	cpu_elapsed := time.Since(start)
+
+	start = time.Now()
 
 	if restore {
 		err := cli.ContainerStart(ctx, out.ID, types.ContainerStartOptions{
@@ -154,13 +177,15 @@ func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) error {
 			CheckpointDir: wl.SharedDir,
 		})
 		if err != nil {
-			return err
+			return 0, 0, 0, err
 		}
 	} else {
 		err := cli.ContainerStart(ctx, out.ID, types.ContainerStartOptions{})
 		if err != nil {
-			return err
+			return 0, 0, 0, err
 		}
 	}
-	return err
+	ram_elapsed := time.Since(start)
+
+	return cpu_elapsed, disc_elapsed, ram_elapsed, err
 }

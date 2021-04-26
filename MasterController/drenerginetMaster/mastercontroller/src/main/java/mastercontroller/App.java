@@ -104,7 +104,7 @@ public class App {
 	 * @throws IOException
 	 */
 	public App() {
-		int delay = 0;
+		int delay = 5;
 		int period = 5;
 		es = Executors.newScheduledThreadPool(10);
 		this.wm = new WorkloadManager();
