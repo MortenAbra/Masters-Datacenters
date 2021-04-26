@@ -71,16 +71,17 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Dur
 	if err != nil {
 		return 0, 0, 0, err
 	}
-	resp, err := cli.ImageSave(ctx, []string{wl.Properties.Image})
-	if err != nil {
-		return 0, 0, 0, err
-	}
-	defer resp.Close()
 
 	cpu_elapsed := time.Since(start)
 
 	// Track second Timer for Disc
 	start = time.Now()
+
+	resp, err := cli.ImageSave(ctx, []string{wl.Properties.Image})
+	if err != nil {
+		return 0, 0, 0, err
+	}
+	defer resp.Close()
 
 	// Write resp to file
 	outFile, err := os.Create(wl.SharedDir + "/" + wl.Properties.ContainerID + ".tar.gz")
@@ -145,17 +146,17 @@ func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Dura
 	if err != nil {
 		return 0, 0, 0, err
 	}
-	disc_elapsed := time.Since(start)
 
 	defer tarFile.Close()
-
-	start = time.Now()
 
 	resp, err := cli.ImageLoad(ctx, tarFile, true)
 	if err != nil {
 		return 0, 0, 0, err
 	}
 	defer resp.Body.Close()
+
+	disc_elapsed := time.Since(start)
+	start = time.Now()
 
 	out, err := cli.ContainerCreate(
 		ctx,

@@ -1,8 +1,10 @@
 package timerresponse
 
+import "time"
+
 type TimerResponse struct {
-	Disc    int64 `json:"Disc"`
-	CPU     int64 `json:"CPU"`
-	Memory  int64 `json:"Memory"`
-	Network int64 `json:"Network"`
+	Disc    time.Duration `json:"Disc"`
+	CPU     time.Duration `json:"CPU"`
+	Memory  time.Duration `json:"Memory"`
+	Network time.Duration `json:"Network"`
 }

@@ -7,6 +7,7 @@ import (
 	"GuestController/workload/vmworkload"
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -209,7 +210,10 @@ func removeIndexFromSlice(slice []interface{}, index int) []interface{} {
 	return append(slice[:index], slice[index+1:]...)
 }
 
-func GetJSONResponseAsJSON(timer timerresponse.TimerResponse) (string, error) {
-	result, err := json.Marshal(timer)
-	return string(result), err
+func GetJSONResponseAsJSON(timer timerresponse.TimerResponse) string {
+	cpu := fmt.Sprint(timer.CPU.Seconds())
+	disc := fmt.Sprint(timer.Disc.Seconds())
+	ram := fmt.Sprint(timer.Memory.Seconds())
+	network := fmt.Sprint(timer.Network.Seconds())
+	return "CPU:" + cpu + " Disc:" + disc + " RAM:" + ram + " Network:" + network
 }

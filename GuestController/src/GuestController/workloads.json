@@ -1,1 +1,1 @@
-{"Workloads":[{"AccessIP":"localhost","AccessPort":"5000","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointIDs":null,"ContainerID":"nostalgic_ishizaka","Image":"pyserver","NetworkSettings":null},"Identifier":"PyServer2","SharedDir":"/home/wolder/shared_storage","Type":"Container"}]}
+{"Workloads":[]}
