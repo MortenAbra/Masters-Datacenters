@@ -514,6 +514,7 @@ public class App {
 				if (selectedWorkload != null && guest.isOnline()) {
 					manager.migrateWorkload(selectedWorkload, guest, guestManager);
 					listModel.removeElement(vmList.getSelectedValue());
+					vmList.setModel(listModel);
 
 				} else {
 					System.out.println("Workload is not selected or guest is not online!");
