@@ -305,7 +305,7 @@ public class VMManager implements Observer {
             System.out.println("Cannot migrate workload to the same guest");
         }
         else if (guestRunningWorkload.getIp().length() != 0) {
-            HTTPMigrate(guestRunningWorkload, obj.toString());
+            HTTPMigrate(guestRunningWorkload, obj.toString(), "/migrate");
 
             ArrayList<Workload> workloadsToRemove = new ArrayList<Workload>();
             for (Workload wl: getWorkloads()) {
@@ -320,9 +320,9 @@ public class VMManager implements Observer {
         }
     }
 
-    public void HTTPMigrate(Guest guest, String json) {
+    public void HTTPMigrate(Guest guest, String json, String urlSuffix) {
         try {
-            URL url = new URL (guest.getURL() + "/migrate");
+            URL url = new URL (guest.getURL() + urlSuffix);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json; utf-8");
