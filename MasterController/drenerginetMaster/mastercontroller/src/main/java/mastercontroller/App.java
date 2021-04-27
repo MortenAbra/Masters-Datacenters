@@ -307,11 +307,17 @@ public class App {
 					String newWorkloadString = workloadJsonTextArea.getText();
 
 					JOptionPane guestOptionPane = new JOptionPane("Add workload to Guest");
-					JOptionPane.showMessageDialog(null, availableVMsComboBox, "Pick Guest", JOptionPane.DEFAULT_OPTION);
+					JComboBox guestMigrationComboBox = new JComboBox();
+					DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(guestManager.getGuestList().toArray());
+					guestMigrationComboBox.setModel(comboBoxModel);
+					JOptionPane.showMessageDialog(null, guestMigrationComboBox, "Pick Guest", JOptionPane.DEFAULT_OPTION);
 					if(JOptionPane.DEFAULT_OPTION == -1){
-						manager.HTTPMigrate((Guest) availableVMsComboBox.getSelectedItem(), newWorkloadString, "/workload");
+						manager.HTTPMigrate((Guest) guestMigrationComboBox.getSelectedItem(), newWorkloadString, "/workloads");
+					} else {
+						System.out.println("Migration pane closed!");
 					}
-					
+				} else {
+					System.out.println("New workload optionpane closed!");
 				}
 			}
 
