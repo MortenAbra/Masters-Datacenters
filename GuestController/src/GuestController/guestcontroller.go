@@ -119,7 +119,7 @@ func guestWorkloadsHandler(w http.ResponseWriter, r *http.Request) {
 func workloadsHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		logInfo("GET Request for /guest/workload")
+		logInfo("GET Request for /workload")
 		// Read Active Workloads
 		result, err := jsonmanager.GetWorkloadFileAsJSON()
 		logErr(err)
