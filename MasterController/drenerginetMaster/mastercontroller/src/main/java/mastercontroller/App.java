@@ -117,8 +117,8 @@ public class App {
 	}
 
 	private void setupWorkloads() {
-		int delay = 5;
-		int period = 5;
+		int delay = 0;
+		int period = 1;
 		AtomicInteger workloadIteration = new AtomicInteger(0);
 		TimerTask updateWorkloadsTask = new TimerTask() {
 			@Override
@@ -142,7 +142,7 @@ public class App {
 						wm.workloadAddedToList(workload);
 					}
 				}
-				if (listModel != null) {
+				if (initDone && listModel != null) {
 					// Add workloads that are not in the listModel
 					for (Workload workload : manager.getWorkloads()) {
 						boolean duplicate = false;
@@ -168,8 +168,8 @@ public class App {
 							listModel.removeElementAt(i);
 						}
 					}
+					vmList.setModel(listModel);
 				}
-				vmList.setModel(listModel);
 				manager.updateWorkloadsJSON();
 			}
 		};
