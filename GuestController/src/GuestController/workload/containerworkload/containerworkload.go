@@ -11,7 +11,7 @@ import (
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
-	uuid "github.com/nu7hatch/gouuid"
+	"github.com/google/uuid"
 
 	"GuestController/workload"
 )
@@ -26,7 +26,7 @@ type ContainerProperties struct {
 	Image           string                               `json:"Image"`
 	Checkpoint      bool                                 `json:"Checkpoint"`
 	NetworkSettings map[string]*network.EndpointSettings `json:"NetworkSettings"`
-	CheckpointIDs   []string                             `json:"CheckpointIDs"`
+	CheckpointID    string                               `json:"CheckpointID"`
 }
 
 func initDocker() (context.Context, *client.Client, error) {
@@ -61,11 +61,11 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Dur
 	}
 
 	// Create UUID for checkpoint and store it
-	cpUUID, err := uuid.NewV4()
+	cpUUID := uuid.New().String()
 	if err != nil {
 		return 0, 0, 0, err
 	}
-	wl.Properties.CheckpointIDs = append(wl.Properties.CheckpointIDs, cpUUID.String())
+	wl.Properties.CheckpointID = cpUUID
 
 	err = cli.ContainerStart(ctx, wl.Properties.ContainerID, types.ContainerStartOptions{})
 	if err != nil {
@@ -94,10 +94,9 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Dur
 	// Track third Timer for RAM
 	ram_start := time.Now()
 	if restore {
-
 		err = cli.CheckpointCreate(ctx, wl.Properties.ContainerID, types.CheckpointCreateOptions{
-			CheckpointID:  wl.Properties.CheckpointIDs[len(wl.Properties.CheckpointIDs)-1],
-			CheckpointDir: wl.SharedDir,
+			CheckpointID:  wl.Properties.CheckpointID,
+			CheckpointDir: "",
 		})
 		if err != nil {
 			return 0, 0, 0, err
@@ -174,10 +173,12 @@ func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Dura
 
 	ram_start := time.Now()
 
+	println(wl.Properties.CheckpointID)
+
 	if restore {
 		err := cli.ContainerStart(ctx, out.ID, types.ContainerStartOptions{
-			CheckpointID:  wl.Properties.CheckpointIDs[len(wl.Properties.CheckpointIDs)-1],
-			CheckpointDir: wl.SharedDir,
+			CheckpointID:  wl.Properties.CheckpointID,
+			CheckpointDir: "",
 		})
 		if err != nil {
 			return 0, 0, 0, err
