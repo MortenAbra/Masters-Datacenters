@@ -19,6 +19,27 @@ network = file['Network']
 migrationtime = file['Combined']
 
 
+processingRatios = []
+diskRatios = []
+memoryRatios = []
+networkRatios = []
+
+for index, row in file.iterrows():
+    total = row['Processing'] + row['Disk'] + row['Memory'] + row['Network']
+    processingRatios.append(row['Processing'] / total)
+    diskRatios.append(row['Disk'] / total)
+    memoryRatios.append(row['Memory'] / total)
+    networkRatios.append(row['Network'] / total)
+
+
+#df1 = pd.DataFrame(data=processingRatios)
+#df2 = pd.DataFrame(data=diskRatios)
+#df3 = pd.DataFrame(data=memoryRatios)
+#df4 = pd.DataFrame(data=networkRatios)
+
+    
+
+
 
 fig, ax1 = plt.subplots()
 
