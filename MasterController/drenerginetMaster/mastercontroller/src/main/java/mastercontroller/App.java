@@ -29,10 +29,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
@@ -66,6 +70,7 @@ public class App {
 	private JCheckBox vmAutoMigrationSwitch;
 	private JComboBox availableVMsComboBox;
 	private JButton vmMigrationBtn;
+	private JButton addWorkloadButton;
 	private JButton migrationThresholdSetButton;
 	private JLabel migrationThresholdLabel;
 	private JLabel migrationThresholdPercentLabel;
@@ -253,9 +258,9 @@ public class App {
 		vmListPanel.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 56, 58, 0 };
-		gbl_panel.rowHeights = new int[] { 188, 0 };
+		gbl_panel.rowHeights = new int[] { 188, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
 		listModel = new DefaultListModel<>();
@@ -285,6 +290,39 @@ public class App {
 			}
 
 		});
+
+		addWorkloadButton = new JButton("Add workload");
+		addWorkloadButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane workloadOptionPane = new JOptionPane("Add new workload with JSON: ");
+				JTextArea workloadJsonTextArea = new JTextArea();
+				workloadJsonTextArea.setLineWrap(true);
+				workloadJsonTextArea.setColumns(15);
+				workloadJsonTextArea.setRows(10);
+				JScrollPane workloadScrollPane = new JScrollPane(workloadJsonTextArea);
+				JOptionPane.showMessageDialog(null, workloadScrollPane, "New Workload", JOptionPane.DEFAULT_OPTION);
+				if(JOptionPane.DEFAULT_OPTION == -1){
+					String newWorkloadString = workloadJsonTextArea.getText();
+
+					JOptionPane guestOptionPane = new JOptionPane("Add workload to Guest");
+					JOptionPane.showMessageDialog(null, availableVMsComboBox, "Pick Guest", JOptionPane.DEFAULT_OPTION);
+					if(JOptionPane.DEFAULT_OPTION == -1){
+						manager.HTTPMigrate((Guest) availableVMsComboBox.getSelectedItem(), newWorkloadString, "/workload");
+					}
+					
+				}
+			}
+
+		});
+
+		GridBagConstraints gbc_addWorkloadButton = new GridBagConstraints();
+		gbc_addWorkloadButton.gridwidth = 2;
+		gbc_addWorkloadButton.gridx = 0;
+		gbc_addWorkloadButton.gridy = 1;
+		panel.add(addWorkloadButton, gbc_addWorkloadButton);
+
 
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
