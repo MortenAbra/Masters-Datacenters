@@ -300,7 +300,7 @@ public class VMManager implements Observer {
             }
         }
 
-        System.out.println("Migrating from " + guest.getURL() + " to " + guestRunningWorkload.getURL());
+        System.out.println("Migrating from " + guestRunningWorkload.getURL()+ " to " + guest.getURL());
         if (guestRunningWorkload.equals(guest)) {
             System.out.println("Cannot migrate workload to the same guest");
         }

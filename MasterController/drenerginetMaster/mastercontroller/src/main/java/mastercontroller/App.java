@@ -1,6 +1,7 @@
 package mastercontroller;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -474,6 +475,8 @@ public class App {
 				Guest guest = (Guest) comboBoxModel.getSelectedItem();
 				if (selectedWorkload != null && guest.isOnline()) {
 					manager.migrateWorkload(selectedWorkload, guest, guestManager);
+					listModel.removeElement(vmList.getSelectedValue());
+
 				} else {
 					System.out.println("Workload is not selected or guest is not online!");
 				}
