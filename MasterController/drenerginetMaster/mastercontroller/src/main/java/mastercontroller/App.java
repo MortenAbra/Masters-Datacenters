@@ -77,6 +77,7 @@ public class App {
 	private JLabel vmStatusResult;
 	private JLabel vmMigrationLabel;
 	private JLabel migrationStatusLabel;
+	private JLabel migrationDummyLabel;
 	private JLabel lblNewLabel;
 	private DefaultListModel listModel;
 	private Workload selectedWorkload;
@@ -225,11 +226,11 @@ public class App {
 	 */
 	private void initialize() {
 		frmVmManager = new JFrame();
-		frmVmManager.setPreferredSize(new Dimension(675, 500));
+		frmVmManager.setPreferredSize(new Dimension(675, 300));
 		frmVmManager.setVisible(true);
-		frmVmManager.setSize(new Dimension(675, 500));
+		frmVmManager.setSize(new Dimension(675, 300));
 		frmVmManager.setTitle("Workload Manager");
-		frmVmManager.setBounds(100, 100, 675, 500);
+		frmVmManager.setBounds(100, 100, 675, 300);
 		frmVmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		vmAutoMigrationSwitch = new JCheckBox();
 
@@ -480,7 +481,7 @@ public class App {
 		});
 		GridBagConstraints gbc_vmMigrationBtn = new GridBagConstraints();
 		gbc_vmMigrationBtn.gridwidth = 3;
-		gbc_vmMigrationBtn.insets = new Insets(0, 0, 0, 5);
+		gbc_vmMigrationBtn.insets = new Insets(0, 0, 0, 0);
 		gbc_vmMigrationBtn.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmMigrationBtn.gridx = 0;
 		gbc_vmMigrationBtn.gridy = 4;
@@ -488,10 +489,11 @@ public class App {
 
 		lblNewLabel = new JLabel("Migration status:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.insets = new Insets(10, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 1;
-		gbc_lblNewLabel.anchor = GridBagConstraints.SOUTH;
+		gbc_lblNewLabel.weighty = 0;
+		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
 		vmPropertiesPanel.add(lblNewLabel, gbc_lblNewLabel);
 
 		migrationStatusLabel = new JLabel("Ready");
@@ -499,7 +501,8 @@ public class App {
 		gbc_migrationStatusLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_migrationStatusLabel.gridx = 0;
 		gbc_migrationStatusLabel.gridy = 2;
-		gbc_migrationStatusLabel.anchor = GridBagConstraints.SOUTH;
+		gbc_migrationStatusLabel.weighty = 1;
+		gbc_migrationStatusLabel.anchor = GridBagConstraints.NORTH;
 		vmPropertiesPanel.add(migrationStatusLabel, gbc_migrationStatusLabel);
 
 		initDone = true;

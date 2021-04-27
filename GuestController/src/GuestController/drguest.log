@@ -45744,3 +45744,203 @@
 [INFO] Apr 27 09:57:18.715:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
 [INFO] Apr 27 09:57:18.724:GET Request for /guest/workload
 [INFO] Apr 27 09:57:18.724:Responding: {"Workloads":[]}
+[INFO] Apr 27 09:59:26.848:GET Request for /guest
+[INFO] Apr 27 09:59:26.848:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 09:59:26.877:GET Request for /guest/workload
+[INFO] Apr 27 09:59:26.877:Responding: {"Workloads":[]}
+[INFO] Apr 27 09:59:33.064:GET Request for /guest
+[INFO] Apr 27 09:59:33.064:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 09:59:33.072:GET Request for /guest/workload
+[INFO] Apr 27 09:59:33.072:Responding: {"Workloads":[]}
+[INFO] Apr 27 09:59:39.204:GET Request for /guest
+[INFO] Apr 27 09:59:39.204:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 09:59:39.212:GET Request for /guest/workload
+[INFO] Apr 27 09:59:39.212:Responding: {"Workloads":[]}
+[INFO] Apr 27 09:59:45.340:GET Request for /guest
+[INFO] Apr 27 09:59:45.341:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 09:59:45.353:GET Request for /guest/workload
+[INFO] Apr 27 09:59:45.353:Responding: {"Workloads":[]}
+[INFO] Apr 27 09:59:51.476:GET Request for /guest
+[INFO] Apr 27 09:59:51.476:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 09:59:51.482:GET Request for /guest/workload
+[INFO] Apr 27 09:59:51.482:Responding: {"Workloads":[]}
+[INFO] Apr 27 09:59:57.627:GET Request for /guest
+[INFO] Apr 27 09:59:57.627:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 09:59:57.635:GET Request for /guest/workload
+[INFO] Apr 27 09:59:57.635:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:00:03.770:GET Request for /guest
+[INFO] Apr 27 10:00:03.770:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:00:03.777:GET Request for /guest/workload
+[INFO] Apr 27 10:00:03.777:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:01:39.509:GET Request for /guest
+[INFO] Apr 27 10:01:39.509:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:01:39.541:GET Request for /guest/workload
+[INFO] Apr 27 10:01:39.541:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:01:45.804:GET Request for /guest
+[INFO] Apr 27 10:01:45.804:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:01:45.810:GET Request for /guest/workload
+[INFO] Apr 27 10:01:45.810:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:01:51.872:GET Request for /guest
+[INFO] Apr 27 10:01:51.872:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:01:51.885:GET Request for /guest/workload
+[INFO] Apr 27 10:01:51.886:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:01:58.019:GET Request for /guest
+[INFO] Apr 27 10:01:58.019:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:01:58.026:GET Request for /guest/workload
+[INFO] Apr 27 10:01:58.026:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:04.150:GET Request for /guest
+[INFO] Apr 27 10:02:04.150:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:04.156:GET Request for /guest/workload
+[INFO] Apr 27 10:02:04.156:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:10.302:GET Request for /guest
+[INFO] Apr 27 10:02:10.302:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:10.315:GET Request for /guest/workload
+[INFO] Apr 27 10:02:10.315:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:16.441:GET Request for /guest
+[INFO] Apr 27 10:02:16.441:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:16.448:GET Request for /guest/workload
+[INFO] Apr 27 10:02:16.448:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:22.589:GET Request for /guest
+[INFO] Apr 27 10:02:22.589:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:22.605:GET Request for /guest/workload
+[INFO] Apr 27 10:02:22.605:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:35.744:GET Request for /guest
+[INFO] Apr 27 10:02:35.744:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:35.773:GET Request for /guest/workload
+[INFO] Apr 27 10:02:35.773:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:41.958:GET Request for /guest
+[INFO] Apr 27 10:02:41.958:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:41.964:GET Request for /guest/workload
+[INFO] Apr 27 10:02:41.964:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:48.089:GET Request for /guest
+[INFO] Apr 27 10:02:48.089:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:48.095:GET Request for /guest/workload
+[INFO] Apr 27 10:02:48.095:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:02:54.245:GET Request for /guest
+[INFO] Apr 27 10:02:54.246:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:02:54.258:GET Request for /guest/workload
+[INFO] Apr 27 10:02:54.259:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:00.379:GET Request for /guest
+[INFO] Apr 27 10:03:00.379:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:00.388:GET Request for /guest/workload
+[INFO] Apr 27 10:03:00.388:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:06.525:GET Request for /guest
+[INFO] Apr 27 10:03:06.525:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:06.540:GET Request for /guest/workload
+[INFO] Apr 27 10:03:06.540:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:12.665:GET Request for /guest
+[INFO] Apr 27 10:03:12.665:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:12.678:GET Request for /guest/workload
+[INFO] Apr 27 10:03:12.678:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:18.812:GET Request for /guest
+[INFO] Apr 27 10:03:18.812:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:18.823:GET Request for /guest/workload
+[INFO] Apr 27 10:03:18.824:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:24.952:GET Request for /guest
+[INFO] Apr 27 10:03:24.953:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:24.962:GET Request for /guest/workload
+[INFO] Apr 27 10:03:24.962:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:31.091:GET Request for /guest
+[INFO] Apr 27 10:03:31.091:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:31.100:GET Request for /guest/workload
+[INFO] Apr 27 10:03:31.101:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:43.247:GET Request for /guest
+[INFO] Apr 27 10:03:43.247:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:43.275:GET Request for /guest/workload
+[INFO] Apr 27 10:03:43.275:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:03:49.481:GET Request for /guest
+[INFO] Apr 27 10:03:49.481:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:03:49.487:GET Request for /guest/workload
+[INFO] Apr 27 10:03:49.487:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:05:16.713:GET Request for /guest
+[INFO] Apr 27 10:05:16.713:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:05:16.750:GET Request for /guest/workload
+[INFO] Apr 27 10:05:16.750:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:06:26.560:GET Request for /guest
+[INFO] Apr 27 10:06:26.560:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:06:26.595:GET Request for /guest/workload
+[INFO] Apr 27 10:06:26.595:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:12:44.420:GET Request for /guest
+[INFO] Apr 27 10:12:44.420:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:12:44.448:GET Request for /guest/workload
+[INFO] Apr 27 10:12:44.448:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:12:50.645:GET Request for /guest
+[INFO] Apr 27 10:12:50.646:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:12:50.652:GET Request for /guest/workload
+[INFO] Apr 27 10:12:50.652:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:12:56.762:GET Request for /guest
+[INFO] Apr 27 10:12:56.762:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:12:56.769:GET Request for /guest/workload
+[INFO] Apr 27 10:12:56.769:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:13:59.468:GET Request for /guest
+[INFO] Apr 27 10:13:59.468:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:13:59.496:GET Request for /guest/workload
+[INFO] Apr 27 10:13:59.496:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:05.718:GET Request for /guest
+[INFO] Apr 27 10:14:05.718:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:05.725:GET Request for /guest/workload
+[INFO] Apr 27 10:14:05.725:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:11.837:GET Request for /guest
+[INFO] Apr 27 10:14:11.837:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:11.845:GET Request for /guest/workload
+[INFO] Apr 27 10:14:11.845:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:17.980:GET Request for /guest
+[INFO] Apr 27 10:14:17.980:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:17.993:GET Request for /guest/workload
+[INFO] Apr 27 10:14:17.993:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:24.116:GET Request for /guest
+[INFO] Apr 27 10:14:24.117:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:24.122:GET Request for /guest/workload
+[INFO] Apr 27 10:14:24.122:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:30.262:GET Request for /guest
+[INFO] Apr 27 10:14:30.262:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:30.271:GET Request for /guest/workload
+[INFO] Apr 27 10:14:30.271:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:36.412:GET Request for /guest
+[INFO] Apr 27 10:14:36.412:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:36.425:GET Request for /guest/workload
+[INFO] Apr 27 10:14:36.425:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:42.557:GET Request for /guest
+[INFO] Apr 27 10:14:42.557:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:42.568:GET Request for /guest/workload
+[INFO] Apr 27 10:14:42.569:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:48.701:GET Request for /guest
+[INFO] Apr 27 10:14:48.701:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:48.712:GET Request for /guest/workload
+[INFO] Apr 27 10:14:48.712:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:14:54.844:GET Request for /guest
+[INFO] Apr 27 10:14:54.844:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:14:54.855:GET Request for /guest/workload
+[INFO] Apr 27 10:14:54.855:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:00.989:GET Request for /guest
+[INFO] Apr 27 10:15:00.989:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:01.002:GET Request for /guest/workload
+[INFO] Apr 27 10:15:01.002:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:07.129:GET Request for /guest
+[INFO] Apr 27 10:15:07.129:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:07.139:GET Request for /guest/workload
+[INFO] Apr 27 10:15:07.139:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:13.272:GET Request for /guest
+[INFO] Apr 27 10:15:13.272:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:13.281:GET Request for /guest/workload
+[INFO] Apr 27 10:15:13.281:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:19.416:GET Request for /guest
+[INFO] Apr 27 10:15:19.416:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:19.425:GET Request for /guest/workload
+[INFO] Apr 27 10:15:19.426:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:25.557:GET Request for /guest
+[INFO] Apr 27 10:15:25.557:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:25.562:GET Request for /guest/workload
+[INFO] Apr 27 10:15:25.562:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:31.701:GET Request for /guest
+[INFO] Apr 27 10:15:31.702:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:31.713:GET Request for /guest/workload
+[INFO] Apr 27 10:15:31.713:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:37.842:GET Request for /guest
+[INFO] Apr 27 10:15:37.842:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:37.848:GET Request for /guest/workload
+[INFO] Apr 27 10:15:37.848:Responding: {"Workloads":[]}
+[INFO] Apr 27 10:15:43.991:GET Request for /guest
+[INFO] Apr 27 10:15:43.991:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] Apr 27 10:15:44.002:GET Request for /guest/workload
+[INFO] Apr 27 10:15:44.003:Responding: {"Workloads":[]}
