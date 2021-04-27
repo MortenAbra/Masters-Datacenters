@@ -104,21 +104,26 @@ public class App {
 	 * @throws IOException
 	 */
 	public App() {
-		int delay = 5;
-		int period = 5;
 		es = Executors.newScheduledThreadPool(10);
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
 		this.guestManager = new GuestManager();
+		guestManager.initialize(manager);
 
+		setupWorkloads();
+		setupEnergiDataLoop();
+		initialize();
+	}
+
+	private void setupWorkloads() {
+		int delay = 5;
+		int period = 5;
 		AtomicInteger workloadIteration = new AtomicInteger(0);
 		TimerTask updateWorkloadsTask = new TimerTask() {
 			@Override
 			public void run() {
 				workloadIteration.incrementAndGet();
 
-				// Initialize GuestManager
-				guestManager.initialize(manager);
 				ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();
 				for (Guest guest : guestManager.getGuestList()) {
 					ArrayList<Workload> guestWorkloads = guestManager.getWorkloadsFromGuest(guest, manager);
@@ -141,7 +146,7 @@ public class App {
 					for (Workload workload : manager.getWorkloads()) {
 						boolean duplicate = false;
 						for (int i = 0; i < listModel.size(); i++) {
-							if (((Workload)listModel.get(i)).getWl_name() == workload.getWl_name()) {
+							if (((Workload) listModel.get(i)).getWl_name() == workload.getWl_name()) {
 								duplicate = true;
 							}
 						}
@@ -149,6 +154,7 @@ public class App {
 							listModel.addElement(workload);
 						}
 					}
+
 					// Remove list entires that are not in the workloads
 					for (int i = 0; i < listModel.getSize(); i++) {
 						boolean elementNotInWorkloads = true;
@@ -162,19 +168,16 @@ public class App {
 						}
 					}
 				}
+				vmList.setModel(listModel);
 				manager.updateWorkloadsJSON();
 			}
 		};
-		es.scheduleAtFixedRate(updateWorkloadsTask, 0, period, TimeUnit.SECONDS);
+		es.scheduleAtFixedRate(updateWorkloadsTask, delay, period, TimeUnit.SECONDS);
 		try {
 			Thread.sleep(delay + period);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
-
-		setupEnergiDataLoop();
-		initialize();
 	}
 
 	private void setupEnergiDataLoop() {
@@ -207,7 +210,6 @@ public class App {
 		// Checks if the expected number is a number
 		thresholdPercentage = Double.parseDouble(migrationThresholdPercentTextField.getText());
 
-
 		edf = new EnergiDataFetcher(days, thresholdPercentage);
 		Record currentRecord = edf.getCurrentRecord();
 		System.out.println("Current Price = " + currentRecord.getSpotPriceDKK());
@@ -223,11 +225,11 @@ public class App {
 	 */
 	private void initialize() {
 		frmVmManager = new JFrame();
-		frmVmManager.setPreferredSize(new Dimension(800, 600));
+		frmVmManager.setPreferredSize(new Dimension(675, 500));
 		frmVmManager.setVisible(true);
-		frmVmManager.setSize(new Dimension(800, 600));
-		frmVmManager.setTitle("VM Manager");
-		frmVmManager.setBounds(100, 100, 450, 300);
+		frmVmManager.setSize(new Dimension(675, 500));
+		frmVmManager.setTitle("Workload Manager");
+		frmVmManager.setBounds(100, 100, 675, 500);
 		frmVmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		vmAutoMigrationSwitch = new JCheckBox();
 
@@ -241,7 +243,7 @@ public class App {
 		vmListPanel.setLayout(gbl_vmListPanel);
 
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "VM List", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Workload List", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
@@ -301,7 +303,7 @@ public class App {
 
 		panel_2 = new JPanel();
 		panel_2.setBorder(
-				new TitledBorder(null, "VM Migration Settings", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+				new TitledBorder(null, "Workload Settings", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.anchor = GridBagConstraints.WEST;
 		gbc_panel_2.gridwidth = 2;
@@ -317,7 +319,7 @@ public class App {
 		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
-		lblNewLabel_1 = new JLabel("VM Auto Migration:");
+		lblNewLabel_1 = new JLabel("Workload Auto Migration:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
@@ -381,7 +383,7 @@ public class App {
 		vmPropertiesPanel.setLayout(gbl_vmPropertiesPanel);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "VM Properties", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(null, "Workload Properties", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
@@ -394,7 +396,7 @@ public class App {
 		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
-		vmNameLabel = new JLabel("VM Name:");
+		vmNameLabel = new JLabel("Workload Name:");
 		GridBagConstraints gbc_vmNameLabel = new GridBagConstraints();
 		gbc_vmNameLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmNameLabel.insets = new Insets(0, 0, 5, 5);
@@ -405,11 +407,12 @@ public class App {
 		vmNameResult = new JLabel("");
 		GridBagConstraints gbc_vmNameResult = new GridBagConstraints();
 		gbc_vmNameResult.insets = new Insets(0, 0, 5, 5);
+		gbc_vmNameResult.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmNameResult.gridx = 1;
 		gbc_vmNameResult.gridy = 0;
 		panel_1.add(vmNameResult, gbc_vmNameResult);
 
-		vmIPLabel = new JLabel("VM IP:");
+		vmIPLabel = new JLabel("IP:");
 		GridBagConstraints gbc_vmIPLabel = new GridBagConstraints();
 		gbc_vmIPLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmIPLabel.insets = new Insets(0, 0, 5, 5);
@@ -420,11 +423,12 @@ public class App {
 		vmIPResult = new JLabel("");
 		GridBagConstraints gbc_vmIPResult = new GridBagConstraints();
 		gbc_vmIPResult.insets = new Insets(0, 0, 5, 5);
+		gbc_vmIPResult.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmIPResult.gridx = 1;
 		gbc_vmIPResult.gridy = 1;
 		panel_1.add(vmIPResult, gbc_vmIPResult);
 
-		vmStatusLabel = new JLabel("VM Status:");
+		vmStatusLabel = new JLabel("Status:");
 		GridBagConstraints gbc_vmStatusLabel = new GridBagConstraints();
 		gbc_vmStatusLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmStatusLabel.insets = new Insets(0, 0, 5, 5);
@@ -435,6 +439,7 @@ public class App {
 		vmStatusResult = new JLabel("");
 		GridBagConstraints gbc_vmStatusResult = new GridBagConstraints();
 		gbc_vmStatusResult.insets = new Insets(0, 0, 5, 5);
+		gbc_vmStatusResult.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmStatusResult.gridx = 1;
 		gbc_vmStatusResult.gridy = 2;
 		panel_1.add(vmStatusResult, gbc_vmStatusResult);
@@ -450,7 +455,6 @@ public class App {
 		availableVMsComboBox = new JComboBox<>();
 		DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(guestManager.getGuestList().toArray());
 		availableVMsComboBox.setModel(comboBoxModel);
-
 
 		GridBagConstraints gbc_availableVMsComboBox = new GridBagConstraints();
 		gbc_availableVMsComboBox.fill = GridBagConstraints.BOTH;
@@ -475,8 +479,9 @@ public class App {
 			}
 		});
 		GridBagConstraints gbc_vmMigrationBtn = new GridBagConstraints();
-		gbc_vmMigrationBtn.gridwidth = 2;
+		gbc_vmMigrationBtn.gridwidth = 3;
 		gbc_vmMigrationBtn.insets = new Insets(0, 0, 0, 5);
+		gbc_vmMigrationBtn.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vmMigrationBtn.gridx = 0;
 		gbc_vmMigrationBtn.gridy = 4;
 		panel_1.add(vmMigrationBtn, gbc_vmMigrationBtn);
@@ -486,13 +491,15 @@ public class App {
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 1;
+		gbc_lblNewLabel.anchor = GridBagConstraints.SOUTH;
 		vmPropertiesPanel.add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		migrationStatusLabel = new JLabel("Ready");
 		GridBagConstraints gbc_migrationStatusLabel = new GridBagConstraints();
 		gbc_migrationStatusLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_migrationStatusLabel.gridx = 0;
 		gbc_migrationStatusLabel.gridy = 2;
+		gbc_migrationStatusLabel.anchor = GridBagConstraints.SOUTH;
 		vmPropertiesPanel.add(migrationStatusLabel, gbc_migrationStatusLabel);
 
 		initDone = true;
