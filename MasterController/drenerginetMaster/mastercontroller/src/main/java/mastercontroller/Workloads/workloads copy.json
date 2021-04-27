@@ -1,59 +1,16 @@
 {
-    "Workloads": [
-        {
-            "Identifier": "Python Flask Server",
-            "AccessIP": "1234",
-            "AccessPort": 1234,
-            "Available": true,
-            "AutoMigrate": true,
-            "SharedDir": "/home/wolder/shared_storage",
-            "Type": "Container",
-            "Containerproperties": {
-                "ContainerID": "sweet_noether",
-                "Image": "pyserver",
-                "Checkpoint": false
-            }
-        },
-        {
-            "Identifier": "Test",
-            "AccessIP": "1234",
-            "AccessPort": 1234,
-            "Available": false,
-            "AutoMigrate": false,
-            "SharedDir": "/home/wolder/shared_storage",
-            "Type": "Container",
-            "Containerproperties": {
-                "ContainerID": "sweet_noether",
-                "Image": "pyserver",
-                "Checkpoint": false
-            }
-        },
-        {
-            "Identifier": "Ny test",
-            "AccessIP": "1234",
-            "AccessPort": 1234,
-            "Available": false,
-            "AutoMigrate": false,
-            "SharedDir": "/home/wolder/shared_storage",
-            "Type": "Container",
-            "Containerproperties": {
-                "ContainerID": "sweet_noether",
-                "Image": "pyserver",
-                "Checkpoint": false
-            }
-        },
-        {
-            "Identifier": "Mere testing!",
-            "AccessIP": "1234",
-            "AccessPort": 1234,
-            "Available": false,
-            "AutoMigrate": false,
-            "SharedDir": "/home/wolder/shared_storage",
-            "Type": "VM",
-            "VMProperties": {
-                "DomainName": "testDomainName",
-                "ConnectionURI": "testURI"
-            }
-        }
-    ]
+    "AccessIP": "localhost",
+    "AccessPort": "5000",
+    "AutoMigrate": false,
+    "Available": true,
+    "Containerproperties": {
+        "Checkpoint": false,
+        "CheckpointID": null,
+        "ContainerID": "nostalgic_ishizaka",
+        "Image": "pyserver",
+        "NetworkSettings": null
+    },
+    "Identifier": "PyServer2",
+    "SharedDir": "/home/wolder/shared_storage",
+    "Type": "Container"
 }
