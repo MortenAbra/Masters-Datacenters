@@ -124,7 +124,7 @@ public class App {
 
 	private void setupWorkloads() {
 		int delay = 0;
-		int period = 10;
+		int period = 5;
 		AtomicInteger workloadIteration = new AtomicInteger(0);
 		TimerTask updateWorkloadsTask = new TimerTask() {
 			@Override
@@ -137,7 +137,6 @@ public class App {
 				if (initDone && listModel != null) {
 					// Add workloads that are not in the listModel
 					for (Workload workload : manager.getWorkloads()) {
-						System.out.println("SIZE" + manager.getWorkloads().size());
 						boolean duplicate = false;
 						for (int i = 0; i < listModel.size(); i++) {
 							if (((Workload) listModel.get(i)).getWl_name() == workload.getWl_name()) {

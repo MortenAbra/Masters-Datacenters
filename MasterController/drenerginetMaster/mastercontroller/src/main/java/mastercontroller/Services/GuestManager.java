@@ -59,7 +59,7 @@ public class GuestManager {
 
     // Calls ip:port/workloads to get workloads running on guest
     public ArrayList<Workload> getWorkloadsFromGuest(Guest g, VMManager vmManager) {
-        ArrayList<Workload> workloadList = new ArrayList<Workload>();
+        ArrayList<Workload> guestWorkloads = new ArrayList<Workload>();
         if (g.isOnline()) {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();
@@ -74,7 +74,7 @@ public class GuestManager {
                     JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
                     for (int i = 0; i < jsonArray.size(); i++) {
                         Workload workload = vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i));
-                        workloadList.add(workload);
+                        guestWorkloads.add(workload);
                         g.getWorkloads().add(workload); // Add workload to guest.
                     }
                 }
@@ -83,6 +83,6 @@ public class GuestManager {
             }
         }
 
-        return workloadList;
+        return guestWorkloads;
     }
 }
