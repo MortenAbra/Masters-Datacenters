@@ -51,6 +51,7 @@ public class VMManager implements Observer {
         fp = new FilePaths();
         this.es = Executors.newCachedThreadPool();
     }
+    
 
     // https://github.com/beabetterdevv/DesignPatterns/blob/master/patterns/observer/ForecastDisplay.java
  

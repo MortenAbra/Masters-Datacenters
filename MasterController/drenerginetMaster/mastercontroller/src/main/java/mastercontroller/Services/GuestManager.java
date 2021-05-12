@@ -12,6 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import mastercontroller.WorkloadManager;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Guest;
 import mastercontroller.Models.Workload;
@@ -19,9 +20,13 @@ import mastercontroller.Models.Workload;
 public class GuestManager {
     private FilePaths fp;
     private ArrayList<Guest> guestList = new ArrayList<Guest>();
+    private VMManager manager;
+    private WorkloadManager wm;
 
     public GuestManager() {
+        this.wm = new WorkloadManager();
         fp = new FilePaths();
+        this.manager = new VMManager(wm);
     }
 
     public void initialize(VMManager vmManager) {
@@ -58,7 +63,7 @@ public class GuestManager {
 
     // Calls ip:port/workloads to get workloads running on guest
     public ArrayList<Workload> getWorkloadsFromGuest(Guest g, VMManager vmManager) {
-        ArrayList<Workload> workloadList = new ArrayList<Workload>();
+        ArrayList<Workload> workloads = this.manager.getWorkloads();
         if (g.isOnline()) {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();
