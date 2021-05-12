@@ -16,6 +16,10 @@ public class WorkloadManager implements Subject {
         this.workloadList = new ArrayList<>();
     }
 
+    public ArrayList<Workload> getWorkloadList(){
+        return this.workloadList;
+    }
+
     @Override
     public void registerObserver(Observer observer) {
         // TODO Auto-generated method stub
