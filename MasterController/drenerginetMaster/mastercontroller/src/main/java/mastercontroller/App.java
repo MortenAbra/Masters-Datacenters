@@ -125,13 +125,13 @@ public class App {
 
 				manager.workloadDuplicates(guestManager);
 				
-				
 				if (initDone && listModel != null) {
 					// Add workloads that are not in the listModel
 					for (Workload workload : manager.getWorkloads()) {
 						boolean duplicate = false;
 						for (int i = 0; i < listModel.size(); i++) {
-							if (((Workload) listModel.get(i)).getWl_name() == workload.getWl_name()) {
+
+							if (((Workload) listModel.get(i)).equals(workload)) {
 								duplicate = true;
 							}
 						}
