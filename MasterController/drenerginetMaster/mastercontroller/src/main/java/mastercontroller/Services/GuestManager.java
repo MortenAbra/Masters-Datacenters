@@ -63,7 +63,6 @@ public class GuestManager {
             if (g.isOnline()) {
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();
-
                 HttpResponse<String> response;
                 try {
                     response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -75,6 +74,7 @@ public class GuestManager {
                         for (int i = 0; i < jsonArray.size(); i++) {
                             Workload workload = vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i));
                             vmManager.getWorkloads().add(workload);
+                            System.out.println("ADDED: " + workload);
                             g.getWorkloads().add(workload); // Add workload to guest.
                         }
                     }

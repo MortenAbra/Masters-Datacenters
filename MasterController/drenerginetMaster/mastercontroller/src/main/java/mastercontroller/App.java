@@ -145,20 +145,6 @@ public class App {
 
 				checkListModelDuplicates(manager, initDone);
 
-				// Remove list entires that are not in the workloads
-				for (int i = 0; i < listModel.getSize(); i++) {
-					boolean elementNotInWorkloads = true;
-					for (Workload workload : manager.getWorkloads()) {
-						if (listModel.get(i).toString() == workload.getWl_name()) {
-							elementNotInWorkloads = false;
-						}
-					}
-					if (elementNotInWorkloads) {
-						listModel.removeElementAt(i);
-					}
-				}
-				vmList.setModel(listModel);
-				manager.updateWorkloadsJSON();
 			}
 		};
 		es.scheduleAtFixedRate(updateWorkloadsTask, delay, period, TimeUnit.SECONDS);
