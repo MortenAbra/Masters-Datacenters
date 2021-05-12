@@ -124,7 +124,7 @@ public class App {
 
 	private void setupWorkloads() {
 		int delay = 0;
-		int period = 1;
+		int period = 5;
 		AtomicInteger workloadIteration = new AtomicInteger(0);
 		TimerTask updateWorkloadsTask = new TimerTask() {
 			@Override
