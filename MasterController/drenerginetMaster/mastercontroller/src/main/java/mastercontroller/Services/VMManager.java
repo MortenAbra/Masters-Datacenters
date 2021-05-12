@@ -20,7 +20,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonNull;
@@ -29,6 +28,7 @@ import com.google.gson.JsonParser;
 
 import mastercontroller.Observer;
 import mastercontroller.Subject;
+import mastercontroller.WorkloadManager;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.ContainerWorkload;
 import mastercontroller.Models.Guest;
@@ -40,94 +40,22 @@ public class VMManager implements Observer {
 
     private FilePaths fp;
     private ArrayList<Workload> workloadList;
-    private ArrayList<Workload> availableVMs;
     private JsonParser parser = new JsonParser();
     private ExecutorService es;
+    private GuestManager guestManager;
 
     public VMManager(Subject WorkloadManager) {
         WorkloadManager.registerObserver(this);
         this.workloadList = new ArrayList<>();
+        this.guestManager = new GuestManager();
         fp = new FilePaths();
         this.es = Executors.newCachedThreadPool();
     }
 
     // https://github.com/beabetterdevv/DesignPatterns/blob/master/patterns/observer/ForecastDisplay.java
-    public void pingHost(Workload workload, FileWriter writer) {
-        int timeout = 10;
-        if (workload.getWl_port() != -1) {
-            pingWithPort(workload, timeout, writer);
-        } else {
-            pingWithoutPort(workload, timeout, writer);
-        }
-    }
-
-    public void pingWithPort(Workload workload, int timeout, FileWriter writer) {
-
-        try (Socket socket = new Socket()) {
-            socket.connect(new InetSocketAddress(workload.getWl_ip(), workload.getWl_port()), timeout);
-
-            // Connection is established
-            if (workload.getElapsedTime() > 1000 && workload.getElapsedTime() < 1000000) {
-
-                // Downtime happend recently
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-                // TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " +
-                // workload.getElapsedTime() + " ms");
-                workload.setEndTime(System.currentTimeMillis());
-            }
-            workload.setStartTime(System.currentTimeMillis());
-            socket.close();
-        } catch (IOException e) {
-            // Connection is not reachable
-            workload.setEndTime(System.currentTimeMillis());
-        }
-    }
-
-    public void pingWithoutPort(Workload workload, int timeout, FileWriter writer) {
-        try {
-            if (InetAddress.getByName(workload.getWl_ip()).isReachable(timeout)) {
-                // Connection is established
-                if (workload.getElapsedTime() > 1000 && workload.getElapsedTime() < 1000000) {
-                    // Downtime happend recently
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-                    // TextOutPut(timestamp + " : " + workload.getWl_name() + " : Downtime = " +
-                    // workload.getElapsedTime() + " ms");
-                    workload.setEndTime(System.currentTimeMillis());
-                }
-                workload.setStartTime(System.currentTimeMillis());
-            } else {
-                // Connection is not reachable
-                workload.setEndTime(System.currentTimeMillis());
-            }
-        } catch (IOException e) {
-        }
-    }
-
-    
-    public Workload getAllVMs(ArrayList<Workload> workloadlist) {
-        for (Workload workload : workloadlist) {
-            return workload;
-        }
-        return null;
-    }
-
-    
-    public ArrayList<Workload> findAvailableVMs() {
-        this.availableVMs = new ArrayList<>();
-        for (Workload workload : workloadList) {
-            if(workload.isWl_status()){
-                availableVMs.add(workload);
-            }
-        }
-        return availableVMs;
-    }
-
+ 
+ 
     public Workload parseWorkloadObject(JsonObject jsonWorkload) {
-        // Workload workload =
-        // gson.fromJson(String.valueOf(jsonWorkload.getAsJsonObject("workload")),
-        // Workload.class);
         String wl_name = (String) jsonWorkload.get("Identifier").getAsString(); // (String) workloadObject.get("name");
         String wl_ip = (String) jsonWorkload.get("AccessIP").getAsString();
         int wl_port = (int) (long) jsonWorkload.get("AccessPort").getAsLong();
@@ -158,34 +86,6 @@ public class VMManager implements Observer {
                 Workload wl = new Workload(wl_name, wl_ip, wl_port, wl_status, wl_autoMigration, wl_sharedDir, null);
                 return wl;
         }
-    }
-
-    // Generating workload json objects and adding to Array
-    public ArrayList<Workload> readJSONWorkloads() throws IOException {
-        ArrayList<Workload> resultList = new ArrayList<>();
-        try (FileReader reader = new FileReader(fp.getWORKLOADPATH() + "workloads.json")) {
-            // Generating JSONObject based on a file
-            Object obj = JsonParser.parseReader(reader);
-            if (obj instanceof JsonNull) {
-                obj = new JsonObject();
-                ((JsonObject) obj).add("Workloads", new JsonArray());
-            } 
-
-            JsonObject jsonObject = (JsonObject) obj;
-            JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
-
-            // Adding workloads to the list
-            if (jsonArray.size() != 0) {
-                for (int i = 0; i < jsonArray.size(); i++) {
-                    resultList.add(parseWorkloadObject((JsonObject) jsonArray.get(i)));
-                }
-            }
-        
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return resultList;
     }
 
     public void updateWorkloadsJSON(){
@@ -239,40 +139,29 @@ public class VMManager implements Observer {
         return obj;
     }
 
-    
-    public Workload getActiveVMObject(ArrayList<Workload> activeVMList) {
-        Workload vmObject = activeVMList.get(0);
-        activeVMList.get(0).setWl_status(true);
-        activeVMList.remove(0);
-        return vmObject;
-    }
-
-    
-    public ArrayList<String> getAvailableVMsIPAsList() {
-        ArrayList<String> vmIpList = new ArrayList<>();
-        for (Workload object : workloadList) {
-            vmIpList.add(object.getWl_ip());
-        }
-        return vmIpList;
-    }
-
-    
+   
     public ArrayList<Workload> getWorkloads() {
         return workloadList;
     }
 
-    public ArrayList<String> getWorkloadsAsStringArray() {
-        ArrayList<String> array = new ArrayList<String>();
-        for (Workload workload : getWorkloads()) {
-            array.add(workload.toString());
-        }
 
-        return array;
+
+    public Workload workloadDuplicates(){
+        for(Guest guest : guestManager.getGuestList()){
+            for(Workload workload : guestManager.getWorkloadsFromGuest(guest, this)){
+                if(this.getWorkloads().contains(workload)){
+                    System.out.println("Duplicate");
+                } else {
+                    this.getWorkloads().add(workload);
+                    return workload;
+                }
+            }
+        }
+        return null;
     }
 
     @Override
     public void update(Workload workload) {
-        // TODO Auto-generated method stub
         workloadList.add(workload);
         System.out.println("Workload added to list - Current list size: " + workloadList.size());
     }

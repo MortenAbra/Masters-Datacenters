@@ -131,23 +131,9 @@ public class App {
 			public void run() {
 				workloadIteration.incrementAndGet();
 
-				ArrayList<Workload> workloadsRunningOnGuests = new ArrayList<Workload>();
-				for (Guest guest : guestManager.getGuestList()) {
-					ArrayList<Workload> guestWorkloads = guestManager.getWorkloadsFromGuest(guest, manager);
-					workloadsRunningOnGuests.addAll(guestWorkloads);
-				}
-				for (Workload workload : workloadsRunningOnGuests) {
-					// check for duplicates
-					boolean duplicate = false;
-					for (Workload addedWorkload : manager.getWorkloads()) {
-						if (addedWorkload.getWl_name().equals(workload.getWl_name())) {
-							duplicate = true;
-						}
-					}
-					if (!duplicate) {
-						wm.workloadAddedToList(workload);
-					}
-				}
+				wm.workloadAddedToList(manager.workloadDuplicates());
+					
+				
 				if (initDone && listModel != null) {
 					// Add workloads that are not in the listModel
 					for (Workload workload : manager.getWorkloads()) {

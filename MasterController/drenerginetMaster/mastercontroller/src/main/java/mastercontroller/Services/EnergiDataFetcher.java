@@ -247,7 +247,6 @@ public class EnergiDataFetcher implements Observer {
                 }
                 
             } catch (ParseException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }  
            
@@ -271,47 +270,4 @@ public class EnergiDataFetcher implements Observer {
             return OperationStage.NORMAL;
         }
     }
-
-    
-    /*
-     * public JsonObject fetchAPIData(String url, String filename) { try { input =
-     * new URL(url).openStream(); } catch (IOException e) { // TODO Auto-generated
-     * catch block e.printStackTrace(); } //TextOutPut("Input stream open...");
-     * reader = new BufferedReader(new InputStreamReader(input,
-     * Charset.forName("UTF-8")));
-     * 
-     * String inputData = readChaString(reader); JsonObject data =
-     * convertToJson(inputData); try { saveDataToFile(data, filename); } catch
-     * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
-     * 
-     * //System.out.println(data.get("result")); return data; }
-     * 
-     * 
-     * public JsonObject fetchData(String apiUrl, String filename){
-     * 
-     * Callable callable; JsonObject jsonResult = null; Future<JsonObject> future;
-     * res = new Result();
-     * 
-     * try { callable = new Callable<JsonObject>(){
-     * 
-     * @Override public JsonObject call() throws Exception { JsonObject jsonObject =
-     * fetchAPIData(apiUrl, filename); return jsonObject; } }; future =
-     * es.submit(callable); jsonResult = future.get(); } catch (Exception e) {
-     * e.printStackTrace(); } return jsonResult; }
-     * 
-     * public void saveDataToFile(JsonObject object, String fileName) throws
-     * IOException{ file = new FileWriter(fp.getOUTPUTPATH() + fileName);
-     * file.write(object.toString()); file.close();
-     * //TextOutPut("DATA SAVED TO FILE"); }
-     * 
-     * public JsonObject convertToJson(String inputData) { jsonObject = (JsonObject)
-     * this.parser.parse(inputData); //TextOutPut("DATA CONVERTED TO JSON"); return
-     * jsonObject; }
-     * 
-     * public String readChaString(Reader reader) { StringBuilder sb = new
-     * StringBuilder(); int i; try { while((i = reader.read()) != -1){
-     * sb.append((char) i); } } catch (IOException e) { // TODO Auto-generated catch
-     * block e.printStackTrace(); } return sb.toString(); }
-     * 
-     */
 }
