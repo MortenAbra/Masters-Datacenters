@@ -47489,3 +47489,493 @@
 [INFO] Apr 27 11:17:17.047:Responding: {"Ip":"192.168.0.106","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
 [INFO] Apr 27 11:17:17.052:GET Request for /guest/workload
 [INFO] Apr 27 11:17:17.052:Responding: {"Workloads":[]}
+[INFO] May 12 14:10:59.253:Initialization done for 192.168.122.1:8080
+[INFO] May 12 14:10:59.254:Setting up handlers
+[INFO] May 12 14:10:59.254:Listening on 192.168.122.1:8080
+[INFO] May 12 14:11:39.540:Initialization done for 192.168.122.1:8080
+[INFO] May 12 14:11:39.541:Setting up handlers
+[INFO] May 12 14:11:39.541:Listening on 192.168.122.1:8080
+[INFO] May 12 14:11:52.020:GET Request for /guest/workload
+[INFO] May 12 14:11:52.020:Responding: {"Workloads":[{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"busybox_container","Image":"busybox","NetworkSettings":null},"Identifier":"Busybox","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"alpine_container","Image":"alpine","NetworkSettings":null},"Identifier":"Alpine","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"ubuntu_container","Image":"ubuntu","NetworkSettings":null},"Identifier":"Ubuntu","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"redis_container","Image":"redis","NetworkSettings":null},"Identifier":"Redis","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mongo_container","Image":"mongo","NetworkSettings":null},"Identifier":"Mongo","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"wordpress_container","Image":"wordpress","NetworkSettings":null},"Identifier":"Wordpress","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mysql_container","Image":"mysql","NetworkSettings":null},"Identifier":"MySQL","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":true,"CheckpointID":"","ContainerID":"python_container","Image":"python","NetworkSettings":null},"Identifier":"Python","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"Node","AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"node_container","Image":"node","Checkpoint":false,"NetworkSettings":null,"CheckpointID":""}}]}
+[INFO] May 12 14:31:03.419:GET Request for /guest
+[INFO] May 12 14:31:03.421:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:31:03.459:GET Request for /guest/workload
+[INFO] May 12 14:31:03.461:Responding: {"Workloads":[{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"busybox_container","Image":"busybox","NetworkSettings":null},"Identifier":"Busybox","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"alpine_container","Image":"alpine","NetworkSettings":null},"Identifier":"Alpine","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"ubuntu_container","Image":"ubuntu","NetworkSettings":null},"Identifier":"Ubuntu","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"redis_container","Image":"redis","NetworkSettings":null},"Identifier":"Redis","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mongo_container","Image":"mongo","NetworkSettings":null},"Identifier":"Mongo","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"wordpress_container","Image":"wordpress","NetworkSettings":null},"Identifier":"Wordpress","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mysql_container","Image":"mysql","NetworkSettings":null},"Identifier":"MySQL","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":true,"CheckpointID":"","ContainerID":"python_container","Image":"python","NetworkSettings":null},"Identifier":"Python","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"Node","AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"node_container","Image":"node","Checkpoint":false,"NetworkSettings":null,"CheckpointID":""}}]}
+[INFO] May 12 14:31:03.849:GET Request for /guest
+[INFO] May 12 14:31:03.849:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:31:03.858:GET Request for /guest/workload
+[INFO] May 12 14:31:03.858:Responding: {"Workloads":[{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"busybox_container","Image":"busybox","NetworkSettings":null},"Identifier":"Busybox","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"alpine_container","Image":"alpine","NetworkSettings":null},"Identifier":"Alpine","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"ubuntu_container","Image":"ubuntu","NetworkSettings":null},"Identifier":"Ubuntu","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"redis_container","Image":"redis","NetworkSettings":null},"Identifier":"Redis","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mongo_container","Image":"mongo","NetworkSettings":null},"Identifier":"Mongo","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"wordpress_container","Image":"wordpress","NetworkSettings":null},"Identifier":"Wordpress","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mysql_container","Image":"mysql","NetworkSettings":null},"Identifier":"MySQL","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":true,"CheckpointID":"","ContainerID":"python_container","Image":"python","NetworkSettings":null},"Identifier":"Python","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"Node","AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"node_container","Image":"node","Checkpoint":false,"NetworkSettings":null,"CheckpointID":""}}]}
+[INFO] May 12 14:31:04.850:GET Request for /guest
+[INFO] May 12 14:31:04.850:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:31:04.859:GET Request for /guest/workload
+[INFO] May 12 14:31:04.859:Responding: {"Workloads":[{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"busybox_container","Image":"busybox","NetworkSettings":null},"Identifier":"Busybox","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"alpine_container","Image":"alpine","NetworkSettings":null},"Identifier":"Alpine","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"ubuntu_container","Image":"ubuntu","NetworkSettings":null},"Identifier":"Ubuntu","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"redis_container","Image":"redis","NetworkSettings":null},"Identifier":"Redis","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mongo_container","Image":"mongo","NetworkSettings":null},"Identifier":"Mongo","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"wordpress_container","Image":"wordpress","NetworkSettings":null},"Identifier":"Wordpress","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mysql_container","Image":"mysql","NetworkSettings":null},"Identifier":"MySQL","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":true,"CheckpointID":"","ContainerID":"python_container","Image":"python","NetworkSettings":null},"Identifier":"Python","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"Node","AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"node_container","Image":"node","Checkpoint":false,"NetworkSettings":null,"CheckpointID":""}}]}
+[INFO] May 12 14:31:05.848:GET Request for /guest
+[INFO] May 12 14:31:05.848:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:31:05.854:GET Request for /guest/workload
+[INFO] May 12 14:31:05.855:Responding: {"Workloads":[{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"busybox_container","Image":"busybox","NetworkSettings":null},"Identifier":"Busybox","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"alpine_container","Image":"alpine","NetworkSettings":null},"Identifier":"Alpine","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"ubuntu_container","Image":"ubuntu","NetworkSettings":null},"Identifier":"Ubuntu","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"redis_container","Image":"redis","NetworkSettings":null},"Identifier":"Redis","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mongo_container","Image":"mongo","NetworkSettings":null},"Identifier":"Mongo","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"wordpress_container","Image":"wordpress","NetworkSettings":null},"Identifier":"Wordpress","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mysql_container","Image":"mysql","NetworkSettings":null},"Identifier":"MySQL","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":true,"CheckpointID":"","ContainerID":"python_container","Image":"python","NetworkSettings":null},"Identifier":"Python","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"Node","AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"node_container","Image":"node","Checkpoint":false,"NetworkSettings":null,"CheckpointID":""}}]}
+[INFO] May 12 14:31:06.848:GET Request for /guest
+[INFO] May 12 14:31:06.848:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:31:06.855:GET Request for /guest/workload
+[INFO] May 12 14:31:06.855:Responding: {"Workloads":[{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"busybox_container","Image":"busybox","NetworkSettings":null},"Identifier":"Busybox","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"alpine_container","Image":"alpine","NetworkSettings":null},"Identifier":"Alpine","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"ubuntu_container","Image":"ubuntu","NetworkSettings":null},"Identifier":"Ubuntu","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"redis_container","Image":"redis","NetworkSettings":null},"Identifier":"Redis","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mongo_container","Image":"mongo","NetworkSettings":null},"Identifier":"Mongo","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"wordpress_container","Image":"wordpress","NetworkSettings":null},"Identifier":"Wordpress","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mysql_container","Image":"mysql","NetworkSettings":null},"Identifier":"MySQL","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":true,"CheckpointID":"","ContainerID":"python_container","Image":"python","NetworkSettings":null},"Identifier":"Python","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"Node","AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"node_container","Image":"node","Checkpoint":false,"NetworkSettings":null,"CheckpointID":""}}]}
+[INFO] May 12 14:31:07.847:GET Request for /guest
+[INFO] May 12 14:31:07.848:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:31:07.853:GET Request for /guest/workload
+[INFO] May 12 14:31:07.854:Responding: {"Workloads":[{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"busybox_container","Image":"busybox","NetworkSettings":null},"Identifier":"Busybox","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"alpine_container","Image":"alpine","NetworkSettings":null},"Identifier":"Alpine","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"ubuntu_container","Image":"ubuntu","NetworkSettings":null},"Identifier":"Ubuntu","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"redis_container","Image":"redis","NetworkSettings":null},"Identifier":"Redis","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mongo_container","Image":"mongo","NetworkSettings":null},"Identifier":"Mongo","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"wordpress_container","Image":"wordpress","NetworkSettings":null},"Identifier":"Wordpress","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":false,"CheckpointID":"","ContainerID":"mysql_container","Image":"mysql","NetworkSettings":null},"Identifier":"MySQL","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"Containerproperties":{"Checkpoint":true,"CheckpointID":"","ContainerID":"python_container","Image":"python","NetworkSettings":null},"Identifier":"Python","SharedDir":"/home/wolder/shared_storage","Type":"Container"},{"Identifier":"Node","AccessIP":"0","AccessPort":"0","AutoMigrate":false,"Available":true,"SharedDir":"/home/wolder/shared_storage","Type":"Container","Containerproperties":{"ContainerID":"node_container","Image":"node","Checkpoint":false,"NetworkSettings":null,"CheckpointID":""}}]}
+[INFO] May 12 14:39:36.290:GET Request for /guest
+[INFO] May 12 14:39:36.290:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:41:38.588:GET Request for /guest
+[INFO] May 12 14:41:38.588:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:41:38.624:GET Request for /guest/workload
+[INFO] May 12 14:41:38.624:Responding: {
+    "Workloads": [
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "busybox_container",
+                "Image": "busybox",
+                "NetworkSettings": null
+            },
+            "Identifier": "Busybox",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "alpine_container",
+                "Image": "alpine",
+                "NetworkSettings": null
+            },
+            "Identifier": "Alpine",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "ubuntu_container",
+                "Image": "ubuntu",
+                "NetworkSettings": null
+            },
+            "Identifier": "Ubuntu",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "redis_container",
+                "Image": "redis",
+                "NetworkSettings": null
+            },
+            "Identifier": "Redis",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "mongo_container",
+                "Image": "mongo",
+                "NetworkSettings": null
+            },
+            "Identifier": "Mongo",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "wordpress_container",
+                "Image": "wordpress",
+                "NetworkSettings": null
+            },
+            "Identifier": "Wordpress",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "mysql_container",
+                "Image": "mysql",
+                "NetworkSettings": null
+            },
+            "Identifier": "MySQL",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": true,
+                "CheckpointID": "",
+                "ContainerID": "python_container",
+                "Image": "python",
+                "NetworkSettings": null
+            },
+            "Identifier": "Python",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "Identifier": "Node",
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "node_container",
+                "Image": "node",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointID": ""
+            }
+        }
+    ]
+}
+[INFO] May 12 14:42:09.462:GET Request for /guest
+[INFO] May 12 14:42:09.463:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:42:09.496:GET Request for /guest/workload
+[INFO] May 12 14:42:09.496:Responding: {
+    "Workloads": [
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "busybox_container",
+                "Image": "busybox",
+                "NetworkSettings": null
+            },
+            "Identifier": "Busybox",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "alpine_container",
+                "Image": "alpine",
+                "NetworkSettings": null
+            },
+            "Identifier": "Alpine",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "ubuntu_container",
+                "Image": "ubuntu",
+                "NetworkSettings": null
+            },
+            "Identifier": "Ubuntu",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "redis_container",
+                "Image": "redis",
+                "NetworkSettings": null
+            },
+            "Identifier": "Redis",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "mongo_container",
+                "Image": "mongo",
+                "NetworkSettings": null
+            },
+            "Identifier": "Mongo",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "wordpress_container",
+                "Image": "wordpress",
+                "NetworkSettings": null
+            },
+            "Identifier": "Wordpress",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "mysql_container",
+                "Image": "mysql",
+                "NetworkSettings": null
+            },
+            "Identifier": "MySQL",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": true,
+                "CheckpointID": "",
+                "ContainerID": "python_container",
+                "Image": "python",
+                "NetworkSettings": null
+            },
+            "Identifier": "Python",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "Identifier": "Node",
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "node_container",
+                "Image": "node",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointID": ""
+            }
+        }
+    ]
+}
+[INFO] May 12 14:42:21.807:GET Request for /guest
+[INFO] May 12 14:42:21.807:Responding: {"Ip":"192.168.122.1","Port":"8080","StoragePath":"/home/wolder/shared_storage","LibvirtURI":"qemu///system"}
+[INFO] May 12 14:42:21.813:GET Request for /guest/workload
+[INFO] May 12 14:42:21.813:Responding: {
+    "Workloads": [
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "busybox_container",
+                "Image": "busybox",
+                "NetworkSettings": null
+            },
+            "Identifier": "Busybox",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "alpine_container",
+                "Image": "alpine",
+                "NetworkSettings": null
+            },
+            "Identifier": "Alpine",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "ubuntu_container",
+                "Image": "ubuntu",
+                "NetworkSettings": null
+            },
+            "Identifier": "Ubuntu",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "redis_container",
+                "Image": "redis",
+                "NetworkSettings": null
+            },
+            "Identifier": "Redis",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "mongo_container",
+                "Image": "mongo",
+                "NetworkSettings": null
+            },
+            "Identifier": "Mongo",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "wordpress_container",
+                "Image": "wordpress",
+                "NetworkSettings": null
+            },
+            "Identifier": "Wordpress",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": false,
+                "CheckpointID": "",
+                "ContainerID": "mysql_container",
+                "Image": "mysql",
+                "NetworkSettings": null
+            },
+            "Identifier": "MySQL",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "Containerproperties": {
+                "Checkpoint": true,
+                "CheckpointID": "",
+                "ContainerID": "python_container",
+                "Image": "python",
+                "NetworkSettings": null
+            },
+            "Identifier": "Python",
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container"
+        },
+        {
+            "Identifier": "Node",
+            "AccessIP": "0",
+            "AccessPort": "0",
+            "AutoMigrate": false,
+            "Available": true,
+            "SharedDir": "/home/wolder/shared_storage",
+            "Type": "Container",
+            "Containerproperties": {
+                "ContainerID": "node_container",
+                "Image": "node",
+                "Checkpoint": false,
+                "NetworkSettings": null,
+                "CheckpointID": ""
+            }
+        }
+    ]
+}
+[INFO] May 12 14:42:42.097:Initialization done for 192.168.122.1:8080
+[INFO] May 12 14:42:42.098:Setting up handlers
+[INFO] May 12 14:42:42.098:Listening on 192.168.122.1:8080

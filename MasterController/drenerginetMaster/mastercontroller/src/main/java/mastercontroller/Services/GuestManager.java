@@ -18,10 +18,11 @@ import mastercontroller.Models.Workload;
 
 public class GuestManager {
     private FilePaths fp;
-    private ArrayList<Guest> guestList = new ArrayList<Guest>();
+    private ArrayList<Guest> guestList;
 
     public GuestManager() {
         fp = new FilePaths();
+        guestList = new ArrayList<Guest>();
     }
 
     public void initialize(VMManager vmManager) {

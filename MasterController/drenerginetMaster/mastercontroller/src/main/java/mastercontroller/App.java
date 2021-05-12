@@ -54,7 +54,7 @@ import mastercontroller.Services.EnergiDataFetcher.OperationStage;
 public class App {
 
 	private VMManager manager;
-	private GuestManager guestManager;
+	public GuestManager guestManager;
 	private WorkloadManager wm;
 	private ScheduledExecutorService es;
 	private JFrame frmVmManager;
@@ -114,7 +114,7 @@ public class App {
 		es = Executors.newScheduledThreadPool(10);
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
-		this.guestManager = new GuestManager();
+		guestManager = new GuestManager();
 		guestManager.initialize(manager);
 
 		setupWorkloads();
@@ -124,19 +124,20 @@ public class App {
 
 	private void setupWorkloads() {
 		int delay = 0;
-		int period = 5;
+		int period = 10;
 		AtomicInteger workloadIteration = new AtomicInteger(0);
 		TimerTask updateWorkloadsTask = new TimerTask() {
 			@Override
 			public void run() {
 				workloadIteration.incrementAndGet();
 
-				wm.workloadAddedToList(manager.workloadDuplicates());
-					
+				manager.workloadDuplicates(guestManager);
+				
 				
 				if (initDone && listModel != null) {
 					// Add workloads that are not in the listModel
 					for (Workload workload : manager.getWorkloads()) {
+						System.out.println("SIZE" + manager.getWorkloads().size());
 						boolean duplicate = false;
 						for (int i = 0; i < listModel.size(); i++) {
 							if (((Workload) listModel.get(i)).getWl_name() == workload.getWl_name()) {
