@@ -40,14 +40,11 @@ public class VMManager implements Observer {
 
     private FilePaths fp;
     private ArrayList<Workload> workloadList;
-    private JsonParser parser = new JsonParser();
     private ExecutorService es;
-    private GuestManager guestManager;
 
     public VMManager(Subject WorkloadManager) {
         WorkloadManager.registerObserver(this);
         this.workloadList = new ArrayList<>();
-        this.guestManager = new GuestManager();
         fp = new FilePaths();
         this.es = Executors.newCachedThreadPool();
     }
@@ -147,18 +144,20 @@ public class VMManager implements Observer {
 
 
 
-    public Workload workloadDuplicates(){
+    public void workloadDuplicates(GuestManager guestManager){
         for(Guest guest : guestManager.getGuestList()){
             for(Workload workload : guestManager.getWorkloadsFromGuest(guest, this)){
-                if(this.getWorkloads().contains(workload)){
-                    System.out.println("Duplicate");
-                } else {
-                    this.getWorkloads().add(workload);
-                    return workload;
+                boolean duplicate = false;
+                for (int i = 0; i < getWorkloads().size(); i++) {
+                    if (getWorkloads().get(i).getWl_name().equals(workload.getWl_name())) {
+                        duplicate = true;
+                    }
+                }
+                if (!duplicate) {
+                    getWorkloads().add(workload);
                 }
             }
         }
-        return null;
     }
 
     @Override

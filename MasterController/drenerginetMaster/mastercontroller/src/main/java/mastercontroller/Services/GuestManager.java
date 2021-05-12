@@ -19,14 +19,11 @@ import mastercontroller.Models.Workload;
 
 public class GuestManager {
     private FilePaths fp;
-    private ArrayList<Guest> guestList = new ArrayList<Guest>();
-    private VMManager manager;
-    private WorkloadManager wm;
+    private ArrayList<Guest> guestList;
 
     public GuestManager() {
-        this.wm = new WorkloadManager();
         fp = new FilePaths();
-        this.manager = new VMManager(wm);
+        guestList = new ArrayList<Guest>();
     }
 
     public void initialize(VMManager vmManager) {
@@ -63,7 +60,7 @@ public class GuestManager {
 
     // Calls ip:port/workloads to get workloads running on guest
     public ArrayList<Workload> getWorkloadsFromGuest(Guest g, VMManager vmManager) {
-        ArrayList<Workload> workloads = this.manager.getWorkloads();
+        ArrayList<Workload> guestWorkloads = new ArrayList<Workload>();
         if (g.isOnline()) {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();
@@ -78,7 +75,7 @@ public class GuestManager {
                     JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
                     for (int i = 0; i < jsonArray.size(); i++) {
                         Workload workload = vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i));
-                        workloadList.add(workload);
+                        guestWorkloads.add(workload);
                         g.getWorkloads().add(workload); // Add workload to guest.
                     }
                 }
@@ -87,6 +84,6 @@ public class GuestManager {
             }
         }
 
-        return workloadList;
+        return guestWorkloads;
     }
 }

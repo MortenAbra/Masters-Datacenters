@@ -91,7 +91,24 @@ def compareImageSizeAndCombinedTime():
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     plt.show()
 
+def workloadTaskDistribution():
+    fig, ax = plt.subplots()
+    width = 0.35       # the width of the bars: can also be len(x) sequence
 
+
+    ax.bar(workload_label, processing, width,  label='Processing')
+    ax.bar(workload_label, disk, width, bottom=processing,label='Disk')
+    ax.bar(workload_label, memory, width, bottom=processing, label='Memory')
+    ax.bar(workload_label, network, width, bottom=processing, label='Network')
+
+    ax.set_ylabel('Scores')
+    ax.set_title('Scores by group')
+    ax.legend()
+
+    plt.show()
+
+
+workloadTaskDistribution()
 pieChartOfTaskRatios()
 compareImageSizeAndCombinedTime()
 compareImagesAndImageSize()
