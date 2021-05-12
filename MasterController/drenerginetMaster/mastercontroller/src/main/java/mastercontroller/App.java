@@ -1,8 +1,6 @@
 package mastercontroller;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
@@ -13,23 +11,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.TimerTask;
-import java.util.Vector;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -47,9 +39,9 @@ import mastercontroller.Models.Guest;
 import mastercontroller.Models.Record;
 import mastercontroller.Models.Workload;
 import mastercontroller.Services.EnergiDataFetcher;
+import mastercontroller.Services.EnergiDataFetcher.OperationStage;
 import mastercontroller.Services.GuestManager;
 import mastercontroller.Services.VMManager;
-import mastercontroller.Services.EnergiDataFetcher.OperationStage;
 
 public class App {
 

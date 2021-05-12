@@ -16,19 +16,17 @@ import java.net.Socket;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonIOException;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import mastercontroller.Observer;
 import mastercontroller.Subject;
-import mastercontroller.WorkloadManager;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.ContainerWorkload;
 import mastercontroller.Models.Guest;
@@ -39,12 +37,12 @@ import mastercontroller.Models.Workload.WorkloadType;
 public class VMManager implements Observer {
 
     private FilePaths fp;
-    private ArrayList<Workload> workloadList;
+    private HashSet<Workload> workloadList;
     private ExecutorService es;
 
     public VMManager(Subject WorkloadManager) {
         WorkloadManager.registerObserver(this);
-        this.workloadList = new ArrayList<>();
+        this.workloadList = new HashSet<>();
         fp = new FilePaths();
         this.es = Executors.newCachedThreadPool();
     }
@@ -138,12 +136,12 @@ public class VMManager implements Observer {
     }
 
    
-    public ArrayList<Workload> getWorkloads() {
+    public HashSet<Workload> getWorkloads() {
         return workloadList;
     }
 
 
-
+/*
     public void workloadDuplicates(GuestManager guestManager){
         for(Guest guest : guestManager.getGuestList()){
             for(Workload workload : guestManager.getWorkloadsFromGuest(guest, this)){
@@ -155,6 +153,17 @@ public class VMManager implements Observer {
                 }
                 if (!duplicate) {
                     getWorkloads().add(workload);
+                }
+            }
+        }
+    }
+    */
+
+    public void workloadDuplicates(GuestManager guestManager){
+        for(Guest guest : guestManager.getGuestList()){
+            for(Workload workload : guestManager.getWorkloadsFromGuest(guest, this)){
+                if(!this.getWorkloads().contains(workload)){
+                    this.getWorkloads().add(workload);
                 }
             }
         }

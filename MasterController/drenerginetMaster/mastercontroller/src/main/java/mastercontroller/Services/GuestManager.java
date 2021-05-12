@@ -7,6 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -19,11 +20,11 @@ import mastercontroller.Models.Workload;
 
 public class GuestManager {
     private FilePaths fp;
-    private ArrayList<Guest> guestList;
+    private HashSet<Guest> guestList;
 
     public GuestManager() {
         fp = new FilePaths();
-        guestList = new ArrayList<Guest>();
+        guestList = new HashSet<Guest>();
     }
 
     public void initialize(VMManager vmManager) {
@@ -54,13 +55,13 @@ public class GuestManager {
         }
     }
 
-    public ArrayList<Guest> getGuestList() {
+    public HashSet<Guest> getGuestList() {
         return guestList;
     }
 
     // Calls ip:port/workloads to get workloads running on guest
-    public ArrayList<Workload> getWorkloadsFromGuest(Guest g, VMManager vmManager) {
-        ArrayList<Workload> guestWorkloads = new ArrayList<Workload>();
+    public HashSet<Workload> getWorkloadsFromGuest(Guest g, VMManager vmManager) {
+        HashSet<Workload> guestWorkloads = new HashSet<Workload>();
         if (g.isOnline()) {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();

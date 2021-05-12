@@ -148,6 +148,86 @@ public class Workload {
     public void setWl_type(WorkloadType wl_type) {
         this.wl_type = wl_type;
     }
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (elapsedTime ^ (elapsedTime >>> 32));
+        result = prime * result + (int) (endTime ^ (endTime >>> 32));
+        result = prime * result + (int) (startTime ^ (startTime >>> 32));
+        result = prime * result + (wl_autoMigration ? 1231 : 1237);
+        result = prime * result + ((wl_ip == null) ? 0 : wl_ip.hashCode());
+        result = prime * result + ((wl_name == null) ? 0 : wl_name.hashCode());
+        result = prime * result + wl_port;
+        result = prime * result + ((wl_sharedDir == null) ? 0 : wl_sharedDir.hashCode());
+        result = prime * result + (wl_status ? 1231 : 1237);
+        result = prime * result + ((wl_type == null) ? 0 : wl_type.hashCode());
+        return result;
+    }
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Workload other = (Workload) obj;
+        if (elapsedTime != other.elapsedTime) {
+            return false;
+        }
+        if (endTime != other.endTime) {
+            return false;
+        }
+        if (startTime != other.startTime) {
+            return false;
+        }
+        if (wl_autoMigration != other.wl_autoMigration) {
+            return false;
+        }
+        if (wl_ip == null) {
+            if (other.wl_ip != null) {
+                return false;
+            }
+        } else if (!wl_ip.equals(other.wl_ip)) {
+            return false;
+        }
+        if (wl_name == null) {
+            if (other.wl_name != null) {
+                return false;
+            }
+        } else if (!wl_name.equals(other.wl_name)) {
+            return false;
+        }
+        if (wl_port != other.wl_port) {
+            return false;
+        }
+        if (wl_sharedDir == null) {
+            if (other.wl_sharedDir != null) {
+                return false;
+            }
+        } else if (!wl_sharedDir.equals(other.wl_sharedDir)) {
+            return false;
+        }
+        if (wl_status != other.wl_status) {
+            return false;
+        }
+        if (wl_type != other.wl_type) {
+            return false;
+        }
+        return true;
+    }
 
     
     
