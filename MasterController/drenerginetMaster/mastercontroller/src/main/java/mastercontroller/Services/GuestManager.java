@@ -74,7 +74,6 @@ public class GuestManager {
                         for (int i = 0; i < jsonArray.size(); i++) {
                             Workload workload = vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i));
                             vmManager.getWorkloads().add(workload);
-                            System.out.println("ADDED: " + workload);
                             g.getWorkloads().add(workload); // Add workload to guest.
                         }
                     }
