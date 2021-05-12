@@ -140,35 +140,6 @@ public class VMManager implements Observer {
         return workloadList;
     }
 
-
-/*
-    public void workloadDuplicates(GuestManager guestManager){
-        for(Guest guest : guestManager.getGuestList()){
-            for(Workload workload : guestManager.getWorkloadsFromGuest(guest, this)){
-                boolean duplicate = false;
-                for (int i = 0; i < getWorkloads().size(); i++) {
-                    if (getWorkloads().get(i).getWl_name().equals(workload.getWl_name())) {
-                        duplicate = true;
-                    }
-                }
-                if (!duplicate) {
-                    getWorkloads().add(workload);
-                }
-            }
-        }
-    }
-    */
-
-    public void workloadDuplicates(GuestManager guestManager){
-        for(Guest guest : guestManager.getGuestList()){
-            for(Workload workload : guestManager.getWorkloadsFromGuest(guest, this)){
-                if(!this.getWorkloads().contains(workload)){
-                    this.getWorkloads().add(workload);
-                }
-            }
-        }
-    }
-
     @Override
     public void update(Workload workload) {
         workloadList.add(workload);

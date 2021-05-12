@@ -6,14 +6,12 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import mastercontroller.WorkloadManager;
 import mastercontroller.FileManager.FilePaths;
 import mastercontroller.Models.Guest;
 import mastercontroller.Models.Workload;
@@ -44,7 +42,7 @@ public class GuestManager {
                         duplciate = true;
                     }
                 }
-                if (!duplciate){ 
+                if (!duplciate) {
                     // If not duplicate then add the guest
                     guestList.add(g);
                 }
@@ -60,31 +58,30 @@ public class GuestManager {
     }
 
     // Calls ip:port/workloads to get workloads running on guest
-    public HashSet<Workload> getWorkloadsFromGuest(Guest g, VMManager vmManager) {
-        HashSet<Workload> guestWorkloads = new HashSet<Workload>();
-        if (g.isOnline()) {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();
+    public void getWorkloadsFromGuests(VMManager vmManager) {
+        for (Guest g : guestList) {
+            if (g.isOnline()) {
+                HttpClient client = HttpClient.newHttpClient();
+                HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();
 
-            HttpResponse<String> response;
-            try {
-                response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                if (response.body().length() != 0) {
-                    Object obj = JsonParser.parseString(response.body());
-                    JsonObject jsonObject = (JsonObject) obj;
+                HttpResponse<String> response;
+                try {
+                    response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    if (response.body().length() != 0) {
+                        Object obj = JsonParser.parseString(response.body());
+                        JsonObject jsonObject = (JsonObject) obj;
 
-                    JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        Workload workload = vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i));
-                        guestWorkloads.add(workload);
-                        g.getWorkloads().add(workload); // Add workload to guest.
+                        JsonArray jsonArray = (JsonArray) jsonObject.get("Workloads");
+                        for (int i = 0; i < jsonArray.size(); i++) {
+                            Workload workload = vmManager.parseWorkloadObject((JsonObject) jsonArray.get(i));
+                            vmManager.getWorkloads().add(workload);
+                            g.getWorkloads().add(workload); // Add workload to guest.
+                        }
                     }
+                } catch (IOException | InterruptedException e) {
+                    System.out.println("Workloads not available: " + toString());
                 }
-            } catch (IOException | InterruptedException e) {
-                System.out.println("Workloads not available: " + toString());
             }
         }
-
-        return guestWorkloads;
     }
 }

@@ -114,6 +114,24 @@ public class App {
 		initialize();
 	}
 
+	public void checkListModelDuplicates(VMManager manager, boolean done) {
+		if (done && listModel != null) {
+			// Add workloads that are not in the listModel
+			for (Workload workload : manager.getWorkloads()) {
+				if (!listModel.contains(workload)) {
+					listModel.addElement(workload);
+				}
+			}
+
+			for (int i = 0; i < listModel.size(); i++) {
+				if (!manager.getWorkloads().contains(listModel.get(i))) {
+					listModel.removeElementAt(i);
+				}
+			}
+			vmList.setModel(listModel);
+		}
+	}
+
 	private void setupWorkloads() {
 		int delay = 0;
 		int period = 5;
@@ -123,37 +141,23 @@ public class App {
 			public void run() {
 				workloadIteration.incrementAndGet();
 
-				manager.workloadDuplicates(guestManager);
-				
-				if (initDone && listModel != null) {
-					// Add workloads that are not in the listModel
+				guestManager.getWorkloadsFromGuests(manager);
+
+				checkListModelDuplicates(manager, initDone);
+
+				// Remove list entires that are not in the workloads
+				for (int i = 0; i < listModel.getSize(); i++) {
+					boolean elementNotInWorkloads = true;
 					for (Workload workload : manager.getWorkloads()) {
-						boolean duplicate = false;
-						for (int i = 0; i < listModel.size(); i++) {
-
-							if (((Workload) listModel.get(i)).equals(workload)) {
-								duplicate = true;
-							}
-						}
-						if (!duplicate) {
-							listModel.addElement(workload);
+						if (listModel.get(i).toString() == workload.getWl_name()) {
+							elementNotInWorkloads = false;
 						}
 					}
-
-					// Remove list entires that are not in the workloads
-					for (int i = 0; i < listModel.getSize(); i++) {
-						boolean elementNotInWorkloads = true;
-						for (Workload workload : manager.getWorkloads()) {
-							if (listModel.get(i).toString() == workload.getWl_name()) {
-								elementNotInWorkloads = false;
-							}
-						}
-						if (elementNotInWorkloads) {
-							listModel.removeElementAt(i);
-						}
+					if (elementNotInWorkloads) {
+						listModel.removeElementAt(i);
 					}
-					vmList.setModel(listModel);
 				}
+				vmList.setModel(listModel);
 				manager.updateWorkloadsJSON();
 			}
 		};
@@ -270,7 +274,7 @@ public class App {
 		});
 
 		addWorkloadButton = new JButton("Add workload");
-		addWorkloadButton.addActionListener(new ActionListener(){
+		addWorkloadButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -281,16 +285,19 @@ public class App {
 				workloadJsonTextArea.setRows(10);
 				JScrollPane workloadScrollPane = new JScrollPane(workloadJsonTextArea);
 				JOptionPane.showMessageDialog(null, workloadScrollPane, "New Workload", JOptionPane.DEFAULT_OPTION);
-				if(JOptionPane.YES_OPTION == 0){
+				if (JOptionPane.YES_OPTION == 0) {
 					String newWorkloadString = workloadJsonTextArea.getText();
 
 					JOptionPane guestOptionPane = new JOptionPane("Add workload to Guest");
 					JComboBox guestMigrationComboBox = new JComboBox();
-					DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(guestManager.getGuestList().toArray());
+					DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<Object>(
+							guestManager.getGuestList().toArray());
 					guestMigrationComboBox.setModel(comboBoxModel);
-					JOptionPane.showMessageDialog(null, guestMigrationComboBox, "Pick Guest", JOptionPane.DEFAULT_OPTION);
-					if(JOptionPane.YES_OPTION == 0){
-						manager.HTTPMigrate((Guest) guestMigrationComboBox.getSelectedItem(), newWorkloadString, "/workloads");
+					JOptionPane.showMessageDialog(null, guestMigrationComboBox, "Pick Guest",
+							JOptionPane.DEFAULT_OPTION);
+					if (JOptionPane.YES_OPTION == 0) {
+						manager.HTTPMigrate((Guest) guestMigrationComboBox.getSelectedItem(), newWorkloadString,
+								"/workloads");
 					} else {
 						System.out.println("Migration pane closed!");
 					}
@@ -306,7 +313,6 @@ public class App {
 		gbc_addWorkloadButton.gridx = 0;
 		gbc_addWorkloadButton.gridy = 1;
 		panel.add(addWorkloadButton, gbc_addWorkloadButton);
-
 
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
@@ -407,7 +413,8 @@ public class App {
 		vmPropertiesPanel.setLayout(gbl_vmPropertiesPanel);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Workload Properties", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_1.setBorder(
+				new TitledBorder(null, "Workload Properties", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
