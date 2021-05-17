@@ -108,7 +108,52 @@ def workloadTaskDistribution():
     plt.show()
 
 
-workloadTaskDistribution()
-pieChartOfTaskRatios()
-compareImageSizeAndCombinedTime()
-compareImagesAndImageSize()
+def elspotPlot():
+    file = pd.read_csv('/home/wolder/Documents/Projects/Masters-Datacenters/Plots/elspotprices.csv', delimiter=',')
+    print(file)
+
+    x_label = file['HourDK']
+    y_values = file['SpotPriceDKK']
+    y_mean = [np.mean(y_values)]*len(x_label)
+
+    threshold_top = y_values.mean() + y_values.mean() * 0.1
+    threshold_middle = y_values.mean()
+    threshold_but = y_values.mean() - y_values.mean() * 0.1
+
+    top_list = [threshold_top]*len(x_label)
+    middle_list = [threshold_middle]*len(x_label)
+    buttom_list = [threshold_but]*len(x_label)
+
+    x = np.linspace(0, 24, 24)
+    
+
+    fig, ax = plt.subplots()
+    ax.plot(x, y_values)  
+    # Plot the average line
+    #mean_line = ax.plot(x,y_mean, label='Mean', linestyle='--')
+    
+    ax.locator_params(axis="x", nbins=24)
+    
+    ax.axhline(threshold_top, color='green', lw=2, alpha=0.5)
+    #ax.axhline(threshold_middle, color='orange', lw=2, alpha=0.5)
+    ax.axhline(threshold_but, color='red', lw=2, alpha=0.5)
+    ax.fill_between(x, y_values, top_list, where=y_values > threshold_top,
+                color='green', alpha=0.2, interpolate=True)
+
+    ax.fill_between(x, y_values, buttom_list, where=threshold_but > y_values,
+                color='red', alpha=0.2, interpolate=True)
+
+
+    ax.set_title("EnergiDataService Migrate Threshold")
+
+    ax.set_xlabel("Time of day (Hours)")
+    ax.set_ylabel("Elspot prices (DKK)")
+
+    plt.show()
+
+
+#workloadTaskDistribution()
+#pieChartOfTaskRatios()
+#compareImageSizeAndCombinedTime()
+#compareImagesAndImageSize()
+elspotPlot()
