@@ -193,8 +193,15 @@ func migrateHandler(w http.ResponseWriter, r *http.Request) {
 						fmt.Println("Migrating VM: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 						logInfo("Migrating VM: " + migration.Identifier + "   to: " + migration.TargetGuest.IP + ":" + migration.TargetGuest.Port)
 
-						// TODO
-						initiateVMMigration(migration, vm)
+						start := time.Now()
+						jsonResponse := initiateVMMigration(migration, vm) // Go Routine?
+						elapsed := time.Since(start)
+						jsonResponse.Network = elapsed - jsonResponse.CPU - jsonResponse.Disc - jsonResponse.Memory
+
+						timerOutput := jsonmanager.GetJSONResponseAsJSON(jsonResponse)
+
+						logErr(err)
+						fmt.Fprintf(w, timerOutput)
 					}
 				}
 			}
@@ -246,7 +253,11 @@ func transferHandler(w http.ResponseWriter, r *http.Request) {
 				err = newdecoder.Decode(&wl)
 				logErr(err)
 
-				finishVMMigration(wl)
+				// Send time back to Migrator
+				jsonResponse := finishVMMigration(wl)
+				response, err := json.Marshal(jsonResponse)
+				logErr(err)
+				fmt.Fprintf(w, string(response))
 			}
 
 		}
@@ -353,38 +364,61 @@ func cleanUpAfterContainerMigration(container containerworkload.ContainerWorkloa
 }
 
 // Initial Migration part of the VM Migration
-func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) {
+func initiateVMMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) timerresponse.TimerResponse {
+	var jsonResponse timerresponse.TimerResponse
+	start_time := time.Now()
 	// MIGRATE FUNC
 	err := vm.Migrate(migration.TargetGuest.LibvirtURI)
 	logErr(err)
-	// Send Workload to Target
-	err = VMPostMigration(migration, vm)
+	logTime(time.Since(start_time).String(), "VMMigration("+vm.Identifier+")")
+	jsonResponse.CPU = time.Since(start_time)
+
+	timeResponse, err := VMPostMigration(migration, vm)
 	logErr(err)
-	// Remove workload from workload.json
+
+	var postResponse timerresponse.TimerResponse
+	json.Unmarshal(timeResponse, &postResponse)
+
+	jsonResponse.CPU = postResponse.CPU + jsonResponse.CPU
+	jsonResponse.Disc = postResponse.Disc + jsonResponse.Disc
+	jsonResponse.Memory = postResponse.Memory + jsonResponse.Memory
+
+	clean_start := time.Now()
 	err = cleanUpAfterVMMigration(vm)
 	logErr(err)
+	logTime(time.Since(clean_start).String(), "cleanUpAfterVMMigration("+vm.Identifier+")")
+	jsonResponse.CPU = time.Since(clean_start) + jsonResponse.CPU
+
+	return jsonResponse
 }
 
 // Intermediary step of migration. Send workload information to receiver
-func VMPostMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) error {
+func VMPostMigration(migration migrate.Migrate, vm vmworkload.VMWorkload) ([]byte, error) {
 	jsonValue, _ := json.Marshal(vm)
 
 	// Send workload to target via /transfer.
 	fmt.Println("Transfering Workload Information: " + vm.Identifier + " to:" + migration.TargetGuest.IP)
 	prefix := migration.TargetGuest.IP + ":" + migration.TargetGuest.Port
 	suffix := "/transfer"
-	_, err := http.Post("http://"+prefix+suffix, "application/json", bytes.NewBuffer(jsonValue))
+	timeResponse, err := http.Post("http://"+prefix+suffix, "application/json", bytes.NewBuffer(jsonValue))
 	if err != nil {
-		return err
+		return []byte{}, err
 	}
-	return err
+	data, err := ioutil.ReadAll(timeResponse.Body)
+	return data, err
 }
 
 // Final Migration part of the VM Migration on receiver
-func finishVMMigration(vm vmworkload.VMWorkload) {
+func finishVMMigration(vm vmworkload.VMWorkload) timerresponse.TimerResponse {
+	var jsonResponse timerresponse.TimerResponse
+	clean_start := time.Now()
+
 	logInfo("Migration of workload: " + vm.Identifier)
 	err := jsonmanager.AddVMWorkloadToSystem(vm)
 	logErr(err)
+	jsonResponse.CPU = time.Since(clean_start) + jsonResponse.CPU
+
+	return jsonResponse
 }
 
 // Clean up after migration by removing VM workload from workload.json
