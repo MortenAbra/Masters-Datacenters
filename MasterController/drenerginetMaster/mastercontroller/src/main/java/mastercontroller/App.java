@@ -488,14 +488,19 @@ public class App {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Guest guest = (Guest) comboBoxModel.getSelectedItem();
-				if (selectedWorkload != null && guest.isOnline()) {
-					manager.migrateWorkload(selectedWorkload, guest, guestManager);
-					listModel.removeElement(vmList.getSelectedValue());
-					vmList.setModel(listModel);
-
-				} else {
-					System.out.println("Workload is not selected or guest is not online!");
+				for (Guest g : guestManager.getGuestList()) {
+					if (guest.getIp() == g.getIp()) {
+						if (selectedWorkload != null && g.isOnline()) {
+							System.out.println("Libvirt: " + g.getLibvirtURI());
+							manager.migrateWorkload(selectedWorkload, g, guestManager);
+							listModel.removeElement(vmList.getSelectedValue());
+							vmList.setModel(listModel);
+						} else {
+							System.out.println("Workload is not selected or guest is not online!");
+						}
+					}
 				}
+
 			}
 		});
 		GridBagConstraints gbc_vmMigrationBtn = new GridBagConstraints();

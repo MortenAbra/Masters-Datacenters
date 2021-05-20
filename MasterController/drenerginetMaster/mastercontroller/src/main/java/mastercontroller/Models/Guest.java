@@ -16,12 +16,13 @@ public class Guest {
     String port;
     boolean online = false;
     HashSet<Workload> workloads = new HashSet<Workload>();
-    String storagePath;
+    String storagePath = "";
     String libvirtURI;
 
-    public Guest(String ip, String port) {
+    public Guest(String ip, String port, String libvirtURI) {
         this.ip = ip;
         this.port = port;
+        this.libvirtURI = libvirtURI;
     }
 
 
@@ -36,11 +37,6 @@ public class Guest {
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.body().length() != 0) {
-                Object obj = JsonParser.parseString(response.body());
-                JsonObject jsonObject = (JsonObject) obj;
-                storagePath = jsonObject.get("StoragePath").getAsString();
-                libvirtURI = jsonObject.get("LibvirtURI").getAsString();
-
                 online = true;
                 return true;
             } else {

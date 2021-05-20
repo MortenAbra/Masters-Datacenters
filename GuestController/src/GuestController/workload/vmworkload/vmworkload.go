@@ -2,7 +2,6 @@ package vmworkload
 
 import (
 	"GuestController/workload"
-	"fmt"
 
 	"github.com/libvirt/libvirt-go"
 )
@@ -24,24 +23,16 @@ func (wl VMWorkload) Migrate(destinationURI string) error {
 	}
 	defer conn.Close()
 
-	doms, err := conn.ListAllDomains(libvirt.CONNECT_LIST_DOMAINS_ACTIVE)
+	dom, err := conn.LookupDomainByName(wl.Identifier)
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("%d running domains:\n", len(doms))
-	for _, dom := range doms {
-		dname, err := dom.GetName()
-		if err != nil {
-			return err
-		}
-
-		if dname == wl.Identifier {
-			err = dom.MigrateToURI3(destinationURI, &libvirt.DomainMigrateParameters{}, libvirt.MIGRATE_ABORT_ON_ERROR)
-			if err != nil {
-				return err
-			}
-		}
+	defer dom.Free()
+	err = dom.MigrateToURI(destinationURI, libvirt.MIGRATE_PEER2PEER|libvirt.MIGRATE_TUNNELLED|libvirt.MIGRATE_UNSAFE, wl.Identifier, 0)
+	if err != nil {
+		return err
 	}
+
 	return err
 }

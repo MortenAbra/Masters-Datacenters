@@ -5,7 +5,7 @@ import numpy as np
 x = []
 y = []
 
-file = pd.read_csv('/home/wolder/Documents/Projects/Masters-Datacenters/Plots/data2.csv', delimiter=',')
+file = pd.read_csv('/home/wolder/Documents/Projects/Masters-Datacenters/Plots/data3.csv', delimiter=',')
 print(file)
 
 workload_label = file['Name']
@@ -57,7 +57,7 @@ def compareImagesAndImageSize():
     plt.title('Image size and migration duration')
 
     color = 'tab:blue'
-    ax1.set_xlabel('Workload')
+    ax1.set_xlabel('Workload by name')
     ax1.set_ylabel('Migration Time (s)', color=color)
     ax1.plot(workload_label, migrationtime, color=color)
     ax1.tick_params(axis='y', labelcolor=color)
@@ -101,8 +101,9 @@ def workloadTaskDistribution():
     ax.bar(workload_label, memory, width, bottom=processing, label='Memory')
     ax.bar(workload_label, network, width, bottom=processing, label='Network')
 
-    ax.set_ylabel('Scores')
-    ax.set_title('Scores by group')
+    ax.set_ylabel('Migration Time (s)')
+    ax.set_xlabel('Workload by name')
+    ax.set_title('Migration Time per workload')
     ax.legend()
 
     plt.show()
@@ -152,8 +153,8 @@ def elspotPlot():
     plt.show()
 
 
-#workloadTaskDistribution()
-#pieChartOfTaskRatios()
-#compareImageSizeAndCombinedTime()
-#compareImagesAndImageSize()
-elspotPlot()
+workloadTaskDistribution()
+pieChartOfTaskRatios()
+compareImageSizeAndCombinedTime()
+compareImagesAndImageSize()
+#elspotPlot()

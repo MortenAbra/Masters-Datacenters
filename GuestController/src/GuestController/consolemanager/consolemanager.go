@@ -39,14 +39,11 @@ func ReadServerIPAndPortFromUser() (string, string, string, string, error) {
 	// TODO TEMPORARY WHILE TESTING
 	serverSharedDir = "/home/wolder/shared_storage"
 
-	fmt.Print("Please enter shared directory with host: ")
+	fmt.Print("Please enter the Libvirt URI of the guest: ")
 	serverLibvirtURI, err := readResonse()
 	if err != nil {
 		return "", "", "", "", err
 	}
-
-	// TODO TEMPORARY WHILE TESTING
-	serverLibvirtURI = "qemu///system"
 
 	return serverIP, serverPort, serverSharedDir, serverLibvirtURI, err
 }

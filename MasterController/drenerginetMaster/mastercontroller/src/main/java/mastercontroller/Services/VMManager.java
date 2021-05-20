@@ -159,7 +159,7 @@ public class VMManager implements Observer {
         obj.add("TargetGuest", targetGuest);
 
         // Find the guest which runs the workload
-        Guest guestRunningWorkload = new Guest("", "");
+        Guest guestRunningWorkload = new Guest("", "", "");
         for (Guest g : guestManager.getGuestList()) {
             for (Workload w : g.getWorkloads()) {
                 if (w.getWl_name().equals(workload.getWl_name())) {

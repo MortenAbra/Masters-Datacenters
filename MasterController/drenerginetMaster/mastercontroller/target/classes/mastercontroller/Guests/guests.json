@@ -2,15 +2,13 @@
     "Guests": [
         {
             "Ip": "192.168.122.162",
-            "Port": "8080"
+            "Port": "8080",
+            "LibvirtURI": "qemu+ssh://wolder@192.168.122.162/system"
         },
         {
             "Ip": "192.168.122.109",
-            "Port": "8080"
-        },
-        {
-            "Ip": "192.168.122.1",
-            "Port": "8080"
+            "Port": "8080",
+            "LibvirtURI": "qemu+ssh://wolder@192.168.122.109/system"
         }
     ]
 }

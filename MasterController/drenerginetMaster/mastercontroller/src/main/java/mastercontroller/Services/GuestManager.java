@@ -34,7 +34,12 @@ public class GuestManager {
 
             for (int i = 0; i < jsonArray.size(); i++) {
                 JsonObject guestObject = (JsonObject) jsonArray.get(i);
-                Guest g = new Guest(guestObject.get("Ip").getAsString(), guestObject.get("Port").getAsString());
+                Guest g = new Guest(
+                    guestObject.get("Ip").getAsString(), 
+                    guestObject.get("Port").getAsString(),
+                    guestObject.get("LibvirtURI").getAsString());
+                
+                
                 boolean duplciate = false;
                 for (Guest oldGuest : guestList) {
                     if (oldGuest.getIp().equals(g.getIp())) {
@@ -54,6 +59,10 @@ public class GuestManager {
     }
 
     public HashSet<Guest> getGuestList() {
+        for (Guest g : guestList) {
+            System.out.println("Testing" + g.getLibvirtURI());
+        }
+
         return guestList;
     }
 
