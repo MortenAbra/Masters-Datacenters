@@ -4,7 +4,7 @@ public class Workload {
 
     String wl_name = "Undefined";
     String wl_ip = "0.0.0.0";
-    int wl_port = -1;
+    String wl_port = "0";
     long startTime = 0;
     long elapsedTime = 0;
     long endTime = 0;
@@ -13,7 +13,7 @@ public class Workload {
     String wl_sharedDir;
     WorkloadType wl_type;
 
-    public Workload(String wl_name, String wl_ip, int wl_port, boolean wl_status, boolean wl_autoMigration, String wl_sharedDir, WorkloadType wl_type) {
+    public Workload(String wl_name, String wl_ip, String wl_port, boolean wl_status, boolean wl_autoMigration, String wl_sharedDir, WorkloadType wl_type) {
         this.wl_name = wl_name;
         this.wl_ip = wl_ip;
         this.wl_port = wl_port;
@@ -78,14 +78,14 @@ public class Workload {
     /**
      * @return the wl_port
      */
-    public int getWl_port() {
+    public String getWl_port() {
         return wl_port;
     }
 
     /**
      * @param wl_port the wl_port to set
      */
-    public void setWl_port(int wl_port) {
+    public void setWl_port(String wl_port) {
         this.wl_port = wl_port;
     }
 
@@ -162,7 +162,7 @@ public class Workload {
         result = prime * result + (wl_autoMigration ? 1231 : 1237);
         result = prime * result + ((wl_ip == null) ? 0 : wl_ip.hashCode());
         result = prime * result + ((wl_name == null) ? 0 : wl_name.hashCode());
-        result = prime * result + wl_port;
+        result = prime * result + ((wl_port == null) ? 0 : wl_ip.hashCode());
         result = prime * result + ((wl_sharedDir == null) ? 0 : wl_sharedDir.hashCode());
         result = prime * result + (wl_status ? 1231 : 1237);
         result = prime * result + ((wl_type == null) ? 0 : wl_type.hashCode());
@@ -210,7 +210,11 @@ public class Workload {
         } else if (!wl_name.equals(other.wl_name)) {
             return false;
         }
-        if (wl_port != other.wl_port) {
+        if (wl_port == null) {
+            if (other.wl_port != null) {
+                return false;
+            }
+        } else if (!wl_port.equals(other.wl_port)) {
             return false;
         }
         if (wl_sharedDir == null) {

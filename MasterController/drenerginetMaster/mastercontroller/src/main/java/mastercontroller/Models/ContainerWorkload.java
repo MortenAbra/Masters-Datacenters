@@ -6,7 +6,7 @@ public class ContainerWorkload extends Workload {
     boolean checkpoint;
 
 
-    public ContainerWorkload(String wl_name, String wl_ip, int wl_port, boolean wl_status, boolean wl_autoMigration, String wl_sharedDir, WorkloadType wl_type,
+    public ContainerWorkload(String wl_name, String wl_ip, String wl_port, boolean wl_status, boolean wl_autoMigration, String wl_sharedDir, WorkloadType wl_type,
         String containerID, String containerImage, boolean checkpoint) {
         super(wl_name, wl_ip, wl_port, wl_status, wl_autoMigration, wl_sharedDir, wl_type);
         this.containerID = containerID;

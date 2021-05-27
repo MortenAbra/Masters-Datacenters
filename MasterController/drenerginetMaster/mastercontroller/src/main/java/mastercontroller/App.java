@@ -85,6 +85,9 @@ public class App {
 
 	private EnergiDataFetcher edf;
 
+	OperationStage operation = OperationStage.NORMAL;
+	public static boolean autoMigrationInProgress = false;
+
 	/**
 	 * Launch the application.
 	 */
@@ -103,7 +106,7 @@ public class App {
 	 * @throws IOException
 	 */
 	public App() {
-		es = Executors.newScheduledThreadPool(10);
+		es = Executors.newScheduledThreadPool(20);
 		this.wm = new WorkloadManager();
 		this.manager = new VMManager(wm);
 		guestManager = new GuestManager();
@@ -111,30 +114,24 @@ public class App {
 
 		setupWorkloads();
 		setupEnergiDataLoop();
+		setupAutoMigrateLoop();
 		initialize();
 	}
 
 	public void checkListModelDuplicates(VMManager manager, boolean done) {
+		int selectedIndex = vmList.getSelectedIndex();
 		if (done && listModel != null) {
-			// Add workloads that are not in the listModel
-			for (Workload workload : manager.getWorkloads()) {
-				if (!listModel.contains(workload)) {
-					listModel.addElement(workload);
-				}
-			}
 
-			for (int i = 0; i < listModel.size(); i++) {
-				if (!manager.getWorkloads().contains(listModel.get(i))) {
-					listModel.removeElementAt(i);
-				}
-			}
+			listModel.clear();
+			listModel.addAll(manager.getWorkloads());
 			vmList.setModel(listModel);
 		}
+		vmList.setSelectedIndex(selectedIndex);
 	}
 
 	private void setupWorkloads() {
-		int delay = 0;
-		int period = 5;
+		int delay = 4;
+		int period = 6;
 		AtomicInteger workloadIteration = new AtomicInteger(0);
 		TimerTask updateWorkloadsTask = new TimerTask() {
 			@Override
@@ -144,7 +141,6 @@ public class App {
 				guestManager.getWorkloadsFromGuests(manager);
 
 				checkListModelDuplicates(manager, initDone);
-
 			}
 		};
 		es.scheduleAtFixedRate(updateWorkloadsTask, delay, period, TimeUnit.SECONDS);
@@ -156,7 +152,7 @@ public class App {
 	}
 
 	private void setupEnergiDataLoop() {
-		int energiPeriod = 10;
+		int energiPeriod = 5;
 		AtomicInteger energiIteration = new AtomicInteger(0);
 		TimerTask energiDataTask = new TimerTask() {
 			@Override
@@ -176,6 +172,51 @@ public class App {
 
 	}
 
+	private void setupAutoMigrateLoop() {
+		int migratePeriod = 10;
+		AtomicInteger autoMigrateIteration = new AtomicInteger(0);
+		TimerTask autoMigrateTask = new TimerTask() {
+			@Override
+			public void run() {
+				if (initDone) {
+					autoMigrateIteration.incrementAndGet();
+					if (!autoMigrationInProgress) {
+						if (operation == OperationStage.MIGRATE) {
+							autoMigrationInProgress = true;
+							autoMigrate();
+							
+							checkListModelDuplicates(manager, initDone);
+							autoMigrationInProgress = false;
+						}
+					}
+				}
+			}
+
+		};
+		es.scheduleAtFixedRate(autoMigrateTask, 0, migratePeriod, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(migratePeriod);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void autoMigrate() {
+		for (Workload wl : manager.getWorkloads()) {
+			if (wl.isWl_autoMigration()) {
+				Guest g = manager.findGuestWhichRunsWorkload(wl, guestManager);
+				for (Guest targetGuest : guestManager.getGuestList()) {
+					if (!targetGuest.getURL().equals(g.getURL())) {
+						System.out.println("Migrating workload: " + wl.getWl_name() + " to: " + targetGuest.getURL());
+						manager.migrateWorkload(wl, targetGuest, guestManager);
+						checkListModelDuplicates(manager, initDone);
+						return;
+					}
+				}
+			}
+		}
+	}
+
 	/**
 	 * Initialize EnergiDataService
 	 */
@@ -187,10 +228,10 @@ public class App {
 
 		edf = new EnergiDataFetcher(days, thresholdPercentage);
 		Record currentRecord = edf.getCurrentRecord();
-		System.out.println("Current Price = " + currentRecord.getSpotPriceDKK());
-		System.out.println("Current Time = " + currentRecord.getHourDK());
+		// System.out.println("Current Price = " + currentRecord.getSpotPriceDKK());
+		// System.out.println("Current Time = " + currentRecord.getHourDK());
 
-		OperationStage operation = edf.getOperationStage();
+		operation = edf.getOperationStage();
 		migrationStatusLabel.setText(operation.name());
 
 	}
@@ -206,6 +247,7 @@ public class App {
 		frmVmManager.setTitle("Workload Manager");
 		frmVmManager.setBounds(100, 100, 675, 300);
 		frmVmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		vmAutoMigrationSwitch = new JCheckBox();
 
 		vmListPanel = new JPanel();
@@ -282,7 +324,7 @@ public class App {
 					JOptionPane.showMessageDialog(null, guestMigrationComboBox, "Pick Guest",
 							JOptionPane.DEFAULT_OPTION);
 					if (JOptionPane.YES_OPTION == 0) {
-						manager.HTTPMigrate((Guest) guestMigrationComboBox.getSelectedItem(), newWorkloadString,
+						manager.HTTPRequest((Guest) guestMigrationComboBox.getSelectedItem(), newWorkloadString,
 								"/workloads");
 					} else {
 						System.out.println("Migration pane closed!");
@@ -348,6 +390,32 @@ public class App {
 		gbc_vmAutoMigrationSwitch.gridx = 0;
 		gbc_vmAutoMigrationSwitch.gridy = 1;
 		panel_2.add(vmAutoMigrationSwitch, gbc_vmAutoMigrationSwitch);
+		vmAutoMigrationSwitch.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!vmList.isSelectionEmpty()) {
+					for (Workload wl : manager.getWorkloads()) {
+						if (wl.equals((Workload)vmList.getSelectedValue())) {
+							wl.setWl_autoMigration(vmAutoMigrationSwitch.isSelected());
+							
+							// Get Source Guest
+							Guest g = manager.findGuestWhichRunsWorkload(wl, guestManager);
+
+							// Update Workload on guest
+							guestManager.getWorkloadsFromGuests(manager);
+							for (Workload guest_wl : g.getWorkloads()) {
+								if (guest_wl.getWl_name().equals(wl.getWl_name())) {
+									manager.HTTPRequest(g, manager.constructJsonObjectFromWorkload(wl).toString(), "/workloads");
+									checkListModelDuplicates(manager, initDone);
+									break;
+								}
+							}
+						}
+					}
+				}
+				
+			}
+		});
 
 		migrationThresholdLabel = new JLabel("Threshold:");
 		GridBagConstraints gbc_migrationThresholdLabel = new GridBagConstraints();
@@ -485,71 +553,34 @@ public class App {
 		vmMigrationBtn = new JButton("Migrate Workload");
 		vmMigrationBtn.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Guest guest = (Guest) comboBoxModel.getSelectedItem();
-				for (Guest g : guestManager.getGuestList()) {
-					if (guest.getIp() == g.getIp()) {
-						if (selectedWorkload != null && g.isOnline()) {
-							System.out.println("Libvirt: " + g.getLibvirtURI());
-							manager.migrateWorkload(selectedWorkload, g, guestManager);
-							listModel.removeElement(vmList.getSelectedValue());
-							vmList.setModel(listModel);
-						} else {
-							System.out.println("Workload is not selected or guest is not online!");
-						}
-					}
-				}
-
-			}
-		});
-		GridBagConstraints gbc_vmMigrationBtn = new GridBagConstraints();
-		gbc_vmMigrationBtn.gridwidth = 3;
-		gbc_vmMigrationBtn.insets = new Insets(0, 0, 0, 0);
-		gbc_vmMigrationBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_vmMigrationBtn.gridx = 0;
-		gbc_vmMigrationBtn.gridy = 4;
-		panel_1.add(vmMigrationBtn, gbc_vmMigrationBtn);
-
-		lblNewLabel = new JLabel("Migration status:");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(10, 0, 5, 0);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 1;
-		gbc_lblNewLabel.weighty = 0;
-		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
-		vmPropertiesPanel.add(lblNewLabel, gbc_lblNewLabel);
-
-		migrationStatusLabel = new JLabel("Ready");
-		GridBagConstraints gbc_migrationStatusLabel = new GridBagConstraints();
-		gbc_migrationStatusLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_migrationStatusLabel.gridx = 0;
-		gbc_migrationStatusLabel.gridy = 2;
-		gbc_migrationStatusLabel.weighty = 1;
-		gbc_migrationStatusLabel.anchor = GridBagConstraints.NORTH;
-		vmPropertiesPanel.add(migrationStatusLabel, gbc_migrationStatusLabel);
-
-		initDone = true;
-	}
-
-	public void setToggleState(int state) {
-		vmAutoMigrationSwitch.addItemListener(new ItemListener() {
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				int currentState = e.getStateChange();
-				if (currentState == e.SELECTED) {
-					currentState = state;
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Guest guest = (Guest) comboBoxModel.getSelectedItem();
+		for (Guest g : guestManager.getGuestList()) {
+			if (guest.getIp() == g.getIp()) {
+				if (selectedWorkload != null && g.isOnline()) {
+					System.out.println("Libvirt: " + g.getLibvirtURI());
+					manager.migrateWorkload(selectedWorkload, g, guestManager);
+					listModel.removeElement(vmList.getSelectedValue());
+					vmList.setModel(listModel);
 				} else {
-					System.out.println("eeeehh");
-					currentState = state;
+					System.out.println("Workload is not selected or guest is not online!");
 				}
 			}
+		}
 
-		});
-	}
-}
+	}});
+
+	GridBagConstraints gbc_vmMigrationBtn = new GridBagConstraints();gbc_vmMigrationBtn.gridwidth=3;gbc_vmMigrationBtn.insets=new Insets(0,0,0,0);gbc_vmMigrationBtn.fill=GridBagConstraints.HORIZONTAL;gbc_vmMigrationBtn.gridx=0;gbc_vmMigrationBtn.gridy=4;panel_1.add(vmMigrationBtn,gbc_vmMigrationBtn);
+
+	lblNewLabel=new JLabel("Migration status:");
+	GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();gbc_lblNewLabel.insets=new Insets(10,0,5,0);gbc_lblNewLabel.gridx=0;gbc_lblNewLabel.gridy=1;gbc_lblNewLabel.weighty=0;gbc_lblNewLabel.anchor=GridBagConstraints.NORTH;vmPropertiesPanel.add(lblNewLabel,gbc_lblNewLabel);
+
+	migrationStatusLabel=new JLabel("Ready");
+	GridBagConstraints gbc_migrationStatusLabel = new GridBagConstraints();gbc_migrationStatusLabel.insets=new Insets(0,0,5,0);gbc_migrationStatusLabel.gridx=0;gbc_migrationStatusLabel.gridy=2;gbc_migrationStatusLabel.weighty=1;gbc_migrationStatusLabel.anchor=GridBagConstraints.NORTH;vmPropertiesPanel.add(migrationStatusLabel,gbc_migrationStatusLabel);
+
+	initDone=true;
+}}
 
 /*
  * 

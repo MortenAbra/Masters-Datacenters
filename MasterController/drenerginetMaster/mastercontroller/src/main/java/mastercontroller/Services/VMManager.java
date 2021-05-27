@@ -54,7 +54,7 @@ public class VMManager implements Observer {
     public Workload parseWorkloadObject(JsonObject jsonWorkload) {
         String wl_name = (String) jsonWorkload.get("Identifier").getAsString(); // (String) workloadObject.get("name");
         String wl_ip = (String) jsonWorkload.get("AccessIP").getAsString();
-        int wl_port = (int) (long) jsonWorkload.get("AccessPort").getAsLong();
+        String wl_port = (String) jsonWorkload.get("AccessPort").getAsString();
         boolean wl_status = (boolean) jsonWorkload.get("Available").getAsBoolean();
         boolean wl_autoMigration = (boolean) jsonWorkload.get("AutoMigrate").getAsBoolean();
         String wl_sharedDir = (String) jsonWorkload.get("SharedDir").getAsString();
@@ -159,37 +159,31 @@ public class VMManager implements Observer {
         obj.add("TargetGuest", targetGuest);
 
         // Find the guest which runs the workload
-        Guest guestRunningWorkload = new Guest("", "", "");
-        for (Guest g : guestManager.getGuestList()) {
-            for (Workload w : g.getWorkloads()) {
-                if (w.getWl_name().equals(workload.getWl_name())) {
-                    guestRunningWorkload = g;
-                    break;
-                }
-            }
-        }
+        Guest guestRunningWorkload = findGuestWhichRunsWorkload(workload, guestManager);
 
         System.out.println("Migrating from " + guestRunningWorkload.getURL()+ " to " + guest.getURL());
         if (guestRunningWorkload.equals(guest)) {
             System.out.println("Cannot migrate workload to the same guest");
         }
         else if (guestRunningWorkload.getIp().length() != 0) {
-            HTTPMigrate(guestRunningWorkload, obj.toString(), "/migrate");
+            if (!guestRunningWorkload.equals(guest)) {
+                HTTPRequest(guestRunningWorkload, obj.toString(), "/migrate");
 
-            ArrayList<Workload> workloadsToRemove = new ArrayList<Workload>();
-            for (Workload wl: getWorkloads()) {
-                if (wl.getWl_name() == workload.getWl_name()){
-                    workloadsToRemove.add(wl);
+                ArrayList<Workload> workloadsToRemove = new ArrayList<Workload>();
+                for (Workload wl: getWorkloads()) {
+                    if (wl.getWl_name().equals(workload.getWl_name())){
+                        workloadsToRemove.add(wl);
+                    }
                 }
+                getWorkloads().removeAll(workloadsToRemove);
             }
-            getWorkloads().removeAll(workloadsToRemove);
         } 
         else {
             System.out.println("Cannot find the guest who runs the workload, Cannot migrate");
         }
     }
 
-    public void HTTPMigrate(Guest guest, String json, String urlSuffix) {
+    public void HTTPRequest(Guest guest, String json, String urlSuffix) {
         try {
             URL url = new URL (guest.getURL() + urlSuffix);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -208,7 +202,7 @@ public class VMManager implements Observer {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                System.out.println("Migration Response: " + response.toString());
+                System.out.println("Response: " + response.toString());
             }
             
         } catch (IOException e) {
@@ -222,4 +216,18 @@ public class VMManager implements Observer {
         // DO NOTHING HERE
         
     }
+
+    public Guest findGuestWhichRunsWorkload(Workload wl, GuestManager guestManager) {
+        Guest guestRunningWorkload = new Guest("", "", "");
+        for (Guest g : guestManager.getGuestList()) {
+            for (Workload w : g.getWorkloads()) {
+                if (w.getWl_name().equals(wl.getWl_name())) {
+                    guestRunningWorkload = g;
+                    break;
+                }
+            }
+        }
+        return guestRunningWorkload;
+    }
+
 }

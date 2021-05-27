@@ -122,6 +122,14 @@ func AddWorkloadToSystemHTTP(r *http.Request) error {
 		return err
 	}
 
+	// Remove if the workload already exists
+	for i := 0; i < len(workloads.Workloads); i++ {
+		list := workloads.Workloads[i].(map[string]interface{})
+		if list["Identifier"] == wl.Identifier {
+			workloads.Workloads = removeIndexFromSlice(workloads.Workloads, i)
+		}
+	}
+
 	// Check the type of workload
 	switch wl.Type {
 	case workload.CONTAINERTYPE:
@@ -132,6 +140,7 @@ func AddWorkloadToSystemHTTP(r *http.Request) error {
 		if err != nil {
 			return err
 		}
+
 		workloads.Workloads = append(workloads.Workloads, wl)
 
 	case workload.VMTYPE:

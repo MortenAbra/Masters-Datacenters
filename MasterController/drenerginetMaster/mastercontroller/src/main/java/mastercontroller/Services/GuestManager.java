@@ -59,16 +59,14 @@ public class GuestManager {
     }
 
     public HashSet<Guest> getGuestList() {
-        for (Guest g : guestList) {
-            System.out.println("Testing" + g.getLibvirtURI());
-        }
-
         return guestList;
     }
 
     // Calls ip:port/workloads to get workloads running on guest
     public void getWorkloadsFromGuests(VMManager vmManager) {
+        vmManager.getWorkloads().clear();
         for (Guest g : guestList) {
+            g.getWorkloads().clear();
             if (g.isOnline()) {
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder().uri(URI.create(g.getURL() + "/workloads")).build();
@@ -85,6 +83,7 @@ public class GuestManager {
                             vmManager.getWorkloads().add(workload);
                             g.getWorkloads().add(workload); // Add workload to guest.
                         }
+
                     }
                 } catch (IOException | InterruptedException e) {
                     System.out.println("Workloads not available: " + toString());

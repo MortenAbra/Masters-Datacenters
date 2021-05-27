@@ -5,7 +5,7 @@ import numpy as np
 x = []
 y = []
 
-file = pd.read_csv('/home/wolder/Documents/Projects/Masters-Datacenters/Plots/data3.csv', delimiter=',')
+file = pd.read_csv('/home/wolder/Documents/Projects/Masters-Datacenters/Plots/data2.csv', delimiter=',')
 print(file)
 
 workload_label = file['Name']
@@ -83,7 +83,7 @@ def compareImageSizeAndCombinedTime():
     color = 'tab:blue'
     ax1.set_xlabel('Image Size (MB)')
     ax1.set_ylabel('Migration Time (s)', color=color)
-    ax1.plot(imagesize, migrationtime, color=color)
+    ax1.plot(imagesize, migrationtime, color=color, alpha=0.2)
     ax1.tick_params(axis='y', labelcolor=color)
     ax1.plot(imagesize,p(imagesize),"r--")
 
@@ -153,8 +153,8 @@ def elspotPlot():
     plt.show()
 
 
-workloadTaskDistribution()
-pieChartOfTaskRatios()
+#workloadTaskDistribution()
+#pieChartOfTaskRatios()
 compareImageSizeAndCombinedTime()
-compareImagesAndImageSize()
+#compareImagesAndImageSize()
 #elspotPlot()
