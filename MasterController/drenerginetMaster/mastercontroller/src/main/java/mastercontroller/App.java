@@ -559,7 +559,6 @@ public class App {
 		for (Guest g : guestManager.getGuestList()) {
 			if (guest.getIp() == g.getIp()) {
 				if (selectedWorkload != null && g.isOnline()) {
-					System.out.println("Libvirt: " + g.getLibvirtURI());
 					manager.migrateWorkload(selectedWorkload, g, guestManager);
 					listModel.removeElement(vmList.getSelectedValue());
 					vmList.setModel(listModel);

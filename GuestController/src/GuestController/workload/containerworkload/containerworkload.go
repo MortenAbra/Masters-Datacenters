@@ -39,7 +39,7 @@ func initDocker() (context.Context, *client.Client, error) {
 
 // Docker save - and save the exported as tar.gz
 // Returns Error, CPUTime, DiscTime, RamTime
-func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Duration, time.Duration, time.Duration, error) {
+func (wl *ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Duration, time.Duration, time.Duration, error) {
 	// Track first Timer for CPU
 	cpu_start := time.Now()
 	// Init docker environment
@@ -77,7 +77,14 @@ func (wl ContainerWorkload) DockerSaveAndStoreCheckpoint(restore bool) (time.Dur
 	// Track second Timer for Disc
 	disc_start := time.Now()
 
-	resp, err := cli.ImageSave(ctx, []string{wl.Properties.Image})
+	newImage, err := cli.ContainerCommit(ctx, wl.Properties.ContainerID, types.ContainerCommitOptions{})
+	if err != nil {
+		return 0, 0, 0, err
+	}
+
+	wl.Properties.Image = newImage.ID
+
+	resp, err := cli.ImageSave(ctx, []string{newImage.ID})
 	if err != nil {
 		return 0, 0, 0, err
 	}
@@ -134,7 +141,7 @@ func (wl ContainerWorkload) DockeRemoveContainer() error {
 }
 
 // Docker load - docker run container
-func (wl ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Duration, time.Duration, time.Duration, error) {
+func (wl *ContainerWorkload) DockerLoadAndStartContainer(restore bool) (time.Duration, time.Duration, time.Duration, error) {
 	disc_start := time.Now()
 
 	// Init docker environment
