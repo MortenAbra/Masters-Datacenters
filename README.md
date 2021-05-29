@@ -30,8 +30,10 @@ Dependencies for building the executable:
 7. Start each guestcontroller on each VM. The executable will ask for an IP and a port. Choose the same as was written in guest.json. The two other arguments which the guestcontroller asks for is not needed, and can be excluded for this example.
 8. Create a sample workload on VM1. This can be a Docker container or a VM within Virsh for example. However this example will focus on a Docker Container.
 - To run a busybox container use the following command: docker run -d -i -t --name busybox_container busybox  /bin/sh 
-9. Now start the MasterController and add the workload through the UI. Press the add workload button in the buttom left and paste the JSON specification of the sample workload (The specifications used during this example can be found underneath).
+9. Now start the MasterController and add the workload through the UI. Press the add workload button in the buttom left and paste the JSON specification of the sample workload (The specifications used during this example can be found at the end of the README. Remember to change the SharedDir to the filepath of the shared directory).
 
+10. Then choose the guest which the workload is running on i.e. the IP and Port of VM1.
+11. The software is now ready to be used. The workload should be showing within the left pane of the UI, and can be migrated to the other VM through the UI. 
 ```
 {
     "Identifier": "busybox_container",
