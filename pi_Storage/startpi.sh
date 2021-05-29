@@ -1,1 +1,0 @@
-sudo ssh ubuntu@192.168.0.102
