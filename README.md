@@ -34,7 +34,7 @@ Dependencies for building the executable:
 
 10. Then choose the guest which the workload is running on i.e. the IP and Port of VM1.
 11. The software is now ready to be used. The workload should be showing within the left pane of the UI, and can be migrated to the other VM through the UI. 
-```
+```json
 {
     "Identifier": "busybox_container",
     "AccessIP": "0",
