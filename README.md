@@ -50,7 +50,7 @@ Dependencies for building the executable:
 }
 ```
 ## Media examples
-1. Add guest VMs to the list of all guests the mastercontroller can use
+1. Add guest VMs to the list of all guests the mastercontroller can migrate to and from
 https://youtu.be/Kyj7H5M3Ryo
 
 2. Build and run some docker container to be used for migration
